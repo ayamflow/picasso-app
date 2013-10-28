@@ -7,9 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SceneModel.h"
+#import "WorkModel.h"
 
 @interface DataManager : NSObject
 
+@property (strong, nonatomic) NSArray *scenes;
+@property (strong, nonatomic) NSArray *works;
+
 + (id)sharedInstance;
+
+- (SceneModel *)getSceneWithId:(NSString *)sceneId;
+- (WorkModel *)getWorkWithId:(NSString *)workId;
 
 @end

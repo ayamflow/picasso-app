@@ -10,4 +10,14 @@
 
 @implementation WorkModel
 
+- (id)initWithData:(NSDictionary *)data {
+    
+    self.workId = data[@"sceneId"];
+    self.title = data[@"title"];
+    self.description = data[@"description"];
+    
+    return [super init];
+}
+
+
 @end

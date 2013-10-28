@@ -23,6 +23,7 @@
     
     // Testing DataManager singleton
     DataManager *dataManager = [DataManager sharedInstance];
+    NSLog(@"Get scene: %@", [dataManager getSceneWithId:@"scene-1"].description);
     
     SceneViewController *scene = [[SceneViewController alloc] init];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"scene-1" ofType:@"mp4"];

@@ -2,8 +2,8 @@
     "scenes": [
         {
             "title": "Picasso, jeune peintre",
-            "id": "scene-1",
-            "description": "",
+            "sceneId": "scene-1",
+            "description": "Description de ouf pour le premier niveau",
             "videoType": "mp4",
             "trackers": [
 
@@ -11,8 +11,8 @@
         },
         {
             "title": "La période bleue",
-            "id": "scene-2",
-            "description": "",
+            "sceneId": "scene-2",
+            "description": "Un peu moins bien la description du 2e niveau",
             "videoType": "mov",
             "trackers": [
 

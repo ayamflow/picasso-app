@@ -10,4 +10,10 @@
 
 @interface WorkModel : NSObject
 
+@property (strong, nonatomic) NSString *workId;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *description;
+
+- (id)initWithData:(NSDictionary *)data;
+
 @end

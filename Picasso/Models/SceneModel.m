@@ -10,4 +10,15 @@
 
 @implementation SceneModel
 
+- (id)initWithData:(NSDictionary *)data {
+
+    self.sceneId = data[@"sceneId"];
+    self.title = data[@"title"];
+    self.trackers = data[@"trackers"];
+    self.description = data[@"description"];
+    
+    return [super init];
+}
+
+
 @end
