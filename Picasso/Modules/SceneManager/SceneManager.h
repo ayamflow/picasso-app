@@ -1,5 +1,5 @@
 //
-//  MotionVideoPlayer.h
+//  SceneManager.h
 //  Picasso
 //
 //  Created by MOREL Florian on 28/10/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MotionVideoPlayer : AVPlayer
+@interface SceneManager : UIViewController
 
 @end

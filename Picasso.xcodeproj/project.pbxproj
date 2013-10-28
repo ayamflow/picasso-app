@@ -23,9 +23,10 @@
 		624E6B20181E5FD300E7FE58 /* PicassoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B1F181E5FD300E7FE58 /* PicassoTests.m */; };
 		624E6B2A181E5FE000E7FE58 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6B29181E5FE000E7FE58 /* AVFoundation.framework */; };
 		624E6B2C181E5FE900E7FE58 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */; };
-		624E6B34181E737300E7FE58 /* SceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B33181E737300E7FE58 /* SceneViewController.m */; };
-		624E6B37181E739E00E7FE58 /* SceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B36181E739E00E7FE58 /* SceneView.m */; };
-		624E6B3B181E779A00E7FE58 /* MotionVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B3A181E779A00E7FE58 /* MotionVideoPlayer.m */; };
+		624E6B3E181E7A4400E7FE58 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B3D181E7A4400E7FE58 /* VideoPlayerView.m */; };
+		624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B40181E8C1200E7FE58 /* MotionVideoPlayer.m */; };
+		624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B43181E949C00E7FE58 /* SceneManager.m */; };
+		624E6B47181E94B100E7FE58 /* SceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B46181E94B100E7FE58 /* SceneViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +61,14 @@
 		624E6B1F181E5FD300E7FE58 /* PicassoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicassoTests.m; sourceTree = "<group>"; };
 		624E6B29181E5FE000E7FE58 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		624E6B32181E737300E7FE58 /* SceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneViewController.h; path = Modules/SceneManager/SceneViewController.h; sourceTree = "<group>"; };
-		624E6B33181E737300E7FE58 /* SceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneViewController.m; path = Modules/SceneManager/SceneViewController.m; sourceTree = "<group>"; };
-		624E6B35181E739E00E7FE58 /* SceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneView.h; path = Modules/SceneManager/SceneView.h; sourceTree = "<group>"; };
-		624E6B36181E739E00E7FE58 /* SceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneView.m; path = Modules/SceneManager/SceneView.m; sourceTree = "<group>"; };
-		624E6B39181E779A00E7FE58 /* MotionVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionVideoPlayer.h; path = Modules/MotionVideoPlayer/MotionVideoPlayer.h; sourceTree = "<group>"; };
-		624E6B3A181E779A00E7FE58 /* MotionVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionVideoPlayer.m; path = Modules/MotionVideoPlayer/MotionVideoPlayer.m; sourceTree = "<group>"; };
+		624E6B3C181E7A4400E7FE58 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoPlayerView.h; path = Modules/VideoPlayer/VideoPlayerView.h; sourceTree = "<group>"; };
+		624E6B3D181E7A4400E7FE58 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoPlayerView.m; path = Modules/VideoPlayer/VideoPlayerView.m; sourceTree = "<group>"; };
+		624E6B3F181E8C1200E7FE58 /* MotionVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionVideoPlayer.h; path = Modules/VideoPlayer/MotionVideoPlayer.h; sourceTree = "<group>"; };
+		624E6B40181E8C1200E7FE58 /* MotionVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionVideoPlayer.m; path = Modules/VideoPlayer/MotionVideoPlayer.m; sourceTree = "<group>"; };
+		624E6B42181E949C00E7FE58 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneManager.h; path = Modules/SceneManager/SceneManager.h; sourceTree = "<group>"; };
+		624E6B43181E949C00E7FE58 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneManager.m; path = Modules/SceneManager/SceneManager.m; sourceTree = "<group>"; };
+		624E6B45181E94B100E7FE58 /* SceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneViewController.h; path = Modules/SceneManager/SceneViewController.h; sourceTree = "<group>"; };
+		624E6B46181E94B100E7FE58 /* SceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneViewController.m; path = Modules/SceneManager/SceneViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +176,7 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				624E6B38181E777800E7FE58 /* MotionVideoPlayer */,
+				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				624E6B31181E733800E7FE58 /* SceneManager */,
 			);
 			name = Modules;
@@ -182,21 +185,23 @@
 		624E6B31181E733800E7FE58 /* SceneManager */ = {
 			isa = PBXGroup;
 			children = (
-				624E6B32181E737300E7FE58 /* SceneViewController.h */,
-				624E6B33181E737300E7FE58 /* SceneViewController.m */,
-				624E6B35181E739E00E7FE58 /* SceneView.h */,
-				624E6B36181E739E00E7FE58 /* SceneView.m */,
+				624E6B42181E949C00E7FE58 /* SceneManager.h */,
+				624E6B43181E949C00E7FE58 /* SceneManager.m */,
+				624E6B45181E94B100E7FE58 /* SceneViewController.h */,
+				624E6B46181E94B100E7FE58 /* SceneViewController.m */,
 			);
 			name = SceneManager;
 			sourceTree = "<group>";
 		};
-		624E6B38181E777800E7FE58 /* MotionVideoPlayer */ = {
+		624E6B38181E777800E7FE58 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				624E6B39181E779A00E7FE58 /* MotionVideoPlayer.h */,
-				624E6B3A181E779A00E7FE58 /* MotionVideoPlayer.m */,
+				624E6B3C181E7A4400E7FE58 /* VideoPlayerView.h */,
+				624E6B3D181E7A4400E7FE58 /* VideoPlayerView.m */,
+				624E6B3F181E8C1200E7FE58 /* MotionVideoPlayer.h */,
+				624E6B40181E8C1200E7FE58 /* MotionVideoPlayer.m */,
 			);
-			name = MotionVideoPlayer;
+			name = VideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,12 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				624E6B3B181E779A00E7FE58 /* MotionVideoPlayer.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
-				624E6B34181E737300E7FE58 /* SceneViewController.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
-				624E6B37181E739E00E7FE58 /* SceneView.m in Sources */,
+				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
+				624E6B47181E94B100E7FE58 /* SceneViewController.m in Sources */,
+				624E6B3E181E7A4400E7FE58 /* VideoPlayerView.m in Sources */,
+				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

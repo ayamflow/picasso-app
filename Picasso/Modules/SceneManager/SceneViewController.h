@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
+#import "MotionVideoPlayer.h"
 
-@interface SceneViewController : ViewController
+@interface SceneViewController : UIViewController
+
+@property (strong, nonatomic) MotionVideoPlayer *player;
 
 @end

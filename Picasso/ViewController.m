@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SceneViewController.h"
 
 @interface ViewController ()
 
@@ -18,6 +19,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    SceneViewController *scene = [[SceneViewController alloc] init];
+    NSLog(@"Scene is %@", scene);
 }
 
 - (void)didReceiveMemoryWarning
