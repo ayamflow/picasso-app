@@ -31,6 +31,8 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
+		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
+		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,9 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManaging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManaging.h; path = Modules/SceneManager/SceneManaging.h; sourceTree = "<group>"; };
+		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
+		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
+		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,9 +207,9 @@
 			children = (
 				624E6B42181E949C00E7FE58 /* SceneManager.h */,
 				624E6B43181E949C00E7FE58 /* SceneManager.m */,
-				624E6B61181EBD1700E7FE58 /* SceneManaging.h */,
 				624E6B45181E94B100E7FE58 /* Scene.h */,
 				624E6B46181E94B100E7FE58 /* Scene.m */,
+				624E6B61181EBD1700E7FE58 /* SceneManaging.h */,
 			);
 			name = SceneManager;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 		624E6B4F181E9AB100E7FE58 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CE488875181EFFA9001D9A09 /* UI */,
 				624E6B50181E9AC100E7FE58 /* data.json */,
 				624E6B51181E9AC100E7FE58 /* Scenes */,
 				624E6B53181E9AC100E7FE58 /* Works */,
@@ -284,8 +290,18 @@
 		624E6B64181ECDF900E7FE58 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				CE488870181EFE91001D9A09 /* Timeline.h */,
+				CE488871181EFE91001D9A09 /* Timeline.m */,
 			);
 			name = Timeline;
+			sourceTree = "<group>";
+		};
+		CE488875181EFFA9001D9A09 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CE488873181EFFA5001D9A09 /* timeline-button.png */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +384,7 @@
 				624E6B55181E9AC100E7FE58 /* scene-1.mp4 in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +406,7 @@
 			files = (
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
+				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
@@ -604,6 +622,7 @@
 				624E6B25181E5FD300E7FE58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		624E6B26181E5FD300E7FE58 /* Build configuration list for PBXNativeTarget "PicassoTests" */ = {
 			isa = XCConfigurationList;
@@ -612,6 +631,7 @@
 				624E6B28181E5FD300E7FE58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

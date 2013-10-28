@@ -18,6 +18,9 @@
 + (id)sharedInstance;
 
 - (SceneModel *)getSceneWithId:(NSString *)sceneId;
+- (SceneModel *)getSceneWithNumber:(int)number;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
+- (int)getScenesNumber;
+- (int)getWorksNumber;
 
 @end

@@ -12,6 +12,4 @@
 
 @interface SceneManager : UIViewController <SceneManaging>
 
-- (void)createNewSceneWithData:(SceneModel *)sceneModel;
-
 @end

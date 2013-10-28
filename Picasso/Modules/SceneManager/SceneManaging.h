@@ -14,5 +14,6 @@
 
 - (void)showNextScene;
 - (void)showPreviousScene;
+- (void)showSceneWithNumber:(int)number;
 
 @end

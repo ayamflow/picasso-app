@@ -13,6 +13,7 @@
 - (id)initWithData:(NSDictionary *)data {
 
     self.sceneId = data[@"sceneId"];
+    self.number = [data[@"number"] integerValue];
     self.videoType = data[@"videoType"];
     self.title = data[@"title"];
     self.trackers = data[@"trackers"];

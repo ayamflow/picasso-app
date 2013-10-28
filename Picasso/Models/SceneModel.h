@@ -10,6 +10,7 @@
 
 @interface SceneModel : NSObject
 
+@property (assign, nonatomic) int number;
 @property (strong, nonatomic) NSString *sceneId;
 @property (strong, nonatomic) NSString *videoType;
 @property (strong, nonatomic) NSString *title;

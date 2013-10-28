@@ -48,6 +48,14 @@
     return nil;
 }
 
+- (SceneModel *)getSceneWithNumber:(int) number {
+    return [[SceneModel alloc] initWithData:[self.scenes objectAtIndex:number]];
+}
+
+- (int)getScenesNumber {
+    return [self.scenes count];
+}
+
 - (WorkModel *)getWorkWithId:(NSString *)workId {
     NSDictionary *work;
     for(int i = 0; i < [self.works count]; i++) {
@@ -57,6 +65,10 @@
         }
     }
     return nil;
+}
+
+- (int)getWorksNumber {
+    return [self.works count];
 }
 
 @end

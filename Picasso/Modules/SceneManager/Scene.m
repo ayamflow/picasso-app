@@ -37,7 +37,7 @@
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self initPlayerWithURL:url];
     
-    NSLog(@"[Scene] Started scene with ID %@.", self.model.sceneId);
+    NSLog(@"[Scene] Started scene #%i.", self.model.number);
     
     return [self init];
 }
@@ -46,7 +46,7 @@
     self.player = [MotionVideoPlayer playerWithURL:URL];
     AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-    
+
     // Make sure the player takes the whole screen
     CGRect screenSize = [[UIScreen mainScreen] bounds];
 //    NSLog(@"Screen size is %lfx%lf", screenSize.size.width, screenSize.size.height);
@@ -55,6 +55,11 @@
     
     // DEBUG
     self.player.rate = 1.0;
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *) notification {
+    NSLog(@"video end");
+    [self.delegate showNextScene];
 }
 
 - (void)didReceiveMemoryWarning

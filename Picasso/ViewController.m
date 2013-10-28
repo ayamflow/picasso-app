@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DataManager.h"
 #import "SceneManager.h"
+#import "Timeline.h"
 
 @interface ViewController ()
 
@@ -19,17 +20,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    // Getting first scene
-    DataManager *dataManager = [DataManager sharedInstance];
-    SceneModel *startScene = [dataManager getSceneWithId:@"scene-1"];
 
     // Init and launch sceneManager
     SceneManager *sceneManager = [[SceneManager alloc] init];
     [self.view addSubview:sceneManager.view];
-    [sceneManager createNewSceneWithData:startScene];
+    [sceneManager showSceneWithNumber:0];
     
+    Timeline *timeline = [[Timeline alloc] init];
+    [self.view addSubview:timeline.view];
 }
 
 - (void)didReceiveMemoryWarning
