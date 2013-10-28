@@ -36,6 +36,7 @@
     
     // Make sure the player takes the whole screen
     CGRect screenSize = [[UIScreen mainScreen] bounds];
+    NSLog(@"Screen size is %fx%f", screenSize.size.width, screenSize.size.height);
     layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
 }

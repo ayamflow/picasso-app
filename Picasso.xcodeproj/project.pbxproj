@@ -27,6 +27,11 @@
 		624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B40181E8C1200E7FE58 /* MotionVideoPlayer.m */; };
 		624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B43181E949C00E7FE58 /* SceneManager.m */; };
 		624E6B47181E94B100E7FE58 /* SceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B46181E94B100E7FE58 /* SceneViewController.m */; };
+		624E6B54181E9AC100E7FE58 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 624E6B50181E9AC100E7FE58 /* data.json */; };
+		624E6B55181E9AC100E7FE58 /* scene-1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 624E6B52181E9AC100E7FE58 /* scene-1.mp4 */; };
+		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
+		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
+		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,14 @@
 		624E6B43181E949C00E7FE58 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneManager.m; path = Modules/SceneManager/SceneManager.m; sourceTree = "<group>"; };
 		624E6B45181E94B100E7FE58 /* SceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneViewController.h; path = Modules/SceneManager/SceneViewController.h; sourceTree = "<group>"; };
 		624E6B46181E94B100E7FE58 /* SceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneViewController.m; path = Modules/SceneManager/SceneViewController.m; sourceTree = "<group>"; };
+		624E6B50181E9AC100E7FE58 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = Data/data.json; sourceTree = "<group>"; };
+		624E6B52181E9AC100E7FE58 /* scene-1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-1.mp4"; sourceTree = "<group>"; };
+		624E6B57181E9EEE00E7FE58 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Modules/DataManager/DataManager.h; sourceTree = "<group>"; };
+		624E6B58181E9EEE00E7FE58 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Modules/DataManager/DataManager.m; sourceTree = "<group>"; };
+		624E6B5B181EA2AB00E7FE58 /* WorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkModel.h; path = Models/WorkModel.h; sourceTree = "<group>"; };
+		624E6B5C181EA2AB00E7FE58 /* WorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkModel.m; path = Models/WorkModel.m; sourceTree = "<group>"; };
+		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
+		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +145,8 @@
 		624E6AFA181E5FD300E7FE58 /* Picasso */ = {
 			isa = PBXGroup;
 			children = (
+				624E6B5A181E9F4C00E7FE58 /* Models */,
+				624E6B4F181E9AB100E7FE58 /* Data */,
 				624E6B2D181E6FAC00E7FE58 /* Modules */,
 				624E6B03181E5FD300E7FE58 /* AppDelegate.h */,
 				624E6B04181E5FD300E7FE58 /* AppDelegate.m */,
@@ -176,6 +191,7 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				624E6B56181E9ECF00E7FE58 /* DataManager */,
 				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				624E6B31181E733800E7FE58 /* SceneManager */,
 			);
@@ -202,6 +218,53 @@
 				624E6B40181E8C1200E7FE58 /* MotionVideoPlayer.m */,
 			);
 			name = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		624E6B4F181E9AB100E7FE58 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				624E6B50181E9AC100E7FE58 /* data.json */,
+				624E6B51181E9AC100E7FE58 /* Scenes */,
+				624E6B53181E9AC100E7FE58 /* Works */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		624E6B51181E9AC100E7FE58 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				624E6B52181E9AC100E7FE58 /* scene-1.mp4 */,
+			);
+			name = Scenes;
+			path = Data/Scenes;
+			sourceTree = "<group>";
+		};
+		624E6B53181E9AC100E7FE58 /* Works */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Works;
+			path = Data/Works;
+			sourceTree = "<group>";
+		};
+		624E6B56181E9ECF00E7FE58 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				624E6B57181E9EEE00E7FE58 /* DataManager.h */,
+				624E6B58181E9EEE00E7FE58 /* DataManager.m */,
+			);
+			name = DataManager;
+			sourceTree = "<group>";
+		};
+		624E6B5A181E9F4C00E7FE58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				624E6B5B181EA2AB00E7FE58 /* WorkModel.h */,
+				624E6B5C181EA2AB00E7FE58 /* WorkModel.m */,
+				624E6B5E181EA2B700E7FE58 /* SceneModel.h */,
+				624E6B5F181EA2B700E7FE58 /* SceneModel.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,8 +344,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
+				624E6B55181E9AC100E7FE58 /* scene-1.mp4 in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,12 +366,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				624E6B47181E94B100E7FE58 /* SceneViewController.m in Sources */,
+				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624E6B3E181E7A4400E7FE58 /* VideoPlayerView.m in Sources */,
+				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

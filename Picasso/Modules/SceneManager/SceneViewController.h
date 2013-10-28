@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) MotionVideoPlayer *player;
 
+- (void)initPlayerWithURL:(NSURL *)URL;
+
 @end
