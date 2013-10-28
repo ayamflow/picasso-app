@@ -21,6 +21,8 @@
 		624E6B16181E5FD300E7FE58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6AF8181E5FD300E7FE58 /* UIKit.framework */; };
 		624E6B1E181E5FD300E7FE58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 624E6B1C181E5FD300E7FE58 /* InfoPlist.strings */; };
 		624E6B20181E5FD300E7FE58 /* PicassoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B1F181E5FD300E7FE58 /* PicassoTests.m */; };
+		624E6B2A181E5FE000E7FE58 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6B29181E5FE000E7FE58 /* AVFoundation.framework */; };
+		624E6B2C181E5FE900E7FE58 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		624E6B1B181E5FD300E7FE58 /* PicassoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PicassoTests-Info.plist"; sourceTree = "<group>"; };
 		624E6B1D181E5FD300E7FE58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		624E6B1F181E5FD300E7FE58 /* PicassoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicassoTests.m; sourceTree = "<group>"; };
+		624E6B29181E5FE000E7FE58 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				624E6B2C181E5FE900E7FE58 /* CoreMotion.framework in Frameworks */,
+				624E6B2A181E5FE000E7FE58 /* AVFoundation.framework in Frameworks */,
 				624E6AF7181E5FD300E7FE58 /* CoreGraphics.framework in Frameworks */,
 				624E6AF9181E5FD300E7FE58 /* UIKit.framework in Frameworks */,
 				624E6AF5181E5FD300E7FE58 /* Foundation.framework in Frameworks */,
@@ -101,6 +107,8 @@
 		624E6AF3181E5FD300E7FE58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */,
+				624E6B29181E5FE000E7FE58 /* AVFoundation.framework */,
 				624E6AF4181E5FD300E7FE58 /* Foundation.framework */,
 				624E6AF6181E5FD300E7FE58 /* CoreGraphics.framework */,
 				624E6AF8181E5FD300E7FE58 /* UIKit.framework */,
