@@ -6,13 +6,14 @@
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
-#import "SceneViewController.h"
+#import "Scene.h"
+#import "SceneModel.h"
 
-@interface SceneViewController ()
+@interface Scene ()
 
 @end
 
-@implementation SceneViewController
+@implementation Scene
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +30,18 @@
 	// Do any additional setup after loading the view.
 }
 
+- (id)initWithModel:(SceneModel *)sceneModel {
+    self.model = sceneModel;
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    [self initPlayerWithURL:url];
+    
+    NSLog(@"[Scene] Started scene with ID %@.", self.model.sceneId);
+    
+    return [self init];
+}
+
 - (void)initPlayerWithURL:(NSURL *)URL {
     self.player = [MotionVideoPlayer playerWithURL:URL];
     AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
@@ -36,9 +49,12 @@
     
     // Make sure the player takes the whole screen
     CGRect screenSize = [[UIScreen mainScreen] bounds];
-    NSLog(@"Screen size is %fx%f", screenSize.size.width, screenSize.size.height);
+//    NSLog(@"Screen size is %lfx%lf", screenSize.size.width, screenSize.size.height);
     layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
+    
+    // DEBUG
+    self.player.rate = 1.0;
 }
 
 - (void)didReceiveMemoryWarning

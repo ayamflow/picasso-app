@@ -1,5 +1,5 @@
 //
-//  VideoPlayerView.h
+//  SceneManaging.h
 //  Picasso
 //
 //  Created by MOREL Florian on 28/10/13.
@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MotionVideoPlayer.h"
 
-@interface VideoPlayerView : UIViewController
+@protocol SceneManaging <NSObject>
 
-@property (strong) MotionVideoPlayer *player;
+@required
+
+- (void)showNextScene;
+- (void)showPreviousScene;
 
 @end

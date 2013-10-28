@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "DataManager.h"
-#import "SceneViewController.h"
+#import "SceneManager.h"
 
 @interface ViewController ()
 
@@ -21,16 +21,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    // Testing DataManager singleton
+    // Getting first scene
     DataManager *dataManager = [DataManager sharedInstance];
-    NSLog(@"Get scene: %@", [dataManager getSceneWithId:@"scene-1"].description);
+    SceneModel *startScene = [dataManager getSceneWithId:@"scene-1"];
+
+    // Init and launch sceneManager
+    SceneManager *sceneManager = [[SceneManager alloc] init];
+    [self.view addSubview:sceneManager.view];
+    [sceneManager createNewSceneWithData:startScene];
     
-    SceneViewController *scene = [[SceneViewController alloc] init];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"scene-1" ofType:@"mp4"];
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    [scene initPlayerWithURL:url];
-    [self.view addSubview:scene.view];
-    scene.player.rate = 1.0;
 }
 
 - (void)didReceiveMemoryWarning

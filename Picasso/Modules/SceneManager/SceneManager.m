@@ -7,8 +7,13 @@
 //
 
 #import "SceneManager.h"
+#import "Scene.h"
+#import "SceneModel.h"
 
 @interface SceneManager ()
+
+@property (strong, nonatomic) Scene *oldScene;
+@property (strong, nonatomic) Scene *currentScene;
 
 @end
 
@@ -29,9 +34,24 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)createNewSceneWithData:(NSDictionary *)data {
+- (void)createNewSceneWithData:(SceneModel *)sceneModel {
     // update oldScene
+    if(self.currentScene) {
+        [self.currentScene.view removeFromSuperview];
+        self.oldScene =  self.currentScene;
+    }
     // create a new scene into *currentScene
+    self.currentScene = [[Scene alloc] initWithModel:sceneModel];
+    self.currentScene.delegate = self;
+    [self.view addSubview:self.currentScene.view];
+}
+
+- (void)showNextScene {
+    NSLog(@"Show next scene");
+}
+
+- (void)showPreviousScene {
+    NSLog(@"Show previous scene");
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,17 +59,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-@end
-
-// Protocol definition (catches messages from each SceneViewController
-
-@protocol SceneDelegate <NSObject>
-
-@required
-
-- (void)showNextScene;
-
-- (void)showPreviousScene;
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SceneModel.h"
+#import "SceneManaging.h"
 
-@interface SceneManager : UIViewController
+@interface SceneManager : UIViewController <SceneManaging>
+
+- (void)createNewSceneWithData:(SceneModel *)sceneModel;
 
 @end
