@@ -19,46 +19,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self initTimeline];
 }
 
 - (id)init {
-    // Create an array of images as long as there are scenes
+    if(self = [super init]) {
+        [self initTimeline];
+    }
+    return self;
+}
+
+- (void)initTimeline {
     DataManager *dataManager = [DataManager sharedInstance];
     int scenesNumber = [dataManager getScenesNumber];
     
-    self.scenes = [[NSMutableArray alloc] init];
+    self.scenes = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
     NSString *path = [[NSBundle mainBundle] pathForResource: @"timeline-button" ofType: @"png"];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     
     for(int i = 0; i < scenesNumber; i++) {
-        UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
-        //        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        //        imageView.frame = CGRectMake(10 + imageView.frame.size.width * i, screenSize.size.height - 60, imageView.frame.size.width, imageView.frame.size.height);
-        //        imageView.tag = i;
-        
-        //        imageView.userInteractionEnabled = YES;
-        //        [imageView addGestureRecognizer:tapGestureRecognizer];
-        
-        //        [self.scenes addObject:imageView];
-        //        [self.view addSubview:imageView];
-        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button setBackgroundImage:image forState:UIControlStateNormal];
-//        [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:[NSString stringWithFormat:@"%i", i] forState:UIControlStateNormal];
         button.frame = CGRectMake(10 + 15 * i, screenSize.size.height - 60, 15, 15);
-        button.tag = i;
+        [button setTag:i];
         [self.view addSubview:button];
         [self.scenes addObject:button];
     }
-    
-    return [super init];
 }
 
 -(void)touchEnded:(id)sender
 {
-    NSLog(@"coucou");
-//    UITouch *touch = [[event allTouches] anyObject];
-//    NSLog(@"Touched image #%i", touch.view.tag);
+    [self.delegate showSceneWithNumber:[sender tag]];
 }
+
 @end

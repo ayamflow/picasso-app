@@ -15,9 +15,11 @@
 
 @property (strong, nonatomic) MotionVideoPlayer *player;
 @property (strong, nonatomic) SceneModel *model;
+@property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManaging> delegate;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
 //- (void)initPlayerWithURL:(NSURL *)URL;
+- (void)stop;
 
 @end

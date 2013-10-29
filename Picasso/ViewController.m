@@ -13,6 +13,9 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) SceneManager *sceneManager;
+@property (strong, nonatomic) Timeline *timeline;
+
 @end
 
 @implementation ViewController
@@ -21,13 +24,16 @@
 {
     [super viewDidLoad];
 
-    // Init and launch sceneManager
-    SceneManager *sceneManager = [[SceneManager alloc] init];
-    [self.view addSubview:sceneManager.view];
-    [sceneManager showSceneWithNumber:0];
+    self.view.backgroundColor = [UIColor blackColor];
     
-    Timeline *timeline = [[Timeline alloc] init];
-    [self.view addSubview:timeline.view];
+    // Init and launch sceneManager
+    self.sceneManager = [[SceneManager alloc] init];
+    [self.view addSubview:self.sceneManager.view];
+    [self.sceneManager showSceneWithNumber:0];
+    
+    self.timeline = [[Timeline alloc] init];
+    [self.view addSubview:self.timeline.view];
+    self.timeline.delegate = self.sceneManager;
 }
 
 - (void)didReceiveMemoryWarning

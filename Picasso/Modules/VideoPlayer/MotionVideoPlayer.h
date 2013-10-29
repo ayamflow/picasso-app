@@ -12,4 +12,5 @@
 
 @interface MotionVideoPlayer : AVPlayer
 @property (strong, nonatomic) CMMotionManager *motionManager;
+@property (assign, nonatomic) BOOL playbackCompleted;
 @end

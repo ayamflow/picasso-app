@@ -49,9 +49,11 @@
     
     // update oldScene
     if(self.currentScene) {
+        [self.currentScene stop];
         [self.currentScene.view removeFromSuperview];
-        self.oldScene =  self.currentScene;
+        self.oldScene = self.currentScene;
     }
+    
     // create a new scene into *currentScene
     self.currentScene = [[Scene alloc] initWithModel:sceneModel];
     self.currentSceneId = self.currentScene.model.number;
@@ -62,15 +64,28 @@
 - (NSString *)getSceneIdFormat:(int)number {
     return [NSString stringWithFormat:@"scene-%i", number];
 }
-    
+
+- (void)showInterstitial {
+    // Show next scene description
+    NSLog(@"showInterstitial");
+}
+
+// Implementation of the SceneManaging Protocol
+
+- (void)fadeCurrentSceneToBlack {
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.currentScene.view setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [self showInterstitial];
+    }];
+}
+
 - (void)showNextScene {
-    NSLog(@"Show next scene");
     int nextSceneId = self.currentSceneId < self.scenesNumber ? self.currentSceneId + 1 : 0;
     [self showSceneWithNumber:nextSceneId];
 }
 
 - (void)showPreviousScene {
-    NSLog(@"Show previous scene");
     int previousSceneId = self.currentSceneId > 0 ? self.currentSceneId - 1 : self.scenesNumber - 1;
     [self showSceneWithNumber:previousSceneId];
 }

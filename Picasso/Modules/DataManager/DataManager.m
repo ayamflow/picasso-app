@@ -8,6 +8,13 @@
 
 #import "DataManager.h"
 
+@interface DataManager ()
+
+@property (strong, nonatomic) NSArray *scenes;
+@property (strong, nonatomic) NSArray *works;
+
+@end
+
 @implementation DataManager
 
 + (id)sharedInstance {
@@ -20,19 +27,21 @@
 }
 
 - (id)init {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    NSData *picassoData = [[NSData alloc] initWithContentsOfURL:url];
-    NSError *error;
-    NSDictionary *picassoDictionnary = [NSJSONSerialization JSONObjectWithData:picassoData options:kNilOptions error:&error];
-    if(error) {
-        NSLog(@"%@", [error localizedDescription]);
+    if(self = [super init]) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
+        NSURL *url = [NSURL fileURLWithPath:filePath];
+        NSData *picassoData = [[NSData alloc] initWithContentsOfURL:url];
+        NSError *error;
+        NSDictionary *picassoDictionnary = [NSJSONSerialization JSONObjectWithData:picassoData options:kNilOptions error:&error];
+        if(error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+        else {
+            self.scenes = picassoDictionnary[@"scenes"];
+            self.works = picassoDictionnary[@"works"];
+        }
     }
-    else {
-        self.scenes = picassoDictionnary[@"scenes"];
-        self.works = picassoDictionnary[@"works"];
-    }
-    return [super init];
+    return self;
 }
 
 /* API */
