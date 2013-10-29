@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "Timeline.h"
+#import "SceneInterstitial.h"
 
 @interface ViewController ()
 
@@ -31,9 +32,13 @@
     [self.view addSubview:self.sceneManager.view];
     [self.sceneManager showSceneWithNumber:0];
     
-    self.timeline = [[Timeline alloc] init];
-    [self.view addSubview:self.timeline.view];
-    self.timeline.delegate = self.sceneManager;
+//    self.timeline = [[Timeline alloc] init];
+//    [self.view addSubview:self.timeline.view];
+//    self.timeline.delegate = self.sceneManager;
+    
+//    DataManager *dataManager = [DataManager sharedInstance];
+//    SceneInterstitial *interstitial = [[SceneInterstitial alloc] initWithDescription:[[dataManager getSceneWithNumber:0] description]];
+//    [self.view addSubview:interstitial.view];
 }
 
 - (void)didReceiveMemoryWarning

@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) id playerUpdatesObserver;
 @property (assign, nonatomic) float frameRate;
+@property (assign, nonatomic) float completion;
 
 @end
 
@@ -58,6 +59,7 @@
     [self.view.layer addSublayer:layer];
     
     self.frameRate = [self getPlayerFrameRate];
+    self.completion = 0.0f;
     [self initTrackers];
     self.playerUpdatesObserver = [self listenForPlayerUpdates];
     
@@ -111,7 +113,12 @@
 }
 
 - (void)listenForVideoEnded {
-    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 1) {
+    self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
+    NSLog(@"completion: %f", 100 * self.completion);
+    if(self.completion > 0.95f) {
+        // fade to black proportionaly
+    }
+    else if(self.completion > 1.0f) {
         [self playerItemDidReachEnd];
     }
 }
