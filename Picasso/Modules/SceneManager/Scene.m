@@ -10,6 +10,8 @@
 #import "SceneModel.h"
 #import "TrackerModel.h"
 
+#define PLAYBACK_PERCENT_BEFORE_FADE 0.90
+
 @interface Scene ()
 
 @property (strong, nonatomic) id playerUpdatesObserver;
@@ -43,8 +45,19 @@
         NSURL *url = [NSURL fileURLWithPath:filePath];
         [self initPlayerWithURL:url];
         
-        NSLog(@"[Scene] Started scene #%i.", self.model.number);
+        NSLog(@"[Scene #%i] Started", self.model.number);
     }
+    return self;
+}
+
+- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position {
+//    NSLog(@"Init scene with position %f:%f", position.x, position.y);
+    if(self = [self initWithModel:sceneModel]) {
+        CGRect frame = self.view.frame;
+        frame.origin = position;
+        self.view.frame = frame;
+    }
+    
     return self;
 }
 
@@ -63,11 +76,12 @@
     [self initTrackers];
     self.playerUpdatesObserver = [self listenForPlayerUpdates];
     
-    NSLog(@"frameRate = %f", self.frameRate);
+    NSLog(@"[Scene #%i] frameRate = %f", self.model.number, self.frameRate);
     
     // DEBUG
     self.player.rate = 2.0;
     self.player.volume = 0.0f;
+    [self.player seekToTime:CMTimeMake(25, 1)];
 }
 
 - (void)initTrackers {
@@ -106,19 +120,18 @@
 - (id)listenForPlayerUpdates {
     __weak typeof(self) weakSelf = self;
     return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
-//        NSLog(@"rate: %f, time: %f, duration: %f", self.player.rate, CMTimeGetSeconds(self.player.currentTime), CMTimeGetSeconds(self.player.currentItem.asset.duration));
-        [weakSelf listenForVideoEnded];
-        [weakSelf toggleTrackers];
+        [weakSelf listenForVideoEnded]; // Watch video status
+        [weakSelf toggleTrackers]; // Show/hide/move trackers
     }];
 }
 
 - (void)listenForVideoEnded {
     self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
-    NSLog(@"completion: %f", 100 * self.completion);
-    if(self.completion > 0.95f) {
+    if(self.completion > PLAYBACK_PERCENT_BEFORE_FADE) {
         // fade to black proportionaly
+        self.view.alpha = 1.0 - (self.completion - PLAYBACK_PERCENT_BEFORE_FADE) * 5; // -10% opacity * factor
     }
-    else if(self.completion > 1.0f) {
+    if(self.completion > 1.0) {
         [self playerItemDidReachEnd];
     }
 }
@@ -162,9 +175,9 @@
 }
 
 - (void)playerItemDidReachEnd{
-    NSLog(@"[Scene] Ended scene #%i", self.model.number);
+    NSLog(@"[Scene #%i] Ended", self.model.number);
     [self stop];
-    [self.delegate fadeCurrentSceneToBlack];
+    [self.delegate showInterstitial];
 }
 
 - (void)stop {

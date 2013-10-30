@@ -10,6 +10,9 @@
 
 @interface SceneInterstitial : UIViewController
 
+// Temp ?
+@property (strong, nonatomic) UIButton *slidingButton;
+
 - (id)initWithDescription:(NSString *)description;
 
 @end

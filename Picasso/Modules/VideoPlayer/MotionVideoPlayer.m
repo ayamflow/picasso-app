@@ -48,7 +48,7 @@
          ];
     }
     else {
-        NSLog(@"Motion data not available :'(");
+        NSLog(@"[MotionVideoPlayer] Motion data not available :'(");
     }
 }
 

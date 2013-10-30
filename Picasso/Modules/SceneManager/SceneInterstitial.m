@@ -32,15 +32,21 @@
     if(self = [super init]) {
         self.description = description;
         
-        [self initSlider];
         [self initText];
         [self initButtons];
+        [self initSlider];
     }
     return self;
 }
 
 - (void)initSlider {
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
     
+    self.slidingButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.slidingButton setBackgroundColor:[UIColor blueColor]];
+    [self.slidingButton setTitle:@"\\/" forState:UIControlStateNormal];
+    [self.slidingButton setFrame:CGRectMake(screenSize.size.width - 10, screenSize.size.height / 2, 30, 30)];
+    [self.view addSubview: self.slidingButton];
 }
 
 - (void)initText {

@@ -15,6 +15,6 @@
 - (void)showNextScene;
 - (void)showPreviousScene;
 - (void)showSceneWithNumber:(int)number;
-- (void)fadeCurrentSceneToBlack;
+- (void)showInterstitial;
 
 @end

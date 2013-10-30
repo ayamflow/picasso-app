@@ -31,6 +31,9 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
+		62E9FA2C181FB56A0080A21D /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mov */; };
+		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
+		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
 		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 /* End PBXBuildFile section */
@@ -82,6 +85,11 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManaging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManaging.h; path = Modules/SceneManager/SceneManaging.h; sourceTree = "<group>"; };
+		62E9FA2B181FB56A0080A21D /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-2.mov"; sourceTree = "<group>"; };
+		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
+		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
+		62E9FA3818201CD30080A21D /* SceneInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneInterstitial.h; path = Modules/SceneManager/SceneInterstitial.h; sourceTree = "<group>"; };
+		62E9FA3918201CD30080A21D /* SceneInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneInterstitial.m; path = Modules/SceneManager/SceneInterstitial.m; sourceTree = "<group>"; };
 		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
 		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
@@ -210,6 +218,8 @@
 				624E6B45181E94B100E7FE58 /* Scene.h */,
 				624E6B46181E94B100E7FE58 /* Scene.m */,
 				624E6B61181EBD1700E7FE58 /* SceneManaging.h */,
+				62E9FA3818201CD30080A21D /* SceneInterstitial.h */,
+				62E9FA3918201CD30080A21D /* SceneInterstitial.m */,
 			);
 			name = SceneManager;
 			sourceTree = "<group>";
@@ -237,6 +247,7 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				62E9FA2B181FB56A0080A21D /* scene-2.mov */,
 				624E6B52181E9AC100E7FE58 /* scene-1.mp4 */,
 			);
 			name = Scenes;
@@ -267,6 +278,8 @@
 				624E6B5C181EA2AB00E7FE58 /* WorkModel.m */,
 				624E6B5E181EA2B700E7FE58 /* SceneModel.h */,
 				624E6B5F181EA2B700E7FE58 /* SceneModel.m */,
+				62E9FA33181FCBC20080A21D /* TrackerModel.h */,
+				62E9FA34181FCBC20080A21D /* TrackerModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -381,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
+				62E9FA2C181FB56A0080A21D /* scene-2.mov in Resources */,
 				624E6B55181E9AC100E7FE58 /* scene-1.mp4 in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
@@ -406,10 +420,12 @@
 			files = (
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
+				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
+				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,

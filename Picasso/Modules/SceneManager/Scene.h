@@ -19,7 +19,7 @@
 @property (weak, nonatomic) id<SceneManaging> delegate;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
-//- (void)initPlayerWithURL:(NSURL *)URL;
+- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position;
 - (void)stop;
 
 @end
