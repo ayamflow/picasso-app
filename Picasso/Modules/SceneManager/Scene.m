@@ -9,6 +9,7 @@
 #import "Scene.h"
 #import "SceneModel.h"
 #import "TrackerModel.h"
+#import "OrientationUtils.h"
 
 #define PLAYBACK_PERCENT_BEFORE_FADE 0.90
 
@@ -67,7 +68,7 @@
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     // Make sure the player takes the whole screen
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    CGRect screenSize = [OrientationUtils deviceSize];
     layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
     
@@ -81,7 +82,7 @@
     // DEBUG
     self.player.rate = 2.0;
     self.player.volume = 0.0f;
-    [self.player seekToTime:CMTimeMake(25, 1)];
+    [self.player seekToTime:CMTimeMake(32, 1)];
 }
 
 - (void)initTrackers {

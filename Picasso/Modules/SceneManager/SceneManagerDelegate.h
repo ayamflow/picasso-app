@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SceneManaging <NSObject>
+@protocol SceneManagerDelegate <NSObject>
 
 @required
 

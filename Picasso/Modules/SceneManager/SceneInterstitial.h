@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SceneSlider.h"
 
 @interface SceneInterstitial : UIViewController
 
-// Temp ?
-@property (strong, nonatomic) UIButton *slidingButton;
+@property (strong, nonatomic) SceneSlider *slidingButton;
 
 - (id)initWithDescription:(NSString *)description;
 

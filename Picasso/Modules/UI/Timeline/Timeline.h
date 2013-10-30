@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SceneManaging.h"
+#import "SceneManagerDelegate.h"
 
 @interface Timeline : UIViewController
 
-@property (weak, nonatomic) id<SceneManaging> delegate;
+@property (weak, nonatomic) id<SceneManagerDelegate> delegate;
 
 
 @end

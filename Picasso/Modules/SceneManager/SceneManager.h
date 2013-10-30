@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SceneModel.h"
-#import "SceneManaging.h"
+#import "SceneManagerDelegate.h"
+#import "SlidingButtonDelegate.h"
 
-@interface SceneManager : UIViewController <SceneManaging>
+@interface SceneManager : UIViewController <SceneManagerDelegate, SlidingButtonDelegate>
 
 @end

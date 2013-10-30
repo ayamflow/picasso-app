@@ -17,7 +17,6 @@
 @property (strong, nonatomic) Scene *oldScene;
 @property (strong, nonatomic) Scene *currentScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
-@property (assign, nonatomic) int currentSceneId;
 @property (assign, nonatomic) int scenesNumber;
 
 @end
@@ -65,6 +64,7 @@
     self.currentScene = [[Scene alloc] initWithModel:sceneModel andPosition:position];
     self.currentScene.delegate = self;
     [self.view addSubview:self.currentScene.view];
+    NSLog(@"new scene #%i", self.currentScene.model.number);
 }
 
 - (void)removeLastSeenScene {
@@ -82,7 +82,7 @@
 - (void)showInterstitial {
     if(self.interstitial != nil) [self removeInterstitial];
     self.interstitial = [[SceneInterstitial alloc] initWithDescription:self.currentScene.model.description];
-    [self.interstitial.slidingButton addTarget:self action:@selector(skipInterstitial:) forControlEvents:UIControlEventTouchUpInside];
+    self.interstitial.slidingButton.delegate = self;
     [self.view addSubview:self.interstitial.view];
 }
 
@@ -91,9 +91,9 @@
     self.interstitial = nil;
 }
 
-- (void)skipInterstitial:(id)sender {
+- (void)skipInterstitial {
     [self createSceneWithNumber:[self getNextSceneNumber] andPosition:CGPointMake(0, self.currentScene.view.frame.size.height)];
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.4f animations:^{
         // Move old scene & interstitial out of the screen
         CGPoint oldScenePosition = CGPointMake(0, -self.oldScene.view.frame.size.height);
         CGRect oldSceneFrame = self.oldScene.view.frame;
@@ -130,11 +130,11 @@
 }
 
 - (int)getNextSceneNumber {
-    return self.currentSceneId < self.scenesNumber ? self.currentSceneId + 1 : 0;
+    return self.currentScene.model.number < self.scenesNumber - 1 ? self.currentScene.model.number + 1 : 0;
 }
 
 - (int)getPreviousSceneNumber {
-    return self.currentSceneId > 0 ? self.currentSceneId - 1 : self.scenesNumber - 1;
+    return self.currentScene.model.number > 0 ? self.currentScene.model.number - 1 : self.scenesNumber - 1;
 }
 
 - (void)didReceiveMemoryWarning

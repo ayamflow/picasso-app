@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "MotionVideoPlayer.h"
 #import "SceneModel.h"
-#import "SceneManaging.h"
+#import "SceneManagerDelegate.h"
 
 @interface Scene : UIViewController
 
 @property (strong, nonatomic) MotionVideoPlayer *player;
 @property (strong, nonatomic) SceneModel *model;
 @property (strong, nonatomic) NSArray *trackersImage;
-@property (weak, nonatomic) id<SceneManaging> delegate;
+@property (weak, nonatomic) id<SceneManagerDelegate> delegate;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
 - (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position;
