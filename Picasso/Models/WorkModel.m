@@ -12,12 +12,11 @@
 
 - (id)initWithData:(NSDictionary *)data {
     
-    self.workId = data[@"sceneId"];
+    self.workId = data[@"id"];
     self.title = data[@"title"];
     self.description = data[@"description"];
     
     return [super init];
 }
-
 
 @end

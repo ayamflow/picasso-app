@@ -52,6 +52,10 @@
     return [[SceneModel alloc] initWithData:[self.scenes objectAtIndex:number]];
 }
 
+- (WorkModel *)getWorkWithNumber:(int) number {
+    return [[WorkModel alloc] initWithData:[self.works objectAtIndex:number]];
+}
+
 - (int)getScenesNumber {
     return [self.scenes count];
 }

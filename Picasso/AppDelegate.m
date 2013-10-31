@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "GalleryViewController.h"
 
 @implementation AppDelegate
 

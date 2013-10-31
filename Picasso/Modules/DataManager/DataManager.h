@@ -20,6 +20,7 @@
 - (SceneModel *)getSceneWithId:(NSString *)sceneId;
 - (SceneModel *)getSceneWithNumber:(int)number;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
+- (WorkModel *)getWorkWithNumber:(int)number;
 - (int)getScenesNumber;
 - (int)getWorksNumber;
 
