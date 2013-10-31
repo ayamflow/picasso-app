@@ -82,7 +82,7 @@
     // DEBUG
     self.player.rate = 2.0;
     self.player.volume = 0.0f;
-    [self.player seekToTime:CMTimeMake(32, 1)];
+    [self.player seekToTime:CMTimeMake(28, 1)];
 }
 
 - (void)initTrackers {

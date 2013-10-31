@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
 		624B97921821534A0087C576 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B97911821534A0087C576 /* Menu.m */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
+		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
 		624B978918211AC50087C576 /* SceneSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneSlider.h; path = Modules/SceneManager/SceneSlider.h; sourceTree = "<group>"; };
 		624B978A18211AC50087C576 /* SceneSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneSlider.m; path = Modules/SceneManager/SceneSlider.m; sourceTree = "<group>"; };
@@ -261,6 +264,8 @@
 			children = (
 				624E6B42181E949C00E7FE58 /* SceneManager.h */,
 				624E6B43181E949C00E7FE58 /* SceneManager.m */,
+				6248626418225E7C00F5927A /* SceneChooser.h */,
+				6248626518225E7C00F5927A /* SceneChooser.m */,
 				624B978818211AA30087C576 /* Scene */,
 				624B9787182117910087C576 /* Delegates */,
 			);
@@ -474,6 +479,7 @@
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
+				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
