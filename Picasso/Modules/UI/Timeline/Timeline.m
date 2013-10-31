@@ -8,6 +8,7 @@
 
 #import "Timeline.h"
 #import "DataManager.h"
+#import "OrientationUtils.h"
 
 @interface Timeline ()
 
@@ -19,46 +20,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self initTimeline];
 }
 
 - (id)init {
-    // Create an array of images as long as there are scenes
+    if(self = [super init]) {
+        [self initTimeline];
+    }
+    return self;
+}
+
+- (void)initTimeline {
     DataManager *dataManager = [DataManager sharedInstance];
     int scenesNumber = [dataManager getScenesNumber];
     
-    self.scenes = [[NSMutableArray alloc] init];
+    self.scenes = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
     NSString *path = [[NSBundle mainBundle] pathForResource: @"timeline-button" ofType: @"png"];
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
+
+    int spaceBetweenScenes = 20;
+    CGRect screenSize = [OrientationUtils deviceSize];
     
     for(int i = 0; i < scenesNumber; i++) {
-        UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
-        //        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        //        imageView.frame = CGRectMake(10 + imageView.frame.size.width * i, screenSize.size.height - 60, imageView.frame.size.width, imageView.frame.size.height);
-        //        imageView.tag = i;
-        
-        //        imageView.userInteractionEnabled = YES;
-        //        [imageView addGestureRecognizer:tapGestureRecognizer];
-        
-        //        [self.scenes addObject:imageView];
-        //        [self.view addSubview:imageView];
-        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button setBackgroundImage:image forState:UIControlStateNormal];
-//        [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:[NSString stringWithFormat:@"%i", i] forState:UIControlStateNormal];
-        button.frame = CGRectMake(10 + 15 * i, screenSize.size.height - 60, 15, 15);
-        button.tag = i;
+        [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
+//        [button setFrame:CGRectMake(i * spaceBetweenScenes, 0, image.size.width, image.size.height)];
+        [button setFrame:CGRectMake(screenSize.size.width / 2 - (i * spaceBetweenScenes), screenSize.size.height - 30 * 1.5, image.size.width, image.size.height)];
+        [button setTag:i];
         [self.view addSubview:button];
         [self.scenes addObject:button];
     }
     
-    return [super init];
+//    [self.view setClipsToBounds:YES];
+//    [self.view setFrame:CGRectMake(0, 0, (scenesNumber - 1) * (image.size.width + spaceBetweenScenes), image.size.height)];
+    UIButton *button = [self.scenes objectAtIndex:0];
+    [self.view setFrame:CGRectMake(button.frame.origin.x, button.frame.origin.y, (scenesNumber - 1) * (image.size.width + spaceBetweenScenes), image.size.height)];
+    [self.view setBackgroundColor:[UIColor redColor]];
+    
+    NSLog(@"Size: %fx%f", scenesNumber * (image.size.width + spaceBetweenScenes), image.size.height);
+//    NSLog(@"Size: %fx%f", self.view.frame.size.width, self.view.frame.size.height);
 }
 
--(void)touchEnded:(id)sender
-{
-    NSLog(@"coucou");
-//    UITouch *touch = [[event allTouches] anyObject];
-//    NSLog(@"Touched image #%i", touch.view.tag);
+-(void)touchEnded:(id)sender {
+    NSLog(@"[Timeline] Touch #%i", [sender tag]);
+//    [self.delegate showSceneWithNumber:[sender tag]];
 }
+
 @end

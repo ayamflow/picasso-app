@@ -7,20 +7,28 @@
 //
 
 #import "SceneModel.h"
+#import "TrackerModel.h"
 
 @implementation SceneModel
 
 - (id)initWithData:(NSDictionary *)data {
-
-    self.sceneId = data[@"sceneId"];
-    self.number = [data[@"number"] integerValue];
-    self.videoType = data[@"videoType"];
-    self.title = data[@"title"];
-    self.trackers = data[@"trackers"];
-    self.description = data[@"description"];
-    
-    return [super init];
+    if(self = [super init]) {
+        self.sceneId = data[@"sceneId"];
+        self.number = [data[@"number"] integerValue];
+        self.unlocked = [data[@"unlocked"] boolValue];
+        self.videoType = data[@"videoType"];
+        self.title = data[@"title"];
+        self.description = data[@"description"];
+        
+        NSArray *trackersData = data[@"trackers"];
+        NSMutableArray *trackers = [[NSMutableArray alloc] initWithCapacity:[trackersData count]];
+        for(int i = 0; i < [trackersData count]; i++) {
+            TrackerModel *trackerModel = [[TrackerModel alloc] initWithData:[trackersData objectAtIndex:i]];
+            [trackers addObject:trackerModel];
+        }
+        self.trackers = [[NSArray alloc] initWithArray:trackers];
+    }
+    return self;
 }
-
 
 @end

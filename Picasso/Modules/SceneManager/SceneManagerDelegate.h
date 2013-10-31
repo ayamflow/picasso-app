@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SceneManaging <NSObject>
+@protocol SceneManagerDelegate <NSObject>
 
 @required
 
 - (void)showNextScene;
 - (void)showPreviousScene;
 - (void)showSceneWithNumber:(int)number;
+- (void)showInterstitial;
 
 @end

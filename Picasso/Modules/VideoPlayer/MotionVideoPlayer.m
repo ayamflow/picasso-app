@@ -14,18 +14,27 @@
 
 // Addind call to initMotionManager to default init methods.
 - (id)init {
-    [self initMotionManager];
-    return [super init];
+    if(self = [super init]) {
+        self.playbackCompleted = NO;
+        [self initMotionManager];
+    }
+    return self;
 }
 
 - (id)initWithPlayerItem:(AVPlayerItem *)item {
-    [self initMotionManager];
-    return [super initWithPlayerItem:item];
+    if(self = [super initWithPlayerItem:item]) {
+        self.playbackCompleted = NO;
+        [self initMotionManager];
+    }
+    return self;
 }
 
 - (id)initWithURL:(NSURL *)URL {
-    [self initMotionManager];
-    return [super initWithURL:URL];
+    if(self = [super initWithURL:URL]) {
+        self.playbackCompleted = NO;
+        [self initMotionManager];
+    }
+    return self;
 }
 
 - (void)initMotionManager {
@@ -39,7 +48,7 @@
          ];
     }
     else {
-        NSLog(@"Motion data not available :'(");
+        NSLog(@"[MotionVideoPlayer] Motion data not available :'(");
     }
 }
 
@@ -53,6 +62,11 @@
     
 //    NSLog(@"Pitch: %f", playerRate);
     self.rate = playerRate;
+//    NSLog(@"rate: %i, time: %f, duration: %f", self.rate, CMTimeGetSeconds(self.currentTime), CMTimeGetSeconds(self.currentItem.asset.duration));
+    if(CMTimeCompare(self.currentTime, self.currentItem.asset.duration) == 0) {
+        NSLog(@"[MotionVideoPlayer] Completed !");
+        self.playbackCompleted = YES;
+    }
 }
 
 @end

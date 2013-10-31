@@ -10,8 +10,16 @@
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "Timeline.h"
+#import "SceneInterstitial.h"
+#import "Menu.h"
 
 @interface ViewController ()
+
+@property (strong, nonatomic) SceneManager *sceneManager;
+@property (strong, nonatomic) Timeline *timeline;
+@property (strong, nonatomic) Menu *menu;
+
+@property (assign, nonatomic) BOOL menuShown;
 
 @end
 
@@ -20,14 +28,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Init and launch sceneManager
-    SceneManager *sceneManager = [[SceneManager alloc] init];
-    [self.view addSubview:sceneManager.view];
-    [sceneManager showSceneWithNumber:0];
+   
+    /* TODO */
+    /*
+     1- show splash
+     2- show menu
+     3- link menu to each section
+     */
     
-    Timeline *timeline = [[Timeline alloc] init];
-    [self.view addSubview:timeline.view];
+    self.menuShown = NO;
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    // Init and launch sceneManager
+/*    self.sceneManager = [[SceneManager alloc] init];
+    [self.view addSubview:self.sceneManager.view];
+    [self.sceneManager showSceneWithNumber:0];
+    
+    [self createMenu];
+ */
+}
+
+- (void)createMenu {
+    if(self.menu == nil) {
+        self.menu = [[Menu alloc] init];
+        [self.view addSubview:self.menu.view];
+        
+//        [self addChildViewController:self.menu];
+//        [self.menu didMoveToParentViewController:self];
+        
+        self.menu.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.menuShown = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning

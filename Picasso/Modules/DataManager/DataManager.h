@@ -12,9 +12,6 @@
 
 @interface DataManager : NSObject
 
-@property (strong, nonatomic) NSArray *scenes;
-@property (strong, nonatomic) NSArray *works;
-
 + (id)sharedInstance;
 
 - (SceneModel *)getSceneWithId:(NSString *)sceneId;
