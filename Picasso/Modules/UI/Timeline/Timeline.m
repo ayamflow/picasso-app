@@ -8,6 +8,7 @@
 
 #import "Timeline.h"
 #import "DataManager.h"
+#import "OrientationUtils.h"
 
 @interface Timeline ()
 
@@ -38,20 +39,23 @@
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
 
     int spaceBetweenScenes = 20;
+    CGRect screenSize = [OrientationUtils deviceSize];
     
     for(int i = 0; i < scenesNumber; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button setBackgroundImage:image forState:UIControlStateNormal];
         [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(i * spaceBetweenScenes, 0, image.size.width, image.size.height)];
+//        [button setFrame:CGRectMake(i * spaceBetweenScenes, 0, image.size.width, image.size.height)];
+        [button setFrame:CGRectMake(screenSize.size.width / 2 - (i * spaceBetweenScenes), screenSize.size.height - 30 * 1.5, image.size.width, image.size.height)];
         [button setTag:i];
         [self.view addSubview:button];
         [self.scenes addObject:button];
     }
     
-    [self.view setClipsToBounds:YES];
-    [self.view setFrame:CGRectMake(0, 0, scenesNumber * (image.size.width + spaceBetweenScenes), image.size.height)];
-//    [self.view setFrame:CGRectMake(0, 0, 0.4, 250)];
+//    [self.view setClipsToBounds:YES];
+//    [self.view setFrame:CGRectMake(0, 0, (scenesNumber - 1) * (image.size.width + spaceBetweenScenes), image.size.height)];
+    UIButton *button = [self.scenes objectAtIndex:0];
+    [self.view setFrame:CGRectMake(button.frame.origin.x, button.frame.origin.y, (scenesNumber - 1) * (image.size.width + spaceBetweenScenes), image.size.height)];
     [self.view setBackgroundColor:[UIColor redColor]];
     
     NSLog(@"Size: %fx%f", scenesNumber * (image.size.width + spaceBetweenScenes), image.size.height);

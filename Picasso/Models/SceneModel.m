@@ -15,6 +15,7 @@
     if(self = [super init]) {
         self.sceneId = data[@"sceneId"];
         self.number = [data[@"number"] integerValue];
+        self.unlocked = [data[@"unlocked"] boolValue];
         self.videoType = data[@"videoType"];
         self.title = data[@"title"];
         self.description = data[@"description"];

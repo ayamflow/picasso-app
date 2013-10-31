@@ -9,6 +9,7 @@
 #import "Menu.h"
 #import "OrientationUtils.h"
 #import "Timeline.h"
+#import "DataManager.h"
 
 #define BUTTON_HEIGHT 30
 
@@ -18,8 +19,10 @@
 @property (strong, nonatomic) UIButton *exploreButton;
 @property (strong, nonatomic) UIButton *galleryButton;
 @property (strong, nonatomic) UIButton *museumButton;
-@property (strong, nonatomic) Timeline *timeline;
 @property (strong, nonatomic) UIColor *textColor;
+//@property (strong, nonatomic) Timeline *timeline;
+@property (strong, nonatomic) UIView *timeline;
+@property (strong, nonatomic) UIView *progressBar;
 
 @end
 
@@ -88,9 +91,47 @@
 - (void)initTimeline {
     CGRect screenSize = [OrientationUtils deviceSize];
     
-    self.timeline = [[Timeline alloc] init];
+    // Old Timeline with specified class (broken frame, see below)
+/*    self.timeline = [[Timeline alloc] init];
     [self.timeline.view setCenter:CGPointMake(screenSize.size.width / 2, screenSize.size.height - BUTTON_HEIGHT * 1.5)];
-    [self.view addSubview:self.timeline.view];
+    [self.view addSubview:self.timeline.view];*/
+    
+    DataManager *dataManager = [DataManager sharedInstance];
+    int scenesNumber = [dataManager getScenesNumber];
+    int spaceBetweenScenes = 20;
+    
+    // Create progress bar first
+    self.progressBar = [[UIView alloc] initWithFrame:CGRectMake(screenSize.size.width / 2 - (scenesNumber * spaceBetweenScenes) / 2 - 4, screenSize.size.height - BUTTON_HEIGHT * 1.5 + 11, (scenesNumber - 1) * (22 + spaceBetweenScenes), 2)];
+    [self.view addSubview: self.progressBar];
+    [self.progressBar setBackgroundColor:[UIColor blackColor]];
+    
+    // Then the timeline itself
+    
+    NSMutableArray *scenes = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"timeline-button" ofType: @"png"];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
+    
+    self.timeline = [[UIView alloc] initWithFrame:screenSize];
+    
+    for(int i = 0; i < scenesNumber; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
+        [button setFrame:CGRectMake(i * spaceBetweenScenes, 0, image.size.width, image.size.height)];
+        [button setTag:i];
+        [self.timeline addSubview:button];
+        [scenes addObject:button];
+    }
+    
+    UIButton *refButton = [scenes objectAtIndex:0];
+    [self.timeline setFrame:CGRectMake(screenSize.size.width / 2 - (scenesNumber * spaceBetweenScenes) / 2, screenSize.size.height - BUTTON_HEIGHT * 1.5, (scenesNumber - 1) * (refButton.frame.size.width + spaceBetweenScenes), refButton.frame.size.height)];
+//    [self.timeline setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:self.timeline];
+}
+
+-(void)touchEnded:(id)sender {
+    NSLog(@"[Timeline] Touch #%i", [sender tag]);
+    //    [self.delegate showSceneWithNumber:[sender tag]];
 }
 
 - (void)didReceiveMemoryWarning
