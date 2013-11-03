@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6B8ADBFB-775E-48F1-9472-0BFEF0E7EADB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Picasso</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>78085BC7-D162-4363-A13F-C2FD68CBD92D</key>
+		<string>https://github.com/ayamflow/picasso-app.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Picasso.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>78085BC7-D162-4363-A13F-C2FD68CBD92D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ayamflow/picasso-app.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>78085BC7-D162-4363-A13F-C2FD68CBD92D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>78085BC7-D162-4363-A13F-C2FD68CBD92D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>picasso-app</string>
+		</dict>
+	</array>
+</dict>
+</plist>
