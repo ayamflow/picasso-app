@@ -8,6 +8,7 @@
 
 #import "SceneInterstitial.h"
 #import "OrientationUtils.h"
+#import "DataManager.h"
 
 #define MARGIN 15
 
@@ -35,7 +36,14 @@
     if(self = [super init]) {
         [self.view setFrame:[OrientationUtils deviceSize]];
         self.description = description;
-        
+
+		DataManager *dataManager = [DataManager sharedInstance];
+        int currentSceneId = [[dataManager getGameModel] currentScene];
+
+        if(currentSceneId < [dataManager getScenesNumber] - 1) {
+	    	[[dataManager getSceneWithNumber:currentSceneId + 1] unlockScene];
+        }
+
         [self initText];
         [self initButtons];
         [self initSlider];

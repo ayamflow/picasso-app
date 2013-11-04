@@ -39,7 +39,7 @@
     return self;
 }
 
-/*- (id)initWithPlayerItem:(AVPlayerItem *)item {
+- (id)initWithPlayerItem:(AVPlayerItem *)item {
     if(self = [super initWithPlayerItem:item]) {
         self.playbackCompleted = NO;
         self.motionEnabled = NO;
@@ -55,7 +55,7 @@
         [self initMotionManager];
     }
     return self;
-}*/
+}
 
 - (void)loadURL:(NSURL *)url {
     AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];

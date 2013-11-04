@@ -8,6 +8,7 @@
 
 #import "SceneModel.h"
 #import "TrackerModel.h"
+#import "DataManager.h"
 
 @implementation SceneModel
 
@@ -29,6 +30,11 @@
         self.trackers = [[NSArray alloc] initWithArray:trackers];
     }
     return self;
+}
+
+- (void)unlockScene {
+    self.unlocked = YES;
+    [[DataManager sharedInstance] unlockSceneWithNumber: self.number];
 }
 
 @end

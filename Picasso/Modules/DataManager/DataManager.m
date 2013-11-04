@@ -7,6 +7,7 @@
 //
 
 #import "DataManager.h"
+#import "GameModel.h"
 
 @interface DataManager ()
 
@@ -37,14 +38,34 @@
             NSLog(@"%@", [error localizedDescription]);
         }
         else {
-            self.scenes = picassoDictionnary[@"scenes"];
-            self.works = picassoDictionnary[@"works"];
+            NSArray *scenes = picassoDictionnary[@"scenes"];
+            int scenesNumber = [scenes count];
+			NSMutableArray *scenesArray = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
+
+            NSArray *works = picassoDictionnary[@"works"];
+            int worksNumber = [works count];
+			NSMutableArray *worksArray = [[NSMutableArray alloc] initWithCapacity:worksNumber];
+
+            for(int i = 0; i < scenesNumber; i++) {
+                SceneModel *scene = [[SceneModel alloc] initWithData:[scenes objectAtIndex:i]];
+                [scenesArray addObject:scene];
+
+                WorkModel *work = [[WorkModel alloc] initWithData:[works objectAtIndex:i]];
+                [worksArray addObject:work];
+            }
+
+            self.scenes = [NSArray arrayWithArray:scenesArray];
+            self.works = [NSArray arrayWithArray:worksArray];
         }
     }
     return self;
 }
 
 /* API */
+
+- (GameModel *)getGameModel {
+	return [GameModel sharedInstance];
+}
 
 - (SceneModel *)getSceneWithId:(NSString *)sceneId {
     NSDictionary *scene;
@@ -58,11 +79,18 @@
 }
 
 - (SceneModel *)getSceneWithNumber:(int) number {
-    return [[SceneModel alloc] initWithData:[self.scenes objectAtIndex:number]];
+    return [self.scenes objectAtIndex:number];
+}
+
+- (void)unlockSceneWithNumber:(int)number {
+    NSDictionary *scene = [self.scenes objectAtIndex:number];
+    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
+    [scene setValue:@"true" forKey:@"unlocked"];
+    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
 }
 
 - (WorkModel *)getWorkWithNumber:(int) number {
-    return [[WorkModel alloc] initWithData:[self.works objectAtIndex:number]];
+    return [self.works objectAtIndex:number];
 }
 
 - (int)getScenesNumber {
@@ -70,11 +98,11 @@
 }
 
 - (WorkModel *)getWorkWithId:(NSString *)workId {
-    NSDictionary *work;
+    WorkModel *work;
     for(int i = 0; i < [self.works count]; i++) {
         work = [self.works objectAtIndex:i];
-        if([[work valueForKey:@"workId"] isEqualToString:workId]) {
-            return [[WorkModel alloc] initWithData:work];
+        if([work.workId isEqualToString:workId]) {
+            return work;
         }
     }
     return nil;
