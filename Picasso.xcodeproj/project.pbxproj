@@ -54,6 +54,8 @@
 		B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5311181FF58500DFCC39 /* GalleryViewController.m */; };
 		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
+		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
+		CE86045D18283E520019657F /* About.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045C18283E520019657F /* About.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,10 @@
 		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
 		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
+		CE86045718283BAB0019657F /* Home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Home.h; path = Modules/Home/Home.h; sourceTree = "<group>"; };
+		CE86045818283BAB0019657F /* Home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Home.m; path = Modules/Home/Home.m; sourceTree = "<group>"; };
+		CE86045B18283E520019657F /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = About.h; path = Modules/About/About.h; sourceTree = "<group>"; };
+		CE86045C18283E520019657F /* About.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = About.m; path = Modules/About/About.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +289,8 @@
 				624E6B56181E9ECF00E7FE58 /* DataManager */,
 				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				624E6B31181E733800E7FE58 /* SceneManager */,
+				CE86045A18283BB00019657F /* Home */,
+				CE86045E18283E560019657F /* AboutMuseum */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -425,6 +433,24 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		CE86045A18283BB00019657F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CE86045718283BAB0019657F /* Home.h */,
+				CE86045818283BAB0019657F /* Home.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		CE86045E18283E560019657F /* AboutMuseum */ = {
+			isa = PBXGroup;
+			children = (
+				CE86045B18283E520019657F /* About.h */,
+				CE86045C18283E520019657F /* About.m */,
+			);
+			name = AboutMuseum;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -544,6 +570,7 @@
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
+				CE86045918283BAB0019657F /* Home.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
@@ -554,6 +581,7 @@
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
+				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);

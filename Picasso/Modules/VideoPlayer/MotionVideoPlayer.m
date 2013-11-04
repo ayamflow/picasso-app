@@ -10,20 +10,39 @@
 #import "MotionVideoPlayer.h"
 #import <CoreMotion/CoreMotion.h>
 
+@interface MotionVideoPlayer ()
+
+@property (strong, nonatomic) CMMotionManager *motionManager;
+@property (assign, nonatomic) BOOL motionEnabled;
+@property (assign, nonatomic) BOOL playbackCompleted;
+
+@end
+
 @implementation MotionVideoPlayer
+
++ (id)sharedInstance {
+    static MotionVideoPlayer *sharedInstance = nil;
+    @synchronized(self) {
+        if (sharedInstance == nil)
+            sharedInstance = [[self alloc] init];
+    }
+    return sharedInstance;
+}
 
 // Addind call to initMotionManager to default init methods.
 - (id)init {
     if(self = [super init]) {
         self.playbackCompleted = NO;
+        self.motionEnabled = NO;
         [self initMotionManager];
     }
     return self;
 }
 
-- (id)initWithPlayerItem:(AVPlayerItem *)item {
+/*- (id)initWithPlayerItem:(AVPlayerItem *)item {
     if(self = [super initWithPlayerItem:item]) {
         self.playbackCompleted = NO;
+        self.motionEnabled = NO;
         [self initMotionManager];
     }
     return self;
@@ -32,24 +51,38 @@
 - (id)initWithURL:(NSURL *)URL {
     if(self = [super initWithURL:URL]) {
         self.playbackCompleted = NO;
+        self.motionEnabled = NO;
         [self initMotionManager];
     }
     return self;
+}*/
+
+- (void)loadURL:(NSURL *)url {
+    AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
+	// play this item
 }
 
 - (void)initMotionManager {
     self.motionManager = [[CMMotionManager alloc] init];
-    
+}
+
+- (void)enableMotion {
     if (self.motionManager.deviceMotionAvailable ) {
         self.motionManager.deviceMotionUpdateInterval = 1.0/30.0;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-            [self updatePlayerWithMotion:motion];
-        }
+            	[self updatePlayerWithMotion:motion];
+        	}
          ];
+	        self.motionEnabled = YES;
     }
     else {
         NSLog(@"[MotionVideoPlayer] Motion data not available :'(");
     }
+}
+
+- (void)disableMotion {
+	[self.motionManager stopDeviceMotionUpdates];
+    self.motionEnabled = NO;
 }
 
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {

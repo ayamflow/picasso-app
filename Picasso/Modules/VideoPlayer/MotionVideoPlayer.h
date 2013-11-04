@@ -11,6 +11,9 @@
 #import <CoreMotion/CoreMotion.h>
 
 @interface MotionVideoPlayer : AVPlayer
-@property (strong, nonatomic) CMMotionManager *motionManager;
-@property (assign, nonatomic) BOOL playbackCompleted;
+
++ (id)sharedInstance;
+- (void)enableMotion;
+- (void)disableMotion;
+
 @end
