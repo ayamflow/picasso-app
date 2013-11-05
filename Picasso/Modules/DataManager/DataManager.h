@@ -18,6 +18,7 @@
 - (GameModel *)getGameModel;
 - (SceneModel *)getSceneWithId:(NSString *)sceneId;
 - (SceneModel *)getSceneWithNumber:(int)number;
+-(SceneModel *)getCurrentSceneModel;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
 - (WorkModel *)getWorkWithNumber:(int)number;
 - (void)unlockSceneWithNumber:(int)number;

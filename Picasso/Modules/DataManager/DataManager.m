@@ -89,12 +89,18 @@
     NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
 }
 
-- (WorkModel *)getWorkWithNumber:(int) number {
-    return [self.works objectAtIndex:number];
+-(SceneModel *)getCurrentSceneModel {
+    int currentScene = [[GameModel sharedInstance] currentScene];
+    return [self.scenes objectAtIndex:currentScene];
 }
+
 
 - (int)getScenesNumber {
     return [self.scenes count];
+}
+
+- (WorkModel *)getWorkWithNumber:(int) number {
+    return [self.works objectAtIndex:number];
 }
 
 - (WorkModel *)getWorkWithId:(NSString *)workId {
