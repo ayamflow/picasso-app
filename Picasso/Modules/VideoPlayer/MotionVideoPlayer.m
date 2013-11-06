@@ -23,6 +23,8 @@
 
 @implementation MotionVideoPlayer
 
+static BOOL initialized;
+
 + (id)sharedInstance {
     static MotionVideoPlayer *sharedInstance = nil;
     @synchronized(self) {
@@ -46,23 +48,18 @@
     if(self = [super init]) {
         self.playbackCompleted = NO;
         self.motionEnabled = NO;
-//        [self initPlayerWithURL:URL];
+
         [self initPlayer];
         [self initMotionManager];
     }
     return self;
 }
 
-- (void)loadURL:(NSURL *)url {
-    AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
-	// play this item
-    [self.player replaceCurrentItemWithPlayerItem:item];
-}
-
 - (void)initPlayer {
     // Automatically starts with the current scene (previously set on the according button touch)
-    SceneModel *currentScene = [[DataManager sharedInstance] getCurrentSceneModel];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:currentScene.sceneId ofType:currentScene.videoType];
+//    SceneModel *currentScene = [[DataManager sharedInstance] getCurrentSceneModel];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:currentScene.sceneId ofType:currentScene.videoType];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     
     self.player = [AVPlayer playerWithURL:url];
@@ -71,7 +68,7 @@
     
     // Make sure the player takes the whole screen in landscape mode
     CGRect screenSize = [OrientationUtils nativeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.height, screenSize.size.width);
+    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.width);
     [self.view.layer addSublayer:layer];
 
 }
@@ -85,11 +82,30 @@
     CGRect screenSize = [OrientationUtils nativeDeviceSize];
     layer.frame = CGRectMake(0, 0, screenSize.size.height, screenSize.size.width);
     [self.view.layer addSublayer:layer];
+
+    self.frameRate = [self getPlayerFrameRate];
 }
 
 - (void)initMotionManager {
     self.motionManager = [[CMMotionManager alloc] init];
 }
+
+- (void)loadURL:(NSURL *)url {
+    NSLog(@"loadURL/initialized = %@", initialized ? @"YES" : @"NO");
+	if(!initialized) {
+		[self initPlayerWithURL:url];
+        initialized = YES;
+    }
+    else {
+        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
+        // play this item
+        [self.player replaceCurrentItemWithPlayerItem:item];
+
+        self.frameRate = [self getPlayerFrameRate];
+    }
+}
+
+// Motion methods
 
 - (void)enableMotion {
     if (self.motionManager.deviceMotionAvailable ) {
@@ -125,6 +141,11 @@
         NSLog(@"[MotionVideoPlayer] Completed !");
         self.playbackCompleted = YES;
     }
+}
+
+-(float)getPlayerFrameRate {
+    AVAssetTrack *track = [[self.player.currentItem.asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
+    return track.nominalFrameRate;
 }
 
 @end

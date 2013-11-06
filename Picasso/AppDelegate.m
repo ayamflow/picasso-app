@@ -7,13 +7,32 @@
 //
 
 #import "AppDelegate.h"
+#import "DataManager.h"
 #import "GalleryViewController.h"
+#import "MotionVideoPlayer.h"
+
+@interface AppDelegate ()
+
+@property (strong, nonatomic) MotionVideoPlayer *player;
+
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[[DataManager sharedInstance] getGameModel] init];
+    
+	self.player = [MotionVideoPlayer sharedInstance];
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    [self.player loadURL:url];
+    self.player.player.rate = 2.0;
+
+    [self.window.rootViewController.view addSubview:self.player.view];
+    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+
     return YES;
 }
 							

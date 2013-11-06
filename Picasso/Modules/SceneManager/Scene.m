@@ -15,39 +15,40 @@
 
 @interface Scene ()
 
-@property (strong, nonatomic) id playerUpdatesObserver;
-@property (assign, nonatomic) float frameRate;
+@property (weak, nonatomic) MotionVideoPlayer *playerView;
+@property (weak, nonatomic) AVPlayer *player;
 @property (assign, nonatomic) float completion;
-@property (strong, nonatomic) AVPlayer *player;
+@property (strong, nonatomic) id playerUpdatesObserver;
 
 @end
 
 @implementation Scene
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel {
     if(self = [super init]) {
         self.model = sceneModel;
-        
+
+        self.playerView = [MotionVideoPlayer sharedInstance];
+        self.player = self.playerView.player;
+
+        // Play the scene's video
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
         NSURL *url = [NSURL fileURLWithPath:filePath];
-        [self initPlayerWithURL:url];
-        
+        [self.playerView loadURL:url];
+
+        [self initTrackers];
+        self.playerUpdatesObserver = [self listenForPlayerUpdates];
+
         NSLog(@"[Scene #%i] Started", self.model.number);
+
+        // DEBUG
+        self.player.rate = 2.0;
     }
     return self;
 }
@@ -61,25 +62,6 @@
     }
     
     return self;
-}
-
-- (void)initPlayerWithURL:(NSURL *)URL {
-    
-    self.playerView = [[MotionVideoPlayer alloc] init];
-    [self.view addSubview:self.playerView.view];
-    self.player = self.playerView.player;
-    
-    self.frameRate = [self getPlayerFrameRate];
-    self.completion = 0.0f;
-    [self initTrackers];
-    self.playerUpdatesObserver = [self listenForPlayerUpdates];
-    
-    NSLog(@"[Scene #%i] frameRate = %f", self.model.number, self.frameRate);
-    
-    // DEBUG
-    self.player.rate = 2.0;
-    self.player.volume = 0.0f;
-    [self.player seekToTime:CMTimeMake(28, 1)];
 }
 
 - (void)initTrackers {
@@ -113,11 +95,9 @@
     return tracker;
 }
 
-// Frame-based methods
-
 - (id)listenForPlayerUpdates {
     __weak typeof(self) weakSelf = self;
-    return [self.playerView.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
+    return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
         [weakSelf listenForVideoEnded]; // Watch video status
         [weakSelf toggleTrackers]; // Show/hide/move trackers
     }];
@@ -136,7 +116,7 @@
 
 - (void)toggleTrackers {
     float currentTime = CMTimeGetSeconds(self.player.currentTime);
-    int currentFrame = self.frameRate * currentTime;
+    int currentFrame = self.playerView.frameRate * currentTime;
     
     // Loop on all trackers (which contains a workId an an array of positions)
     for(int i = 0; i < [self.model.trackers count]; i++) {
@@ -167,11 +147,6 @@
     }
 }
 
--(float)getPlayerFrameRate {
-    AVAssetTrack *track = [[self.player.currentItem.asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
-    return track.nominalFrameRate;
-}
-
 - (void)playerItemDidReachEnd{
     NSLog(@"[Scene #%i] Ended", self.model.number);
     [self stop];
@@ -180,7 +155,6 @@
 
 - (void)stop {
     self.player.rate = 0.0;
-    [self.player removeTimeObserver:self.playerUpdatesObserver];
 }
 
 - (void)didReceiveMemoryWarning

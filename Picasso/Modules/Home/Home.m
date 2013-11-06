@@ -7,20 +7,19 @@
 //
 
 #import "Home.h"
-#import "DataManager.h"
+#import "MotionVideoPlayer.h"
 
 @implementation Home
 
-/* TODO */
-/* This class is the starting point of the app. Thus, it must init the game model, load previously saved data, etc.*/
-
-/*
- 	1- Init GameModel by loading saved data or init to zero.
- 
- */
-
 - (void)viewDidLoad {
-    GameModel *gameModel = [[[DataManager sharedInstance] getGameModel] init];
+    self.view.backgroundColor = [UIColor clearColor];
+
+    [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)stopVideo:(id)sender {
+	[[[MotionVideoPlayer sharedInstance] player] setRate:0.0];
 }
 
 @end

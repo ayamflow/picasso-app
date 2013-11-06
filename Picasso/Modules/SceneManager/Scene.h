@@ -13,7 +13,6 @@
 
 @interface Scene : UIViewController
 
-@property (strong, nonatomic) MotionVideoPlayer *playerView;
 @property (strong, nonatomic) SceneModel *model;
 @property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;
