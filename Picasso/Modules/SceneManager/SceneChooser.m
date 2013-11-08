@@ -9,6 +9,7 @@
 #import "SceneChooser.h"
 #import "DataManager.h"
 #import "SceneManager.h"
+#import "Constants.h"
 
 @interface SceneChooser ()
 
@@ -42,13 +43,11 @@
     for(int i = 0; i < scenesNumber; i++) {
         SceneModel *sceneModel = [dataManager getSceneWithNumber:i];
         UIButton *sceneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [sceneButton setBackgroundImage:[UIImage imageNamed:@"frame.png"] forState:UIControlStateNormal];
         [sceneButton setTitle:[NSString stringWithFormat:@"%i", i + 1] forState:UIControlStateNormal];
-        if(sceneModel.unlocked) {
-            [sceneButton setBackgroundColor:[UIColor blackColor]];
-        }
-        else {
-            [sceneButton setBackgroundColor:[UIColor grayColor]];
-            sceneButton.enabled = NO;
+        [sceneButton setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
+        if(!sceneModel.unlocked) {
+            sceneButton.alpha = 0.2;
         }
         [sceneButton setFrame:CGRectMake(i * 50, 140, 30, 30)];
         sceneButton.tag = i;

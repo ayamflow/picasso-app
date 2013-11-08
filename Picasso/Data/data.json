@@ -334,6 +334,46 @@
                     ]
                 }
             ]
+        },
+        {
+            "title": "Scene 3",
+            "unlocked": "false",
+            "number": "3",
+            "description": "",
+            "videoType": "mov",
+            "trackers": []
+        },
+        {
+            "title": "Scene 4",
+            "unlocked": "false",
+            "number": "4",
+            "description": "",
+            "videoType": "mov",
+            "trackers": []
+        },
+        {
+            "title": "Scene 5",
+            "unlocked": "false",
+            "number": "5",
+            "description": "",
+            "videoType": "mov",
+            "trackers": []
+        },
+        {
+            "title": "Scene 6",
+            "unlocked": "false",
+            "number": "6",
+            "description": "",
+            "videoType": "mov",
+            "trackers": []
+        },
+        {
+            "title": "Scene 6",
+            "unlocked": "false",
+            "number": "6",
+            "description": "",
+            "videoType": "mov",
+            "trackers": []
         }
     ],
 
