@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F20B8DF182D34420035EEF1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F20B8DE182D34420035EEF1 /* Constants.m */; };
+		4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */; };
+		4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */; };
+		4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */; };
+		4F20B8EB182D3F960035EEF1 /* frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8EA182D3F960035EEF1 /* frame@2x.png */; };
+		4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -72,6 +78,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F20B8DD182D34420035EEF1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Modules/Utils/Constants.h; sourceTree = "<group>"; };
+		4F20B8DE182D34420035EEF1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Modules/Utils/Constants.m; sourceTree = "<group>"; };
+		4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exploreButton@2x.png"; sourceTree = "<group>"; };
+		4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryButton@2x.png"; sourceTree = "<group>"; };
+		4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "museumButton@2x.png"; sourceTree = "<group>"; };
+		4F20B8EA182D3F960035EEF1 /* frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frame@2x.png"; sourceTree = "<group>"; };
+		4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooserTitle@2x.png"; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -177,6 +190,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F20B8E0182D3D9A0035EEF1 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */,
+				4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */,
+				4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */,
+			);
+			name = Menu;
+			path = Data/UI/Menu;
+			sourceTree = "<group>";
+		};
+		4F20B8E9182D3F960035EEF1 /* SceneChooser */ = {
+			isa = PBXGroup;
+			children = (
+				4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */,
+				4F20B8EA182D3F960035EEF1 /* frame@2x.png */,
+			);
+			name = SceneChooser;
+			path = Data/UI/SceneChooser;
+			sourceTree = "<group>";
+		};
 		624B9787182117910087C576 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +238,8 @@
 			children = (
 				624B978D182120580087C576 /* OrientationUtils.h */,
 				624B978E182120580087C576 /* OrientationUtils.m */,
+				4F20B8DD182D34420035EEF1 /* Constants.h */,
+				4F20B8DE182D34420035EEF1 /* Constants.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -435,6 +471,8 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4F20B8E9182D3F960035EEF1 /* SceneChooser */,
+				4F20B8E0182D3D9A0035EEF1 /* Menu */,
 				62A2B28918215DC700B4F0E4 /* logo.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
 				CE488873181EFFA5001D9A09 /* timeline-button.png */,
@@ -545,20 +583,25 @@
 				B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */,
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
 				CEF64D56182ACA4200FE9C39 /* scene-1.mp4 in Resources */,
+				4F20B8EB182D3F960035EEF1 /* frame@2x.png in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mov in Resources */,
 				62A2B28A18215DC700B4F0E4 /* logo.png in Resources */,
+				4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */,
 				B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */,
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
+				4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				CEF64D57182ACA4200FE9C39 /* menu.mp4 in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
+				4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +631,7 @@
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
+				4F20B8DF182D34420035EEF1 /* Constants.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,

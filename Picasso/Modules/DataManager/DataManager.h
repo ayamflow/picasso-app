@@ -16,7 +16,6 @@
 + (id)sharedInstance;
 
 - (GameModel *)getGameModel;
-- (SceneModel *)getSceneWithId:(NSString *)sceneId;
 - (SceneModel *)getSceneWithNumber:(int)number;
 -(SceneModel *)getCurrentSceneModel;
 - (WorkModel *)getWorkWithId:(NSString *)workId;

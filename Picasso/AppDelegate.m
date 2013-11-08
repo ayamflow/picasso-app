@@ -31,8 +31,8 @@
     [self.player loadURL:url];
     self.player.player.rate = 2.0;
 
-    //[self.window.rootViewController.view addSubview:self.player.view];
-    //[self.window.rootViewController.view sendSubviewToBack:self.player.view];
+    [self.window.rootViewController.view addSubview:self.player.view];
+    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
 
     return YES;

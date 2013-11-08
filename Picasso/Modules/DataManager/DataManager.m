@@ -67,26 +67,13 @@
 	return [GameModel sharedInstance];
 }
 
-- (SceneModel *)getSceneWithId:(NSString *)sceneId {
-    NSDictionary *scene;
-    for(int i = 0; i < [self.scenes count]; i++) {
-        scene = [self.scenes objectAtIndex:i];
-        if([[scene valueForKey:@"sceneId"] isEqualToString:sceneId]) {
-            return [[SceneModel alloc] initWithData:scene];
-        }
-    }
-    return nil;
-}
-
 - (SceneModel *)getSceneWithNumber:(int) number {
     return [self.scenes objectAtIndex:number];
 }
 
 - (void)unlockSceneWithNumber:(int)number {
-    NSDictionary *scene = [self.scenes objectAtIndex:number];
-    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
-    [scene setValue:@"true" forKey:@"unlocked"];
-    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
+    SceneModel *scene = [self.scenes objectAtIndex:number];
+    scene.unlocked = YES;
 }
 
 -(SceneModel *)getCurrentSceneModel {

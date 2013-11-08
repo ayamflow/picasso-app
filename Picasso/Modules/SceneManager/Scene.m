@@ -49,6 +49,7 @@
 
         // DEBUG
         self.player.rate = 2.0;
+        [self.player seekToTime:CMTimeMake(55, 10)];
     }
     return self;
 }

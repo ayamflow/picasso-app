@@ -49,7 +49,7 @@
         if(!sceneModel.unlocked) {
             sceneButton.alpha = 0.2;
         }
-        [sceneButton setFrame:CGRectMake(i * 50, 140, 30, 30)];
+        [sceneButton setFrame:CGRectMake(i * 62, 250, 42, 42)];
         sceneButton.tag = i;
         [sceneButton addTarget:self action:@selector(sceneButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:sceneButton];
