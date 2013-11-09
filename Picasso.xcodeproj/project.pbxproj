@@ -57,6 +57,7 @@
 		B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5307181FE76400DFCC39 /* 2.jpg */; };
 		B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5308181FE76400DFCC39 /* 3.jpg */; };
 		B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5311181FF58500DFCC39 /* GalleryViewController.m */; };
+		CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2FBC51182E94C7004160FF /* OpacityTransition.m */; };
 		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
@@ -150,6 +151,8 @@
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5310181FF58500DFCC39 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		B9FF5311181FF58500DFCC39 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
+		CE2FBC50182E94C7004160FF /* OpacityTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpacityTransition.h; path = Modules/Transitions/OpacityTransition.h; sourceTree = "<group>"; };
+		CE2FBC51182E94C7004160FF /* OpacityTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpacityTransition.m; path = Modules/Transitions/OpacityTransition.m; sourceTree = "<group>"; };
 		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
 		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE2FBC4F182E94AE004160FF /* Transitions */,
 				624E6B31181E733800E7FE58 /* SceneManager */,
 				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				CE86045A18283BB00019657F /* Home */,
@@ -468,6 +472,15 @@
 				B9FF5311181FF58500DFCC39 /* GalleryViewController.m */,
 			);
 			name = GalleryView;
+			sourceTree = "<group>";
+		};
+		CE2FBC4F182E94AE004160FF /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				CE2FBC50182E94C7004160FF /* OpacityTransition.h */,
+				CE2FBC51182E94C7004160FF /* OpacityTransition.m */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 		CE488875181EFFA9001D9A09 /* UI */ = {
@@ -631,6 +644,7 @@
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
+				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,

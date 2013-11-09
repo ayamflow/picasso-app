@@ -11,6 +11,7 @@
 #import "SceneManager.h"
 #import "Constants.h"
 #import "OrientationUtils.h"
+#import "OpacityTransition.h"
 
 @interface SceneChooser ()
 
@@ -142,7 +143,8 @@
     [[DataManager sharedInstance] getGameModel].currentScene = [sender tag];
 
     SceneManager *scene = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-    [self.navigationController pushViewController:scene animated:YES];
+    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
+    [self.navigationController pushViewController:scene animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
