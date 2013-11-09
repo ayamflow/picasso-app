@@ -10,10 +10,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
 
-@interface MotionVideoPlayer : AVPlayer
+@interface MotionVideoPlayer : UIViewController
+
+@property (strong, nonatomic) AVPlayer *player;
 
 + (id)sharedInstance;
 - (void)enableMotion;
 - (void)disableMotion;
+
 
 @end

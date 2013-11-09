@@ -23,4 +23,8 @@
     return window;
 }
 
++ (CGRect)nativeDeviceSize {
+    return[[UIScreen mainScreen] bounds];
+}
+
 @end

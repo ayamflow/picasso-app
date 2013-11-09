@@ -18,6 +18,7 @@
 @property (strong, nonatomic) id playerUpdatesObserver;
 @property (assign, nonatomic) float frameRate;
 @property (assign, nonatomic) float completion;
+@property (strong, nonatomic) AVPlayer *player;
 
 @end
 
@@ -63,14 +64,10 @@
 }
 
 - (void)initPlayerWithURL:(NSURL *)URL {
-    self.player = [MotionVideoPlayer playerWithURL:URL];
-    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
-    // Make sure the player takes the whole screen
-    CGRect screenSize = [OrientationUtils deviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
-    [self.view.layer addSublayer:layer];
+    self.playerView = [[MotionVideoPlayer alloc] init];
+    [self.view addSubview:self.playerView.view];
+    self.player = self.playerView.player;
     
     self.frameRate = [self getPlayerFrameRate];
     self.completion = 0.0f;
@@ -120,7 +117,7 @@
 
 - (id)listenForPlayerUpdates {
     __weak typeof(self) weakSelf = self;
-    return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
+    return [self.playerView.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
         [weakSelf listenForVideoEnded]; // Watch video status
         [weakSelf toggleTrackers]; // Show/hide/move trackers
     }];

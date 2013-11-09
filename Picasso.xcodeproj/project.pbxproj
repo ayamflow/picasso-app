@@ -57,6 +57,7 @@
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
 		CE86045D18283E520019657F /* About.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045C18283E520019657F /* About.m */; };
+		CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB7A07018284CB100A1F6E8 /* GameModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,8 @@
 		CE86045818283BAB0019657F /* Home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Home.m; path = Modules/Home/Home.m; sourceTree = "<group>"; };
 		CE86045B18283E520019657F /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = About.h; path = Modules/About/About.h; sourceTree = "<group>"; };
 		CE86045C18283E520019657F /* About.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = About.m; path = Modules/About/About.m; sourceTree = "<group>"; };
+		CEB7A06F18284CB100A1F6E8 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModel.h; path = Models/GameModel.h; sourceTree = "<group>"; };
+		CEB7A07018284CB100A1F6E8 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModel.m; path = Models/GameModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,12 +243,13 @@
 			children = (
 				624E6B5A181E9F4C00E7FE58 /* Models */,
 				624E6B4F181E9AB100E7FE58 /* Data */,
+				624E6B56181E9ECF00E7FE58 /* DataManager */,
 				624E6B2D181E6FAC00E7FE58 /* Modules */,
 				624E6B03181E5FD300E7FE58 /* AppDelegate.h */,
 				624E6B04181E5FD300E7FE58 /* AppDelegate.m */,
-				624E6B06181E5FD300E7FE58 /* Main.storyboard */,
 				624E6B09181E5FD300E7FE58 /* ViewController.h */,
 				624E6B0A181E5FD300E7FE58 /* ViewController.m */,
+				624E6B06181E5FD300E7FE58 /* Main.storyboard */,
 				624E6B0C181E5FD300E7FE58 /* Images.xcassets */,
 				624E6AFB181E5FD300E7FE58 /* Supporting Files */,
 			);
@@ -284,15 +288,12 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE86045A18283BB00019657F /* Home */,
 				B9FF530C181FF48300DFCC39 /* GalleryView */,
 				B9FF5302181FBD3A00DFCC39 /* WorkView */,
+				CE86045E18283E560019657F /* AboutMuseum */,
 				624B978C182120420087C576 /* Utils */,
 				624E6B62181ECD5300E7FE58 /* UI */,
-				624E6B56181E9ECF00E7FE58 /* DataManager */,
-				624E6B38181E777800E7FE58 /* VideoPlayer */,
-				624E6B31181E733800E7FE58 /* SceneManager */,
-				CE86045A18283BB00019657F /* Home */,
-				CE86045E18283E560019657F /* AboutMuseum */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -377,6 +378,8 @@
 				624E6B5F181EA2B700E7FE58 /* SceneModel.m */,
 				62E9FA33181FCBC20080A21D /* TrackerModel.h */,
 				62E9FA34181FCBC20080A21D /* TrackerModel.m */,
+				CEB7A06F18284CB100A1F6E8 /* GameModel.h */,
+				CEB7A07018284CB100A1F6E8 /* GameModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -441,6 +444,8 @@
 			children = (
 				CE86045718283BAB0019657F /* Home.h */,
 				CE86045818283BAB0019657F /* Home.m */,
+				624E6B31181E733800E7FE58 /* SceneManager */,
+				624E6B38181E777800E7FE58 /* VideoPlayer */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
+				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,

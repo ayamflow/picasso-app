@@ -19,5 +19,6 @@
 @property (strong, nonatomic) NSString *description;
 
 - (id)initWithData:(NSDictionary *)data;
+- (void)unlockScene;
 
 @end

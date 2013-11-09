@@ -41,7 +41,7 @@
     self.scenesNumber = [dataManager getScenesNumber];
     
     // Auto launch if needed
-//    [self showSceneWithNumber:0];
+    [self showSceneWithNumber:[dataManager getGameModel].currentScene];
 }
 
 - (void)showSceneWithNumber:(int)number {
