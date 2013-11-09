@@ -12,5 +12,8 @@
 
 + (UIColor *)backgroundColor;
 + (UIColor *)textColor;
++ (UIColor *)lightColor;
++ (UIColor *)darkColor;
++ (UIColor *)sliderColor;
 
 @end

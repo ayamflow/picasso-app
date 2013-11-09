@@ -22,10 +22,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 //    [self showFonts];
 	[self initModels];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
-//    [self initBackgroundVideo];
+    [self initBackgroundVideo];
 //    [self initMenuButton];
 
     return YES;
@@ -55,7 +56,7 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self.player loadURL:url];
-    self.player.player.rate = 2.0;
+//    self.player.player.rate = 2.0;
 
     [self.window.rootViewController.view addSubview:self.player.view];
     [self.window.rootViewController.view sendSubviewToBack:self.player.view];

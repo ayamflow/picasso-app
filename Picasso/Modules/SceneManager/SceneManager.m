@@ -82,7 +82,7 @@
 
 - (void)showInterstitial {
     if(self.interstitial != nil) [self removeInterstitial];
-    self.interstitial = [[SceneInterstitial alloc] initWithDescription:self.currentScene.model.description];
+    self.interstitial = [[SceneInterstitial alloc] initWithModel:self.currentScene.model];
     self.interstitial.slidingButton.delegate = self;
     [self.view addSubview:self.interstitial.view];
 }

@@ -12,6 +12,7 @@
 
 @property (assign, nonatomic) int number;
 @property (strong, nonatomic) NSString *sceneId;
+@property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *videoType;
 @property (assign, nonatomic) BOOL unlocked;
 @property (strong, nonatomic) NSString *title;

@@ -27,4 +27,9 @@
     return[[UIScreen mainScreen] bounds];
 }
 
++ (CGRect)nativeLandscapeDeviceSize {
+    CGRect window = [[UIScreen mainScreen] bounds];
+    return CGRectMake(0, 0, window.size.height, window.size.width);
+}
+
 @end

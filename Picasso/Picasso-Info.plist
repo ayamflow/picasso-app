@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Brandon_light_it.otf</string>
 		<string>Brandon_bold.otf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

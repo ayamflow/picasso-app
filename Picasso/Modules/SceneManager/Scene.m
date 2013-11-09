@@ -48,8 +48,8 @@
         NSLog(@"[Scene #%i] Started", self.model.number);
 
         // DEBUG
-        self.player.rate = 2.0;
-        [self.player seekToTime:CMTimeMake(55, 10)];
+        self.player.rate = 20.0;
+        [self.player seekToTime:CMTimeMake(25, 10)];
     }
     return self;
 }

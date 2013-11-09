@@ -7,6 +7,7 @@
 //
 
 #import "SceneSlider.h"
+#import "Constants.h"
 
 @interface SceneSlider ()
 
@@ -14,7 +15,6 @@
 @property (assign, nonatomic) int sliderBasePosition;
 @property (assign, nonatomic) float sliderAmplitude;
 @property (assign, nonatomic) float sliderDistanceThreshold;
-@property (assign, nonatomic) float sliderDistance;
 @property (strong, nonatomic) UIColor *baseColor;
 @property (strong, nonatomic) UIColor *readyColor;
 
@@ -37,7 +37,7 @@
         self.readyColor = [UIColor purpleColor];
         
         [self initButtonWithFrame:frame];
-        
+
         self.sliderAmplitude = amplitude;
         self.sliderBasePosition = self.button.frame.size.height / 2;
         self.sliderDistanceThreshold = (self.sliderAmplitude - self.sliderBasePosition) * threshold;
@@ -47,10 +47,10 @@
 
 - (void)initButtonWithFrame:(CGRect)frame {
     self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.button setBackgroundColor:self.baseColor];
-    [self.button setTitle:@"\\/" forState:UIControlStateNormal];
+    self.button.backgroundColor = [UIColor textColor];
+    [self.button setImage:[UIImage imageNamed:@"sliderInterstitial.png"] forState:UIControlStateNormal];
     [self.view setFrame:frame];
-    [self.button setFrame:CGRectMake(0, 0, 30, 30)];
+    [self.button setFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
     [self.button addTarget:self action:@selector(sliderDragStarted:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [self.button addTarget:self action:@selector(sliderDragEnded:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.button];
@@ -63,7 +63,9 @@
     self.button.center = CGPointMake(self.button.center.x, touchY);
     self.sliderDistance = touchY - self.sliderBasePosition;
 
-    if(self.sliderDistance > self.sliderDistanceThreshold) {
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"sliderHasMoved" object:self];
+
+    /*if(self.sliderDistance > self.sliderDistanceThreshold) {
         // Visual feedback that it's down enough
         [UIView animateWithDuration:0.2f animations:^{
             [self.button setBackgroundColor:self.readyColor];
@@ -73,7 +75,7 @@
         [UIView animateWithDuration:0.2f animations:^{
             [self.button setBackgroundColor:self.baseColor];
         }];
-    }
+    }*/
 }
 
 - (void)sliderDragEnded:(id)sender withEvent:(UIEvent *)event {
@@ -89,6 +91,7 @@
 }
 
 - (void)resetSlidingButtonPositionWithDuration:(float)duration {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"resetSlider" object:self];
     [UIView animateWithDuration:duration animations:^{
         self.button.center = CGPointMake(self.button.center.x, self.sliderBasePosition);
     }];

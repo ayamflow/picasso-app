@@ -16,5 +16,6 @@ static int Portrait = 1;
 + (int)deviceOrientation;
 + (CGRect)deviceSize;
 + (CGRect)nativeDeviceSize;
++ (CGRect)nativeLandscapeDeviceSize;
 
 @end
