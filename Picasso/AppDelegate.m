@@ -22,8 +22,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[[DataManager sharedInstance] getGameModel] init];
-    
+//    [self showFonts];
+	[self initModels];
+    self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+//    [self initBackgroundVideo];
+//    [self initMenuButton];
+
+    return YES;
+}
+
+// CUSTOM METHODS FOR PICASSO
+
+- (void)showFonts {
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+}
+
+- (void)initModels {
+	[[[DataManager sharedInstance] getGameModel] init];
+}
+
+- (void)initBackgroundVideo {
 	self.player = [MotionVideoPlayer sharedInstance];
 
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
@@ -34,8 +60,10 @@
     [self.window.rootViewController.view addSubview:self.player.view];
     [self.window.rootViewController.view sendSubviewToBack:self.player.view];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+}
 
-    return YES;
+- (void)initMenuButton {
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

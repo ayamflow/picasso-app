@@ -43,7 +43,10 @@
     for(int i = 0; i < scenesNumber; i++) {
         SceneModel *sceneModel = [dataManager getSceneWithNumber:i];
         UIButton *sceneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [sceneButton setBackgroundImage:[UIImage imageNamed:@"frame.png"] forState:UIControlStateNormal];
+        sceneButton.layer.cornerRadius = 0.0;
+        sceneButton.layer.borderWidth = 2.0;
+        sceneButton.layer.borderColor = [UIColor textColor].CGColor;
+        sceneButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15.0];
         [sceneButton setTitle:[NSString stringWithFormat:@"%i", i + 1] forState:UIControlStateNormal];
         [sceneButton setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
         if(!sceneModel.unlocked) {

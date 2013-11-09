@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2Uu-Jz-OKz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2Uu-Jz-OKz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--Scene Chooser-->
         <scene sceneID="dVN-g0-96a">
             <objects>
                 <viewController id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4mz-tO-OxA"/>
-                        <viewControllerLayoutGuide type="bottom" id="cKs-Qz-bZ6"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gjo-LO-52i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chooserTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="DRf-Hm-ri9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooserTitle.png" id="DRf-Hm-ri9">
                                 <rect key="frame" x="0.0" y="20" width="320" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -33,10 +29,6 @@
         <scene sceneID="Gn4-YD-ynG">
             <objects>
                 <viewController storyboardIdentifier="SceneManager" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uqe-AI-x0G" customClass="SceneManager" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Aqx-9S-W5e"/>
-                        <viewControllerLayoutGuide type="bottom" id="fwM-sc-UrQ"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="o16-SL-ZSK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -51,15 +43,11 @@
         <scene sceneID="X6E-Hs-n4T">
             <objects>
                 <viewController storyboardIdentifier="GalleryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nJk-K9-wsr" customClass="GalleryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bpT-xp-uFe"/>
-                        <viewControllerLayoutGuide type="bottom" id="8jj-qp-k2D"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ib1-0u-5aI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-dI-Ytt">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="ERX-dI-Ytt">
                                 <rect key="frame" x="0.0" y="37" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WXX-6B-vxD">
@@ -100,10 +88,6 @@
         <scene sceneID="6Ri-A0-tsU">
             <objects>
                 <viewController id="pw8-1h-sAP" customClass="About" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="c8Z-Dz-taC"/>
-                        <viewControllerLayoutGuide type="bottom" id="qrV-pd-FSb"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ia9-bb-cjq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -119,19 +103,15 @@
         <scene sceneID="V7k-Xk-t0s">
             <objects>
                 <viewController storyboardIdentifier="WorkViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UIM-FZ-cXh" customClass="WorkViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xcQ-sv-7c5"/>
-                        <viewControllerLayoutGuide type="bottom" id="J0Z-tN-g7o"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hTV-Zf-Rbq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVp-U6-33K">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tVp-U6-33K">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="289"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kyh-X9-MUU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Kyh-X9-MUU">
                                 <rect key="frame" x="0.0" y="297" width="320" height="271"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
@@ -152,44 +132,44 @@
         <scene sceneID="SbM-vb-Srf">
             <objects>
                 <viewController id="slh-Y1-crv" customClass="Home" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YtP-0H-blU"/>
-                        <viewControllerLayoutGuide type="bottom" id="yxr-Cu-57Y"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sc5-Io-2C9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTj-Hu-dSE">
-                                <rect key="frame" x="83" y="213" width="157" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="exploreButton.png">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CTj-Hu-dSE">
+                                <rect key="frame" x="82" y="282" width="157" height="42"/>
+                                <state key="normal" title="EXPLORER" backgroundImage="exploreButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="i8K-0P-76g" kind="push" id="u02-ss-QSO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdG-kb-XTA">
-                                <rect key="frame" x="82" y="263" width="157" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="galleryButton.png">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zdG-kb-XTA">
+                                <rect key="frame" x="82" y="332" width="157" height="42"/>
+                                <state key="normal" title="GALERIE" backgroundImage="galleryButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="nJk-K9-wsr" kind="push" id="WJh-nJ-Fi5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvN-8L-DX0">
-                                <rect key="frame" x="22" y="313" width="277" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="museumButton.png">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bvN-8L-DX0">
+                                <rect key="frame" x="83" y="382" width="156" height="42"/>
+                                <state key="normal" title="LE MUSÉE" backgroundImage="museumButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="pw8-1h-sAP" kind="push" id="sJy-tY-RGP"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="1Jq-MB-qgP">
+                                <rect key="frame" x="40" y="60" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -197,6 +177,7 @@
                     <connections>
                         <outlet property="exploreButton" destination="CTj-Hu-dSE" id="2xu-iD-GSC"/>
                         <outlet property="galleryButton" destination="zdG-kb-XTA" id="fWY-zS-zQ5"/>
+                        <outlet property="logo" destination="1Jq-MB-qgP" id="ZEy-AU-nJt"/>
                         <outlet property="museumButton" destination="bvN-8L-DX0" id="are-GB-Hw4"/>
                     </connections>
                 </viewController>
@@ -227,6 +208,7 @@
         <image name="chooserTitle.png" width="261" height="41"/>
         <image name="exploreButton.png" width="157" height="42"/>
         <image name="galleryButton.png" width="157" height="42"/>
+        <image name="logo.png" width="505" height="161"/>
         <image name="museumButton.png" width="157" height="42"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
