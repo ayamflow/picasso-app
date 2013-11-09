@@ -10,4 +10,7 @@
 
 @interface SceneChooser : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *titleImage;
+
 @end
