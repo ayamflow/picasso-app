@@ -49,11 +49,13 @@
             for(int i = 0; i < scenesNumber; i++) {
                 SceneModel *scene = [[SceneModel alloc] initWithData:[scenes objectAtIndex:i]];
                 [scenesArray addObject:scene];
+            }
 
+            for(int i = 0; i < worksNumber; i++) {
                 WorkModel *work = [[WorkModel alloc] initWithData:[works objectAtIndex:i]];
                 [worksArray addObject:work];
             }
-
+            
             self.scenes = [NSArray arrayWithArray:scenesArray];
             self.works = [NSArray arrayWithArray:worksArray];
         }
