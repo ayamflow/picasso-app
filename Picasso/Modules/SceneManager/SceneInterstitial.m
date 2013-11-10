@@ -37,7 +37,11 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel {
@@ -146,8 +150,8 @@
     self.slidingButton = [[SceneSlider alloc] initWithFrame:sliderFrame andAmplitude:screenSize.size.height - buttonSize / 2 andThreshold:0.7];
     [self.view addSubview:self.slidingButton.view];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSliderZone) name:@"sliderHasMoved" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSliderZone) name:@"resetSlider" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSliderZone) name:[MPPEvents SliderHasMovedEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSliderZone) name:[MPPEvents ResetSliderEvent] object:nil];
 }
 
 - (void)updateSliderZone {

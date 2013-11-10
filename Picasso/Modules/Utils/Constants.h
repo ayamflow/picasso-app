@@ -10,10 +10,20 @@
 
 @interface UIColor (Picasso)
 
+// Colors
 + (UIColor *)backgroundColor;
 + (UIColor *)textColor;
 + (UIColor *)lightColor;
 + (UIColor *)darkColor;
 + (UIColor *)sliderColor;
+
+@end
+
+@interface MPPEvents : NSObject
+
++ (NSString *)PlayerHasMovedEvent;
++ (NSString *)SendPlayerToBackEvent;
++ (NSString *)ResetSliderEvent;
++ (NSString *)SliderHasMovedEvent;
 
 @end

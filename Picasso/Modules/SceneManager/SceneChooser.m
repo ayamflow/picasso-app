@@ -56,7 +56,7 @@
 
 - (void)initButtons {
     DataManager *dataManager = [DataManager sharedInstance];
-    int scenesNumber = [dataManager getScenesNumber];
+    NSInteger scenesNumber = [dataManager getScenesNumber];
 
     NSMutableArray *tempButtonsArray = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
 
@@ -99,7 +99,7 @@
 - (void)updatePositionToLandscape {
 	float leftPosition = ([OrientationUtils nativeDeviceSize].size.height - self.titleImage.frame.size.width - self.titleLabel.frame.size.width - 10.0) / 2 + self.titleImage.frame.size.width / 2;
     float topPosition = 90.0;
-	NSLog(@"left: %f, %f", leftPosition, self.titleImage.frame.size.width);
+//	NSLog(@"left: %f, %f", leftPosition, self.titleImage.frame.size.width);
     self.titleImage.layer.position = CGPointMake(leftPosition, topPosition);
     self.titleLabel.layer.position = CGPointMake(leftPosition + self.titleImage.frame.size.width * 3 + 10.0, topPosition);
 
@@ -109,7 +109,7 @@
 - (void)updatePositionToPortrait {
 	float leftPosition = ([OrientationUtils nativeDeviceSize].size.width - self.titleImage.frame.size.width - self.titleLabel.frame.size.width - 10.0) / 2 + self.titleImage.frame.size.width / 2;
     float topPosition = 120.0;
-	NSLog(@"left: %f", leftPosition);
+//	NSLog(@"left: %f", leftPosition);
     self.titleImage.layer.position = CGPointMake(leftPosition, topPosition);
     self.titleLabel.layer.position = CGPointMake(leftPosition + self.titleImage.frame.size.width * 3 + 10.0, topPosition);
 
@@ -144,7 +144,8 @@
 
     SceneManager *scene = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
     [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
-    [self.navigationController pushViewController:scene animated:NO];
+//    [self.navigationController pushViewController:scene animated:NO];
+    [self.navigationController presentViewController:scene animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

@@ -10,6 +10,9 @@
 
 @implementation OrientationUtils
 
+static int Landscape = 0;
+static int Portrait = 1;
+
 + (int)deviceOrientation {
     return [[UIApplication sharedApplication] statusBarOrientation] <= 1 ? Portrait : Landscape;
 }

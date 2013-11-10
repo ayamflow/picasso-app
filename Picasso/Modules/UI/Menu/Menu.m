@@ -45,9 +45,9 @@
     self.textColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0];
     
     [self initLogo];
-    [self initButtons];
-    [self initTimeline];
-    
+//    [self initButtons];
+//    [self initTimeline];
+
     [self.view setBackgroundColor:[UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0]];
 }
 
@@ -97,8 +97,8 @@
     [self.view addSubview:self.timeline.view];*/
     
     DataManager *dataManager = [DataManager sharedInstance];
-    int scenesNumber = [dataManager getScenesNumber];
-    int spaceBetweenScenes = 20;
+    NSInteger scenesNumber = [dataManager getScenesNumber];
+    NSInteger spaceBetweenScenes = 20;
     
     // Create progress bar first
     self.progressBar = [[UIView alloc] initWithFrame:CGRectMake(screenSize.size.width / 2 - (scenesNumber * spaceBetweenScenes) / 2 - 4, screenSize.size.height - BUTTON_HEIGHT * 1.5 + 11, (scenesNumber - 1) * (22 + spaceBetweenScenes), 2)];
@@ -130,7 +130,7 @@
 }
 
 -(void)touchEnded:(id)sender {
-    NSLog(@"[Timeline] Touch #%i", [sender tag]);
+    NSLog(@"[Timeline] Touch #%ld", [sender tag]);
     //    [self.delegate showSceneWithNumber:[sender tag]];
 }
 

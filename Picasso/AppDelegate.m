@@ -15,6 +15,7 @@
 @interface AppDelegate ()
 
 @property (strong, nonatomic) MotionVideoPlayer *player;
+@property (assign, nonatomic) BOOL playerIsHere;
 
 @end
 
@@ -22,12 +23,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 //    [self showFonts];
 	[self initModels];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
     [self initBackgroundVideo];
-//    [self initMenuButton];
 
     return YES;
 }
@@ -56,11 +56,26 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self.player loadURL:url];
-//    self.player.player.rate = 2.0;
+    self.player.player.rate = 2.0;
+//    self.player.player.volume = 0;
 
-    [self.window.rootViewController.view addSubview:self.player.view];
-    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendVideoPlayerToBack) name:[MPPEvents SendPlayerToBackEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerHasMoved) name:[MPPEvents PlayerHasMovedEvent] object:nil];
+	[self sendVideoPlayerToBack];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+}
+
+- (void)sendVideoPlayerToBack {
+    if(self.playerIsHere) return;
+    else {
+        self.playerIsHere = YES;
+	    [self.window.rootViewController.view addSubview:self.player.view];
+        [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+    }
+}
+
+- (void)videoPlayerHasMoved {
+    self.playerIsHere = NO;
 }
 
 - (void)initMenuButton {

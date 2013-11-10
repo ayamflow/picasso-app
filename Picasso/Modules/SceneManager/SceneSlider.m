@@ -46,7 +46,7 @@
 }
 
 - (void)initButtonWithFrame:(CGRect)frame {
-    self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.button.backgroundColor = [UIColor textColor];
     [self.button setImage:[UIImage imageNamed:@"sliderInterstitial.png"] forState:UIControlStateNormal];
     [self.view setFrame:frame];
@@ -63,7 +63,7 @@
     self.button.center = CGPointMake(self.button.center.x, touchY);
     self.sliderDistance = touchY - self.sliderBasePosition;
 
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"sliderHasMoved" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SliderHasMovedEvent] object:self];
 
     /*if(self.sliderDistance > self.sliderDistanceThreshold) {
         // Visual feedback that it's down enough
@@ -91,7 +91,7 @@
 }
 
 - (void)resetSlidingButtonPositionWithDuration:(float)duration {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"resetSlider" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents ResetSliderEvent] object:self];
     [UIView animateWithDuration:duration animations:^{
         self.button.center = CGPointMake(self.button.center.x, self.sliderBasePosition);
     }];

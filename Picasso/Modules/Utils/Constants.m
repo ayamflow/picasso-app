@@ -31,3 +31,23 @@
 }
 
 @end
+
+@implementation MPPEvents
+
++ (NSString *)PlayerHasMovedEvent {
+    return @"videoPlayerHasMoved";
+}
+
++ (NSString *)SendPlayerToBackEvent {
+    return @"sendVideoPlayerToBack";
+}
+
++ (NSString *)ResetSliderEvent {
+    return @"resetSlider";
+}
+
++ (NSString *)SliderHasMovedEvent {
+    return @"sliderHasMoved";
+}
+
+@end

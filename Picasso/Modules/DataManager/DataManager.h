@@ -16,12 +16,12 @@
 + (id)sharedInstance;
 
 - (GameModel *)getGameModel;
-- (SceneModel *)getSceneWithNumber:(int)number;
+- (SceneModel *)getSceneWithNumber:(NSInteger)number;
 -(SceneModel *)getCurrentSceneModel;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
-- (WorkModel *)getWorkWithNumber:(int)number;
-- (void)unlockSceneWithNumber:(int)number;
-- (int)getScenesNumber;
-- (int)getWorksNumber;
+- (WorkModel *)getWorkWithNumber:(NSInteger)number;
+- (void)unlockSceneWithNumber:(NSInteger)number;
+- (NSInteger)getScenesNumber;
+- (NSInteger)getWorksNumber;
 
 @end

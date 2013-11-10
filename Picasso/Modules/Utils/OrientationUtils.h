@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-static int Landscape = 0;
-static int Portrait = 1;
-
 @interface OrientationUtils : NSObject
 
 + (int)deviceOrientation;

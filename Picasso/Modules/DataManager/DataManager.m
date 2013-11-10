@@ -39,11 +39,11 @@
         }
         else {
             NSArray *scenes = picassoDictionnary[@"scenes"];
-            int scenesNumber = [scenes count];
+            NSInteger scenesNumber = [scenes count];
 			NSMutableArray *scenesArray = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
 
             NSArray *works = picassoDictionnary[@"works"];
-            int worksNumber = [works count];
+            NSInteger worksNumber = [works count];
 			NSMutableArray *worksArray = [[NSMutableArray alloc] initWithCapacity:worksNumber];
 
             for(int i = 0; i < scenesNumber; i++) {
@@ -67,11 +67,11 @@
 	return [GameModel sharedInstance];
 }
 
-- (SceneModel *)getSceneWithNumber:(int) number {
+- (SceneModel *)getSceneWithNumber:(NSInteger) number {
     return [self.scenes objectAtIndex:number];
 }
 
-- (void)unlockSceneWithNumber:(int)number {
+- (void)unlockSceneWithNumber:(NSInteger)number {
     SceneModel *scene = [self.scenes objectAtIndex:number];
     scene.unlocked = YES;
 }
@@ -82,11 +82,11 @@
 }
 
 
-- (int)getScenesNumber {
+- (NSInteger)getScenesNumber {
     return [self.scenes count];
 }
 
-- (WorkModel *)getWorkWithNumber:(int) number {
+- (WorkModel *)getWorkWithNumber:(NSInteger) number {
     return [self.works objectAtIndex:number];
 }
 
@@ -101,7 +101,7 @@
     return nil;
 }
 
-- (int)getWorksNumber {
+- (NSInteger)getWorksNumber {
     return [self.works count];
 }
 

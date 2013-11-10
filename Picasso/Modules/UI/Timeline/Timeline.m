@@ -32,7 +32,7 @@
 
 - (void)initTimeline {
     DataManager *dataManager = [DataManager sharedInstance];
-    int scenesNumber = [dataManager getScenesNumber];
+    NSInteger scenesNumber = [dataManager getScenesNumber];
     
     self.scenes = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
     NSString *path = [[NSBundle mainBundle] pathForResource: @"timeline-button" ofType: @"png"];
@@ -63,7 +63,7 @@
 }
 
 -(void)touchEnded:(id)sender {
-    NSLog(@"[Timeline] Touch #%i", [sender tag]);
+    NSLog(@"[Timeline] Touch #%ld", [sender tag]);
 //    [self.delegate showSceneWithNumber:[sender tag]];
 }
 

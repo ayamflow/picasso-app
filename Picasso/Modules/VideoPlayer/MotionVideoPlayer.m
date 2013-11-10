@@ -34,6 +34,15 @@ static BOOL initialized;
     return sharedInstance;
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 // Addind call to initMotionManager to default init methods.
 - (id)init {
     if(self = [super init]) {
@@ -91,16 +100,13 @@ static BOOL initialized;
 }
 
 - (void)loadURL:(NSURL *)url {
-    NSLog(@"loadURL/initialized = %@", initialized ? @"YES" : @"NO");
 	if(!initialized) {
 		[self initPlayerWithURL:url];
         initialized = YES;
     }
     else {
         AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
-        // play this item
         [self.player replaceCurrentItemWithPlayerItem:item];
-
         self.frameRate = [self getPlayerFrameRate];
     }
 }
@@ -108,6 +114,7 @@ static BOOL initialized;
 // Motion methods
 
 - (void)enableMotion {
+    if(self.motionEnabled) return;
     if (self.motionManager.deviceMotionAvailable ) {
         self.motionManager.deviceMotionUpdateInterval = 1.0/30.0;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
@@ -126,21 +133,31 @@ static BOOL initialized;
     self.motionEnabled = NO;
 }
 
+
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
-    double playerRate = motion.attitude.pitch;
-    
-    // Normalizes it in [-2, 2]
-    playerRate = fmin(0.5, fmax(-0.5, playerRate)) * 4;
+    double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
+
+    self.player.rate = playerRate;
+//    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
+//        NSLog(@"[MotionVideoPlayer] Completed !");
+//        self.playbackCompleted = YES;
+//    }
+}
+
+// This one slowly updates the player rate with the pitch
+- (double)getSmoothedPlayerRateWithPitch:(double)pitch {
+    if(pitch > 0.2) return fmin(2, self.player.rate + 0.2);
+    else if(pitch < -0.2) return fmax(-2, self.player.rate - 0.2);
+    else return 0.0;
+}
+
+// This method mirrors the device motion to the player rate, normalized to [-2, 2]
+- (double)getNormalizedPlayerRateWithPitch:(double)pitch {
+    double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
     // Stabilizes playback around 0
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
-    
-//    NSLog(@"Pitch: %f", playerRate);
-    self.player.rate = playerRate;
-//    NSLog(@"rate: %i, time: %f, duration: %f", self.rate, CMTimeGetSeconds(self.currentTime), CMTimeGetSeconds(self.currentItem.asset.duration));
-    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
-        NSLog(@"[MotionVideoPlayer] Completed !");
-        self.playbackCompleted = YES;
-    }
+
+	return playerRate;
 }
 
 -(float)getPlayerFrameRate {

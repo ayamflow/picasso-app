@@ -9,6 +9,7 @@
 #import "Home.h"
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
+#import "Constants.h"
 
 @interface Home ()
 
@@ -19,6 +20,9 @@
 @implementation Home
 
 - (void)viewDidLoad {
+    // Place by default the video player in the background
+    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SendPlayerToBackEvent] object:self];
+
     self.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.hidden = YES;
 
@@ -33,6 +37,10 @@
 
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

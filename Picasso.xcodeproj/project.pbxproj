@@ -24,7 +24,6 @@
 		624E6B01181E5FD300E7FE58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B00181E5FD300E7FE58 /* main.m */; };
 		624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B04181E5FD300E7FE58 /* AppDelegate.m */; };
 		624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624E6B06181E5FD300E7FE58 /* Main.storyboard */; };
-		624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B0A181E5FD300E7FE58 /* ViewController.m */; };
 		624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624E6B0C181E5FD300E7FE58 /* Images.xcassets */; };
 		624E6B14181E5FD300E7FE58 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6B13181E5FD300E7FE58 /* XCTest.framework */; };
 		624E6B15181E5FD300E7FE58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6AF4181E5FD300E7FE58 /* Foundation.framework */; };
@@ -40,7 +39,7 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
-		62A2B28A18215DC700B4F0E4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2B28918215DC700B4F0E4 /* logo.png */; };
+		62A2B28A18215DC700B4F0E4 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2B28918215DC700B4F0E4 /* logo@2x.png */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -61,6 +60,7 @@
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE0182ED33C00BBAE33 /* dateTitleSign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */; };
 		CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE1182ED34200BBAE33 /* sliderInterstitial@2x.png */; };
+		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
@@ -109,8 +109,6 @@
 		624E6B03181E5FD300E7FE58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		624E6B04181E5FD300E7FE58 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		624E6B07181E5FD300E7FE58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		624E6B09181E5FD300E7FE58 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		624E6B0A181E5FD300E7FE58 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		624E6B0C181E5FD300E7FE58 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		624E6B12181E5FD300E7FE58 /* PicassoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicassoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		624E6B13181E5FD300E7FE58 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -133,7 +131,7 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
-		62A2B28918215DC700B4F0E4 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Data/UI/logo.png; sourceTree = "<group>"; };
+		62A2B28918215DC700B4F0E4 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Data/UI/logo@2x.png"; sourceTree = "<group>"; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -159,6 +157,7 @@
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
 		CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dateTitleSign@2x.png"; path = "Data/UI/dateTitleSign@2x.png"; sourceTree = "<group>"; };
 		CE32CDE1182ED34200BBAE33 /* sliderInterstitial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderInterstitial@2x.png"; sourceTree = "<group>"; };
+		CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSlider@2x.png"; sourceTree = "<group>"; };
 		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
 		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
@@ -202,6 +201,7 @@
 		4F20B8E0182D3D9A0035EEF1 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */,
 				4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */,
 				4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */,
 				4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */,
@@ -294,8 +294,6 @@
 				624E6B2D181E6FAC00E7FE58 /* Modules */,
 				624E6B03181E5FD300E7FE58 /* AppDelegate.h */,
 				624E6B04181E5FD300E7FE58 /* AppDelegate.m */,
-				624E6B09181E5FD300E7FE58 /* ViewController.h */,
-				624E6B0A181E5FD300E7FE58 /* ViewController.m */,
 				624E6B06181E5FD300E7FE58 /* Main.storyboard */,
 				624E6B0C181E5FD300E7FE58 /* Images.xcassets */,
 				624E6AFB181E5FD300E7FE58 /* Supporting Files */,
@@ -496,7 +494,7 @@
 				CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */,
 				4F20B8E9182D3F960035EEF1 /* SceneChooser */,
 				4F20B8E0182D3D9A0035EEF1 /* Menu */,
-				62A2B28918215DC700B4F0E4 /* logo.png */,
+				62A2B28918215DC700B4F0E4 /* logo@2x.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
 				CE488873181EFFA5001D9A09 /* timeline-button.png */,
 			);
@@ -617,13 +615,14 @@
 				CEF64D56182ACA4200FE9C39 /* scene-1.mov in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */,
-				62A2B28A18215DC700B4F0E4 /* logo.png in Resources */,
+				62A2B28A18215DC700B4F0E4 /* logo@2x.png in Resources */,
 				CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */,
 				4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */,
 				CEA3E755182E616400B115BC /* Brandon_bold.otf in Resources */,
 				4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */,
 				B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */,
@@ -654,7 +653,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
-				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,

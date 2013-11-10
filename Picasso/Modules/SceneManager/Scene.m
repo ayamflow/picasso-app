@@ -10,6 +10,7 @@
 #import "SceneModel.h"
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
+#import "Constants.h"
 
 #define PLAYBACK_PERCENT_BEFORE_FADE 0.90
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) AVPlayer *player;
 @property (assign, nonatomic) float completion;
 @property (strong, nonatomic) id playerUpdatesObserver;
+@property (assign, nonatomic) BOOL hasEnded;
 
 @end
 
@@ -33,9 +35,12 @@
 - (id)initWithModel:(SceneModel *)sceneModel {
     if(self = [super init]) {
         self.model = sceneModel;
+        self.hasEnded = NO;
 
         self.playerView = [MotionVideoPlayer sharedInstance];
         self.player = self.playerView.player;
+        [self.view addSubview:self.playerView.view];
+        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents PlayerHasMovedEvent] object:self];
 
         // Play the scene's video
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
@@ -45,17 +50,15 @@
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
-        NSLog(@"[Scene #%i] Started", self.model.number);
+		[self.playerView enableMotion];
 
-        // DEBUG
-        self.player.rate = 20.0;
-        [self.player seekToTime:CMTimeMake(25, 10)];
+        NSLog(@"[Scene #%i] Started", self.model.number);
+        self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
     }
     return self;
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position {
-//    NSLog(@"Init scene with position %f:%f", position.x, position.y);
     if(self = [self initWithModel:sceneModel]) {
         CGRect frame = self.view.frame;
         frame.origin = position;
@@ -69,7 +72,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource: @"tracker-button" ofType: @"png"];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
     
-    int number = [self.model.trackers count];
+    NSUInteger number = [self.model.trackers count];
     NSMutableArray *trackersArray = [[NSMutableArray alloc]initWithCapacity:number];
     
     for(int i = 0; i < number; i++) {
@@ -106,12 +109,15 @@
 
 - (void)listenForVideoEnded {
     self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
-    if(self.completion > PLAYBACK_PERCENT_BEFORE_FADE) {
-        // fade to black proportionaly
-        self.view.alpha = 1.0 - (self.completion - PLAYBACK_PERCENT_BEFORE_FADE) * 5; // -10% opacity * factor
-    }
-    if(self.completion > 1.0) {
-        [self playerItemDidReachEnd];
+    if(!self.hasEnded) {
+	    if(self.completion > PLAYBACK_PERCENT_BEFORE_FADE) {
+    	    // fade to black proportionaly
+    	    self.view.alpha = 1.0 - (self.completion - PLAYBACK_PERCENT_BEFORE_FADE) * 5; // -10% opacity * factor
+   	 }
+   	 if(self.completion > 1.0) {
+         self.hasEnded = YES;
+   	     [self playerItemDidReachEnd];
+   	 }
     }
 }
 
@@ -132,8 +138,8 @@
             if(currentFrame == [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:0] integerValue]) {
                 [currentTracker setHidden:NO];
                 [currentTracker setEnabled:YES];
-                int x = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:1] integerValue];
-                int y = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:2] integerValue];
+                NSInteger x = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:1] integerValue];
+                NSInteger y = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:2] integerValue];
                 CGRect trackerFrame = currentTracker.frame;
                 trackerFrame.origin = CGPointMake(x, y);
                 currentTracker.autoresizingMask = UIViewAutoresizingNone;
@@ -155,7 +161,10 @@
 }
 
 - (void)stop {
+    NSLog(@"[Scene #%i] Stopped.", self.model.number);
     self.player.rate = 0.0;
+    [self.playerView disableMotion];
+    self.player = nil;
 }
 
 - (void)didReceiveMemoryWarning
