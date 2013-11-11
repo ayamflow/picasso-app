@@ -14,7 +14,7 @@
 
 - (void)showNextScene;
 - (void)showPreviousScene;
-- (void)showSceneWithNumber:(int)number;
+- (void)showSceneWithNumber:(NSInteger)number;
 - (void)showInterstitial;
 
 @end

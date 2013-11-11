@@ -50,4 +50,8 @@
     return @"sliderHasMoved";
 }
 
++ (NSString *)SceneUnlockedEvent {
+    return @"sceneUnlocked";
+}
+
 @end

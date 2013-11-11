@@ -8,6 +8,7 @@
 
 #import "DataManager.h"
 #import "GameModel.h"
+#import "Constants.h"
 
 @interface DataManager ()
 
@@ -79,13 +80,13 @@
 
 - (void)unlockSceneWithNumber:(NSInteger)number {
     SceneModel *scene = [self.scenes objectAtIndex:number];
-    GameModel *gameModel = [self getGameModel];
-    gameModel.lastUnlockedScene = number;
+    NSDictionary *unlockedSceneDictionnary = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:number] forKey:@"number"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SceneUnlockedEvent] object:self userInfo:unlockedSceneDictionnary];
     scene.unlocked = YES;
 }
 
 -(SceneModel *)getCurrentSceneModel {
-    int currentScene = [[GameModel sharedInstance] currentScene];
+    NSInteger currentScene = [[GameModel sharedInstance] currentScene];
     return [self.scenes objectAtIndex:currentScene];
 }
 

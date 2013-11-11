@@ -19,7 +19,7 @@
 @property (strong, nonatomic) Scene *oldScene;
 @property (strong, nonatomic) Scene *currentScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
-@property (assign, nonatomic) int scenesNumber;
+@property (assign, nonatomic) NSInteger scenesNumber;
 @property (strong, nonatomic) UIButton *menuSlider;
 @property (assign, nonatomic) BOOL menuShown;
 @property (assign, nonatomic) BOOL shouldShowMenu;
@@ -55,7 +55,7 @@
     self.scenesNumber = [dataManager getScenesNumber];
     
     // Auto launch
-    [self showSceneWithNumber:[dataManager getGameModel].currentScene];
+    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
 	[self initMenu];
 }
 
@@ -162,7 +162,7 @@
     } completion:^(BOOL finished) {}];
 }*/
 
-- (void)showSceneWithNumber:(int)number {
+- (void)showSceneWithNumber:(NSInteger)number {
     // update oldScene
     if(self.currentScene) {
         [self.currentScene stop];
@@ -174,7 +174,7 @@
     [self createSceneWithNumber:number andPosition:CGPointMake(0, 0)];
 }
 
-- (void)createSceneWithNumber:(int)number andPosition:(CGPoint)position {
+- (void)createSceneWithNumber:(NSInteger)number andPosition:(CGPoint)position {
     DataManager *dataManager = [DataManager sharedInstance];
     SceneModel *sceneModel = [dataManager getSceneWithNumber:number];
 
@@ -185,7 +185,7 @@
 }
 
 - (void)removeLastSeenScene {
-    NSLog(@"[SceneManager] RemoveLastSeenScene #%i", self.oldScene.model.number);
+    NSLog(@"[SceneManager] RemoveLastSeenScene #%li", (long)self.oldScene.model.number);
     if(self.oldScene) {
         [self.oldScene stop];
         [self.oldScene.view removeFromSuperview];
@@ -245,11 +245,11 @@
     [self showSceneWithNumber:[self getPreviousSceneNumber]];
 }
 
-- (int)getNextSceneNumber {
+- (NSInteger)getNextSceneNumber {
     return self.currentScene.model.number < self.scenesNumber - 1 ? self.currentScene.model.number + 1 : 0;
 }
 
-- (int)getPreviousSceneNumber {
+- (NSInteger)getPreviousSceneNumber {
     return self.currentScene.model.number > 0 ? self.currentScene.model.number - 1 : self.scenesNumber - 1;
 }
 

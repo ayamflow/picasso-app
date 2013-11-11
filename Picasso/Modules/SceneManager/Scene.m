@@ -52,7 +52,7 @@
 
 		[self.playerView enableMotion];
 
-        NSLog(@"[Scene #%i] Started", self.model.number);
+        NSLog(@"[Scene #%li] Started", (long)self.model.number);
         self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
     }
     return self;
@@ -155,13 +155,13 @@
 }
 
 - (void)playerItemDidReachEnd{
-    NSLog(@"[Scene #%i] Ended", self.model.number);
+    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
     [self stop];
     [self.delegate showInterstitial];
 }
 
 - (void)stop {
-    NSLog(@"[Scene #%i] Stopped.", self.model.number);
+    NSLog(@"[Scene #%li] Stopped.", (long)self.model.number);
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;

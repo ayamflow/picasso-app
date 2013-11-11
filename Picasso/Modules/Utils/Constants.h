@@ -26,4 +26,6 @@
 + (NSString *)ResetSliderEvent;
 + (NSString *)SliderHasMovedEvent;
 
++ (NSString *)SceneUnlockedEvent;
+
 @end

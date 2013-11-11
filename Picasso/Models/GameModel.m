@@ -8,8 +8,9 @@
 
 #import "GameModel.h"
 #import "DataManager.h"
+#import "Constants.h"
 
-#define kSaveExists @"saveExists"
+#define kSavePath @"PicassoSave.plist"
 #define kCurrentScene @"currentScene"
 #define kLastUnlockedScene @"lastUnlockedScene"
 #define kSceneCurrentTime @"sceneCurrentTime"
@@ -27,61 +28,38 @@
 - (id)init {
     if(self = [super init]) {
         NSLog(@"[GameModel] init");
-        if([self checkIfSaveExists]) {
-            [self load];
-            [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
-            NSLog(@"[GameModel] save exists-> currentScene: %i, lastUnlockedScene: %i, sceneCurrentTime: %f", self.currentScene, self.lastUnlockedScene, self.sceneCurrentTime);
-        }
-        else {
-            NSLog(@"[GameModel] save doesn't exist");
-			self.currentScene = 0;
-            self.lastUnlockedScene = 0;
-            self.sceneCurrentTime = 0;
-        }
+        [self load];
+        [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
+        NSLog(@"[GameModel] save exists-> currentScene: %li, lastUnlockedScene: %li, sceneCurrentTime: %f", self.currentScene, (long)self.lastUnlockedScene, self.sceneCurrentTime);
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sceneUnlocked:) name:[MPPEvents SceneUnlockedEvent] object:nil];
     }
 
     return self;
 }
 
-- (id)initWithCurrentScene:(int)currentScene andLastUnlockedScene:(int)unlockedScene andSceneCurrentTime:(float)currentTime {
-    if(self = [super init]) {
-        self.currentScene = currentScene;
-        self.sceneCurrentTime = currentTime;
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeInt:self.currentScene forKey:kCurrentScene];
-	[aCoder encodeInt:self.lastUnlockedScene forKey:kLastUnlockedScene];
-    [aCoder encodeFloat:self.sceneCurrentTime forKey:kSceneCurrentTime];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-	int currentScene = [aDecoder decodeIntForKey:kCurrentScene];
-	int lastUnlockedScene = [aDecoder decodeIntForKey:kLastUnlockedScene];
-    float currentTime = [aDecoder decodeFloatForKey:kSceneCurrentTime];
-    return [self initWithCurrentScene:currentScene andLastUnlockedScene:lastUnlockedScene andSceneCurrentTime:currentTime];
+- (void)sceneUnlocked:(NSNotification *)notification {
+    self.lastUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
 }
 
 - (void)save {
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:YES forKey:kSaveExists];
-    [userDefaults setInteger:self.currentScene forKey:kCurrentScene ];
-    [userDefaults setInteger:self.lastUnlockedScene forKey:kLastUnlockedScene];
-    [userDefaults setFloat:self.sceneCurrentTime forKey:kSceneCurrentTime];
-    [userDefaults synchronize];
+    NSString *savePlist = [self getSavePlistPath];
+
+    NSArray *savedData = [NSArray arrayWithObjects: [NSNumber numberWithInteger: self.currentScene], [NSNumber numberWithInteger: self.lastUnlockedScene], [NSNumber numberWithFloat: self.sceneCurrentTime ], nil];
+    [savedData writeToFile:savePlist atomically:YES];
 }
 
 - (void)load {
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.currentScene = [userDefaults integerForKey:kCurrentScene];
-    self.lastUnlockedScene = [userDefaults integerForKey:kLastUnlockedScene];
-    self.sceneCurrentTime = [userDefaults floatForKey:kSceneCurrentTime];
+    NSString *savePlist = [self getSavePlistPath];
+
+    NSArray *savedData = [NSArray arrayWithContentsOfFile:savePlist];
+    self.currentScene = [[savedData objectAtIndex:0] integerValue] || 0;
+    self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue] || 0;
+    self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue] || 0.0;
 }
 
-- (BOOL)checkIfSaveExists {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kSaveExists];
+- (NSString *)getSavePlistPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:kSavePath];
 }
 
 @end
