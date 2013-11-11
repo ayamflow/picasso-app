@@ -71,8 +71,16 @@
     return [self.scenes objectAtIndex:number];
 }
 
+- (void)unlockSceneTo:(NSInteger)number {
+	for(int i = 0; i < number; i++) {
+		[self unlockSceneWithNumber:i];
+    }
+}
+
 - (void)unlockSceneWithNumber:(NSInteger)number {
     SceneModel *scene = [self.scenes objectAtIndex:number];
+    GameModel *gameModel = [self getGameModel];
+    gameModel.lastUnlockedScene = number;
     scene.unlocked = YES;
 }
 

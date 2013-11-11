@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GameModel : NSObject
+@interface GameModel : NSObject <NSCoding>
 
 @property (assign, nonatomic) int currentScene;
+@property (assign, nonatomic) int lastUnlockedScene;
 @property (assign, nonatomic) float sceneCurrentTime;
 
 + (id)sharedInstance;
+- (void)save;
 
 @end
