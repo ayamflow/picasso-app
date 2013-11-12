@@ -67,14 +67,11 @@
     self.menuSlider = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *sliderImage = [UIImage imageNamed:@"menuSlider.png"];
     [self.menuSlider setImage:sliderImage forState:UIControlStateNormal];
-//    self.menuSlider.layer.position = CGPointMake([OrientationUtils deviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2);
-//    self.menuSlider.layer.position = CGPointMake(40, 40);
     [self.menuSlider setFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - sliderImage.size.width / 2, sliderImage.size.height, sliderImage.size.width, sliderImage.size.height)];
 	[self.view addSubview:self.menuSlider];
     self.menuSlider.backgroundColor = [UIColor redColor];
     [self.view bringSubviewToFront:self.menuSlider];
     [self.menuSlider addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
 - (void)showMenu {
@@ -189,6 +186,7 @@
     self.currentScene.delegate = self;
     [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];
+    [self.view bringSubviewToFront:self.menuSlider];
 }
 
 - (void)removeLastSeenScene {

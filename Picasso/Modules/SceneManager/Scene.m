@@ -173,13 +173,11 @@
     [self.delegate showInterstitial];
 }
 
-// T Player / Tmodel /
-
 - (void)stop {
     NSLog(@"[Scene #%li] Stopped.", self.model.number);
     GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
     gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
-    NSLog(@"[Scene] current Time: %f/%f", self.player.currentTime, gameModel.sceneCurrentTime);
+    gameModel.currentScene = self.model.number;
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;
@@ -190,8 +188,6 @@
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
-//    [self.player seekToTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(self.player.currentTime), self.player.currentItem.asset.duration.timescale)];
-    NSLog(@"[Scene] current Time: %f/%f", self.player.currentTime, [[[DataManager sharedInstance] getGameModel] sceneCurrentTime]);
 }
 
 - (void)didReceiveMemoryWarning
