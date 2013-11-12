@@ -21,11 +21,24 @@
 
 @interface MPPEvents : NSObject
 
-+ (NSString *)PlayerHasMovedEvent;
-+ (NSString *)SendPlayerToBackEvent;
 + (NSString *)ResetSliderEvent;
 + (NSString *)SliderHasMovedEvent;
 
++ (NSString *)UpdateRotationEvent;
+
 + (NSString *)SceneUnlockedEvent;
+
+@end
+
+@interface UINavigationController (Picasso)
+
+- (BOOL)shouldAutorotate;
+- (NSUInteger)supportedInterfaceOrientations;
+
+@end
+
+@interface UIViewController (Picasso)
+
+- (void)rotateToLandscapeOrientation;
 
 @end

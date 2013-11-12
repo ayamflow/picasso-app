@@ -38,12 +38,16 @@
     return self;
 }
 
-- (BOOL)shouldAutorotate {
-    return NO;
-}
+//- (BOOL)shouldAutorotate {
+//    return NO;
+//}
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
 }
 
 - (void)viewDidLoad
@@ -181,6 +185,7 @@
     self.oldScene = self.currentScene;
     self.currentScene = [[Scene alloc] initWithModel:sceneModel andPosition:position];
     self.currentScene.delegate = self;
+    [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];
 }
 
@@ -189,6 +194,7 @@
     if(self.oldScene) {
         [self.oldScene stop];
         [self.oldScene.view removeFromSuperview];
+        [self.oldScene removeFromParentViewController];
         self.oldScene.delegate = nil;
         self.oldScene = nil;
     }

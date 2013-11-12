@@ -10,6 +10,7 @@
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
+#import "Constants.h"
 #import <CoreMotion/CoreMotion.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -30,17 +31,19 @@ static BOOL initialized;
     @synchronized(self) {
         if (sharedInstance == nil)
             sharedInstance = [[self alloc] init];
+//            [sharedInstance updateViewControllerRotation];
+
     }
     return sharedInstance;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
-- (BOOL)shouldAutorotate
-{
-    return NO;
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 // Addind call to initMotionManager to default init methods.
@@ -76,10 +79,11 @@ static BOOL initialized;
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.width);
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
-
+    
+    self.frameRate = [self getPlayerFrameRate];
 }
 
 - (void)initPlayerWithURL:(NSURL *)URL {
@@ -88,8 +92,8 @@ static BOOL initialized;
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.height, screenSize.size.width);
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
 
     self.frameRate = [self getPlayerFrameRate];

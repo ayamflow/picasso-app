@@ -9,7 +9,7 @@
             "videoType": "mov",
             "trackers": [
                 {
-                    "workId": "some-work",
+                    "workId": "0",
                     "positions": [
                         [19, 88, 142],
                         [20, 89, 135],
@@ -231,7 +231,7 @@
             "videoType": "mp4",
             "trackers": [
                 {
-                    "workId": "some-other-work",
+                    "workId": "1",
                     "positions": [
                         [0, 276, 207],
                         [1, 276, 207],

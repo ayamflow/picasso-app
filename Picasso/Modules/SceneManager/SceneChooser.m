@@ -32,10 +32,20 @@
     return self;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor clearColor];
+    [self rotateToLandscapeOrientation];
 
 	self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-bold" size:15.0];
     self.titleLabel.layer.borderColor = [UIColor textColor].CGColor;
@@ -46,12 +56,12 @@
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
 
     [self initButtons];
-    if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+//    if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
         [self updatePositionToLandscape];
-    }
-    else if(UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-	    [self updatePositionToPortrait];
-    }
+//    }
+//    else if(UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+//	    [self updatePositionToPortrait];
+//    }
 }
 
 - (void)initButtons {
@@ -83,16 +93,16 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
+//    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
         if(self.orientationWasLandscape) return;
 		[self updatePositionToLandscape];
         self.orientationWasLandscape = YES;
     }
 	else if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [self updatePositionToPortrait];
-        self.orientationWasLandscape = NO;
+//        [self updatePositionToPortrait];
+//        self.orientationWasLandscape = NO;
     }
 }
 
@@ -144,8 +154,8 @@
 
     SceneManager *scene = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
     [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
-//    [self.navigationController pushViewController:scene animated:NO];
-    [self.navigationController presentViewController:scene animated:NO completion:nil];
+    [self.navigationController pushViewController:scene animated:NO];
+//    [self.navigationController presentViewController:scene animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

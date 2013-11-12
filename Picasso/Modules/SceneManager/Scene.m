@@ -8,10 +8,13 @@
 
 #import "Scene.h"
 #import "SceneModel.h"
+#import "DataManager.h"
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
 #import "Constants.h"
 #import "WorkViewController.h"
+#import "OpacityTransition.h"
+#import "SceneManager.h"
 
 #define PLAYBACK_PERCENT_BEFORE_FADE 0.90
 
@@ -40,14 +43,14 @@
 
         self.playerView = [MotionVideoPlayer sharedInstance];
         self.player = self.playerView.player;
-        [self.view addSubview:self.playerView.view];
-        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents PlayerHasMovedEvent] object:self];
+//        [self.view addSubview:self.playerView.view];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents PlayerHasMovedEvent] object:self];
 
         // Play the scene's video
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
         NSURL *url = [NSURL fileURLWithPath:filePath];
         [self.playerView loadURL:url];
-
+        
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
@@ -73,11 +76,13 @@
     NSString *path = [[NSBundle mainBundle] pathForResource: @"tracker-button" ofType: @"png"];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
     
-    NSUInteger number = [self.model.trackers count];
-    NSMutableArray *trackersArray = [[NSMutableArray alloc]initWithCapacity:number];
+    NSUInteger trackerNumber = [self.model.trackers count];
+    NSMutableArray *trackersArray = [[NSMutableArray alloc]initWithCapacity:trackerNumber];
     
-    for(int i = 0; i < number; i++) {
+    for(int i = 0; i < trackerNumber; i++) {
         UIButton *tracker = [self createTrackerWithImage:image];
+        TrackerModel *trackerModel = [self.model.trackers objectAtIndex:i];
+        tracker.tag = trackerModel.workId;
         [trackersArray addObject:tracker];
         [tracker addTarget:self action:@selector(trackerTouched:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:tracker];
@@ -95,18 +100,20 @@
     [tracker setEnabled:NO];
     // DEBUG
     tracker.frame = CGRectMake(250, 250, 35, 35);
-//    CGRect trackerFrame = tracker.frame;
-//    trackerFrame.origin = CGPointMake(250, 250);
-//    tracker.autoresizingMask = UIViewAutoresizingNone;
-//    tracker.frame = trackerFrame;
     return tracker;
 }
 
 - (void)trackerTouched:(id)sender {
-//    UIImage *tracker = sender
-//    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
-//    workViewController.workId = indexPath.row;
-//    [self.navigationController pushViewController:workViewController animated:YES];
+    NSLog(@"[Scene #%i] Touched tracker with workId %i", self.model.number, [sender tag]);
+    GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
+    gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
+    [self stop];
+    WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
+    NSLog(@"workView: %@", workView);
+    NSLog(@"parentVC: %@", self.parentViewController);
+    workView.workId = [sender tag];
+    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
+    [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];
 }
 
 - (id)listenForPlayerUpdates {
@@ -171,10 +178,16 @@
 }
 
 - (void)stop {
-    NSLog(@"[Scene #%li] Stopped.", (long)self.model.number);
+    NSLog(@"[Scene #%li] Stopped.", self.model.number);
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;
+}
+
+- (void)resume {
+    NSLog(@"[Scene #%li] Pause.", self.model.number);
+    [self.playerView enableMotion];
+    [self.player seekToTime:CMTimeMake([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], 60)];
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,11 +11,11 @@
 #import "GalleryViewController.h"
 #import "MotionVideoPlayer.h"
 #import "Constants.h"
+#import "OrientationUtils.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) MotionVideoPlayer *player;
-@property (assign, nonatomic) BOOL playerIsHere;
 
 @end
 
@@ -28,7 +28,7 @@
 	[self initModels];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
     [self initBackgroundVideo];
-
+    
     return YES;
 }
 
@@ -59,29 +59,19 @@
     self.player.player.rate = 2.0;
 //    self.player.player.volume = 0;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendVideoPlayerToBack) name:[MPPEvents SendPlayerToBackEvent] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerHasMoved) name:[MPPEvents PlayerHasMovedEvent] object:nil];
-	[self sendVideoPlayerToBack];
+//    CGRect screenSize = [OrientationUtils nativeDeviceSize];
+//    self.player.view.layer.transform = CATransform3DMakeRotation(0.5 * M_PI, 0, 0, 1.0);
+//    self.player.view.layer.position = CGPointMake(35, 160);
+    
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
-}
-
-- (void)sendVideoPlayerToBack {
-    if(self.playerIsHere) return;
-    else {
-        self.playerIsHere = YES;
-	    [self.window.rootViewController.view addSubview:self.player.view];
-        [self.window.rootViewController.view sendSubviewToBack:self.player.view];
-    }
-}
-
-- (void)videoPlayerHasMoved {
-    self.playerIsHere = NO;
+//    [self.window.rootViewController updateViewControllerRotation];
+//    [self.player updateViewControllerRotation];
 }
 
 - (void)initMenuButton {
 
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -34,14 +34,6 @@
 
 @implementation MPPEvents
 
-+ (NSString *)PlayerHasMovedEvent {
-    return @"videoPlayerHasMoved";
-}
-
-+ (NSString *)SendPlayerToBackEvent {
-    return @"sendVideoPlayerToBack";
-}
-
 + (NSString *)ResetSliderEvent {
     return @"resetSlider";
 }
@@ -52,6 +44,33 @@
 
 + (NSString *)SceneUnlockedEvent {
     return @"sceneUnlocked";
+}
+
++ (NSString *)UpdateRotationEvent {
+    return @"updateRotation";
+}
+
+@end
+
+@implementation UINavigationController (Picasso)
+
+- (BOOL)shouldAutorotate {
+    return self.topViewController.shouldAutorotate;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return self.topViewController.supportedInterfaceOrientations;
+}
+
+@end
+
+@implementation UIViewController (Picasso)
+
+- (void)rotateToLandscapeOrientation {
+    UIViewController* forcePortrait = [[UIViewController alloc] init];
+    [self presentViewController:forcePortrait animated:NO completion:^{
+        [forcePortrait dismissViewControllerAnimated:NO completion:nil];
+    }];
 }
 
 @end

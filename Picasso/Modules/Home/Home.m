@@ -20,9 +20,6 @@
 @implementation Home
 
 - (void)viewDidLoad {
-    // Place by default the video player in the background
-    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SendPlayerToBackEvent] object:self];
-
     self.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.hidden = YES;
 
@@ -40,7 +37,7 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

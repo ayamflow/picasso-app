@@ -10,7 +10,7 @@
 
 @interface TrackerModel : NSObject
 
-@property (strong, nonatomic) NSString *workId;
+@property (assign, nonatomic) NSInteger workId;
 @property (strong, nonatomic) NSArray *positions;
 
 - (id)initWithData:(NSDictionary *)data;
