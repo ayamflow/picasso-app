@@ -73,7 +73,7 @@
 }
 
 - (void)unlockSceneTo:(NSInteger)number {
-	for(int i = 0; i < number; i++) {
+	for(int i = 0; i <= number; i++) {
 		[self unlockSceneWithNumber:i];
     }
 }

@@ -26,6 +26,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
 
+    [self initModels];
     //    [self showFonts];
     [self initBackgroundVideo];
     
@@ -33,6 +34,10 @@
 }
 
 // CUSTOM METHODS FOR PICASSO
+
+- (void)initModels {
+    [[DataManager sharedInstance] getGameModel]; // Implicitly load the game
+}
 
 - (void)showFonts {
     for (NSString* family in [UIFont familyNames])

@@ -83,9 +83,11 @@
         if(!sceneModel.unlocked) {
             sceneButton.alpha = 0.2;
         }
+        else {
+            sceneButton.tag = i;
+            [sceneButton addTarget:self action:@selector(sceneButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+        }
         [sceneButton setFrame:CGRectMake(0, 0, 42, 42)];
-        sceneButton.tag = i;
-        [sceneButton addTarget:self action:@selector(sceneButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:sceneButton];
         [tempButtonsArray addObject:sceneButton];
     }
