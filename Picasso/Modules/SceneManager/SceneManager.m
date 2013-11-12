@@ -185,7 +185,7 @@
 }
 
 - (void)removeLastSeenScene {
-    NSLog(@"[SceneManager] RemoveLastSeenScene #%li", (long)self.oldScene.model.number);
+//    NSLog(@"[SceneManager] RemoveLastSeenScene #%li", (long)self.oldScene.model.number);
     if(self.oldScene) {
         [self.oldScene stop];
         [self.oldScene.view removeFromSuperview];

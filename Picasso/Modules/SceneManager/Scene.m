@@ -11,6 +11,7 @@
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
 #import "Constants.h"
+#import "WorkViewController.h"
 
 #define PLAYBACK_PERCENT_BEFORE_FADE 0.90
 
@@ -76,8 +77,10 @@
     NSMutableArray *trackersArray = [[NSMutableArray alloc]initWithCapacity:number];
     
     for(int i = 0; i < number; i++) {
-        [trackersArray addObject:[self createTrackerWithImage:image]];
-        [self.view addSubview:[trackersArray objectAtIndex:i]];
+        UIButton *tracker = [self createTrackerWithImage:image];
+        [trackersArray addObject:tracker];
+        [tracker addTarget:self action:@selector(trackerTouched:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:tracker];
     }
     
     self.trackersImage = [NSArray arrayWithArray:trackersArray];
@@ -97,6 +100,13 @@
 //    tracker.autoresizingMask = UIViewAutoresizingNone;
 //    tracker.frame = trackerFrame;
     return tracker;
+}
+
+- (void)trackerTouched:(id)sender {
+//    UIImage *tracker = sender
+//    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
+//    workViewController.workId = indexPath.row;
+//    [self.navigationController pushViewController:workViewController animated:YES];
 }
 
 - (id)listenForPlayerUpdates {

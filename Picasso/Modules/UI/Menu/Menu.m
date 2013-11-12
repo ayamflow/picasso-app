@@ -130,7 +130,7 @@
 }
 
 -(void)touchEnded:(id)sender {
-    NSLog(@"[Timeline] Touch #%ld", [sender tag]);
+//    NSLog(@"[Timeline] Touch #%li", [sender tag]);
     //    [self.delegate showSceneWithNumber:[sender tag]];
 }
 
