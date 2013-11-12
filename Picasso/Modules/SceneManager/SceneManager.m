@@ -11,6 +11,7 @@
 #import "SceneModel.h"
 #import "DataManager.h"
 #import "SceneInterstitial.h"
+#import "Constants.h"
 #import "OrientationUtils.h"
 #import "Menu.h"
 
@@ -23,7 +24,6 @@
 @property (strong, nonatomic) UIButton *menuSlider;
 @property (assign, nonatomic) BOOL menuShown;
 @property (assign, nonatomic) BOOL shouldShowMenu;
-@property (strong, nonatomic) Menu *menu;
 
 @end
 
@@ -65,29 +65,31 @@
 
 - (void)initMenu {
     self.menuSlider = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.menuSlider setImage:[UIImage imageNamed:@"menuSlider.png"] forState:UIControlStateNormal];
+    UIImage *sliderImage = [UIImage imageNamed:@"menuSlider.png"];
+    [self.menuSlider setImage:sliderImage forState:UIControlStateNormal];
 //    self.menuSlider.layer.position = CGPointMake([OrientationUtils deviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2);
 //    self.menuSlider.layer.position = CGPointMake(40, 40);
+    [self.menuSlider setFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - sliderImage.size.width / 2, sliderImage.size.height, sliderImage.size.width, sliderImage.size.height)];
 	[self.view addSubview:self.menuSlider];
-//    self.menuSlider.backgroundColor = [UIColor redColor];
-//    [self.view bringSubviewToFront:self.menuSlider];
-//    [self.menuSlider addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.menuSlider.backgroundColor = [UIColor redColor];
+    [self.view bringSubviewToFront:self.menuSlider];
+    [self.menuSlider addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
 - (void)showMenu {
-    self.menu = [[Menu alloc] init];
-    [self.view addSubview:self.menu.view];
-    self.menu.view.layer.position = CGPointMake(0.0, -[OrientationUtils nativeLandscapeDeviceSize].size.height);
-    [UIView animateWithDuration:0.3 animations:^{
-		self.menu.view.layer.position = CGPointMake(0.0, 0.0);
-    }];
+    [self.currentScene stop];
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    menu.wasInExploreMode = YES;
+    [self.navigationController pushViewController:menu animated:YES];
 }
 
 /*- (void)initMenu {
     self.menuSlider = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.menuSlider setImage:[UIImage imageNamed:@"menuSlider.png"] forState:UIControlStateNormal];
-    self.menuSlider.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2);
+//    self.menuSlider.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2);
+    [self.menuSlider setFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2, 17, 8)];
 	[self.view addSubview:self.menuSlider];
     [self.view bringSubviewToFront:self.menuSlider];
     //    self.menuSlider addTarget:self action:@selector(menuSliderTouched) forControlEvents:UIControlEvent
@@ -214,6 +216,7 @@
 }
 
 - (void)skipInterstitial {
+    [[[DataManager sharedInstance] getGameModel] setSceneCurrentTime:0.0];
     [self createSceneWithNumber:[self getNextSceneNumber] andPosition:CGPointMake(0, self.currentScene.view.frame.size.height)];
     [UIView animateWithDuration:0.4f animations:^{
         // Move old scene & interstitial out of the screen
@@ -244,10 +247,12 @@
 }
 
 - (void)showNextScene {
+    [[[DataManager sharedInstance] getGameModel] setCurrentScene:[self getNextSceneNumber]];
     [self showSceneWithNumber:[self getNextSceneNumber]];
 }
 
 - (void)showPreviousScene {
+    [[[DataManager sharedInstance] getGameModel] setCurrentScene:[self getPreviousSceneNumber]];
     [self showSceneWithNumber:[self getPreviousSceneNumber]];
 }
 

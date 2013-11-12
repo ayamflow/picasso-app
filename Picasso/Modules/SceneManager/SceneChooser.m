@@ -25,6 +25,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    NSLog(@"init with nib name");
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -152,9 +153,9 @@
 -(void)sceneButtonTouched:(id)sender {
     [[DataManager sharedInstance] getGameModel].currentScene = [sender tag];
 
-    SceneManager *scene = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+    SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
     [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
-    [self.navigationController pushViewController:scene animated:NO];
+    [self.navigationController pushViewController:sceneManager animated:NO];
 //    [self.navigationController presentViewController:scene animated:NO completion:nil];
 }
 

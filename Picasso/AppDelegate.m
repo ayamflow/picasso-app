@@ -24,9 +24,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-//    [self showFonts];
-	[self initModels];
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+
+    //    [self showFonts];
     [self initBackgroundVideo];
     
     return YES;
@@ -37,17 +37,13 @@
 - (void)showFonts {
     for (NSString* family in [UIFont familyNames])
     {
-        NSLog(@"%@", family);
+        NSLog(@"--%@--", family);
 
         for (NSString* name in [UIFont fontNamesForFamilyName: family])
         {
             NSLog(@"  %@", name);
         }
     }
-}
-
-- (void)initModels {
-	[[DataManager sharedInstance] getGameModel]; // Implicitly init the game model and load data
 }
 
 - (void)initBackgroundVideo {
@@ -57,15 +53,12 @@
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self.player loadURL:url];
     self.player.player.rate = 2.0;
-//    self.player.player.volume = 0;
-
-//    CGRect screenSize = [OrientationUtils nativeDeviceSize];
-//    self.player.view.layer.transform = CATransform3DMakeRotation(0.5 * M_PI, 0, 0, 1.0);
-//    self.player.view.layer.position = CGPointMake(35, 160);
+    self.player.player.volume = 0;
     
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
-//    [self.window.rootViewController updateViewControllerRotation];
-//    [self.player updateViewControllerRotation];
+    
+    [self.window.rootViewController.view addSubview:self.player.view];
+    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
 }
 
 - (void)initMenuButton {

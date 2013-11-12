@@ -6,19 +6,18 @@
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
+#import "SceneManager.h"
 #import "Menu.h"
 #import "OrientationUtils.h"
 #import "Timeline.h"
 #import "DataManager.h"
+#import "SceneChooser.h"
 
 #define BUTTON_HEIGHT 30
 
 @interface Menu ()
 
 @property (strong, nonatomic) UIImageView *logo;
-@property (strong, nonatomic) UIButton *exploreButton;
-@property (strong, nonatomic) UIButton *galleryButton;
-@property (strong, nonatomic) UIButton *museumButton;
 @property (strong, nonatomic) UIColor *textColor;
 //@property (strong, nonatomic) Timeline *timeline;
 @property (strong, nonatomic) UIView *timeline;
@@ -42,50 +41,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor clearColor];
     self.textColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0];
     
     [self initLogo];
-//    [self initButtons];
+    [self initButtons];
 //    [self initTimeline];
-
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0]];
 }
 
 - (void)initLogo {
     CGRect screenSize = [OrientationUtils deviceSize];
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"logo" ofType: @"png"];
-    UIImage *logoImage = [UIImage imageWithContentsOfFile:path];
+    UIImage *logoImage = [UIImage imageNamed:@"logo.png"];
     self.logo = [[UIImageView alloc] initWithImage:logoImage];
     [self.logo setCenter:CGPointMake(screenSize.size.width / 2, self.logo.frame.size.height)];
     [self.view addSubview:self.logo];
 }
 
 - (void)initButtons {
-    CGRect screenSize = [OrientationUtils deviceSize];
-    
-    self.exploreButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.exploreButton setTitle:@"Explorer" forState:UIControlStateNormal];
-    [self.exploreButton setBackgroundColor:[UIColor clearColor]];
-    [self.exploreButton setTitleColor:self.textColor forState:UIControlStateNormal];
-    [self.exploreButton setFrame:CGRectMake(0, 0, screenSize.size.width / 2, BUTTON_HEIGHT)];
-    [self.exploreButton setCenter:CGPointMake(screenSize.size.width / 2, self.logo.center.y + BUTTON_HEIGHT * 2)];
-    [self.view addSubview:self.exploreButton];
-    
-    self.galleryButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.galleryButton setTitle:@"Galerie" forState:UIControlStateNormal];
-    [self.galleryButton setBackgroundColor:[UIColor clearColor]];
-    [self.galleryButton setTitleColor:self.textColor forState:UIControlStateNormal];
-    [self.galleryButton setFrame:CGRectMake(0, 0, screenSize.size.width / 2, BUTTON_HEIGHT)];
-    [self.galleryButton setCenter:CGPointMake(screenSize.size.width / 2, self.exploreButton.center.y + BUTTON_HEIGHT * 1.2)];
-    [self.view addSubview:self.galleryButton];
-    
-    self.museumButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.museumButton setTitle:@"Infos pratiques" forState:UIControlStateNormal];
-    [self.museumButton setBackgroundColor:[UIColor clearColor]];
-    [self.museumButton setTitleColor:self.textColor forState:UIControlStateNormal];
-    [self.museumButton setFrame:CGRectMake(0, 0, screenSize.size.width / 2, BUTTON_HEIGHT)];
-    [self.museumButton setCenter:CGPointMake(screenSize.size.width / 2, self.galleryButton.center.y + BUTTON_HEIGHT * 1.2)];
-    [self.view addSubview:self.museumButton];
+    [self.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initTimeline {
@@ -127,6 +101,21 @@
     [self.timeline setFrame:CGRectMake(screenSize.size.width / 2 - (scenesNumber * spaceBetweenScenes) / 2, screenSize.size.height - BUTTON_HEIGHT * 1.5, (scenesNumber - 1) * (refButton.frame.size.width + spaceBetweenScenes), refButton.frame.size.height)];
 //    [self.timeline setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:self.timeline];
+}
+
+- (void)hideMenu {
+    if(self.wasInExploreMode) {
+        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+        [self.navigationController pushViewController:sceneManager animated:YES];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)navigateToExploreMode {
+    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+    [self.navigationController pushViewController:sceneChooser animated:NO];
 }
 
 -(void)touchEnded:(id)sender {

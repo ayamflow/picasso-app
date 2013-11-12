@@ -10,4 +10,11 @@
 
 @interface Menu : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *exploreButton;
+@property (weak, nonatomic) IBOutlet UIButton *galleryButton;
+@property (weak, nonatomic) IBOutlet UIButton *museumButton;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property (assign, nonatomic) BOOL wasInExploreMode;
+
 @end

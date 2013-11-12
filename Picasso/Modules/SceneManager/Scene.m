@@ -43,8 +43,6 @@
 
         self.playerView = [MotionVideoPlayer sharedInstance];
         self.player = self.playerView.player;
-//        [self.view addSubview:self.playerView.view];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents PlayerHasMovedEvent] object:self];
 
         // Play the scene's video
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
@@ -54,10 +52,10 @@
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
-		[self.playerView enableMotion];
-
         NSLog(@"[Scene #%li] Started", (long)self.model.number);
         self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
+
+        [self resume]; // seekToTime + enableMotion
     }
     return self;
 }
@@ -105,8 +103,6 @@
 
 - (void)trackerTouched:(id)sender {
     NSLog(@"[Scene #%i] Touched tracker with workId %i", self.model.number, [sender tag]);
-    GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
-    gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
     [self stop];
     WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
     NSLog(@"workView: %@", workView);
@@ -177,17 +173,25 @@
     [self.delegate showInterstitial];
 }
 
+// T Player / Tmodel /
+
 - (void)stop {
     NSLog(@"[Scene #%li] Stopped.", self.model.number);
+    GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
+    gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
+    NSLog(@"[Scene] current Time: %f/%f", self.player.currentTime, gameModel.sceneCurrentTime);
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;
 }
 
 - (void)resume {
-    NSLog(@"[Scene #%li] Pause.", self.model.number);
+    NSLog(@"[Scene #%li] Resume.", self.model.number);
     [self.playerView enableMotion];
-    [self.player seekToTime:CMTimeMake([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], 60)];
+    self.player = self.playerView.player;
+    [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
+//    [self.player seekToTime: CMTimeMakeWithSeconds(CMTimeGetSeconds(self.player.currentTime), self.player.currentItem.asset.duration.timescale)];
+    NSLog(@"[Scene] current Time: %f/%f", self.player.currentTime, [[[DataManager sharedInstance] getGameModel] sceneCurrentTime]);
 }
 
 - (void)didReceiveMemoryWarning

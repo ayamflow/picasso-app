@@ -7,7 +7,7 @@
         <!--Scene Chooser-->
         <scene sceneID="dVN-g0-96a">
             <objects>
-                <viewController id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneChooser" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gjo-LO-52i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,7 +69,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellID" id="G5O-ta-i0f">
-                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -196,6 +196,62 @@
             </objects>
             <point key="canvasLocation" x="1040" y="-8"/>
         </scene>
+        <!--Menu-->
+        <scene sceneID="Tem-qy-T5Q">
+            <objects>
+                <viewController storyboardIdentifier="Menu" id="jTI-Lr-gl6" customClass="Menu" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BOD-ca-AUp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PT5-MT-RUQ">
+                                <rect key="frame" x="82" y="213" width="157" height="42"/>
+                                <state key="normal" title="EXPLORER" backgroundImage="exploreButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tdj-j0-Vc8">
+                                <rect key="frame" x="82" y="263" width="157" height="42"/>
+                                <state key="normal" title="GALERIE" backgroundImage="galleryButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="nJk-K9-wsr" kind="push" id="1gf-Eu-BiW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jfx-32-63Z">
+                                <rect key="frame" x="83" y="313" width="156" height="42"/>
+                                <state key="normal" title="LE MUSÉE" backgroundImage="museumButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="pw8-1h-sAP" kind="push" id="pMS-7j-2bV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bIf-Nm-Zxu">
+                                <rect key="frame" x="82" y="363" width="156" height="42"/>
+                                <state key="normal" title="RETOUR" backgroundImage="museumButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="bIf-Nm-Zxu" id="sFY-7k-ugt"/>
+                        <outlet property="exploreButton" destination="PT5-MT-RUQ" id="sYd-lB-BMP"/>
+                        <outlet property="galleryButton" destination="Tdj-j0-Vc8" id="WlZ-1Z-mmF"/>
+                        <outlet property="museumButton" destination="jfx-32-63Z" id="J30-jK-wIQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bBX-eA-yib" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1040" y="804"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cb5-jg-9ES">
             <objects>
@@ -227,4 +283,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="1gf-Eu-BiW"/>
+        <segue reference="pMS-7j-2bV"/>
+    </inferredMetricsTieBreakers>
 </document>
