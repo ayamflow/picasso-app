@@ -20,14 +20,10 @@
 #import "WorkModel.h"
 #import "DataManager.h"
 
-#define CELL_WIDTH 160
 #define CELL_IDENTIFIER @"WaterfallCell"
-#define HEADER_IDENTIFIER @"WaterfallHeader"
-#define FOOTER_IDENTIFIER @"WaterfallFooter"
 
 @interface GalleryViewController ()
 
-@property (nonatomic, strong) NSMutableArray *cellHeights;
 @property (nonatomic, assign) int cellCount;
 @property (nonatomic, strong) DataManager *dataManager;
 
@@ -39,7 +35,6 @@
     if (self = [super initWithCoder:aDecoder]) {
         self.dataManager = [DataManager sharedInstance];
         self.cellCount = [self.dataManager getWorksNumber];
-        self.cellWidth = CELL_WIDTH;
     }
     return self;
 }
@@ -50,6 +45,7 @@
         CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
         
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.itemWidth = 160;
         layout.delegate = self;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
@@ -59,16 +55,6 @@
         _collectionView.backgroundColor = [UIColor whiteColor];
     }
     return _collectionView;
-}
-
-- (NSMutableArray *)cellHeights {
-    if (!_cellHeights) {
-        _cellHeights = [NSMutableArray arrayWithCapacity:self.cellCount];
-        for (NSInteger i = 0; i < self.cellCount; i++) {
-            _cellHeights[i] = @(arc4random() % 100 * 2 + 100);
-        }
-    }
-    return _cellHeights;
 }
 
 #pragma mark - Life Cycle
@@ -98,8 +84,7 @@
 - (void)updateLayout {
     CHTCollectionViewWaterfallLayout *layout =
     (CHTCollectionViewWaterfallLayout *)self.collectionView.collectionViewLayout;
-    layout.columnCount = self.collectionView.bounds.size.width / self.cellWidth;
-    layout.itemWidth = self.cellWidth;
+    layout.columnCount = self.collectionView.bounds.size.width / 160;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -111,18 +96,6 @@
     return 1;
 }
 
-/*
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CHTCollectionViewWaterfallCell *cell =
-    (CHTCollectionViewWaterfallCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
-                                                                                forIndexPath:indexPath];
-    
-    cell.displayString = [NSString stringWithFormat:@"%d", indexPath.row];
-    return cell;
-}
-*/
- 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CHTCollectionViewWaterfallCell *cell =
@@ -141,26 +114,22 @@
     return cell;
 }
 
-/*
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-           viewForSupplementaryElementOfKind:(NSString *)kind
-                                 atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionReusableView *reusableView = nil;
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: Select Item
+    NSLog(@"select %ld", (long)indexPath.row);
+    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
     
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                          withReuseIdentifier:HEADER_IDENTIFIER
-                                                                 forIndexPath:indexPath];
-    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                          withReuseIdentifier:FOOTER_IDENTIFIER
-                                                                 forIndexPath:indexPath];
-    }
-    
-    return reusableView;
+    workViewController.workId = indexPath.row;
+    [self.navigationController pushViewController:workViewController animated:YES];
 }
-*/
- 
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+    NSLog(@"deselect %ld", (long)indexPath.row);
+}
+
 #pragma mark - UICollectionViewWaterfallLayoutDelegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                    layout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout
@@ -173,16 +142,12 @@
     
 }
 
-/*
 - (CGFloat)collectionView:(UICollectionView *)collectionView
-  heightForHeaderInLayout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout {
-    return 50;
+                   layout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout
+ widthForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 160;
+    
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-  heightForFooterInLayout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout {
-    return 30;
-}
-*/
- 
 @end
