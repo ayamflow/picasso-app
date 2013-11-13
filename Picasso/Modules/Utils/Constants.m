@@ -71,6 +71,14 @@
 
 @implementation UIViewController (Picasso)
 
+- (void)hideNavigationBar {
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)showNavigationBar {
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)rotateToLandscapeOrientation {
     UIViewController* forcePortrait = [[UIViewController alloc] init];
     [self presentViewController:forcePortrait animated:NO completion:^{
@@ -79,7 +87,6 @@
 }
 
 - (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
-    NSLog(@"[VC Picasso] Show menu");
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
     Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
     menu.wasInExploreMode = isExploreMode;

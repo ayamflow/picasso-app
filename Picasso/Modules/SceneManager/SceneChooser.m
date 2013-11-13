@@ -19,8 +19,6 @@
 @property (strong, nonatomic) NSArray *sceneButtons;
 @property (strong, nonatomic) MenuButton *menuButton;
 
-@property (assign, nonatomic) BOOL orientationWasLandscape;
-
 @end
 
 @implementation SceneChooser
@@ -63,6 +61,11 @@
     titleFrame.size = CGSizeMake(self.titleLabel.frame.size.width + 25.0, 42.0);
     self.titleLabel.frame = titleFrame;
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    float leftPosition = ([OrientationUtils nativeDeviceSize].size.height - self.titleImage.frame.size.width - self.titleLabel.frame.size.width - 10.0) / 2 + self.titleImage.frame.size.width / 2;
+    float topPosition = 90.0;
+    self.titleImage.layer.position = CGPointMake(leftPosition, topPosition);
+    self.titleLabel.layer.position = CGPointMake(leftPosition + self.titleImage.frame.size.width * 3 + 10.0, topPosition);
 }
 
 - (void)initMenu {
@@ -78,6 +81,10 @@
 
     NSMutableArray *tempButtonsArray = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
 
+    float buttonSize = 42.0;
+    float buttonMargin = 10.0;
+    float leftPosition = ([OrientationUtils nativeLandscapeDeviceSize].size.width - scenesNumber * buttonSize - (scenesNumber - 1) * buttonMargin) / 2;
+    
     for(int i = 0; i < scenesNumber; i++) {
         SceneModel *sceneModel = [dataManager getSceneWithNumber:i];
         UIButton *sceneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -94,68 +101,12 @@
             sceneButton.tag = i;
             [sceneButton addTarget:self action:@selector(sceneButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
         }
-        [sceneButton setFrame:CGRectMake(0, 0, 42, 42)];
+        [sceneButton setFrame:CGRectMake(leftPosition + i * (buttonSize + buttonMargin), 195.0, buttonSize, buttonSize)];
         [self.view addSubview:sceneButton];
         [tempButtonsArray addObject:sceneButton];
     }
 
     self.sceneButtons = [NSArray arrayWithArray:tempButtonsArray];
-    [self updatePositionToLandscape];
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-//    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        if(self.orientationWasLandscape) return;
-		[self updatePositionToLandscape];
-        self.orientationWasLandscape = YES;
-    }
-//	else if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-//        [self updatePositionToPortrait];
-//        self.orientationWasLandscape = NO;
-//    }
-}
-
-- (void)updatePositionToLandscape {
-	float leftPosition = ([OrientationUtils nativeDeviceSize].size.height - self.titleImage.frame.size.width - self.titleLabel.frame.size.width - 10.0) / 2 + self.titleImage.frame.size.width / 2;
-    float topPosition = 90.0;
-    self.titleImage.layer.position = CGPointMake(leftPosition, topPosition);
-    self.titleLabel.layer.position = CGPointMake(leftPosition + self.titleImage.frame.size.width * 3 + 10.0, topPosition);
-
-	[self updateButtonsPositionLandscape];
-}
-
-- (void)updatePositionToPortrait {
-	float leftPosition = ([OrientationUtils nativeDeviceSize].size.width - self.titleImage.frame.size.width - self.titleLabel.frame.size.width - 10.0) / 2 + self.titleImage.frame.size.width / 2;
-    float topPosition = 120.0;
-    self.titleImage.layer.position = CGPointMake(leftPosition, topPosition);
-    self.titleLabel.layer.position = CGPointMake(leftPosition + self.titleImage.frame.size.width * 3 + 10.0, topPosition);
-
-
-	[self updateButtonsPositionPortrait];
-}
-
-- (void)updateButtonsPositionPortrait {
-	float leftPosition = [OrientationUtils nativeDeviceSize].size.width / 2 - 2 * [[self.sceneButtons objectAtIndex:0] frame].size.width + 5.0;
-    float topPosition = 280.0;
-	BOOL secondLine = NO;
-
-	for(int i = 0; i < [self.sceneButtons count]; i++) {
-		UIButton *sceneButton = [self.sceneButtons objectAtIndex:i];
-		if(!secondLine && i > 3) secondLine = YES;
-
-        sceneButton.layer.position = CGPointMake(secondLine ? leftPosition + (i - 4) * (sceneButton.frame.size.width + 10.0) : leftPosition + i * (sceneButton.frame.size.width + 10.0), secondLine ? topPosition + 10.0 + sceneButton.frame.size.height : topPosition);
-    }
-}
-
-- (void)updateButtonsPositionLandscape {
-	float leftPosition = ([OrientationUtils nativeDeviceSize].size.height - [self.sceneButtons count] * [[self.sceneButtons objectAtIndex:0] frame].size.width - ([self.sceneButtons count] - 1) * 2.5) / 2;
-
-	for(int i = 0; i < [self.sceneButtons count]; i++) {
-		UIButton *sceneButton = [self.sceneButtons objectAtIndex:i];
-        sceneButton.layer.position = CGPointMake(leftPosition + i * (sceneButton.frame.size.width + 10.0), 195.0);
-    }
 }
 
 -(void)sceneButtonTouched:(id)sender {
@@ -164,7 +115,6 @@
     SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
     [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
     [self.navigationController pushViewController:sceneManager animated:NO];
-//    [self.navigationController presentViewController:scene animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

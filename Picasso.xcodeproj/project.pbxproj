@@ -13,6 +13,8 @@
 		4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */; };
 		4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */; };
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
+		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
+		620409241833B92600105A03 /* TransitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 620409231833B92600105A03 /* TransitionUtil.m */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -91,6 +93,9 @@
 		4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooserTitle@2x.png"; sourceTree = "<group>"; };
 		6204091D1833804B00105A03 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuButton.h; path = Modules/UI/Timeline/MenuButton.h; sourceTree = "<group>"; };
 		6204091E1833804B00105A03 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuButton.m; path = Modules/UI/Timeline/MenuButton.m; sourceTree = "<group>"; };
+		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
+		620409221833B92600105A03 /* TransitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionUtil.h; path = Modules/Utils/TransitionUtil.h; sourceTree = "<group>"; };
+		620409231833B92600105A03 /* TransitionUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionUtil.m; path = Modules/Utils/TransitionUtil.m; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 		4F20B8E0182D3D9A0035EEF1 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				620409201833A64000105A03 /* menuSliderUp@2x.png */,
 				CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */,
 				4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */,
 				4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */,
@@ -252,6 +258,8 @@
 				624B978E182120580087C576 /* OrientationUtils.m */,
 				4F20B8DD182D34420035EEF1 /* Constants.h */,
 				4F20B8DE182D34420035EEF1 /* Constants.m */,
+				620409221833B92600105A03 /* TransitionUtil.h */,
+				620409231833B92600105A03 /* TransitionUtil.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -619,6 +627,7 @@
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
 				CEF64D56182ACA4200FE9C39 /* scene-1.mov in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
+				620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */,
 				62A2B28A18215DC700B4F0E4 /* logo@2x.png in Resources */,
 				CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */,
@@ -669,6 +678,7 @@
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
+				620409241833B92600105A03 /* TransitionUtil.m in Sources */,
 				4F20B8DF182D34420035EEF1 /* Constants.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,

@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *galleryButton;
 @property (weak, nonatomic) IBOutlet UIButton *museumButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 @property (assign, nonatomic) BOOL wasInExploreMode;
 @property (assign, nonatomic) BOOL wasInSceneMode;

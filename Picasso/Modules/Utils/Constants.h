@@ -38,6 +38,8 @@
 
 @interface UIViewController (Picasso)
 
+- (void)hideNavigationBar;
+- (void)showNavigationBar;
 - (void)rotateToLandscapeOrientation;
 - (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
 

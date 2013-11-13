@@ -58,6 +58,7 @@
 }
 
 - (void)initButtons {
+    [self.closeButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
 }

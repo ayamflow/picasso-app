@@ -18,6 +18,15 @@
 
 @implementation About
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initMenu];
