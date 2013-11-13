@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @property (assign, nonatomic) BOOL wasInExploreMode;
+@property (assign, nonatomic) BOOL wasInSceneMode;
 
 @end

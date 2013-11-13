@@ -7,7 +7,27 @@
 //
 
 #import "About.h"
+#import "MenuButton.h"
+#import "OrientationUtils.h"
+
+@interface About ()
+
+@property (strong, nonatomic) MenuButton *menuButton;
+
+@end
 
 @implementation About
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initMenu];
+}
+
+- (void)initMenu {
+    self.menuButton = [[MenuButton alloc] initWithExploreMode:NO andPosition:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2, self.menuButton.view.frame.size.height)];
+    [self addChildViewController:self.menuButton];
+    [self.view addSubview:self.menuButton.view];
+    [self.view bringSubviewToFront:self.menuButton.view];
+}
 
 @end

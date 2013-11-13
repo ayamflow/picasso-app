@@ -7,6 +7,7 @@
 //
 
 #import "Constants.h"
+#import "Menu.h"
 
 @implementation UIColor (Picasso)
 
@@ -50,6 +51,10 @@
     return @"updateRotation";
 }
 
++ (NSString *)MenuShownEvent {
+    return @"menuShown";
+}
+
 @end
 
 @implementation UINavigationController (Picasso)
@@ -71,6 +76,15 @@
     [self presentViewController:forcePortrait animated:NO completion:^{
         [forcePortrait dismissViewControllerAnimated:NO completion:nil];
     }];
+}
+
+- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
+    NSLog(@"[VC Picasso] Show menu");
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    menu.wasInExploreMode = isExploreMode;
+    menu.wasInSceneMode = isSceneMode;
+    [self.navigationController pushViewController:menu animated:YES];
 }
 
 @end

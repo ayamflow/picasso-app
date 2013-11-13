@@ -23,10 +23,9 @@
 
 + (NSString *)ResetSliderEvent;
 + (NSString *)SliderHasMovedEvent;
-
 + (NSString *)UpdateRotationEvent;
-
 + (NSString *)SceneUnlockedEvent;
++ (NSString *)MenuShownEvent;
 
 @end
 
@@ -40,5 +39,6 @@
 @interface UIViewController (Picasso)
 
 - (void)rotateToLandscapeOrientation;
+- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
 
 @end

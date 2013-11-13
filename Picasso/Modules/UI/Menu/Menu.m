@@ -62,13 +62,8 @@
     [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)initTimeline {
+/*- (void)initTimeline {
     CGRect screenSize = [OrientationUtils deviceSize];
-    
-    // Old Timeline with specified class (broken frame, see below)
-/*    self.timeline = [[Timeline alloc] init];
-    [self.timeline.view setCenter:CGPointMake(screenSize.size.width / 2, screenSize.size.height - BUTTON_HEIGHT * 1.5)];
-    [self.view addSubview:self.timeline.view];*/
     
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger scenesNumber = [dataManager getScenesNumber];
@@ -101,10 +96,10 @@
     [self.timeline setFrame:CGRectMake(screenSize.size.width / 2 - (scenesNumber * spaceBetweenScenes) / 2, screenSize.size.height - BUTTON_HEIGHT * 1.5, (scenesNumber - 1) * (refButton.frame.size.width + spaceBetweenScenes), refButton.frame.size.height)];
 //    [self.timeline setBackgroundColor:[UIColor redColor]];
     [self.view addSubview:self.timeline];
-}
+}*/
 
 - (void)hideMenu {
-    if(self.wasInExploreMode) {
+    if(self.wasInExploreMode && self.wasInSceneMode) {
         SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
         [self.navigationController pushViewController:sceneManager animated:YES];
     }

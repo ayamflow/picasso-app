@@ -13,7 +13,7 @@
 #import "SceneInterstitial.h"
 #import "Constants.h"
 #import "OrientationUtils.h"
-#import "Menu.h"
+#import "MenuButton.h"
 
 @interface SceneManager ()
 
@@ -21,9 +21,7 @@
 @property (strong, nonatomic) Scene *currentScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
 @property (assign, nonatomic) NSInteger scenesNumber;
-@property (strong, nonatomic) UIButton *menuSlider;
-@property (assign, nonatomic) BOOL menuShown;
-@property (assign, nonatomic) BOOL shouldShowMenu;
+@property (strong, nonatomic) MenuButton *menuButton;
 
 @end
 
@@ -37,10 +35,6 @@
     }
     return self;
 }
-
-//- (BOOL)shouldAutorotate {
-//    return NO;
-//}
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
@@ -64,106 +58,16 @@
 }
 
 - (void)initMenu {
-    self.menuSlider = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *sliderImage = [UIImage imageNamed:@"menuSlider.png"];
-    [self.menuSlider setImage:sliderImage forState:UIControlStateNormal];
-    [self.menuSlider setFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - sliderImage.size.width / 2, sliderImage.size.height, sliderImage.size.width, sliderImage.size.height)];
-	[self.view addSubview:self.menuSlider];
-    self.menuSlider.backgroundColor = [UIColor redColor];
-    [self.view bringSubviewToFront:self.menuSlider];
-    [self.menuSlider addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES andPosition:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2, self.menuButton.view.frame.size.height)];
+    [self addChildViewController:self.menuButton];
+    [self.view addSubview:self.menuButton.view];
+    [self.view bringSubviewToFront:self.menuButton.view];
 }
 
-- (void)showMenu {
+- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
     [self.currentScene stop];
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-    menu.wasInExploreMode = YES;
-    [self.navigationController pushViewController:menu animated:YES];
+    [super showMenuWithExploreMode:YES andSceneMode:YES];
 }
-
-/*- (void)initMenu {
-    self.menuSlider = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.menuSlider setImage:[UIImage imageNamed:@"menuSlider.png"] forState:UIControlStateNormal];
-//    self.menuSlider.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2);
-    [self.menuSlider setFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuSlider.frame.size.width / 2, self.menuSlider.frame.size.height * 2, 17, 8)];
-	[self.view addSubview:self.menuSlider];
-    [self.view bringSubviewToFront:self.menuSlider];
-    //    self.menuSlider addTarget:self action:@selector(menuSliderTouched) forControlEvents:UIControlEvent
-
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    panRecognizer.minimumNumberOfTouches = 1;
-    panRecognizer.maximumNumberOfTouches = 1;
-    panRecognizer.delegate = self;
-    [self.view addGestureRecognizer:panRecognizer];
-}*/
-
-/*- (void)handlePanGesture:(id)sender {
-	UIPanGestureRecognizer *panRecognizer = (UIPanGestureRecognizer *) sender;
-    [panRecognizer.view.layer removeAllAnimations];
-
-    CGPoint translation = [panRecognizer translationInView:self.view];
-    CGPoint velocity = [panRecognizer velocityInView:self.view];
-
-    if(panRecognizer.state == UIGestureRecognizerStateBegan) {
-		if(velocity.y > 0 && !self.menuShown) {
-            UIView *menuView = [self getMenuView];
-
-            [self.view bringSubviewToFront:menuView];
-        }
-    }
-
-    if(panRecognizer.state == UIGestureRecognizerStateChanged) {
-        float halfScreensize = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
-		self.shouldShowMenu = abs(panRecognizer.view.center.x - halfScreensize > halfScreensize);
-
-        panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
-        [panRecognizer setTranslation:CGPointMake(0, 0) inView:self.view];
-    }
-
-    if(panRecognizer.state == UIGestureRecognizerStateEnded) {
-		if(!self.shouldShowMenu) {
-			[self resetMenu];
-        }
-        else if(self.menuShown) {
-            [self showMenu];
-        }
-    }
-}*/
-
-/*- (UIView *)getMenuView {
-    if(self.menu == nil) {
-        self.menu = [[Menu alloc] init];
-//        self.menu.delegate = self;
-
-        [self.view addSubview:self.menu.view];
-        [self addChildViewController:self.menu];
-        [self.menu didMoveToParentViewController:self];
-        self.menu.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
-    }
-
-    self.menuShown = YES;
-    return self.menu.view;
-}*/
-
-/*- (void)resetMenu {
-	[self.view bringSubviewToFront:self.menu.view];
-    [UIView animateWithDuration:0.5 delay: 0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		self.menu.view.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2, -[OrientationUtils nativeLandscapeDeviceSize].size.height / 2);
-    } completion:^(BOOL finished) {
-		[self.menu.view removeFromSuperview];
-        self.menu = nil;
-        self.menuShown = NO;
-    }];
-
-}*/
-
-/*- (void)showMenu {
-	[self.view bringSubviewToFront:self.menu.view];
-    [UIView animateWithDuration:0.5 delay: 0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		self.menu.view.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2);
-    } completion:^(BOOL finished) {}];
-}*/
 
 - (void)showSceneWithNumber:(NSInteger)number {
     // update oldScene
@@ -186,7 +90,7 @@
     self.currentScene.delegate = self;
     [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];
-    [self.view bringSubviewToFront:self.menuSlider];
+    [self.view bringSubviewToFront:self.menuButton.view];
 }
 
 - (void)removeLastSeenScene {
