@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5FC667D11833C0F800F4585F /* WorkFullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC667D01833C0F800F4585F /* WorkFullViewController.m */; };
+		5FC667D31833C67600F4585F /* background-dev.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D21833C67600F4585F /* background-dev.png */; };
+		5FC667D61833CA5000F4585F /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D51833CA5000F4585F /* scene-2.mov */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -38,8 +41,6 @@
 		62A2B28A18215DC700B4F0E4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2B28918215DC700B4F0E4 /* logo.png */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
-		B96302D118284EEC00683E5D /* scene-1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B96302CF18284EEC00683E5D /* scene-1.mp4 */; };
-		B96302D218284EEC00683E5D /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = B96302D018284EEC00683E5D /* scene-2.mov */; };
 		B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2418204DE400BC6A09 /* 4.jpg */; };
 		B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2518204DE400BC6A09 /* 5.jpg */; };
 		B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2618204DE400BC6A09 /* 6.jpg */; };
@@ -71,6 +72,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5FC667CF1833C0F800F4585F /* WorkFullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkFullViewController.h; sourceTree = "<group>"; };
+		5FC667D01833C0F800F4585F /* WorkFullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkFullViewController.m; sourceTree = "<group>"; };
+		5FC667D21833C67600F4585F /* background-dev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-dev.png"; path = "Data/background-dev.png"; sourceTree = "<group>"; };
+		5FC667D41833C98800F4585F /* scene-1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "scene-1.mp4"; path = "Picasso/Data/scene-1.mp4"; sourceTree = SOURCE_ROOT; };
+		5FC667D51833CA5000F4585F /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "scene-2.mov"; path = "Picasso/Data/scene-2.mov"; sourceTree = SOURCE_ROOT; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -121,8 +127,6 @@
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
 		62E9FA3818201CD30080A21D /* SceneInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneInterstitial.h; path = Modules/SceneManager/SceneInterstitial.h; sourceTree = "<group>"; };
 		62E9FA3918201CD30080A21D /* SceneInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneInterstitial.m; path = Modules/SceneManager/SceneInterstitial.m; sourceTree = "<group>"; };
-		B96302CF18284EEC00683E5D /* scene-1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "scene-1.mp4"; path = "../../../../../Desktop/scene-1.mp4"; sourceTree = "<group>"; };
-		B96302D018284EEC00683E5D /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "scene-2.mov"; path = "../../../../../Desktop/scene-2.mov"; sourceTree = "<group>"; };
 		B98CFC2418204DE400BC6A09 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 4.jpg; path = Picasso/Data/4.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2518204DE400BC6A09 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 5.jpg; path = Picasso/Data/5.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2618204DE400BC6A09 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 6.jpg; path = Picasso/Data/6.jpg; sourceTree = SOURCE_ROOT; };
@@ -175,6 +179,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5FC667CE1833C0D200F4585F /* WorkFullView */ = {
+			isa = PBXGroup;
+			children = (
+				5FC667CF1833C0F800F4585F /* WorkFullViewController.h */,
+				5FC667D01833C0F800F4585F /* WorkFullViewController.m */,
+			);
+			name = WorkFullView;
+			sourceTree = "<group>";
+		};
 		624B9787182117910087C576 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +301,7 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5FC667CE1833C0D200F4585F /* WorkFullView */,
 				CE86045A18283BB00019657F /* Home */,
 				B9FF530C181FF48300DFCC39 /* GalleryView */,
 				B9FF5302181FBD3A00DFCC39 /* WorkView */,
@@ -334,8 +348,8 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B96302CF18284EEC00683E5D /* scene-1.mp4 */,
-				B96302D018284EEC00683E5D /* scene-2.mov */,
+				5FC667D41833C98800F4585F /* scene-1.mp4 */,
+				5FC667D51833CA5000F4585F /* scene-2.mov */,
 			);
 			name = Scenes;
 			path = Data/Scenes;
@@ -432,6 +446,7 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5FC667D21833C67600F4585F /* background-dev.png */,
 				62A2B28918215DC700B4F0E4 /* logo.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
 				CE488873181EFFA5001D9A09 /* timeline-button.png */,
@@ -537,13 +552,13 @@
 			files = (
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
+				5FC667D31833C67600F4585F /* background-dev.png in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */,
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
-				B96302D118284EEC00683E5D /* scene-1.mp4 in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
-				B96302D218284EEC00683E5D /* scene-2.mov in Resources */,
+				5FC667D61833CA5000F4585F /* scene-2.mov in Resources */,
 				62A2B28A18215DC700B4F0E4 /* logo.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
@@ -573,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FC667D11833C0F800F4585F /* WorkFullViewController.m in Sources */,
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				624E6B0B181E5FD300E7FE58 /* ViewController.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,

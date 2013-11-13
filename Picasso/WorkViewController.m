@@ -25,6 +25,14 @@
     return self;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        NSLog(@"wahooooo");
+    }
+}
+
 - (void)imgToFullScreen:(UISwipeGestureRecognizer*)sender {
     if (!isFullScreen) {
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
