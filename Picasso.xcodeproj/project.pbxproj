@@ -21,8 +21,6 @@
 		5F66914C1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */; };
 		5F6691551832666600CBE39F /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691541832666600CBE39F /* GalleryViewController.m */; };
 		5F66915C1832692700CBE39F /* CHTCollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */; };
-		5F66915D1832692700CBE39F /* CHTCollectionViewWaterfallFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691591832692700CBE39F /* CHTCollectionViewWaterfallFooter.m */; };
-		5F66915E1832692700CBE39F /* CHTCollectionViewWaterfallHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66915B1832692700CBE39F /* CHTCollectionViewWaterfallHeader.m */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -101,10 +99,6 @@
 		5F6691541832666600CBE39F /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		5F6691561832692700CBE39F /* CHTCollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallCell.h; sourceTree = "<group>"; };
 		5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallCell.m; sourceTree = "<group>"; };
-		5F6691581832692700CBE39F /* CHTCollectionViewWaterfallFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallFooter.h; sourceTree = "<group>"; };
-		5F6691591832692700CBE39F /* CHTCollectionViewWaterfallFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallFooter.m; sourceTree = "<group>"; };
-		5F66915A1832692700CBE39F /* CHTCollectionViewWaterfallHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallHeader.h; sourceTree = "<group>"; };
-		5F66915B1832692700CBE39F /* CHTCollectionViewWaterfallHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallHeader.m; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -464,10 +458,6 @@
 			children = (
 				5F6691561832692700CBE39F /* CHTCollectionViewWaterfallCell.h */,
 				5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */,
-				5F6691581832692700CBE39F /* CHTCollectionViewWaterfallFooter.h */,
-				5F6691591832692700CBE39F /* CHTCollectionViewWaterfallFooter.m */,
-				5F66915A1832692700CBE39F /* CHTCollectionViewWaterfallHeader.h */,
-				5F66915B1832692700CBE39F /* CHTCollectionViewWaterfallHeader.m */,
 				5F66914A1832345800CBE39F /* CHTCollectionViewWaterfallLayout.h */,
 				5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */,
 				5F6691531832666600CBE39F /* GalleryViewController.h */,
@@ -644,13 +634,11 @@
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				5F6691551832666600CBE39F /* GalleryViewController.m in Sources */,
-				5F66915E1832692700CBE39F /* CHTCollectionViewWaterfallHeader.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
 				CE86045D18283E520019657F /* About.m in Sources */,
-				5F66915D1832692700CBE39F /* CHTCollectionViewWaterfallFooter.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				5F66915C1832692700CBE39F /* CHTCollectionViewWaterfallCell.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
