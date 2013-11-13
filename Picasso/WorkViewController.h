@@ -11,6 +11,7 @@
 @interface WorkViewController : UIViewController  <UIGestureRecognizerDelegate> {
     UISwipeGestureRecognizer *swipeDown;
     UISwipeGestureRecognizer *swipeUp;
+    UITapGestureRecognizer *touch;
     BOOL isFullScreen;
     CGRect prevFrame;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "WorkViewController.h"
+#import "GalleryViewController.h"
 #import "WorkModel.h"
 #import "DataManager.h"
 
@@ -49,6 +50,10 @@
     }
 }
 
+- (void)goToGallery:(UITouch*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {
     UITextView *calculationView = [[UITextView alloc] init];
     [calculationView setAttributedText:text];
@@ -59,10 +64,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //DataManager *dataManager = [DataManager sharedInstance];
-    //WorkModel *workModel = [dataManager getWorkWithNumber:self.workId];
+    
+    WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
+    NSString *workDescription = [workModel description];
     
     isFullScreen = FALSE;
+    
+    self.navigationController.navigationBarHidden = YES;
     
     self.workImage.contentMode = UIViewContentModeScaleAspectFill;
     [self.workImage setClipsToBounds:YES];
@@ -78,6 +86,14 @@
     swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(imgToMini:)];
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
     [self.workImage addGestureRecognizer:swipeUp];
+    
+    touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToGallery:)];
+    [self.workImage addGestureRecognizer:touch];
+    
+    UITextView *workTextContent = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+    workTextContent.text = workDescription;
+    workTextContent.textColor = [UIColor blackColor];
+    [self.workContent addSubview:workTextContent];
 }
 
 - (void)didReceiveMemoryWarning
