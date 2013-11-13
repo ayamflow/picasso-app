@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSString *workId;
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSArray *description;
+@property (strong, nonatomic) NSString *description;
 
 - (id)initWithData:(NSDictionary *)data;
 

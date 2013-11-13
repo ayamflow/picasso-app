@@ -2,71 +2,113 @@
 //  GalleryViewController.m
 //  Picasso
 //
-//  Created by Julian on 29/10/2013.
+//  Created by RENARD Julian on 12/11/13.
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
+//
+//  ViewController.m
+//  Demo
+//
+//  Created by Nelson on 12/11/27.
+//  Copyright (c) 2012年 Nelson. All rights reserved.
+//
+
+#import "CHTCollectionViewWaterfallCell.h"
 #import "GalleryViewController.h"
 #import "WorkViewController.h"
 #import "WorkModel.h"
 #import "DataManager.h"
 
+#define CELL_IDENTIFIER @"WaterfallCell"
+
 @interface GalleryViewController ()
 
-@property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, assign) int cellCount;
+@property (nonatomic, strong) DataManager *dataManager;
 
 @end
 
-DataManager *dataManager;
-NSString *kCellID = @"cellID";
-
 @implementation GalleryViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.dataManager = [DataManager sharedInstance];
+        self.cellCount = [self.dataManager getWorksNumber];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+#pragma mark - Accessors
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
+        
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.itemWidth = 160;
+        layout.delegate = self;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+    }
+    return _collectionView;
+}
+
+#pragma mark - Life Cycle
+- (void)dealloc {
+    [_collectionView removeFromSuperview];
+    _collectionView = nil;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //self.navigationController.navigationBarHidden = YES;
-    
-    dataManager = [DataManager sharedInstance];
-	// Do any additional setup after loading the view.
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kCellID];
+    [self.collectionView registerClass:[CHTCollectionViewWaterfallCell class] forCellWithReuseIdentifier:@"WaterfallCell"];
+    [self.view addSubview:self.collectionView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self updateLayout];
 }
 
-#pragma mark - UICollectionView Datasource
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    return [dataManager getWorksNumber];
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation
+                                            duration:duration];
+    [self updateLayout];
 }
 
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+- (void)updateLayout {
+    CHTCollectionViewWaterfallLayout *layout =
+    (CHTCollectionViewWaterfallLayout *)self.collectionView.collectionViewLayout;
+    layout.columnCount = self.collectionView.bounds.size.width / 160;
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.cellCount;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
-
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CHTCollectionViewWaterfallCell *cell =
+    (CHTCollectionViewWaterfallCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
+                                                                                forIndexPath:indexPath];
+    
     if([cell.contentView.subviews count] == 0) {
         [cell.contentView addSubview:[[UIImageView alloc] initWithFrame:cell.contentView.bounds]];
     }
     
     UIImageView *cellImageView = cell.contentView.subviews[0];
     
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", indexPath.row];
+    NSString *imageUrl = [NSString stringWithFormat: @"min-%d.jpg", indexPath.row];
     cellImageView.image = [UIImage imageNamed:imageUrl];
     
     return cell;
@@ -88,24 +130,24 @@ NSString *kCellID = @"cellID";
     NSLog(@"deselect %ld", (long)indexPath.row);
 }
 
-#pragma mark – UICollectionViewDelegateFlowLayout
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UICollectionViewWaterfallLayoutDelegate
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout
+ heightForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", indexPath.row];
+    NSString *imageUrl = [NSString stringWithFormat: @"min-%d.jpg", indexPath.row];
     UIImage *workImage = [UIImage imageNamed:imageUrl];
     
-    float workImageWidth = workImage.size.width;
-    float workImageHeight = workImage.size.height;
+    return workImage.size.height;
     
-    //Just for test, resize image in back
-    CGSize retval = CGSizeMake(workImageWidth/10, workImageHeight/10);
-    
-    return retval;
 }
 
-- (UIEdgeInsets)collectionView:
-(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(50, 20, 50, 20);
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout
+ widthForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 160;
+    
 }
 
 @end
