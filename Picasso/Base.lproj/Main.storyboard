@@ -177,8 +177,8 @@
                                     <segue destination="pw8-1h-sAP" kind="push" id="sJy-tY-RGP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="1Jq-MB-qgP">
-                                <rect key="frame" x="40" y="60" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GCc-m8-jdP">
+                                <rect key="frame" x="-10" y="0.0" width="330" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -186,9 +186,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZEb-qR-h2f"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="GCc-m8-jdP" id="S6p-ef-mYM"/>
                         <outlet property="exploreButton" destination="CTj-Hu-dSE" id="2xu-iD-GSC"/>
                         <outlet property="galleryButton" destination="zdG-kb-XTA" id="fWY-zS-zQ5"/>
-                        <outlet property="logo" destination="1Jq-MB-qgP" id="ZEy-AU-nJt"/>
                         <outlet property="museumButton" destination="bvN-8L-DX0" id="are-GB-Hw4"/>
                     </connections>
                 </viewController>
@@ -200,7 +200,7 @@
         <scene sceneID="Tem-qy-T5Q">
             <objects>
                 <viewController storyboardIdentifier="Menu" id="jTI-Lr-gl6" customClass="Menu" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BOD-ca-AUp">
+                    <view key="view" alpha="0.0" contentMode="scaleAspectFit" id="BOD-ca-AUp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -283,7 +283,6 @@
         <image name="chooserTitle.png" width="42" height="42"/>
         <image name="exploreButton.png" width="157" height="42"/>
         <image name="galleryButton.png" width="157" height="42"/>
-        <image name="logo.png" width="252" height="80"/>
         <image name="menuSliderUp.png" width="12" height="6"/>
         <image name="museumButton.png" width="157" height="42"/>
     </resources>

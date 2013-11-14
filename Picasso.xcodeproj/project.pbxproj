@@ -15,6 +15,10 @@
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		620409241833B92600105A03 /* TransitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 620409231833B92600105A03 /* TransitionUtil.m */; };
+		62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D4C1834E82300F9C26C /* homeBackground@2x.png */; };
+		62084D51183508C100F9C26C /* Logo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62084D50183508C100F9C26C /* Logo.m */; };
+		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
+		62084D561835237D00F9C26C /* logo5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D541835237D00F9C26C /* logo5@2x.png */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -42,7 +46,6 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
-		62A2B28A18215DC700B4F0E4 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2B28918215DC700B4F0E4 /* logo@2x.png */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -96,6 +99,11 @@
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
 		620409221833B92600105A03 /* TransitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionUtil.h; path = Modules/Utils/TransitionUtil.h; sourceTree = "<group>"; };
 		620409231833B92600105A03 /* TransitionUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionUtil.m; path = Modules/Utils/TransitionUtil.m; sourceTree = "<group>"; };
+		62084D4C1834E82300F9C26C /* homeBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "homeBackground@2x.png"; path = "Data/UI/homeBackground@2x.png"; sourceTree = "<group>"; };
+		62084D4F183508C100F9C26C /* Logo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logo.h; path = Modules/UI/Logo/Logo.h; sourceTree = "<group>"; };
+		62084D50183508C100F9C26C /* Logo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logo.m; path = Modules/UI/Logo/Logo.m; sourceTree = "<group>"; };
+		62084D531835237D00F9C26C /* logo0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo0@2x.png"; sourceTree = "<group>"; };
+		62084D541835237D00F9C26C /* logo5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo5@2x.png"; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -139,7 +147,6 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
-		62A2B28918215DC700B4F0E4 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Data/UI/logo@2x.png"; sourceTree = "<group>"; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -227,6 +234,25 @@
 			);
 			name = SceneChooser;
 			path = Data/UI/SceneChooser;
+			sourceTree = "<group>";
+		};
+		62084D4E183508A800F9C26C /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				62084D4F183508C100F9C26C /* Logo.h */,
+				62084D50183508C100F9C26C /* Logo.m */,
+			);
+			name = Logo;
+			sourceTree = "<group>";
+		};
+		62084D521835237D00F9C26C /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				62084D531835237D00F9C26C /* logo0@2x.png */,
+				62084D541835237D00F9C26C /* logo5@2x.png */,
+			);
+			name = Logo;
+			path = Data/UI/Logo;
 			sourceTree = "<group>";
 		};
 		624B9787182117910087C576 /* Delegates */ = {
@@ -448,6 +474,7 @@
 		624E6B62181ECD5300E7FE58 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				62084D4E183508A800F9C26C /* Logo */,
 				624E6B63181ECD5700E7FE58 /* Menu */,
 				624E6B64181ECDF900E7FE58 /* Timeline */,
 			);
@@ -504,10 +531,11 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				62084D521835237D00F9C26C /* Logo */,
+				62084D4C1834E82300F9C26C /* homeBackground@2x.png */,
 				CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */,
 				4F20B8E9182D3F960035EEF1 /* SceneChooser */,
 				4F20B8E0182D3D9A0035EEF1 /* Menu */,
-				62A2B28918215DC700B4F0E4 /* logo@2x.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
 				CE488873181EFFA5001D9A09 /* timeline-button.png */,
 			);
@@ -627,9 +655,9 @@
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
 				CEF64D56182ACA4200FE9C39 /* scene-1.mov in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
+				62084D551835237D00F9C26C /* logo0@2x.png in Resources */,
 				620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */,
-				62A2B28A18215DC700B4F0E4 /* logo@2x.png in Resources */,
 				CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */,
 				4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
@@ -644,9 +672,11 @@
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */,
+				62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				CEF64D57182ACA4200FE9C39 /* menu.mp4 in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
+				62084D561835237D00F9C26C /* logo5@2x.png in Resources */,
 				4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +701,7 @@
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
+				62084D51183508C100F9C26C /* Logo.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,

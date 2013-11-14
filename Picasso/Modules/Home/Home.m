@@ -11,10 +11,19 @@
 #import "OrientationUtils.h"
 #import "Constants.h"
 #import "TransitionUtil.h"
+#import "Logo.h"
+
+#define kLogoPositionVariant -40
+#define kButtonsPositionVariant 40
+#define kLogoOpacityDuration 2
+#define kLogoPositionDuration 1.2
 
 @interface Home ()
 
+@property (strong, nonatomic) Logo *logo;
 @property (assign, nonatomic) BOOL orientationWasLandscape;
+@property (assign, nonatomic) BOOL transitionCompleted;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @end
 
@@ -23,9 +32,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.transitionCompleted = NO;
+    self.backgroundImage.image = [UIImage imageNamed:@"homeBackground.png"];
+    [self.view sendSubviewToBack:self.backgroundImage];
+    
     [self hideNavigationBar];
+    [self initLogo];
     [self initButtons];
     [self startIntroTransition];
+}
+
+- (void)initLogo {
+    self.logo = [[Logo alloc] init];
+    [self.view addSubview:self.logo.view];
+    CGRect logoFrame = self.logo.view.frame;
+    logoFrame.origin.x = [OrientationUtils deviceSize].size.width / 2 - logoFrame.size.width / 2;
+    logoFrame.origin.y = [OrientationUtils deviceSize].size.height / 2 - logoFrame.size.height;
+    self.logo.view.frame = logoFrame;
+    self.logo.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)initButtons {
@@ -43,23 +67,18 @@
 }
 
 - (void)startIntroTransition {
-    NSLog(@"start intro");
-    // 1) logo alpha
-    self.logo.alpha = 0;
-    // Place logo in center
-    
-    // 2) bg alpha
-    // 3) logo y + buttons y & alpha
+    self.logo.view.alpha = 0;
+    self.backgroundImage.alpha = 0;
     self.exploreButton.alpha = 0;
     self.galleryButton.alpha = 0;
     self.museumButton.alpha = 0;
     
-//    [self transitionLogoOpacity];
+    [self transitionLogoOpacity];
 }
 
 - (void)transitionLogoOpacity {
     [CATransaction begin];
-    [CATransaction setAnimationDuration:0.5];
+    [CATransaction setAnimationDuration:kLogoOpacityDuration];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     
     CABasicAnimation *logoTransition = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -69,31 +88,43 @@
     logoTransition.beginTime = CACurrentMediaTime() + 1;
     [logoTransition setValue:@"logoAlpha" forKey:@"id"];
     
-    [self.logo.layer addAnimation:logoTransition forKey:@"logoAlpha"];
+    [self.logo.view.layer addAnimation:logoTransition forKey:@"logoAlpha"];
+    
+    CABasicAnimation *backgroundTransition = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    backgroundTransition.fromValue = [NSNumber numberWithFloat:0.0];
+    backgroundTransition.toValue = [NSNumber numberWithFloat:1.0];
+    backgroundTransition.delegate = self;
+    backgroundTransition.beginTime = CACurrentMediaTime() + 1.3;
+    [backgroundTransition setValue:@"backgroundAlpha" forKey:@"id"];
+    
+    [self.backgroundImage.layer addAnimation:backgroundTransition forKey:@"backgroundAlpha"];
+    
+    [self.logo transitionOpenWithDuration:kLogoOpacityDuration andDelay:0.2];
     [CATransaction commit];
 }
 
 - (void)transitionLogoPosition {
     [CATransaction begin];
-    [CATransaction setAnimationDuration:0.7];
+    [CATransaction setAnimationDuration:kLogoPositionDuration];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     
-    CGPoint logoPosition = self.logo.layer.position;
+    CGPoint logoPosition = self.logo.view.layer.position;
+    logoPosition.y += kLogoPositionVariant;
     CABasicAnimation *logoPositionTransition = [CABasicAnimation animationWithKeyPath:@"position"];
-    logoPositionTransition.fromValue = [NSValue valueWithCGPoint:CGPointMake(logoPosition.x, logoPosition.y + 20)];
     logoPositionTransition.toValue = [NSValue valueWithCGPoint: logoPosition];
     logoPositionTransition.delegate = self;
+//    logoPositionTransition.beginTime = CACurrentMediaTime() + 0.5;
     [logoPositionTransition setValue:@"logoPosition" forKey:@"id"];
     
     // Kick it !
-    [self.logo.layer addAnimation:logoPositionTransition forKey:@"logoPosition"];
+    [self.logo.view.layer addAnimation:logoPositionTransition forKey:@"logoPosition"];
     [CATransaction commit];
 }
 
 - (void)transitionButtons {
     NSLog(@"buttonsTransition");
     [CATransaction begin];
-    [CATransaction setAnimationDuration:0.7];
+    [CATransaction setAnimationDuration:kLogoPositionDuration];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     
     NSArray *layersArray = [NSArray arrayWithObjects:self.exploreButton.layer, self.galleryButton.layer, self.museumButton.layer, nil];
@@ -112,13 +143,13 @@
         CABasicAnimation *positionTransition = [CABasicAnimation animationWithKeyPath:@"position"];
         CGPoint position = layer.position;
         [positionTransition setValue:[NSString stringWithFormat:@"buttonPosition%i", (int)(1 + timeOffset / 0.2)] forKey:@"id"];
-        positionTransition.delegate = self;
-        positionTransition.fromValue = [NSValue valueWithCGPoint:CGPointMake(position.x, position.y + 20)];
+//        positionTransition.delegate = self;
+        positionTransition.fromValue = [NSValue valueWithCGPoint:CGPointMake(position.x, position.y + kButtonsPositionVariant)];
         opacityTransition.toValue = [NSValue valueWithCGPoint:position];
         positionTransition.beginTime = CACurrentMediaTime() + timeOffset;
         [layer addAnimation:positionTransition forKey:nil];
         
-        timeOffset += 0.2;
+        timeOffset += 0.25;
     }
     [CATransaction commit];
 }
@@ -127,20 +158,29 @@
 //    NSLog(@"animationDidStop: %@", [anim valueForKey:@"id"]);
     NSString *transitionId = [anim valueForKey:@"id"];
     if([transitionId isEqualToString:@"logoAlpha"]) {
-        self.logo.alpha = 1;
+        self.logo.view.alpha = 1;
         [self transitionLogoPosition];
         [self transitionButtons];
     }
+    else if([transitionId isEqualToString:@"backgroundAlpha"]) {
+        self.backgroundImage.alpha = 1;
+    }
     else if([transitionId isEqualToString:@"logoPosition"]) {
-
+        CGPoint logoPosition = self.logo.view.layer.position;
+        logoPosition.y -= 40;
+        self.logo.view.layer.position = logoPosition;
+        self.transitionCompleted = YES;
     }
     else if([transitionId isEqualToString:@"buttonOpacity1"]) {
+        NSLog(@"1");
         self.exploreButton.alpha = 1;
     }
     else if([transitionId isEqualToString:@"buttonOpacity2"]) {
+        NSLog(@"2");
         self.galleryButton.alpha = 1;
     }
     else if([transitionId isEqualToString:@"buttonOpacity3"]) {
+        NSLog(@"3");
         self.museumButton.alpha = 1;
     }
 }
@@ -172,7 +212,19 @@
     self.galleryButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement / 2);
     self.museumButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement);
 
-    self.logo.layer.position = CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2, 140.0);
+    self.backgroundImage.frame = [OrientationUtils nativeDeviceSize];
+
+    CGRect logoFrame = self.logo.view.frame;
+    logoFrame.origin.x = [OrientationUtils nativeDeviceSize].size.width / 2 - logoFrame.size.width / 2;
+    if(self.transitionCompleted) {
+        logoFrame.origin.y = [OrientationUtils nativeDeviceSize].size.height / 2 - logoFrame.size.height + kLogoPositionVariant;
+//        self.logo.view.layer.position = CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2, 140.0 + kLogoPositionVariant);
+    }
+    else {
+        logoFrame.origin.y = [OrientationUtils nativeDeviceSize].size.height / 2 - logoFrame.size.height;
+//        self.logo.view.layer.position = CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2, 140.0);
+    }
+    self.logo.view.frame = logoFrame;
 }
 
 - (void)updatePositionToLandscape {
@@ -182,7 +234,18 @@
     self.galleryButton.layer.position = CGPointMake(self.exploreButton.layer.position.x + self.exploreButton.frame.size.width + 10.0, topPosition);
     self.museumButton.layer.position = CGPointMake(self.galleryButton.layer.position.x + self.galleryButton.frame.size.width + 10.0, topPosition);
 
-    self.logo.layer.position = CGPointMake([OrientationUtils nativeDeviceSize].size.height / 2, 100.0);
+    self.backgroundImage.frame = [OrientationUtils nativeLandscapeDeviceSize];
+
+    CGRect logoFrame = self.logo.view.frame;
+    logoFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - logoFrame.size.width / 2;
+    if(self.transitionCompleted) {
+//        logoFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - logoFrame.size.width / 2;
+//        logoFrame.origin.y = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - logoFrame.size.height / 2 + kLogoPositionVariant;
+        self.logo.view.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2,[OrientationUtils nativeLandscapeDeviceSize].size.height / 2 + kLogoPositionVariant);
+    }
+    else {
+        self.logo.view.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2,[OrientationUtils nativeLandscapeDeviceSize].size.height / 2);
+    }
 
 }
 
