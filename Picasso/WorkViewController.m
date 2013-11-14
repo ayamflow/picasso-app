@@ -7,6 +7,7 @@
 //
 
 #import "WorkViewController.h"
+#import "WorkFullViewController.h"
 #import "GalleryViewController.h"
 #import "WorkModel.h"
 #import "DataManager.h"
@@ -30,7 +31,9 @@
 {
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
-        NSLog(@"wahooooo");
+        WorkFullViewController *workFullViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
+        workFullViewController.workId = self.workId;
+        [self.navigationController pushViewController:workFullViewController animated:YES];
     }
 }
 

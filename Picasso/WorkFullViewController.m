@@ -7,18 +7,23 @@
 //
 
 #import "WorkFullViewController.h"
+#import "OrientationUtils.h"
+#import "UIImage+ImageEffects.h"
 
 @interface WorkFullViewController ()
+
+@property (nonatomic, strong) CALayer *maskLayer;
 
 @end
 
 @implementation WorkFullViewController
 
+CGRect deviceSize;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -27,28 +32,46 @@
 {
     [super viewDidLoad];
 	
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat heigth = [UIScreen mainScreen].bounds.size.height;
+    deviceSize = [OrientationUtils deviceSize];
+    NSLog(@"device size %f", deviceSize.size.width);
+    
+    NSString *workImageFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", self.workId]];
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    backgroundView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
-    [backgroundView setContentSize:CGSizeMake(320, 2000)];
+    backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.width, deviceSize.size.height)];
     [self.view addSubview:backgroundView];
     
-    middleView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
-    [middleView setContentSize:CGSizeMake(320, 1000)];
-    [self.view addSubview:middleView];
+    firstView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.width, deviceSize.size.height)];
+    [firstView setContentSize:CGSizeMake(deviceSize.size.width, 4300)];
+    [firstView setDelegate:self];
+    [self.view addSubview:firstView];
     
+    /*
     frontView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
     [frontView setContentSize:CGSizeMake(320, 500)];
     
     [frontView setDelegate:self];
     [self.view addSubview:frontView];
-    
+    */
+     
     NSString *backgroundFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"background-dev.png"];
     UIImageView *background = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:backgroundFile]];
     [backgroundView addSubview:background];
+    
+    backgroundFirstView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:workImageFile]];
+    [firstView addSubview:backgroundFirstView];
+    backgroundFirstView.frame = CGRectMake(0, 0,deviceSize.size.width, 4300);
+    backgroundFirstView.image = [backgroundFirstView.image applyDarkEffect];
+    
+    /*
+    self.workImage.contentMode = UIViewContentModeScaleAspectFill;
+    [self.workImage setClipsToBounds:YES];
+    self.workImage.userInteractionEnabled = YES;
+    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", self.workId];
+    self.workImage.image = [UIImage imageNamed:imageUrl];
+    self.workImage.layer.zPosition = 1;
+    */
     
     /*
     // load image into second scrollview

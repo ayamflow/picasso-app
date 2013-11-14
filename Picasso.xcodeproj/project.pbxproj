@@ -7,26 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
+		5F09CC831833D1A7003C9686 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */; };
+		5F09CC841833D1B3003C9686 /* CHTCollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */; };
+		5F09CC871833D277003C9686 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F09CC861833D277003C9686 /* GalleryViewController.m */; };
 		5FC667D11833C0F800F4585F /* WorkFullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC667D01833C0F800F4585F /* WorkFullViewController.m */; };
-		5FC667D31833C67600F4585F /* background-dev.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D21833C67600F4585F /* background-dev.png */; };
+		5FC667D31833C67600F4585F /* background-dev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D21833C67600F4585F /* background-dev@2x.png */; };
 		5FC667D61833CA5000F4585F /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D51833CA5000F4585F /* scene-2.mov */; };
-=======
-		5F66913E18322E3400CBE39F /* min-0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913318322E3400CBE39F /* min-0.jpg */; };
-		5F66913F18322E3400CBE39F /* min-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913418322E3400CBE39F /* min-1.jpg */; };
-		5F66914018322E3400CBE39F /* min-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913518322E3400CBE39F /* min-2.jpg */; };
-		5F66914118322E3400CBE39F /* min-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913618322E3400CBE39F /* min-3.jpg */; };
-		5F66914218322E3400CBE39F /* min-4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913718322E3400CBE39F /* min-4.jpg */; };
-		5F66914318322E3400CBE39F /* min-5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913818322E3400CBE39F /* min-5.jpg */; };
-		5F66914418322E3400CBE39F /* min-6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913918322E3400CBE39F /* min-6.jpg */; };
-		5F66914518322E3400CBE39F /* min-7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913A18322E3400CBE39F /* min-7.jpg */; };
-		5F66914618322E3400CBE39F /* min-8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913B18322E3400CBE39F /* min-8.jpg */; };
-		5F66914718322E3400CBE39F /* min-9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913C18322E3400CBE39F /* min-9.jpg */; };
-		5F66914818322E3400CBE39F /* min-10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F66913D18322E3400CBE39F /* min-10.jpg */; };
-		5F66914C1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */; };
-		5F6691551832666600CBE39F /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691541832666600CBE39F /* GalleryViewController.m */; };
-		5F66915C1832692700CBE39F /* CHTCollectionViewWaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */; };
->>>>>>> feature/work
+		5FE1CC8C1835294300AC21FB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -70,7 +57,6 @@
 		B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5306181FE76400DFCC39 /* 1.jpg */; };
 		B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5307181FE76400DFCC39 /* 2.jpg */; };
 		B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5308181FE76400DFCC39 /* 3.jpg */; };
-		B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5311181FF58500DFCC39 /* GalleryViewController.m */; };
 		CE488872181EFE91001D9A09 /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = CE488871181EFE91001D9A09 /* Timeline.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
@@ -89,31 +75,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
-		5FC667CF1833C0F800F4585F /* WorkFullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkFullViewController.h; sourceTree = "<group>"; };
-		5FC667D01833C0F800F4585F /* WorkFullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkFullViewController.m; sourceTree = "<group>"; };
-		5FC667D21833C67600F4585F /* background-dev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-dev.png"; path = "Data/background-dev.png"; sourceTree = "<group>"; };
-		5FC667D41833C98800F4585F /* scene-1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "scene-1.mp4"; path = "Picasso/Data/scene-1.mp4"; sourceTree = SOURCE_ROOT; };
-		5FC667D51833CA5000F4585F /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "scene-2.mov"; path = "Picasso/Data/scene-2.mov"; sourceTree = SOURCE_ROOT; };
-=======
-		5F66913318322E3400CBE39F /* min-0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-0.jpg"; path = "Picasso/Data/min-0.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913418322E3400CBE39F /* min-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-1.jpg"; path = "Picasso/Data/min-1.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913518322E3400CBE39F /* min-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-2.jpg"; path = "Picasso/Data/min-2.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913618322E3400CBE39F /* min-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-3.jpg"; path = "Picasso/Data/min-3.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913718322E3400CBE39F /* min-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-4.jpg"; path = "Picasso/Data/min-4.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913818322E3400CBE39F /* min-5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-5.jpg"; path = "Picasso/Data/min-5.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913918322E3400CBE39F /* min-6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-6.jpg"; path = "Picasso/Data/min-6.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913A18322E3400CBE39F /* min-7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-7.jpg"; path = "Picasso/Data/min-7.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913B18322E3400CBE39F /* min-8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-8.jpg"; path = "Picasso/Data/min-8.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913C18322E3400CBE39F /* min-9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-9.jpg"; path = "Picasso/Data/min-9.jpg"; sourceTree = SOURCE_ROOT; };
-		5F66913D18322E3400CBE39F /* min-10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "min-10.jpg"; path = "Picasso/Data/min-10.jpg"; sourceTree = SOURCE_ROOT; };
+		5F09CC851833D277003C9686 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
+		5F09CC861833D277003C9686 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		5F66914A1832345800CBE39F /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
-		5F6691531832666600CBE39F /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
-		5F6691541832666600CBE39F /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		5F6691561832692700CBE39F /* CHTCollectionViewWaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallCell.h; sourceTree = "<group>"; };
 		5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallCell.m; sourceTree = "<group>"; };
->>>>>>> feature/work
+		5FC667CF1833C0F800F4585F /* WorkFullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkFullViewController.h; sourceTree = "<group>"; };
+		5FC667D01833C0F800F4585F /* WorkFullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkFullViewController.m; sourceTree = "<group>"; };
+		5FC667D21833C67600F4585F /* background-dev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-dev@2x.png"; path = "Data/background-dev@2x.png"; sourceTree = "<group>"; };
+		5FC667D41833C98800F4585F /* scene-1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "scene-1.mp4"; path = "Picasso/Data/scene-1.mp4"; sourceTree = SOURCE_ROOT; };
+		5FC667D51833CA5000F4585F /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "scene-2.mov"; path = "Picasso/Data/scene-2.mov"; sourceTree = SOURCE_ROOT; };
+		5FE1CC8A1835294300AC21FB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -177,8 +151,6 @@
 		B9FF5306181FE76400DFCC39 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Picasso/Data/1.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5307181FE76400DFCC39 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 2.jpg; path = Picasso/Data/2.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
-		B9FF5310181FF58500DFCC39 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
-		B9FF5311181FF58500DFCC39 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		CE488870181EFE91001D9A09 /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = Modules/UI/Timeline/Timeline.h; sourceTree = "<group>"; };
 		CE488871181EFE91001D9A09 /* Timeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Timeline.m; path = Modules/UI/Timeline/Timeline.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button.png"; path = "Data/UI/timeline-button.png"; sourceTree = "<group>"; };
@@ -250,6 +222,8 @@
 		624B978C182120420087C576 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5FE1CC8A1835294300AC21FB /* UIImage+ImageEffects.h */,
+				5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */,
 				624B978D182120580087C576 /* OrientationUtils.h */,
 				624B978E182120580087C576 /* OrientationUtils.m */,
 			);
@@ -474,17 +448,12 @@
 		B9FF530C181FF48300DFCC39 /* GalleryView */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				B9FF5310181FF58500DFCC39 /* GalleryViewController.h */,
-				B9FF5311181FF58500DFCC39 /* GalleryViewController.m */,
-=======
+				5F09CC851833D277003C9686 /* GalleryViewController.h */,
+				5F09CC861833D277003C9686 /* GalleryViewController.m */,
 				5F6691561832692700CBE39F /* CHTCollectionViewWaterfallCell.h */,
 				5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */,
 				5F66914A1832345800CBE39F /* CHTCollectionViewWaterfallLayout.h */,
 				5F66914B1832345800CBE39F /* CHTCollectionViewWaterfallLayout.m */,
-				5F6691531832666600CBE39F /* GalleryViewController.h */,
-				5F6691541832666600CBE39F /* GalleryViewController.m */,
->>>>>>> feature/work
 			);
 			name = GalleryView;
 			sourceTree = "<group>";
@@ -492,7 +461,7 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				5FC667D21833C67600F4585F /* background-dev.png */,
+				5FC667D21833C67600F4585F /* background-dev@2x.png */,
 				62A2B28918215DC700B4F0E4 /* logo.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
 				CE488873181EFFA5001D9A09 /* timeline-button.png */,
@@ -598,7 +567,7 @@
 			files = (
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
-				5FC667D31833C67600F4585F /* background-dev.png in Resources */,
+				5FC667D31833C67600F4585F /* background-dev@2x.png in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */,
@@ -640,20 +609,19 @@
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
+				5FE1CC8C1835294300AC21FB /* UIImage+ImageEffects.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
+				5F09CC831833D1A7003C9686 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
-				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
+				5F09CC841833D1B3003C9686 /* CHTCollectionViewWaterfallCell.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
-<<<<<<< HEAD
-=======
-				5F6691551832666600CBE39F /* GalleryViewController.m in Sources */,
->>>>>>> feature/work
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
+				5F09CC871833D277003C9686 /* GalleryViewController.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,

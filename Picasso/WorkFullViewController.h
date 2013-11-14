@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface WorkFullViewController : UIViewController <UIScrollViewDelegate> {
-    UIScrollView *backgroundView;
-    UIScrollView *middleView;
+    UIView *backgroundView;
+    UIScrollView *firstView;
     UIScrollView *frontView;
+    UIImageView *backgroundFirstView;
 }
+
+@property (nonatomic, readwrite, assign) int workId;
 
 @end
