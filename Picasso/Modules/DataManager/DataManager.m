@@ -8,7 +8,7 @@
 
 #import "DataManager.h"
 #import "GameModel.h"
-#import "Constants.h"
+#import "Events.h"
 
 @interface DataManager ()
 

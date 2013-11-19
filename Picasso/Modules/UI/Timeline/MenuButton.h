@@ -13,6 +13,6 @@
 @property (assign, nonatomic) BOOL wasExploreMode;
 @property (assign, nonatomic) BOOL wasSceneMode;
 
-- (id)initWithExploreMode:(BOOL)isExploreMode andPosition:(CGPoint)position;
+- (id)initWithExploreMode:(BOOL)isExploreMode;
 
 @end

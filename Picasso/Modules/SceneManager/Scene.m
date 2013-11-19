@@ -11,7 +11,6 @@
 #import "DataManager.h"
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
-#import "Constants.h"
 #import "WorkViewController.h"
 #import "OpacityTransition.h"
 #import "SceneManager.h"

@@ -10,10 +10,11 @@
 #import "Scene.h"
 #import "SceneModel.h"
 #import "DataManager.h"
+#import "UIViewControllerPicasso.h"
 #import "SceneInterstitial.h"
-#import "Constants.h"
 #import "OrientationUtils.h"
 #import "MenuButton.h"
+#import "UIViewControllerPicasso.h"
 
 @interface SceneManager ()
 
@@ -58,10 +59,13 @@
 }
 
 - (void)initMenu {
-    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES andPosition:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2, self.menuButton.view.frame.size.height)];
+    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES];
     [self addChildViewController:self.menuButton];
     [self.view addSubview:self.menuButton.view];
     [self.view bringSubviewToFront:self.menuButton.view];
+    CGRect frame = self.menuButton.view.frame;
+    frame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2;
+    self.menuButton.view.frame = frame;
 }
 
 - (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{

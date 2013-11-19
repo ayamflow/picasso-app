@@ -10,7 +10,6 @@
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
-#import "Constants.h"
 #import <CoreMotion/CoreMotion.h>
 #import <AVFoundation/AVFoundation.h>
 

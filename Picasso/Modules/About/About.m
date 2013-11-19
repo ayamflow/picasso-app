@@ -33,10 +33,13 @@
 }
 
 - (void)initMenu {
-    self.menuButton = [[MenuButton alloc] initWithExploreMode:NO andPosition:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2, self.menuButton.view.frame.size.height)];
+    self.menuButton = [[MenuButton alloc] initWithExploreMode:NO];
     [self addChildViewController:self.menuButton];
     [self.view addSubview:self.menuButton.view];
     [self.view bringSubviewToFront:self.menuButton.view];
+    CGRect frame = self.menuButton.view.frame;
+    frame.origin.x = [OrientationUtils nativeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2;
+    self.menuButton.view.frame = frame;
 }
 
 @end

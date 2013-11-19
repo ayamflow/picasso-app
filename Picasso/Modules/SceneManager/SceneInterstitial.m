@@ -9,7 +9,8 @@
 #import "SceneInterstitial.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
-#import "Constants.h"
+#import "Events.h"
+#import "Colors.h"
 
 #define MARGIN 15
 

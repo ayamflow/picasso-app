@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import "DataManager.h"
 #import "GalleryViewController.h"
+#import "Colors.h"
 #import "MotionVideoPlayer.h"
-#import "Constants.h"
 #import "OrientationUtils.h"
 
 @interface AppDelegate ()

@@ -7,7 +7,7 @@
 //
 
 #import "Logo.h"
-#import "Constants.h"
+#import "Colors.h"
 
 #define kLogoBlockSize 65
 #define kBorderWidth 2.5
@@ -25,20 +25,13 @@
 
 @implementation Logo
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initLogo];
     self.view.frame = CGRectMake(0, 0, 4 * self.five.frame.size.width - 3 * kBorderWidth, self.five.frame.size.height + kOpenedGap * 2);
+//    self.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |  UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 }
 
 - (void)initLogo {
@@ -60,42 +53,25 @@
         logoBlock.frame = CGRectMake(leftPosition, topPosition, kLogoBlockSize, kLogoBlockSize);
         logoBlock.layer.borderColor = [UIColor textColor].CGColor;
         logoBlock.layer.borderWidth = kBorderWidth;
-        // Set font
         [self.view addSubview:logoBlock];
         i++;
     }
 }
 
 - (void)transitionOpenWithDuration:(CFTimeInterval)duration andDelay:(CFTimeInterval)delay {
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:duration];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    
     NSArray *labels = [NSArray arrayWithObjects:self.five, self.zero, self.secondZero, self.thirdZero, nil];
     
     int i = 0;
     for(UIImageView *logoBlock in labels) {
-        CABasicAnimation *openTransition = [CABasicAnimation animationWithKeyPath:@"position"];
-        openTransition.beginTime = CACurrentMediaTime() + delay;
-        CGPoint labelPosition = logoBlock.layer.position;
-        labelPosition.y += i % 2 == 0 ? -kClosedGap : kClosedGap;
-        openTransition.fillMode = kCAFillModeForwards;
-        openTransition.removedOnCompletion = NO;
-        openTransition.fromValue = [NSValue valueWithCGPoint:logoBlock.layer.position];
-        openTransition.toValue = [NSValue valueWithCGPoint:labelPosition];
-        openTransition.delegate = self;
-        
-        [logoBlock.layer addAnimation:openTransition forKey:@"labelPosition"];
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGPoint labelPosition = logoBlock.layer.position;
+            labelPosition.y += i % 2 == 0 ? -kClosedGap : kClosedGap;
+            logoBlock.layer.position = labelPosition;
+        } completion:^(BOOL finished) {
+            
+        }];
         i++;
     }
-    
-    [CATransaction commit];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

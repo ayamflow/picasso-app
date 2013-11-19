@@ -7,7 +7,8 @@
 //
 
 #import "SceneSlider.h"
-#import "Constants.h"
+#import "Colors.h"
+#import "Events.h"
 
 @interface SceneSlider ()
 

@@ -8,7 +8,7 @@
 
 #import "GameModel.h"
 #import "DataManager.h"
-#import "Constants.h"
+#import "Events.h"
 
 #define kSavePath @"PicassoSave.plist"
 #define kCurrentScene @"currentScene"

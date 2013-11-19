@@ -9,7 +9,8 @@
 #import "SceneChooser.h"
 #import "DataManager.h"
 #import "SceneManager.h"
-#import "Constants.h"
+#import "UIViewControllerPicasso.h"
+#import "Colors.h"
 #import "OrientationUtils.h"
 #import "OpacityTransition.h"
 #import "MenuButton.h"
@@ -69,10 +70,13 @@
 }
 
 - (void)initMenu {
-    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES andPosition:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2, self.menuButton.view.frame.size.height)];
+    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES];
     [self addChildViewController:self.menuButton];
     [self.view addSubview:self.menuButton.view];
     [self.view bringSubviewToFront:self.menuButton.view];
+    CGRect frame = self.menuButton.view.frame;
+    frame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2;
+    self.menuButton.view.frame = frame;
 }
 
 - (void)initButtons {

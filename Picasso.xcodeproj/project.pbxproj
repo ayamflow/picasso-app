@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F20B8DF182D34420035EEF1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F20B8DE182D34420035EEF1 /* Constants.m */; };
 		4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */; };
 		4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */; };
 		4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */; };
 		4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */; };
+		4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */; };
+		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
+		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
+		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
-		620409241833B92600105A03 /* TransitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 620409231833B92600105A03 /* TransitionUtil.m */; };
 		62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D4C1834E82300F9C26C /* homeBackground@2x.png */; };
 		62084D51183508C100F9C26C /* Logo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62084D50183508C100F9C26C /* Logo.m */; };
 		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
@@ -88,17 +90,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F20B8DD182D34420035EEF1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Modules/Utils/Constants.h; sourceTree = "<group>"; };
-		4F20B8DE182D34420035EEF1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Modules/Utils/Constants.m; sourceTree = "<group>"; };
 		4F20B8E1182D3D9A0035EEF1 /* exploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exploreButton@2x.png"; sourceTree = "<group>"; };
 		4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryButton@2x.png"; sourceTree = "<group>"; };
 		4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "museumButton@2x.png"; sourceTree = "<group>"; };
 		4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooserTitle@2x.png"; sourceTree = "<group>"; };
+		4F836D23183BD3EB00CA63CD /* UIViewControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewControllerPicasso.h; path = Modules/Utils/Categories/UIViewControllerPicasso.h; sourceTree = "<group>"; };
+		4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewControllerPicasso.m; path = Modules/Utils/Categories/UIViewControllerPicasso.m; sourceTree = "<group>"; };
+		4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINavigationControllerPicasso.h; path = Modules/Utils/Categories/UINavigationControllerPicasso.h; sourceTree = "<group>"; };
+		4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINavigationControllerPicasso.m; path = Modules/Utils/Categories/UINavigationControllerPicasso.m; sourceTree = "<group>"; };
+		4F836D30183BD4EA00CA63CD /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = Modules/Utils/Constants/Colors.h; sourceTree = "<group>"; };
+		4F836D31183BD4EA00CA63CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = Modules/Utils/Constants/Colors.m; sourceTree = "<group>"; };
+		4F836D32183BD4EA00CA63CD /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = Modules/Utils/Constants/Events.h; sourceTree = "<group>"; };
+		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
 		6204091D1833804B00105A03 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuButton.h; path = Modules/UI/Timeline/MenuButton.h; sourceTree = "<group>"; };
 		6204091E1833804B00105A03 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuButton.m; path = Modules/UI/Timeline/MenuButton.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
-		620409221833B92600105A03 /* TransitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionUtil.h; path = Modules/Utils/TransitionUtil.h; sourceTree = "<group>"; };
-		620409231833B92600105A03 /* TransitionUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransitionUtil.m; path = Modules/Utils/TransitionUtil.m; sourceTree = "<group>"; };
 		62084D4C1834E82300F9C26C /* homeBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "homeBackground@2x.png"; path = "Data/UI/homeBackground@2x.png"; sourceTree = "<group>"; };
 		62084D4F183508C100F9C26C /* Logo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logo.h; path = Modules/UI/Logo/Logo.h; sourceTree = "<group>"; };
 		62084D50183508C100F9C26C /* Logo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logo.m; path = Modules/UI/Logo/Logo.m; sourceTree = "<group>"; };
@@ -236,6 +242,28 @@
 			path = Data/UI/SceneChooser;
 			sourceTree = "<group>";
 		};
+		4F836D22183BD3D800CA63CD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4F836D23183BD3EB00CA63CD /* UIViewControllerPicasso.h */,
+				4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */,
+				4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */,
+				4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		4F836D29183BD47600CA63CD /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4F836D30183BD4EA00CA63CD /* Colors.h */,
+				4F836D31183BD4EA00CA63CD /* Colors.m */,
+				4F836D32183BD4EA00CA63CD /* Events.h */,
+				4F836D33183BD4EA00CA63CD /* Events.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		62084D4E183508A800F9C26C /* Logo */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,12 +308,10 @@
 		624B978C182120420087C576 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4F836D29183BD47600CA63CD /* Constants */,
+				4F836D22183BD3D800CA63CD /* Categories */,
 				624B978D182120580087C576 /* OrientationUtils.h */,
 				624B978E182120580087C576 /* OrientationUtils.m */,
-				4F20B8DD182D34420035EEF1 /* Constants.h */,
-				4F20B8DE182D34420035EEF1 /* Constants.m */,
-				620409221833B92600105A03 /* TransitionUtil.h */,
-				620409231833B92600105A03 /* TransitionUtil.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -697,6 +723,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
+				4F836D35183BD4EA00CA63CD /* Events.m in Sources */,
+				4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */,
 				6204091F1833804B00105A03 /* MenuButton.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
@@ -704,13 +732,12 @@
 				62084D51183508C100F9C26C /* Logo.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
+				4F836D34183BD4EA00CA63CD /* Colors.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
-				620409241833B92600105A03 /* TransitionUtil.m in Sources */,
-				4F20B8DF182D34420035EEF1 /* Constants.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
@@ -721,6 +748,7 @@
 				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
+				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
