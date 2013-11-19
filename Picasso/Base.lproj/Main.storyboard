@@ -154,7 +154,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="i8K-0P-76g" kind="custom" customClass="OpacityTransition" id="u02-ss-QSO"/>
+                                    <segue destination="i8K-0P-76g" kind="custom" customClass="HomeToExploreTransition" id="u02-ss-QSO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zdG-kb-XTA">

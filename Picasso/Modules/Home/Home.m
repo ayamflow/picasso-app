@@ -38,7 +38,7 @@
     [self hideNavigationBar];
     [self initLogo];
     [self initButtons];
-    [self startIntroTransition];
+//    [self startIntroTransition];
 }
 
 - (void)initLogo {
@@ -148,6 +148,8 @@
     float leftPosition = [OrientationUtils nativeDeviceSize].size.width / 2;
     float topIncrement = self.exploreButton.frame.size.height + 10.0;
 
+    NSLog(@"left/top: %f/%f", leftPosition, topPosition);
+    
     self.exploreButton.layer.position = CGPointMake(leftPosition, topPosition);
     self.galleryButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement / 2);
     self.museumButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement);

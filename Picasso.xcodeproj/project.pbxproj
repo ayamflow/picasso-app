@@ -15,6 +15,7 @@
 		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
 		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
+		4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */; };
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D4C1834E82300F9C26C /* homeBackground@2x.png */; };
@@ -102,6 +103,8 @@
 		4F836D31183BD4EA00CA63CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = Modules/Utils/Constants/Colors.m; sourceTree = "<group>"; };
 		4F836D32183BD4EA00CA63CD /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = Modules/Utils/Constants/Events.h; sourceTree = "<group>"; };
 		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
+		4F836D36183BD91D00CA63CD /* HomeToExploreTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeToExploreTransition.h; path = Modules/Transitions/HomeToExploreTransition.h; sourceTree = "<group>"; };
+		4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeToExploreTransition.m; path = Modules/Transitions/HomeToExploreTransition.m; sourceTree = "<group>"; };
 		6204091D1833804B00105A03 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuButton.h; path = Modules/UI/Timeline/MenuButton.h; sourceTree = "<group>"; };
 		6204091E1833804B00105A03 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuButton.m; path = Modules/UI/Timeline/MenuButton.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
@@ -550,6 +553,8 @@
 			children = (
 				CE2FBC50182E94C7004160FF /* OpacityTransition.h */,
 				CE2FBC51182E94C7004160FF /* OpacityTransition.m */,
+				4F836D36183BD91D00CA63CD /* HomeToExploreTransition.h */,
+				4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -740,6 +745,7 @@
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
+				4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,

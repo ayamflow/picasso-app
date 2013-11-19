@@ -62,8 +62,8 @@
     
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
     
-    [self.window.rootViewController.view addSubview:self.player.view];
-    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+//    [self.window.rootViewController.view addSubview:self.player.view];
+//    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
 }
 
 - (void)initMenuButton {
