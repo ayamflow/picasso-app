@@ -16,4 +16,7 @@
 + (NSString *)SceneUnlockedEvent;
 + (NSString *)MenuShownEvent;
 
++ (NSString *)TransitionInCompleteEvent;
++ (NSString *)TransitionOutCompleteEvent;
+
 @end

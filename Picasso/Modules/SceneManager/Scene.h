@@ -17,6 +17,10 @@
 @property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;
 
+@property (strong, nonatomic) UILabel *sceneTitle;
+@property (strong, nonatomic) UILabel *dateTitle;
+@property (strong, nonatomic) UIImageView *dateImageView;
+
 - (id)initWithModel:(SceneModel *)sceneModel;
 - (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position;
 - (void)stop;

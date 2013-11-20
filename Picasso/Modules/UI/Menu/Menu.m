@@ -12,6 +12,7 @@
 #import "Timeline.h"
 #import "DataManager.h"
 #import "SceneChooser.h"
+#import "UIViewPicasso.h"
 
 #define BUTTON_HEIGHT 30
 
@@ -22,6 +23,8 @@
 //@property (strong, nonatomic) Timeline *timeline;
 @property (strong, nonatomic) UIView *timeline;
 @property (strong, nonatomic) UIView *progressBar;
+
+@property (assign, nonatomic) BOOL orientationWasLandscape;
 
 @end
 
@@ -52,6 +55,50 @@
     [self.closeButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.backButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height - self.backButton.frame.size.height)];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        if(self.orientationWasLandscape) return;
+		[self updatePositionToLandscape];
+        self.orientationWasLandscape = YES;
+    }
+	else if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        [self updatePositionToPortrait];
+        self.orientationWasLandscape = NO;
+    }
+}
+
+- (void)updatePositionToPortrait {
+    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2;
+    float leftPosition = [OrientationUtils nativeDeviceSize].size.width / 2;
+    float topIncrement = self.exploreButton.frame.size.height + 10.0;
+    
+    [self.exploreButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition)];
+    [self.galleryButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement / 2)];
+    [self.museumButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement)];
+    [self.backButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement * 1.5)];
+    
+    [self.closeButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.closeButton.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height - self.closeButton.frame.size.height)];
+}
+
+- (void)updatePositionToLandscape {
+    float topPosition = [OrientationUtils nativeDeviceSize].size.height * 2 / 3;
+    float leftPosition = ([OrientationUtils nativeLandscapeDeviceSize].size.width / 2) - self.exploreButton.frame.size.width * 1.5 - 10.0;
+
+    [self.exploreButton moveTo:CGPointMake(leftPosition, topPosition)];
+    [self.galleryButton moveTo:CGPointMake(leftPosition + self.exploreButton.frame.size.width + 10.0, topPosition)];
+    [self.museumButton moveTo:CGPointMake(leftPosition + 2 * (self.exploreButton.frame.size.width + 10.0), topPosition)];
+    
+    [self.closeButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.closeButton.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height - self.closeButton.frame.size.height)];
 }
 
 /*- (void)initTimeline {

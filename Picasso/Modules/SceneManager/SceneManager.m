@@ -19,7 +19,6 @@
 @interface SceneManager ()
 
 @property (strong, nonatomic) Scene *oldScene;
-@property (strong, nonatomic) Scene *currentScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
 @property (assign, nonatomic) NSInteger scenesNumber;
 @property (strong, nonatomic) MenuButton *menuButton;

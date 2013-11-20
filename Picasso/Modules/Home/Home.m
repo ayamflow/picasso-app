@@ -38,7 +38,7 @@
     [self hideNavigationBar];
     [self initLogo];
     [self initButtons];
-    [self startIntroTransition];
+//    [self startIntroTransition];
 }
 
 - (void)initLogo {
@@ -60,6 +60,7 @@
     self.museumButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-bold" size:15.0];
     [self.museumButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 40.0, 0.0, 0.0)];
     
+    // Going to gallery or musem mode stops the video
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
 }

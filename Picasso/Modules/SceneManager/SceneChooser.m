@@ -110,9 +110,11 @@
 -(void)sceneButtonTouched:(id)sender {
     [[DataManager sharedInstance] getGameModel].currentScene = [sender tag];
 
-    SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
-    [self.navigationController pushViewController:sceneManager animated:NO];
+    [self performSegueWithIdentifier:@"SceneSegue" sender:self];
+    
+//    SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+//    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
+//    [self.navigationController pushViewController:sceneManager animated:NO];
 }
 
 - (void)didReceiveMemoryWarning

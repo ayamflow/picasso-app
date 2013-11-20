@@ -14,6 +14,8 @@
 #import "WorkViewController.h"
 #import "OpacityTransition.h"
 #import "SceneManager.h"
+#import "Colors.h"
+#import "UIViewPicasso.h"
 
 #define PLAYBACK_PERCENT_BEFORE_FADE 0.90
 
@@ -48,6 +50,9 @@
         NSURL *url = [NSURL fileURLWithPath:filePath];
         [self.playerView loadURL:url];
         
+        [self initTitle:self.model.title];
+        [self initDate:self.model.date];
+        
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
@@ -68,6 +73,39 @@
     
     return self;
 }
+
+- (void)initTitle:(NSString *)title {
+    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.sceneTitle.frame.size.height / 2 - 50;
+    self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 40.0)];
+    self.sceneTitle.text = [title uppercaseString];
+    [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
+    self.sceneTitle.textColor = [UIColor textColor];
+    self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15.0];
+    
+    self.sceneTitle.layer.borderColor = [UIColor textColor].CGColor;
+    self.sceneTitle.layer.borderWidth = 2.0;
+    
+    [self.sceneTitle moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.sceneTitle.frame.size.width / 2, topPosition)];
+    [self.view addSubview:self.sceneTitle];
+}
+
+- (void)initDate:(NSString *)date {
+    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.sceneTitle.frame.size.height / 2;
+    self.dateTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 45.0)];
+    self.dateTitle.text = date;
+    self.dateTitle.textColor = [UIColor textColor];
+    [self.dateTitle setTextAlignment:NSTextAlignmentCenter];
+    self.dateTitle.font = [UIFont fontWithName:@"Avenir" size:12.0];
+    
+    self.dateImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateTitleSign.png"]];
+
+    [self.dateImageView moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateImageView.frame.size.width / 2, topPosition + self.dateTitle.frame.size.height - 22)];
+    [self.dateTitle moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateTitle.frame.size.width / 2, topPosition + 20)];
+
+    [self.view addSubview:self.dateTitle];
+    [self.view addSubview:self.dateImageView];
+}
+
 
 - (void)initTrackers {
     NSString *path = [[NSBundle mainBundle] pathForResource: @"tracker-button" ofType: @"png"];

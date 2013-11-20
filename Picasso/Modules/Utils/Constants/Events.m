@@ -30,4 +30,12 @@
     return @"menuShown";
 }
 
++ (NSString *)TransitionInCompleteEvent {
+    return @"transitionInComplete";
+}
+
++ (NSString *)TransitionOutCompleteEvent {
+    return @"transitionOutComplete";
+}
+
 @end

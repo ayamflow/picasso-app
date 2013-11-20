@@ -15,6 +15,7 @@
 		4F34E974183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E971183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m */; };
 		4F34E975183CD26900661A68 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E972183CD26900661A68 /* easing.c */; };
 		4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E977183CE42B00661A68 /* UIViewPicasso.m */; };
+		4F34E97B183D1A4D00661A68 /* ExploreToSceneTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */; };
 		4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */; };
 		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
@@ -107,6 +108,8 @@
 		4F34E973183CD26900661A68 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
 		4F34E976183CE42B00661A68 /* UIViewPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewPicasso.h; path = Modules/Utils/Categories/UIViewPicasso.h; sourceTree = "<group>"; };
 		4F34E977183CE42B00661A68 /* UIViewPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewPicasso.m; path = Modules/Utils/Categories/UIViewPicasso.m; sourceTree = "<group>"; };
+		4F34E979183D1A4D00661A68 /* ExploreToSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExploreToSceneTransition.h; path = Modules/Transitions/ExploreToSceneTransition.h; sourceTree = "<group>"; };
+		4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExploreToSceneTransition.m; path = Modules/Transitions/ExploreToSceneTransition.m; sourceTree = "<group>"; };
 		4F836D23183BD3EB00CA63CD /* UIViewControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewControllerPicasso.h; path = Modules/Utils/Categories/UIViewControllerPicasso.h; sourceTree = "<group>"; };
 		4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewControllerPicasso.m; path = Modules/Utils/Categories/UIViewControllerPicasso.m; sourceTree = "<group>"; };
 		4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINavigationControllerPicasso.h; path = Modules/Utils/Categories/UINavigationControllerPicasso.h; sourceTree = "<group>"; };
@@ -599,6 +602,8 @@
 				CE2FBC51182E94C7004160FF /* OpacityTransition.m */,
 				4F836D36183BD91D00CA63CD /* HomeToExploreTransition.h */,
 				4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */,
+				4F34E979183D1A4D00661A68 /* ExploreToSceneTransition.h */,
+				4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
+				4F34E97B183D1A4D00661A68 /* ExploreToSceneTransition.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
