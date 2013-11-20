@@ -11,6 +11,7 @@
 #import "OrientationUtils.h"
 #import "Logo.h"
 #import "UIViewControllerPicasso.h"
+#import "UIViewPicasso.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 40
@@ -19,7 +20,6 @@
 
 @interface Home ()
 
-@property (strong, nonatomic) Logo *logo;
 @property (assign, nonatomic) BOOL orientationWasLandscape;
 @property (assign, nonatomic) BOOL transitionCompleted;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -38,7 +38,7 @@
     [self hideNavigationBar];
     [self initLogo];
     [self initButtons];
-//    [self startIntroTransition];
+    [self startIntroTransition];
 }
 
 - (void)initLogo {
@@ -130,7 +130,7 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
+    
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
         if(self.orientationWasLandscape) return;
 		[self updatePositionToLandscape];
@@ -143,51 +143,40 @@
 }
 
 - (void)updatePositionToPortrait {
-    NSLog(@"toPortrait, logo:%fx%f", self.logo.view.frame.size.width, self.logo.view.frame.size.height);
-    float topPosition = [OrientationUtils nativeDeviceSize].size.height / 2  - self.exploreButton.frame.size.height / 2;
+    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2;
     float leftPosition = [OrientationUtils nativeDeviceSize].size.width / 2;
     float topIncrement = self.exploreButton.frame.size.height + 10.0;
-
-    NSLog(@"left/top: %f/%f", leftPosition, topPosition);
     
-    self.exploreButton.layer.position = CGPointMake(leftPosition, topPosition);
-    self.galleryButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement / 2);
-    self.museumButton.layer.position = CGPointMake(leftPosition, topPosition + topIncrement);
+    [self.exploreButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition)];
+    [self.galleryButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement / 2)];
+    [self.museumButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement)];
 
     self.backgroundImage.frame = [OrientationUtils nativeDeviceSize];
 
-    CGRect logoFrame = self.logo.view.frame;
-    logoFrame.origin.x = [OrientationUtils nativeDeviceSize].size.width / 2 - logoFrame.size.width / 2;
     if(self.transitionCompleted) {
-        logoFrame.origin.y = [OrientationUtils nativeDeviceSize].size.height / 2 - logoFrame.size.height + kLogoPositionVariant;
+        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant * 2)];
     }
     else {
-        logoFrame.origin.y = [OrientationUtils nativeDeviceSize].size.height / 2 - logoFrame.size.height;
+        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant)];
     }
-    self.logo.view.frame = logoFrame;
-    NSLog(@"toPortrait, logo:%fx%f", logoFrame.origin.x, logoFrame.origin.y);
 }
 
 - (void)updatePositionToLandscape {
-    NSLog(@"toLandscape, logo:%fx%f", self.logo.view.frame.size.width, self.logo.view.frame.size.height);
-    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2  - self.exploreButton.frame.size.height / 2;
-    float leftPosition = ([OrientationUtils nativeLandscapeDeviceSize].size.width / 2) - self.exploreButton.frame.size.width - 10.0;
-    self.exploreButton.layer.position = CGPointMake(leftPosition, topPosition);
-    self.galleryButton.layer.position = CGPointMake(self.exploreButton.layer.position.x + self.exploreButton.frame.size.width + 10.0, topPosition);
-    self.museumButton.layer.position = CGPointMake(self.galleryButton.layer.position.x + self.galleryButton.frame.size.width + 10.0, topPosition);
+    float topPosition = [OrientationUtils nativeDeviceSize].size.height * 2 / 3;
+    float leftPosition = ([OrientationUtils nativeLandscapeDeviceSize].size.width / 2) - self.exploreButton.frame.size.width * 1.5 - 10.0;
+    
+    [self.exploreButton moveTo:CGPointMake(leftPosition, topPosition)];
+    [self.galleryButton moveTo:CGPointMake(leftPosition + self.exploreButton.frame.size.width + 10.0, topPosition)];
+    [self.museumButton moveTo:CGPointMake(leftPosition + 2 * (self.exploreButton.frame.size.width + 10.0), topPosition)];
 
     self.backgroundImage.frame = [OrientationUtils nativeLandscapeDeviceSize];
 
-    CGRect logoFrame = self.logo.view.frame;
-    logoFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - logoFrame.size.width / 2;
     if(self.transitionCompleted) {
-        logoFrame.origin.y = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - logoFrame.size.height - kLogoPositionVariant;
+        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant)];
     }
     else {
-        logoFrame.origin.y = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - logoFrame.size.height;
+        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2)];
     }
-    self.logo.view.frame = logoFrame;
-    NSLog(@"toLandscape, logo:%fx%f", logoFrame.origin.x, logoFrame.origin.y);
 }
 
 - (void)stopVideo:(id)sender {

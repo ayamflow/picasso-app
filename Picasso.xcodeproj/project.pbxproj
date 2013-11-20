@@ -11,6 +11,10 @@
 		4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */; };
 		4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */; };
 		4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */; };
+		4F34E96E183CD1D900661A68 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E96D183CD1D900661A68 /* UIView+EasingFunctions.m */; };
+		4F34E974183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E971183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m */; };
+		4F34E975183CD26900661A68 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E972183CD26900661A68 /* easing.c */; };
+		4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E977183CE42B00661A68 /* UIViewPicasso.m */; };
 		4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */; };
 		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
@@ -95,6 +99,14 @@
 		4F20B8E2182D3D9A0035EEF1 /* galleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryButton@2x.png"; sourceTree = "<group>"; };
 		4F20B8E4182D3D9A0035EEF1 /* museumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "museumButton@2x.png"; sourceTree = "<group>"; };
 		4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooserTitle@2x.png"; sourceTree = "<group>"; };
+		4F34E96C183CD1D900661A68 /* UIView+EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasingFunctions.h"; sourceTree = "<group>"; };
+		4F34E96D183CD1D900661A68 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasingFunctions.m"; sourceTree = "<group>"; };
+		4F34E970183CD26900661A68 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
+		4F34E971183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
+		4F34E972183CD26900661A68 /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easing.c; sourceTree = "<group>"; };
+		4F34E973183CD26900661A68 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
+		4F34E976183CE42B00661A68 /* UIViewPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewPicasso.h; path = Modules/Utils/Categories/UIViewPicasso.h; sourceTree = "<group>"; };
+		4F34E977183CE42B00661A68 /* UIViewPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewPicasso.m; path = Modules/Utils/Categories/UIViewPicasso.m; sourceTree = "<group>"; };
 		4F836D23183BD3EB00CA63CD /* UIViewControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewControllerPicasso.h; path = Modules/Utils/Categories/UIViewControllerPicasso.h; sourceTree = "<group>"; };
 		4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewControllerPicasso.m; path = Modules/Utils/Categories/UIViewControllerPicasso.m; sourceTree = "<group>"; };
 		4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINavigationControllerPicasso.h; path = Modules/Utils/Categories/UINavigationControllerPicasso.h; sourceTree = "<group>"; };
@@ -245,6 +257,35 @@
 			path = Data/UI/SceneChooser;
 			sourceTree = "<group>";
 		};
+		4F34E958183CC79100661A68 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				4F34E96F183CD26900661A68 /* AHEasing */,
+				4F34E96B183CD1D900661A68 /* UIView+EasingFunctions */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		4F34E96B183CD1D900661A68 /* UIView+EasingFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				4F34E96C183CD1D900661A68 /* UIView+EasingFunctions.h */,
+				4F34E96D183CD1D900661A68 /* UIView+EasingFunctions.m */,
+			);
+			path = "UIView+EasingFunctions";
+			sourceTree = "<group>";
+		};
+		4F34E96F183CD26900661A68 /* AHEasing */ = {
+			isa = PBXGroup;
+			children = (
+				4F34E970183CD26900661A68 /* CAKeyframeAnimation+AHEasing.h */,
+				4F34E971183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m */,
+				4F34E972183CD26900661A68 /* easing.c */,
+				4F34E973183CD26900661A68 /* easing.h */,
+			);
+			path = AHEasing;
+			sourceTree = "<group>";
+		};
 		4F836D22183BD3D800CA63CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +293,8 @@
 				4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */,
 				4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */,
 				4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */,
+				4F34E976183CE42B00661A68 /* UIViewPicasso.h */,
+				4F34E977183CE42B00661A68 /* UIViewPicasso.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -354,6 +397,7 @@
 		624E6AFA181E5FD300E7FE58 /* Picasso */ = {
 			isa = PBXGroup;
 			children = (
+				4F34E958183CC79100661A68 /* Libs */,
 				624E6B5A181E9F4C00E7FE58 /* Models */,
 				624E6B4F181E9AB100E7FE58 /* Data */,
 				624E6B56181E9ECF00E7FE58 /* DataManager */,
@@ -733,11 +777,13 @@
 				6204091F1833804B00105A03 /* MenuButton.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
+				4F34E974183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				62084D51183508C100F9C26C /* Logo.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				4F836D34183BD4EA00CA63CD /* Colors.m in Sources */,
+				4F34E96E183CD1D900661A68 /* UIView+EasingFunctions.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
@@ -746,7 +792,9 @@
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */,
+				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
+				4F34E975183CD26900661A68 /* easing.c in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Logo.h"
 
 @interface Home : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *exploreButton;
 @property (weak, nonatomic) IBOutlet UIButton *galleryButton;
 @property (weak, nonatomic) IBOutlet UIButton *museumButton;
+@property (strong, nonatomic) Logo *logo;
 
 @end

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleImage;
+@property (strong, nonatomic) NSArray *sceneButtons;
 
 @end

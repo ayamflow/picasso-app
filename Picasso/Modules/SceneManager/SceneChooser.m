@@ -17,7 +17,6 @@
 
 @interface SceneChooser ()
 
-@property (strong, nonatomic) NSArray *sceneButtons;
 @property (strong, nonatomic) MenuButton *menuButton;
 
 @end
@@ -32,11 +31,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
