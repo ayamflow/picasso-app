@@ -42,8 +42,10 @@
 }
 
 - (void)showMenu {
+    NSLog(@"[MenuButton] showMenu");
     [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuShownEvent] object:self];
-    [self.parentViewController showMenuWithExploreMode:self.wasExploreMode andSceneMode:self.wasSceneMode];
+    [self.parentViewController showMenuWithOrientation:self.parentViewController.interfaceOrientation andExploreMode:self.wasExploreMode andSceneMode:self.wasSceneMode];
+//    [self.parentViewController showMenuWithExploreMode:self.wasExploreMode andSceneMode:self.wasSceneMode];
 }
 
 @end

@@ -18,5 +18,6 @@
 
 @property (assign, nonatomic) BOOL wasInExploreMode;
 @property (assign, nonatomic) BOOL wasInSceneMode;
+@property (assign, nonatomic) UIInterfaceOrientation previousOrientation;
 
 @end

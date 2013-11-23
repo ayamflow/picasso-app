@@ -13,6 +13,7 @@
 - (void)hideNavigationBar;
 - (void)showNavigationBar;
 - (void)rotateToLandscapeOrientation;
-- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
+//- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
+- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
 
 @end

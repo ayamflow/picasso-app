@@ -19,19 +19,13 @@
 
 @property (strong, nonatomic) MenuButton *menuButton;
 
+// Transitions
+@property (assign, nonatomic) NSInteger transitionsDone;
+@property (assign, nonatomic) NSInteger transitionsNumber;
+
 @end
 
 @implementation SceneChooser
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    NSLog(@"init with nib name");
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
@@ -46,6 +40,73 @@
     [self initTitle];
     [self initButtons];
     [self initMenu];
+
+    [self transitionIn];
+}
+
+- (void)transitionIn {
+
+    self.transitionsDone = 0;
+    self.transitionsNumber = 0;
+
+    NSTimeInterval inDuration = 1;
+
+    for(int i = 0; i < [self.sceneButtons count]; i++) {
+        [self translateElementIn:[self.sceneButtons objectAtIndex:i] at:i * 0.02 withDuration:inDuration];
+    }
+
+    [self translateElementIn:self.titleImage at:0.2 withDuration:inDuration];
+    [self translateElementIn:self.titleLabel at:0.25 withDuration:inDuration];
+}
+
+- (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    self.transitionsNumber++;
+    view.layer.position = CGPointMake(view.layer.position.x + screenSize.size.width, view.layer.position.y);
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
+    } completion:^(BOOL finished) {
+        [self transitionInComplete];
+    }];
+}
+
+- (void)transitionInComplete {
+    if(++self.transitionsDone == self.transitionsNumber) {
+        NSLog(@"TransitionIn Complete");
+    }
+}
+
+- (void)transitionOut {
+
+    self.transitionsDone = 0;
+    self.transitionsNumber = 0;
+
+    NSTimeInterval transitionDuration = 1;
+
+    for(int i = 0; i < [self.sceneButtons count]; i++) {
+        [self translateElementOut:[self.sceneButtons objectAtIndex:i] at:i * 0.02 withDuration:transitionDuration];
+    }
+
+    [self translateElementOut:self.titleImage at:0.2 withDuration:transitionDuration];
+    [self translateElementOut:self.titleLabel at:0.25 withDuration:transitionDuration];
+}
+
+- (void)translateElementOut:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    self.transitionsNumber++;
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
+    } completion:^(BOOL finished) {
+        [self transitionOutComplete];
+    }];
+}
+
+- (void)transitionOutComplete {
+    if(++self.transitionsDone == self.transitionsNumber) {
+        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+        [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
+        [self.navigationController pushViewController:sceneManager animated:NO];
+    }
 }
 
 - (void)initTitle {
@@ -109,12 +170,7 @@
 
 -(void)sceneButtonTouched:(id)sender {
     [[DataManager sharedInstance] getGameModel].currentScene = [sender tag];
-
-    [self performSegueWithIdentifier:@"SceneSegue" sender:self];
-    
-//    SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-//    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
-//    [self.navigationController pushViewController:sceneManager animated:NO];
+    [self transitionOut];
 }
 
 - (void)didReceiveMemoryWarning

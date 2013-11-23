@@ -62,14 +62,14 @@
 - (void)transitionIn {
     UIViewController *sourceViewController = (UIViewController*)[self sourceViewController];
     UIViewController *destinationController = (UIViewController*)[self destinationViewController];
-    Scene *sceneView = ((Scene *)((SceneManager *)destinationController).currentScene);
-    
+//    Scene *sceneView = ((Scene *)((SceneManager *)destinationController).currentScene);
+
     [sourceViewController.view addSubview:destinationController.view];
     
-    [self translateElementIn:sceneView.dateImageView at:0 withDuration:1];
-    [self translateElementIn:sceneView.dateTitle at:0 withDuration:1];
-    [self translateElementIn:sceneView.sceneTitle at:0.2 withDuration:1];
-    
+//    [self translateElementIn:sceneView.dateImageView at:0 withDuration:1];
+//    [self translateElementIn:sceneView.dateTitle at:0 withDuration:1];
+//    [self translateElementIn:sceneView.sceneTitle at:0.2 withDuration:1];
+
 //    UILabel *sceneTitle;
 //    UILabel *dateTitle;
 //    UIImageView *dateImageView;

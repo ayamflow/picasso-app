@@ -66,9 +66,6 @@
     UIViewController *sourceViewController = (UIViewController*)[self sourceViewController];
     UIViewController *destinationController = (UIViewController*)[self destinationViewController];
     SceneChooser *sceneView = ((SceneChooser *)destinationController);
-
-    // Add & position the dest view
-    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
     
     [sourceViewController.view addSubview:destinationController.view];
     
@@ -88,7 +85,7 @@
 - (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
     CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
     view.layer.position = CGPointMake(view.layer.position.x + screenSize.size.width, view.layer.position.y);
-    [UIView animateWithDuration:duration delay:startTime options:nil animations:^{
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseInOut animations:^{
 //        [view setEasingFunction:ElasticEaseInOut forKeyPath:@"view"];
         view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
     } completion:^(BOOL finished) {

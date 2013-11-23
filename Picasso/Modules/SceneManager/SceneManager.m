@@ -68,8 +68,10 @@
 }
 
 - (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
+    NSLog(@"showMenu");
     [self.currentScene stop];
-    [super showMenuWithExploreMode:YES andSceneMode:YES];
+    [self showMenuWithOrientation:self.interfaceOrientation andExploreMode:YES andSceneMode:YES];
+//    [super showMenuWithExploreMode:YES andSceneMode:YES];
 }
 
 - (void)showSceneWithNumber:(NSInteger)number {

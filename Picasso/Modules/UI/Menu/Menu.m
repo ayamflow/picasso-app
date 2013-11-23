@@ -23,6 +23,7 @@
 //@property (strong, nonatomic) Timeline *timeline;
 @property (strong, nonatomic) UIView *timeline;
 @property (strong, nonatomic) UIView *progressBar;
+@property (strong, nonatomic) UIView *overlay;
 
 @property (assign, nonatomic) BOOL orientationWasLandscape;
 
@@ -37,10 +38,21 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     self.textColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0];
-    
+
+    [self initOverlay];
     [self initLogo];
     [self initButtons];
 //    [self initTimeline];
+
+     [self transitionIn];
+}
+
+- (void)initOverlay {
+    CGRect overlayFrame = UIInterfaceOrientationIsLandscape(self.previousOrientation) ? [OrientationUtils nativeLandscapeDeviceSize] : [OrientationUtils nativeDeviceSize];
+    self.overlay = [[UIView alloc] initWithFrame:overlayFrame];
+    self.overlay.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.7];
+    [self.view addSubview:self.overlay];
+    [self.view sendSubviewToBack:self.overlay];
 }
 
 - (void)initLogo {
@@ -57,6 +69,10 @@
     [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
     
     [self.backButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height - self.backButton.frame.size.height)];
+}
+
+- (void)transitionIn {
+
 }
 
 - (NSUInteger)supportedInterfaceOrientations {

@@ -27,6 +27,13 @@
 @property (strong, nonatomic) id playerUpdatesObserver;
 @property (assign, nonatomic) BOOL hasEnded;
 
+@property (strong, nonatomic) UILabel *sceneTitle;
+@property (strong, nonatomic) UILabel *dateTitle;
+@property (strong, nonatomic) UIImageView *dateImageView;
+
+@property (assign, nonatomic) NSInteger transitionsDone;
+@property (assign, nonatomic) NSInteger transitionsNumber;
+
 @end
 
 @implementation Scene
@@ -55,10 +62,10 @@
         
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
+        [self transitionIn];
 
         NSLog(@"[Scene #%li] Started", (long)self.model.number);
         self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
-
         [self resume]; // seekToTime + enableMotion
     }
     return self;
@@ -106,6 +113,36 @@
     [self.view addSubview:self.dateImageView];
 }
 
+- (void)transitionIn {
+    [self translateElementIn:self.dateImageView at:0 withDuration:1];
+    [self translateElementIn:self.dateTitle at:0 withDuration:1];
+    [self translateElementIn:self.sceneTitle at:0.05 withDuration:1];
+}
+
+- (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    self.transitionsNumber++;
+    view.layer.position = CGPointMake(view.layer.position.x + screenSize.size.width, view.layer.position.y);
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseOut animations:^{
+        view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
+    } completion:^(BOOL finished) {
+        [self transitionInComplete];
+    }];
+}
+
+- (void)transitionInComplete {
+    if(++self.transitionsDone == self.transitionsNumber) {
+        [UIView animateWithDuration:4 animations:^{
+         	self.sceneTitle.alpha = 0;
+	         self.dateImageView.alpha = 0;
+    	     self.dateTitle.alpha = 0;
+         } completion:^(BOOL finished) {
+        	 [self.sceneTitle removeFromSuperview];
+	         [self.dateImageView removeFromSuperview];
+    	     [self.dateTitle removeFromSuperview];
+         }];
+    }
+}
 
 - (void)initTrackers {
     NSString *path = [[NSBundle mainBundle] pathForResource: @"tracker-button" ofType: @"png"];
@@ -139,7 +176,7 @@
 }
 
 - (void)trackerTouched:(id)sender {
-    NSLog(@"[Scene #%i] Touched tracker with workId %i", self.model.number, [sender tag]);
+    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
     [self stop];
     WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
     NSLog(@"workView: %@", workView);

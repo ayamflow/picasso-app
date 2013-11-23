@@ -12,6 +12,7 @@
 #import "Logo.h"
 #import "UIViewControllerPicasso.h"
 #import "UIViewPicasso.h"
+#import "SceneChooser.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 40
@@ -23,6 +24,10 @@
 @property (assign, nonatomic) BOOL orientationWasLandscape;
 @property (assign, nonatomic) BOOL transitionCompleted;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
+
+// Transitions
+@property (assign, nonatomic) NSInteger transitionOutNumber;
+@property (assign, nonatomic) NSInteger transitionOutDone;
 
 @end
 
@@ -61,6 +66,7 @@
     [self.museumButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 40.0, 0.0, 0.0)];
     
     // Going to gallery or musem mode stops the video
+    [self.exploreButton addTarget:self action:@selector(transitionOutToExplore) forControlEvents:UIControlEventTouchUpInside];
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -122,6 +128,36 @@
             self.transitionCompleted = YES;
         }];
         i++;
+    }
+}
+
+- (void)transitionOutToExplore {
+    [self rotateToLandscapeOrientation];
+
+    NSTimeInterval outDuration = 1;
+    self.transitionOutDone = 0;
+    self.transitionOutNumber = 0;
+
+    [self translateElementOut:self.exploreButton at:0 withDuration: outDuration];
+    [self translateElementOut:self.logo.view at:0.1 withDuration:outDuration];
+    [self translateElementOut:self.galleryButton at:0.05 withDuration:outDuration];
+    [self translateElementOut:self.museumButton at:0.1 withDuration:outDuration];
+}
+
+- (void)translateElementOut:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
+	self.transitionOutNumber++;
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionTransitionNone animations:^{
+        view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
+    } completion:^(BOOL finished) {
+        [self transitionOutComplete];
+    }];
+}
+
+- (void)transitionOutComplete {
+    if(++self.transitionOutDone == self.transitionOutNumber) {
+        SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+        [self.navigationController pushViewController:sceneChooser animated:NO];
     }
 }
 

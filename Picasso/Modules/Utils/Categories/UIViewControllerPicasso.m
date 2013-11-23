@@ -20,19 +20,26 @@
 }
 
 - (void)rotateToLandscapeOrientation {
+//    [self willRotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft duration:0]; // Cleaner rotate
     UIViewController* forcePortrait = [[UIViewController alloc] init];
     [self presentViewController:forcePortrait animated:NO completion:^{
         [forcePortrait dismissViewControllerAnimated:NO completion:nil];
     }];
 }
 
-- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
-    //    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+/*- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
     Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
     menu.wasInExploreMode = isExploreMode;
     menu.wasInSceneMode = isSceneMode;
     [self.navigationController pushViewController:menu animated:YES];
-    //    [self.navigationController presentViewController:menu animated:YES completion:nil];
+}*/
+
+- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode {
+    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    menu.wasInExploreMode = isExploreMode;
+    menu.wasInSceneMode = isSceneMode;
+    menu.previousOrientation = orientation;
+    [self.navigationController pushViewController:menu animated:YES];
 }
 
 @end
