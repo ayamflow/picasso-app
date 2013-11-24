@@ -7,7 +7,7 @@
 //
 
 #import "UIViewControllerPicasso.h"
-#import "Menu.h"
+#import "MenuLandscape.h"
 
 @implementation UIViewController (Picasso)
 
@@ -31,15 +31,25 @@
     Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
     menu.wasInExploreMode = isExploreMode;
     menu.wasInSceneMode = isSceneMode;
-    [self.navigationController pushViewController:menu animated:YES];
+    [self.navigationController pushViewController:menu animated:NO];
 }*/
 
 - (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode {
-    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    MenuLandscape *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
     menu.wasInExploreMode = isExploreMode;
     menu.wasInSceneMode = isSceneMode;
     menu.previousOrientation = orientation;
-    [self.navigationController pushViewController:menu animated:YES];
+    [self.navigationController pushViewController:menu animated:NO];
 }
+
+- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andLayer:(CALayer *)screen andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode {
+    MenuLandscape *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    menu.wasInExploreMode = isExploreMode;
+    menu.wasInSceneMode = isSceneMode;
+    menu.previousOrientation = orientation;
+    menu.screenLayer = screen;
+    [self.navigationController pushViewController:menu animated:NO];
+}
+
 
 @end

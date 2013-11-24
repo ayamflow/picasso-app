@@ -7,7 +7,7 @@
 //
 
 #import "SceneManager.h"
-#import "Menu.h"
+#import "MenuLandscape.h"
 #import "OrientationUtils.h"
 #import "Timeline.h"
 #import "DataManager.h"
@@ -16,7 +16,7 @@
 
 #define BUTTON_HEIGHT 30
 
-@interface Menu ()
+@interface MenuLandscape ()
 
 @property (strong, nonatomic) UIImageView *logo;
 @property (strong, nonatomic) UIColor *textColor;
@@ -27,9 +27,13 @@
 
 @property (assign, nonatomic) BOOL orientationWasLandscape;
 
+// Transitions
+@property (assign, nonatomic) NSInteger transitionsNumber;
+@property (assign, nonatomic) NSInteger transitionsDone;
+
 @end
 
-@implementation Menu
+@implementation MenuLandscape
 
 - (void)viewDidLoad
 {
@@ -39,12 +43,12 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.textColor = [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1.0];
 
-    [self initOverlay];
-    [self initLogo];
-    [self initButtons];
+//    [self initOverlay];
+//    [self initLogo];
+//    [self initButtons];
 //    [self initTimeline];
 
-     [self transitionIn];
+//     [self transitionIn];
 }
 
 - (void)initOverlay {
@@ -67,12 +71,52 @@
     [self.closeButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(navigateToExploreMode) forControlEvents:UIControlEventTouchUpInside];
-    
+
     [self.backButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height - self.backButton.frame.size.height)];
 }
 
 - (void)transitionIn {
+    float height = UIInterfaceOrientationIsLandscape(self.previousOrientation) ? [OrientationUtils nativeLandscapeDeviceSize].size.height : [OrientationUtils nativeDeviceSize].size.height;
 
+    self.overlay.alpha = 0;
+    [self.exploreButton moveTo:CGPointMake(self.exploreButton.frame.origin.x, self.exploreButton.frame.origin.y - height)];
+    [self.galleryButton moveTo:CGPointMake(self.galleryButton.frame.origin.x, self.galleryButton.frame.origin.y - height)];
+    [self.museumButton moveTo:CGPointMake(self.museumButton.frame.origin.x, self.museumButton.frame.origin.y - height)];
+
+    [self transitionInOverlay];
+    [self transitionInButtons];
+}
+
+- (void)transitionInOverlay {
+	[UIView animateWithDuration:1 animations:^{
+        self.overlay.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)transitionInButtons {
+	[self translateElementIn:self.exploreButton at:0 withDuration:1];
+	[self translateElementIn:self.galleryButton at:0.05 withDuration:1];
+    [self translateElementIn:self.museumButton at:0.1 withDuration:1];
+}
+
+- (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
+    CGRect screenSize = UIInterfaceOrientationIsLandscape(self.previousOrientation) ? [OrientationUtils nativeLandscapeDeviceSize] : [OrientationUtils nativeDeviceSize];
+
+    self.transitionsNumber++;
+    view.layer.position = CGPointMake(view.layer.position.x, view.layer.position.y - screenSize.size.height);
+    [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view.layer.position = CGPointMake(view.layer.position.x, view.layer.position.y  + screenSize.size.height);
+    } completion:^(BOOL finished) {
+        [self transitionInComplete];
+    }];
+}
+
+- (void)transitionInComplete {
+    if(++self.transitionsDone == self.transitionsNumber) {
+	    NSLog(@"transitionInComplete");
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -156,10 +200,10 @@
 - (void)hideMenu {
     if(self.wasInExploreMode && self.wasInSceneMode) {
         SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-        [self.navigationController pushViewController:sceneManager animated:YES];
+        [self.navigationController pushViewController:sceneManager animated:NO];
     }
     else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 

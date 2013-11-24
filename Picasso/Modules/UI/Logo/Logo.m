@@ -30,7 +30,6 @@
     [super viewDidLoad];
     [self initLogo];
     self.view.frame = CGRectMake(0, 0, 4 * self.five.frame.size.width - 3 * kBorderWidth, self.five.frame.size.height + kOpenedGap * 2);
-//    self.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |  UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     self.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 }
 
