@@ -1,5 +1,5 @@
 //
-//  ScenePreview.h
+//  SceneTimeline.h
 //  Picasso
 //
 //  Created by MOREL Florian on 25/11/13.
@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SceneModel.h"
 
-@interface ScenePreview : UIViewController
-
-@property (assign, nonatomic) float previewWidth;
+@interface SceneTimeline : UIViewController
 
 - (id)initWithModel:(SceneModel *)model;
-- (void)resetButtonColor;
+- (void)updateWithCompletion:(float)completion;
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SceneChooser : UIViewController
+@interface SceneChooser : UIViewController <UIGestureRecognizerDelegate>
 
 @end

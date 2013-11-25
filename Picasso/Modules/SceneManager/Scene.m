@@ -12,12 +12,12 @@
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
 #import "WorkViewController.h"
-#import "OpacityTransition.h"
 #import "SceneManager.h"
 #import "Colors.h"
 #import "UIViewPicasso.h"
+#import "SceneTimeline.h"
 
-#define PLAYBACK_PERCENT_BEFORE_FADE 0.90
+#define kPlaybackFadePercent 0.90
 
 @interface Scene ()
 
@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UILabel *sceneTitle;
 @property (strong, nonatomic) UILabel *dateTitle;
 @property (strong, nonatomic) UIImageView *dateImageView;
+@property (strong, nonatomic) SceneTimeline *timeline;
 
 @property (assign, nonatomic) NSInteger transitionsDone;
 @property (assign, nonatomic) NSInteger transitionsNumber;
@@ -62,6 +63,9 @@
         
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
+        
+        [self initTimeline];
+        
         [self transitionIn];
 
         NSLog(@"[Scene #%li] Started", (long)self.model.number);
@@ -79,6 +83,17 @@
     }
     
     return self;
+}
+
+- (void)initTimeline {
+    self.timeline = [[SceneTimeline alloc] initWithModel:self.model];
+    [self.view addSubview:self.timeline.view];
+    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
+    
+    CGSize screenSize = [OrientationUtils nativeLandscapeDeviceSize].size;
+    float timelineWidth = screenSize.width * 0.8;
+    self.timeline.view.frame = CGRectMake((screenSize.width - timelineWidth) / 2, screenSize.height - 90, screenSize.width, 90);
+//    self.timeline.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)initTitle:(NSString *)title {
@@ -182,7 +197,6 @@
     NSLog(@"workView: %@", workView);
     NSLog(@"parentVC: %@", self.parentViewController);
     workView.workId = [sender tag];
-    [self.navigationController.view.layer addAnimation:[OpacityTransition getOpacityTransition] forKey:kCATransition];
     [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];
 }
 
@@ -197,9 +211,10 @@
 - (void)listenForVideoEnded {
     self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
     if(!self.hasEnded) {
-	    if(self.completion > PLAYBACK_PERCENT_BEFORE_FADE) {
+        [self.timeline updateWithCompletion:self.completion];
+	    if(self.completion > kPlaybackFadePercent) {
     	    // fade to black proportionaly
-    	    self.view.alpha = 1.0 - (self.completion - PLAYBACK_PERCENT_BEFORE_FADE) * 5; // -10% opacity * factor
+    	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 5; // -10% opacity * factor
    	 }
    	 if(self.completion > 1.0) {
          self.hasEnded = YES;

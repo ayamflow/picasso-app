@@ -11,13 +11,15 @@
 #import "OrientationUtils.h"
 #import "Colors.h"
 #import "UIViewPicasso.h"
+#import "DataManager.h"
+#import "SceneManager.h"
 
 #define kWidthFactor 0.56
 
 @interface ScenePreview ()
 
 @property (strong, nonatomic) SceneModel *model;
-@property (assign, nonatomic) float previewWidth;
+@property (strong, nonatomic) UIButton *exploreButton;
 
 @end
 
@@ -26,7 +28,6 @@
 - (id)initWithModel:(SceneModel *)model {
     if(self = [super init]) {
         self.model = model;
-        self.sceneNumber = self.model.number;
     }
     return self;
 }
@@ -35,28 +36,30 @@
 {
     [super viewDidLoad];
     
-    [self initBackground];
+//    [self initBackground];
     [self initChapterTitle];
-    [self initNavArrows];
+//    [self initNavArrows];
     [self initTitle];
     [self initDate];
-    [self initButton];
+//    [self initButton];
 }
 
 - (void)initBackground {
     CGSize screenSize = [OrientationUtils nativeLandscapeDeviceSize].size;
     self.previewWidth = screenSize.width * kWidthFactor;
-    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth, screenSize.height)];
-    background.backgroundColor = [UIColor textColor];
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circleButton.png"]];
     [self.view addSubview:background];
+    
+    UIImageView *scenePreview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"scene-%li.png", self.model.number + 1]]];
+//    [self.view addSubview:scenePreview];
+    [scenePreview moveTo:CGPointMake(0, background.frame.size.height - scenePreview.frame.size.height + 20)];
 }
 
 - (void)initChapterTitle {
-    NSLog(@"initChapterTitle");
     UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.8, 50)];
     chapterLabel.text = [@"chapitre" uppercaseString];
     chapterLabel.textColor = [UIColor whiteColor];
-    chapterLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:12];
+    chapterLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:8];
     [chapterLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:chapterLabel];
     [chapterLabel moveTo:CGPointMake(self.previewWidth / 2 - chapterLabel.frame.size.width / 2, 5)];
@@ -64,7 +67,7 @@
     UILabel *chapterNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.8, 50)];
     chapterNumberLabel.text = [NSString stringWithFormat:@"%li", self.model.number + 1];
     chapterNumberLabel.textColor = [UIColor whiteColor];
-    chapterNumberLabel.font = [UIFont fontWithName:@"AvenirLTStd-Black" size:25];
+    chapterNumberLabel.font = [UIFont fontWithName:@"AvenirLTStd-Black" size:22];
     [chapterNumberLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:chapterNumberLabel];
     [chapterNumberLabel moveTo:CGPointMake(self.previewWidth / 2 - chapterNumberLabel.frame.size.width / 2, 30)];
@@ -119,14 +122,36 @@
 }
 
 - (void)initExploreButton {
-    UILabel *exploreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.4, 40)];
-    exploreLabel.text = [@"explorer" uppercaseString];
-    exploreLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
-    exploreLabel.textColor = [UIColor whiteColor];
-    exploreLabel.backgroundColor = [UIColor darkerColor];
-    [exploreLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.view addSubview:exploreLabel];
-    [exploreLabel moveTo:CGPointMake(self.previewWidth / 2 - exploreLabel.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2/3 + exploreLabel.frame.size.height / 2)];
+    self.exploreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.exploreButton.frame = CGRectMake(0, 0, self.previewWidth * 0.4, 40);
+    [self.exploreButton setTitle:[@"explorer" uppercaseString] forState:UIControlStateNormal];
+    [self.exploreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.exploreButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
+    self.exploreButton.backgroundColor = [UIColor darkerColor];
+    [self.exploreButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.view addSubview:self.exploreButton];
+    [self.exploreButton moveTo:CGPointMake(self.previewWidth / 2 - self.exploreButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2/3 + self.exploreButton.frame.size.height / 2)];
+    [self.exploreButton addTarget:self action:@selector(exploreButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreButton addTarget:self action:@selector(exploreButtonDown:) forControlEvents:UIControlEventTouchDown];
+    [self.exploreButton addTarget:self action:@selector(resetButtonColor) forControlEvents:UIControlEventTouchUpOutside];
+}
+
+- (void)exploreButtonDown:(id)sender {
+    ((UIButton *)sender).backgroundColor = [UIColor blackColor];
+}
+
+- (void)resetButtonColor {
+    // Touch feedback
+    self.exploreButton.backgroundColor = [UIColor darkerColor];
+}
+
+- (void)exploreButtonTouched:(id)sender {
+    [self resetButtonColor];
+    // Set global scene model
+    [[DataManager sharedInstance] getGameModel].currentScene = [sender tag];
+    // Out animation & go to SceneManager
+    SceneManager *sceneManager = [self.parentViewController.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+    [self.parentViewController.navigationController pushViewController:sceneManager animated:NO];
 }
 
 @end

@@ -15,12 +15,10 @@
 		4F34E974183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E971183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m */; };
 		4F34E975183CD26900661A68 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E972183CD26900661A68 /* easing.c */; };
 		4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E977183CE42B00661A68 /* UIViewPicasso.m */; };
-		4F34E97B183D1A4D00661A68 /* ExploreToSceneTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */; };
 		4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */; };
 		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
 		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
-		4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */; };
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		620423C818434B5D00648ABA /* ScenePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreview.m */; };
@@ -62,6 +60,9 @@
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
 		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
+		62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8E918439F7000CF593F /* scene-1@2x.png */; };
+		62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8EC1843A3B700CF593F /* SceneTimeline.m */; };
+		62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8EE1843B17000CF593F /* circleButton@2x.png */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -78,7 +79,6 @@
 		B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5307181FE76400DFCC39 /* 2.jpg */; };
 		B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5308181FE76400DFCC39 /* 3.jpg */; };
 		B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5311181FF58500DFCC39 /* GalleryViewController.m */; };
-		CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2FBC51182E94C7004160FF /* OpacityTransition.m */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE0182ED33C00BBAE33 /* dateTitleSign@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */; };
 		CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE1182ED34200BBAE33 /* sliderInterstitial@2x.png */; };
@@ -118,8 +118,6 @@
 		4F34E973183CD26900661A68 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
 		4F34E976183CE42B00661A68 /* UIViewPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewPicasso.h; path = Modules/Utils/Categories/UIViewPicasso.h; sourceTree = "<group>"; };
 		4F34E977183CE42B00661A68 /* UIViewPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewPicasso.m; path = Modules/Utils/Categories/UIViewPicasso.m; sourceTree = "<group>"; };
-		4F34E979183D1A4D00661A68 /* ExploreToSceneTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExploreToSceneTransition.h; path = Modules/Transitions/ExploreToSceneTransition.h; sourceTree = "<group>"; };
-		4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExploreToSceneTransition.m; path = Modules/Transitions/ExploreToSceneTransition.m; sourceTree = "<group>"; };
 		4F836D23183BD3EB00CA63CD /* UIViewControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewControllerPicasso.h; path = Modules/Utils/Categories/UIViewControllerPicasso.h; sourceTree = "<group>"; };
 		4F836D24183BD3EB00CA63CD /* UIViewControllerPicasso.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewControllerPicasso.m; path = Modules/Utils/Categories/UIViewControllerPicasso.m; sourceTree = "<group>"; };
 		4F836D26183BD41B00CA63CD /* UINavigationControllerPicasso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINavigationControllerPicasso.h; path = Modules/Utils/Categories/UINavigationControllerPicasso.h; sourceTree = "<group>"; };
@@ -128,8 +126,6 @@
 		4F836D31183BD4EA00CA63CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = Modules/Utils/Constants/Colors.m; sourceTree = "<group>"; };
 		4F836D32183BD4EA00CA63CD /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = Modules/Utils/Constants/Events.h; sourceTree = "<group>"; };
 		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
-		4F836D36183BD91D00CA63CD /* HomeToExploreTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeToExploreTransition.h; path = Modules/Transitions/HomeToExploreTransition.h; sourceTree = "<group>"; };
-		4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeToExploreTransition.m; path = Modules/Transitions/HomeToExploreTransition.m; sourceTree = "<group>"; };
 		6204091D1833804B00105A03 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuButton.h; path = Modules/UI/Timeline/MenuButton.h; sourceTree = "<group>"; };
 		6204091E1833804B00105A03 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuButton.m; path = Modules/UI/Timeline/MenuButton.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
@@ -190,6 +186,10 @@
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
 		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
+		62DCA8E918439F7000CF593F /* scene-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-1@2x.png"; sourceTree = "<group>"; };
+		62DCA8EB1843A3B700CF593F /* SceneTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneTimeline.h; path = Modules/SceneManager/SceneTimeline.h; sourceTree = "<group>"; };
+		62DCA8EC1843A3B700CF593F /* SceneTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneTimeline.m; path = Modules/SceneManager/SceneTimeline.m; sourceTree = "<group>"; };
+		62DCA8EE1843B17000CF593F /* circleButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleButton@2x.png"; sourceTree = "<group>"; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -210,8 +210,6 @@
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5310181FF58500DFCC39 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		B9FF5311181FF58500DFCC39 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
-		CE2FBC50182E94C7004160FF /* OpacityTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpacityTransition.h; path = Modules/Transitions/OpacityTransition.h; sourceTree = "<group>"; };
-		CE2FBC51182E94C7004160FF /* OpacityTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpacityTransition.m; path = Modules/Transitions/OpacityTransition.m; sourceTree = "<group>"; };
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
 		CE32CDDF182ED33C00BBAE33 /* dateTitleSign@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dateTitleSign@2x.png"; path = "Data/UI/dateTitleSign@2x.png"; sourceTree = "<group>"; };
 		CE32CDE1182ED34200BBAE33 /* sliderInterstitial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderInterstitial@2x.png"; sourceTree = "<group>"; };
@@ -276,6 +274,7 @@
 		4F20B8E9182D3F960035EEF1 /* SceneChooser */ = {
 			isa = PBXGroup;
 			children = (
+				62DCA8EE1843B17000CF593F /* circleButton@2x.png */,
 				62CDE0A918435CEA006276C7 /* lockedButton@2x.png */,
 				620423D51843579300648ABA /* navArrowLeft@2x.png */,
 				620423D61843579300648ABA /* navArrowRight@2x.png */,
@@ -387,6 +386,8 @@
 				62E9FA3918201CD30080A21D /* SceneInterstitial.m */,
 				624B978918211AC50087C576 /* SceneSlider.h */,
 				624B978A18211AC50087C576 /* SceneSlider.m */,
+				62DCA8EB1843A3B700CF593F /* SceneTimeline.h */,
+				62DCA8EC1843A3B700CF593F /* SceneTimeline.m */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -483,7 +484,6 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CE2FBC4F182E94AE004160FF /* Transitions */,
 				624E6B31181E733800E7FE58 /* SceneManager */,
 				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				CE86045A18283BB00019657F /* Home */,
@@ -532,6 +532,7 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				62DCA8E618439EF700CF593F /* Previews */,
 				CEF64D54182ACA4200FE9C39 /* scene-1.mov */,
 				CEF64D55182ACA4200FE9C39 /* menu.mp4 */,
 				62E9FA2B181FB56A0080A21D /* scene-2.mp4 */,
@@ -615,6 +616,14 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
+		62DCA8E618439EF700CF593F /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				62DCA8E918439F7000CF593F /* scene-1@2x.png */,
+			);
+			path = Previews;
+			sourceTree = "<group>";
+		};
 		B9FF5302181FBD3A00DFCC39 /* WorkView */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,19 +640,6 @@
 				B9FF5311181FF58500DFCC39 /* GalleryViewController.m */,
 			);
 			name = GalleryView;
-			sourceTree = "<group>";
-		};
-		CE2FBC4F182E94AE004160FF /* Transitions */ = {
-			isa = PBXGroup;
-			children = (
-				CE2FBC50182E94C7004160FF /* OpacityTransition.h */,
-				CE2FBC51182E94C7004160FF /* OpacityTransition.m */,
-				4F836D36183BD91D00CA63CD /* HomeToExploreTransition.h */,
-				4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */,
-				4F34E979183D1A4D00661A68 /* ExploreToSceneTransition.h */,
-				4F34E97A183D1A4D00661A68 /* ExploreToSceneTransition.m */,
-			);
-			name = Transitions;
 			sourceTree = "<group>";
 		};
 		CE488875181EFFA9001D9A09 /* UI */ = {
@@ -797,6 +793,7 @@
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
 				620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
+				62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */,
 				62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */,
@@ -808,6 +805,7 @@
 				620423D01843510F00648ABA /* Brandon_med.otf in Resources */,
 				62084D561835237D00F9C26C /* logo5@2x.png in Resources */,
 				4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */,
+				62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,7 +829,6 @@
 				4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */,
 				6204091F1833804B00105A03 /* MenuButton.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
-				CE2FBC52182E94C7004160FF /* OpacityTransition.m in Sources */,
 				4F34E974183CD26900661A68 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				CE71977618410C50006F6CAE /* MenuPortrait.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
@@ -841,6 +838,7 @@
 				4F836D34183BD4EA00CA63CD /* Colors.m in Sources */,
 				4F34E96E183CD1D900661A68 /* UIView+EasingFunctions.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
+				62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
@@ -848,7 +846,6 @@
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				620423C818434B5D00648ABA /* ScenePreview.m in Sources */,
-				4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */,
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				4F34E975183CD26900661A68 /* easing.c in Sources */,
@@ -859,7 +856,6 @@
 				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
-				4F34E97B183D1A4D00661A68 /* ExploreToSceneTransition.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
