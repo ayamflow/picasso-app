@@ -35,19 +35,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.view = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     self.timelineWidth = [OrientationUtils nativeLandscapeDeviceSize].size.width * kTimelineWidthRatio;
-//    self.view.frame = CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight);
-    
+
     // create background line
     [self initTimelineBackground];
     // create progress bar
     [self initProgressBar];
     // create starting dot
     // show trackers position
+
+    self.view.frame = CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight);
 }
 
 - (void)initTimelineBackground {
+	UIView *area = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight)];
+    area.backgroundColor = [UIColor blueColor];
+    area.alpha = 0.3;
+    [self.view addSubview:area];
+
     UIView *backgroundTl = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, 2)];
     backgroundTl.backgroundColor = [UIColor blackColor];
     [backgroundTl moveTo:CGPointMake(0, kTimelineHeight / 2 - backgroundTl.frame.size.height / 2)];

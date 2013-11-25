@@ -19,5 +19,7 @@
 - (void)enableMotion;
 - (void)disableMotion;
 - (void)loadURL:(NSURL *)url;
+- (UIImage *)getScreenshot;
+- (UIImage *)getBlurredScreenshot;
 
 @end

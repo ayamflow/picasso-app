@@ -18,6 +18,9 @@
 #import "SceneTimeline.h"
 
 #define kPlaybackFadePercent 0.90
+#define kDirectionNone 0
+#define kDirectionLeft 1
+#define kDirectionRight 2
 
 @interface Scene ()
 
@@ -30,7 +33,11 @@
 @property (strong, nonatomic) UILabel *sceneTitle;
 @property (strong, nonatomic) UILabel *dateTitle;
 @property (strong, nonatomic) UIImageView *dateImageView;
+
 @property (strong, nonatomic) SceneTimeline *timeline;
+@property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
+@property (assign, nonatomic) NSInteger panDistance;
+@property (assign, nonatomic) NSInteger panDirection;
 
 @property (assign, nonatomic) NSInteger transitionsDone;
 @property (assign, nonatomic) NSInteger transitionsNumber;
@@ -89,11 +96,65 @@
     self.timeline = [[SceneTimeline alloc] initWithModel:self.model];
     [self.view addSubview:self.timeline.view];
     [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-    
-    CGSize screenSize = [OrientationUtils nativeLandscapeDeviceSize].size;
-    float timelineWidth = screenSize.width * 0.8;
-    self.timeline.view.frame = CGRectMake((screenSize.width - timelineWidth) / 2, screenSize.height - 90, screenSize.width, 90);
-//    self.timeline.view.backgroundColor = [UIColor redColor];
+
+    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(timelineDragged:)];
+    self.panRecognizer.maximumNumberOfTouches = 1;
+    self.panRecognizer.minimumNumberOfTouches = 1;
+    self.panRecognizer.delegate = self;
+    [self.timeline.view addGestureRecognizer:self.panRecognizer];
+}
+
+- (void)timelineDragged:(UIPanGestureRecognizer *)panRecognizer {
+    CGPoint translation = [panRecognizer translationInView:self.view];
+    panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
+    [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
+
+    if(panRecognizer.state == UIGestureRecognizerStateBegan) {
+
+    }
+    if(panRecognizer.state == UIGestureRecognizerStateChanged) {
+        float bottom = [OrientationUtils nativeLandscapeDeviceSize].size.height;
+        float timelineBottom = self.panRecognizer.view.frame.origin.y + self.timeline.view.frame.size.height;
+        self.panDistance = sqrt((bottom - timelineBottom) * (bottom - timelineBottom));
+        NSLog(@"distance %li", self.panDistance);
+
+        if(timelineBottom > bottom) self.panDirection = kDirectionRight;
+        else if (timelineBottom < bottom) self.panDirection = kDirectionLeft;
+        else self.panDirection = kDirectionNone;
+
+   		if(self.panDistance > self.timeline.view.frame.size.height / 2) {
+            [self showMap];
+        }
+    }
+    if(panRecognizer.state == UIGestureRecognizerStateEnded) {
+		if(self.panDistance <= self.timeline.view.frame.size.height * 2) {
+			[UIView animateWithDuration:0.4 animations:^{
+			    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
+            } completion:^(BOOL finished) {
+
+            }];
+        }
+    }
+}
+
+- (void)showMap {
+    [self stop];
+	[self.timeline.view removeGestureRecognizer:self.panRecognizer];
+
+    UIImageView *playerScreenshot = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
+    [self.view addSubview:playerScreenshot];
+
+    UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.png"]];
+    [self.view addSubview:map];
+	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
+
+	[UIView animateWithDuration:0.4 animations:^{
+        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2)];
+        self.timeline.view.alpha = 0;
+      	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - map.frame.size.height)];
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 - (void)initTitle:(NSString *)title {

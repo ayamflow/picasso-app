@@ -37,7 +37,7 @@
     [super viewDidLoad];
 
     self.transitionCompleted = NO;
-    self.backgroundImage.image = [UIImage imageNamed:@"homeBackground.png"];
+    self.backgroundImage.image = [[MotionVideoPlayer sharedInstance] getScreenshot];
     [self.view sendSubviewToBack:self.backgroundImage];
     
     [self hideNavigationBar];

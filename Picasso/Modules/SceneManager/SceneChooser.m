@@ -15,7 +15,6 @@
 #import "OrientationUtils.h"
 #import "ScenePreview.h"
 #import "SceneModel.h"
-#import "UIImage+ImageEffects.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -85,9 +84,8 @@
     overlay.alpha = 0.8;
     [self.view addSubview:overlay];
     
-    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"homeBackground.png"]];
+	UIImageView *background = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
     [self.view addSubview:background];
-//    [[background image] applyLightEffect]; // Blur ?
 }
 
 - (void)initGesture {

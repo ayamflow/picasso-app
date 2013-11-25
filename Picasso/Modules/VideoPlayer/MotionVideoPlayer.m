@@ -10,6 +10,7 @@
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
+#import "UIImage+ImageEffects.h"
 #import <CoreMotion/CoreMotion.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -161,6 +162,18 @@ static BOOL initialized;
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
 
 	return playerRate;
+}
+
+- (UIImage *)getScreenshot {
+	AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:self.player.currentItem.asset];
+    CGImageRef thumb = [imageGenerator copyCGImageAtTime:CMTimeMakeWithSeconds(10.0, 1.0) actualTime:NULL error:NULL];
+    UIImage *screenShot = [UIImage imageWithCGImage:thumb];
+    CGImageRelease(thumb);
+    return screenShot;
+}
+
+- (UIImage *)getBlurredScreenshot {
+	return [[self getScreenshot] applySubtleEffect];
 }
 
 -(float)getPlayerFrameRate {
