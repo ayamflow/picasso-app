@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Picasso/Modules/SceneManager/SceneChooser.m"
-            timestampString = "407086412.058646"
+            timestampString = "407095507.692679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "-switchScene"
             landmarkType = "5">
          </BreakpointContent>

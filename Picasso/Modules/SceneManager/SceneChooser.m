@@ -15,6 +15,7 @@
 #import "OrientationUtils.h"
 #import "ScenePreview.h"
 #import "SceneModel.h"
+#import "UIImage+ImageEffects.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -42,17 +43,14 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"viewDidLoad");
     [super viewDidLoad];
     
 	self.view.backgroundColor = [UIColor clearColor];
     [self rotateToLandscapeOrientation];
     
-    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"homeBackground.png"]];
-    [self.view addSubview:background];
-    
     self.currentSceneNumber = 0;
     
+    [self initBackground];
     [self initGesture];
     [self addSceneWithNumber:self.currentSceneNumber];
 }
@@ -71,7 +69,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"transitionOut");
+    NSLog(@"transitionOut"); // NOT WORKING
     
     [UIView animateWithDuration:0.4 animations:^{
         [self.currentPreview.view moveTo:CGPointMake(- self.currentPreview.previewWidth, 0)];
@@ -79,6 +77,17 @@
     } completion:^(BOOL finished) {
         [super viewWillDisappear:NO];
     }];
+}
+
+- (void)initBackground {
+    UIView *overlay = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+    overlay.backgroundColor = [UIColor whiteColor];
+    overlay.alpha = 0.8;
+    [self.view addSubview:overlay];
+    
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"homeBackground.png"]];
+    [self.view addSubview:background];
+//    [[background image] applyLightEffect]; // Blur ?
 }
 
 - (void)initGesture {

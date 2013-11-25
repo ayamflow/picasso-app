@@ -63,6 +63,7 @@
 		62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8E918439F7000CF593F /* scene-1@2x.png */; };
 		62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8EC1843A3B700CF593F /* SceneTimeline.m */; };
 		62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8EE1843B17000CF593F /* circleButton@2x.png */; };
+		62DCA8F51843C65300CF593F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8F41843C65300CF593F /* UIImage+ImageEffects.m */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -190,6 +191,8 @@
 		62DCA8EB1843A3B700CF593F /* SceneTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneTimeline.h; path = Modules/SceneManager/SceneTimeline.h; sourceTree = "<group>"; };
 		62DCA8EC1843A3B700CF593F /* SceneTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneTimeline.m; path = Modules/SceneManager/SceneTimeline.m; sourceTree = "<group>"; };
 		62DCA8EE1843B17000CF593F /* circleButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleButton@2x.png"; sourceTree = "<group>"; };
+		62DCA8F31843C65300CF593F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Modules/Utils/Categories/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		62DCA8F41843C65300CF593F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Modules/Utils/Categories/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 				4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */,
 				4F34E976183CE42B00661A68 /* UIViewPicasso.h */,
 				4F34E977183CE42B00661A68 /* UIViewPicasso.m */,
+				62DCA8F31843C65300CF593F /* UIImage+ImageEffects.h */,
+				62DCA8F41843C65300CF593F /* UIImage+ImageEffects.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -840,6 +845,7 @@
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
+				62DCA8F51843C65300CF593F /* UIImage+ImageEffects.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
