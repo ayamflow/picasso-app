@@ -27,7 +27,7 @@
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
 
     [self initModels];
-    //    [self showFonts];
+//    [self showFonts];
     [self initBackgroundVideo];
     
     return YES;

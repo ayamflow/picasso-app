@@ -23,6 +23,13 @@
 		4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D37183BD91D00CA63CD /* HomeToExploreTransition.m */; };
 		6204091F1833804B00105A03 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6204091E1833804B00105A03 /* MenuButton.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
+		620423C818434B5D00648ABA /* ScenePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreview.m */; };
+		620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423C91843510F00648ABA /* AvenirLTStd-Black.otf */; };
+		620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */; };
+		620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */; };
+		620423D01843510F00648ABA /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CC1843510F00648ABA /* Brandon_med.otf */; };
+		620423D71843579300648ABA /* navArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620423D51843579300648ABA /* navArrowLeft@2x.png */; };
+		620423D81843579300648ABA /* navArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620423D61843579300648ABA /* navArrowRight@2x.png */; };
 		62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D4C1834E82300F9C26C /* homeBackground@2x.png */; };
 		62084D51183508C100F9C26C /* Logo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62084D50183508C100F9C26C /* Logo.m */; };
 		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
@@ -54,6 +61,7 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
+		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -125,6 +133,14 @@
 		6204091D1833804B00105A03 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuButton.h; path = Modules/UI/Timeline/MenuButton.h; sourceTree = "<group>"; };
 		6204091E1833804B00105A03 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuButton.m; path = Modules/UI/Timeline/MenuButton.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
+		620423C618434B5D00648ABA /* ScenePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScenePreview.h; path = Modules/SceneManager/ScenePreview.h; sourceTree = "<group>"; };
+		620423C718434B5D00648ABA /* ScenePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScenePreview.m; path = Modules/SceneManager/ScenePreview.m; sourceTree = "<group>"; };
+		620423C91843510F00648ABA /* AvenirLTStd-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Black.otf"; path = "Data/Fonts/AvenirLTStd-Black.otf"; sourceTree = "<group>"; };
+		620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Light.otf"; path = "Data/Fonts/AvenirLTStd-Light.otf"; sourceTree = "<group>"; };
+		620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Roman.otf"; path = "Data/Fonts/AvenirLTStd-Roman.otf"; sourceTree = "<group>"; };
+		620423CC1843510F00648ABA /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_med.otf; path = Data/Fonts/Brandon_med.otf; sourceTree = "<group>"; };
+		620423D51843579300648ABA /* navArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navArrowLeft@2x.png"; sourceTree = "<group>"; };
+		620423D61843579300648ABA /* navArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navArrowRight@2x.png"; sourceTree = "<group>"; };
 		62084D4C1834E82300F9C26C /* homeBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "homeBackground@2x.png"; path = "Data/UI/homeBackground@2x.png"; sourceTree = "<group>"; };
 		62084D4F183508C100F9C26C /* Logo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logo.h; path = Modules/UI/Logo/Logo.h; sourceTree = "<group>"; };
 		62084D50183508C100F9C26C /* Logo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logo.m; path = Modules/UI/Logo/Logo.m; sourceTree = "<group>"; };
@@ -173,6 +189,7 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
+		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -259,6 +276,9 @@
 		4F20B8E9182D3F960035EEF1 /* SceneChooser */ = {
 			isa = PBXGroup;
 			children = (
+				62CDE0A918435CEA006276C7 /* lockedButton@2x.png */,
+				620423D51843579300648ABA /* navArrowLeft@2x.png */,
+				620423D61843579300648ABA /* navArrowRight@2x.png */,
 				CE32CDE1182ED34200BBAE33 /* sliderInterstitial@2x.png */,
 				4F20B8EC182D46030035EEF1 /* chooserTitle@2x.png */,
 			);
@@ -317,6 +337,17 @@
 				4F836D33183BD4EA00CA63CD /* Events.m */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		620423C518434AE500648ABA /* SceneChooser */ = {
+			isa = PBXGroup;
+			children = (
+				6248626418225E7C00F5927A /* SceneChooser.h */,
+				6248626518225E7C00F5927A /* SceneChooser.m */,
+				620423C618434B5D00648ABA /* ScenePreview.h */,
+				620423C718434B5D00648ABA /* ScenePreview.m */,
+			);
+			name = SceneChooser;
 			sourceTree = "<group>";
 		};
 		62084D4E183508A800F9C26C /* Logo */ = {
@@ -470,8 +501,7 @@
 			children = (
 				624E6B42181E949C00E7FE58 /* SceneManager.h */,
 				624E6B43181E949C00E7FE58 /* SceneManager.m */,
-				6248626418225E7C00F5927A /* SceneChooser.h */,
-				6248626518225E7C00F5927A /* SceneChooser.m */,
+				620423C518434AE500648ABA /* SceneChooser */,
 				624B978818211AA30087C576 /* Scene */,
 				624B9787182117910087C576 /* Delegates */,
 			);
@@ -651,6 +681,10 @@
 		CEA3E756182E616700B115BC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				620423C91843510F00648ABA /* AvenirLTStd-Black.otf */,
+				620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */,
+				620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */,
+				620423CC1843510F00648ABA /* Brandon_med.otf */,
 				CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */,
 				CEA3E754182E616400B115BC /* Brandon_bold.otf */,
 			);
@@ -733,9 +767,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				620423D71843579300648ABA /* navArrowLeft@2x.png in Resources */,
 				CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */,
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
+				620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				CE32CDE0182ED33C00BBAE33 /* dateTitleSign@2x.png in Resources */,
@@ -746,9 +782,11 @@
 				62084D551835237D00F9C26C /* logo0@2x.png in Resources */,
 				620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */,
+				620423D81843579300648ABA /* navArrowRight@2x.png in Resources */,
 				CE32CDE2182ED34200BBAE33 /* sliderInterstitial@2x.png in Resources */,
 				4F20B8E5182D3D9A0035EEF1 /* exploreButton@2x.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
+				620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
@@ -757,14 +795,17 @@
 				4F20B8E8182D3D9A0035EEF1 /* museumButton@2x.png in Resources */,
 				B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */,
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
+				620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				4F20B8E6182D3D9A0035EEF1 /* galleryButton@2x.png in Resources */,
+				62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */,
 				62084D4D1834E82300F9C26C /* homeBackground@2x.png in Resources */,
 				CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				CEF64D57182ACA4200FE9C39 /* menu.mp4 in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
+				620423D01843510F00648ABA /* Brandon_med.otf in Resources */,
 				62084D561835237D00F9C26C /* logo5@2x.png in Resources */,
 				4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */,
 			);
@@ -806,6 +847,7 @@
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
+				620423C818434B5D00648ABA /* ScenePreview.m in Sources */,
 				4F836D38183BD91D00CA63CD /* HomeToExploreTransition.m in Sources */,
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,

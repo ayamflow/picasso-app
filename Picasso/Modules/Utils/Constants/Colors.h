@@ -15,6 +15,7 @@
 + (UIColor *)textColor;
 + (UIColor *)lightColor;
 + (UIColor *)darkColor;
++ (UIColor *)darkerColor;
 + (UIColor *)sliderColor;
 
 @end

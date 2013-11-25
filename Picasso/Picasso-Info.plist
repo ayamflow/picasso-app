@@ -26,13 +26,15 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>AvenirLTStd-Roman.otf</string>
+		<string>AvenirLTStd-Light.otf</string>
+		<string>AvenirLTStd-Black.otf</string>
+		<string>Brandon_med.otf</string>
 		<string>Brandon_light_it.otf</string>
 		<string>Brandon_bold.otf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -45,5 +47,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

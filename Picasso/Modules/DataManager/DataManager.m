@@ -12,9 +12,6 @@
 
 @interface DataManager ()
 
-@property (strong, nonatomic) NSArray *scenes;
-@property (strong, nonatomic) NSArray *works;
-
 @end
 
 @implementation DataManager
