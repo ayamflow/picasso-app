@@ -75,11 +75,20 @@
     self.carousel.type = iCarouselTypeCustom;
     self.carousel.pagingEnabled = YES;
     [self.view addSubview:self.carousel];
+
+    [self.carousel addObserver:self forKeyPath:@"scrollOffset" options:0 context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if(object == self.carousel && [keyPath isEqualToString:@"scrollOffset"]) {
+        NSLog(@"scroll: %f", self.carousel.scrollOffset);
+    }
 }
 
 - (void)showBackButton {
 	if(self.isDragging && self.carousel.currentItemIndex == 0) {
 		NSLog(@"%f", self.carousel.scrollOffset);
+        [self showBackButton];
     }
 }
 
@@ -203,7 +212,8 @@
 
 - (void)carouselWillBeginDragging:(iCarousel *)carousel {
     self.isDragging = YES;
-    [self showBackButton];
+//    [self showBackButton];
+//    [self performSelector:@selector(showBackButton) withObject:self afterDelay:0.2];
 }
 
 - (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
