@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Brandon_reg.otf</string>
 		<string>AvenirLTStd-Roman.otf</string>
 		<string>AvenirLTStd-Light.otf</string>
 		<string>AvenirLTStd-Black.otf</string>

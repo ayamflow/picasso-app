@@ -143,16 +143,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CTj-Hu-dSE">
-                                <rect key="frame" x="82" y="282" width="157" height="42"/>
-                                <state key="normal" title="EXPLORER" backgroundImage="exploreButton.png">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CTj-Hu-dSE">
+                                <rect key="frame" x="52" y="263" width="101" height="101"/>
+                                <state key="normal" backgroundImage="exploreButton.png">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zdG-kb-XTA">
-                                <rect key="frame" x="82" y="332" width="157" height="42"/>
-                                <state key="normal" title="GALERIE" backgroundImage="galleryButton.png">
+                                <rect key="frame" x="166" y="263" width="101" height="101"/>
+                                <state key="normal" backgroundImage="galleryButton.png">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -161,8 +161,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bvN-8L-DX0">
-                                <rect key="frame" x="83" y="382" width="156" height="42"/>
-                                <state key="normal" title="LE MUSÉE" backgroundImage="museumButton.png">
+                                <rect key="frame" x="52" y="377" width="101" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" backgroundImage="museumButton.png">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -170,19 +171,48 @@
                                     <segue destination="pw8-1h-sAP" kind="push" id="sJy-tY-RGP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GCc-m8-jdP">
-                                <rect key="frame" x="-10" y="0.0" width="330" height="568"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Aje-Oi-qta">
+                                <rect key="frame" x="166" y="377" width="101" height="101"/>
+                                <state key="normal" backgroundImage="creditButton.png">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un voyage proposé par" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tma-0M-sNd">
+                                <rect key="frame" x="0.0" y="506" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le musée national pablo picasso" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nSz-QL-u4d">
+                                <rect key="frame" x="0.0" y="520" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LOh-2b-l8n">
+                                <rect key="frame" x="0.0" y="171" width="320" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Sur les traces du maître Picasso
+</string>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZEb-qR-h2f"/>
                     <connections>
-                        <outlet property="backgroundImage" destination="GCc-m8-jdP" id="S6p-ef-mYM"/>
+                        <outlet property="creditsButton" destination="Aje-Oi-qta" id="7eI-e3-36g"/>
                         <outlet property="exploreButton" destination="CTj-Hu-dSE" id="2xu-iD-GSC"/>
                         <outlet property="galleryButton" destination="zdG-kb-XTA" id="fWY-zS-zQ5"/>
                         <outlet property="museumButton" destination="bvN-8L-DX0" id="are-GB-Hw4"/>
+                        <outlet property="museumLabel" destination="nSz-QL-u4d" id="ZJl-al-dVg"/>
+                        <outlet property="titleLabel" destination="LOh-2b-l8n" id="frf-oq-ZRV"/>
+                        <outlet property="travelLabel" destination="tma-0M-sNd" id="qMp-Ci-xVL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRS-a3-wNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -327,10 +357,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="exploreButton.png" width="157" height="42"/>
-        <image name="galleryButton.png" width="157" height="42"/>
+        <image name="creditButton.png" width="101" height="101"/>
+        <image name="exploreButton.png" width="101" height="101"/>
+        <image name="galleryButton.png" width="101" height="101"/>
         <image name="menuSliderUp.png" width="12" height="6"/>
-        <image name="museumButton.png" width="157" height="42"/>
+        <image name="museumButton.png" width="101" height="101"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -338,7 +369,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1gf-Eu-BiW"/>
-        <segue reference="pMS-7j-2bV"/>
+        <segue reference="sJy-tY-RGP"/>
+        <segue reference="WJh-nJ-Fi5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,5 +14,7 @@
 + (CGRect)deviceSize;
 + (CGRect)nativeDeviceSize;
 + (CGRect)nativeLandscapeDeviceSize;
++ (BOOL)isRetina;
++ (NSInteger)screenScale;
 
 @end

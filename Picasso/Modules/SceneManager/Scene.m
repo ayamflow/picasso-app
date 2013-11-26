@@ -116,13 +116,12 @@
         float bottom = [OrientationUtils nativeLandscapeDeviceSize].size.height;
         float timelineBottom = self.panRecognizer.view.frame.origin.y + self.timeline.view.frame.size.height;
         self.panDistance = sqrt((bottom - timelineBottom) * (bottom - timelineBottom));
-        NSLog(@"distance %li", self.panDistance);
 
         if(timelineBottom > bottom) self.panDirection = kDirectionRight;
         else if (timelineBottom < bottom) self.panDirection = kDirectionLeft;
         else self.panDirection = kDirectionNone;
 
-   		if(self.panDistance > self.timeline.view.frame.size.height / 2) {
+   		if(self.panDistance > self.timeline.view.frame.size.height) {
             [self showMap];
         }
     }
@@ -138,22 +137,23 @@
 }
 
 - (void)showMap {
-    [self stop];
-	[self.timeline.view removeGestureRecognizer:self.panRecognizer];
-
+    [self.timeline.view removeGestureRecognizer:self.panRecognizer];
+    
     UIImageView *playerScreenshot = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
+    playerScreenshot.alpha = 0;
     [self.view addSubview:playerScreenshot];
 
     UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.png"]];
     [self.view addSubview:map];
 	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
 
-	[UIView animateWithDuration:0.4 animations:^{
+	[UIView animateWithDuration:0.8 animations:^{
         [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2)];
-        self.timeline.view.alpha = 0;
       	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - map.frame.size.height)];
+        self.timeline.view.alpha = 0;
+        playerScreenshot.alpha = 1;
     } completion:^(BOOL finished) {
-
+        [self stop];
     }];
 }
 

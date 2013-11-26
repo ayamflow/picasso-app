@@ -26,6 +26,7 @@
 @property (strong, nonatomic) ScenePreview *oldPreview;
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @property (assign, nonatomic) NSInteger currentSceneNumber;
 
@@ -84,8 +85,8 @@
     overlay.alpha = 0.8;
     [self.view addSubview:overlay];
     
-	UIImageView *background = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
-    [self.view addSubview:background];
+//	UIImageView *background = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
+//    [self.view addSubview:background];
 }
 
 - (void)initGesture {
@@ -93,6 +94,9 @@
     self.panRecognizer.delegate = self;
     self.panRecognizer.minimumNumberOfTouches = 1;
     self.panRecognizer.maximumNumberOfTouches = 1;
+    
+    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sceneTouched:)];
+    self.tapRecognizer.delegate = self;
 }
 
 - (void)addSceneWithNumber:(NSInteger)sceneNumber {
@@ -102,7 +106,8 @@
     [self.view addSubview:self.currentPreview.view];
     [self addChildViewController:self.currentPreview];
     
-    [self.currentPreview.view addGestureRecognizer:self.panRecognizer];
+//    [self.currentPreview.view addGestureRecognizer:self.panRecognizer];
+    [self.currentPreview.view addGestureRecognizer:self.tapRecognizer];
 }
 
 - (void)removeOldScene {
@@ -136,6 +141,18 @@
     if(panRecognizer.state == UIGestureRecognizerStateEnded) {
         [self.currentPreview resetButtonColor];
         [self switchScene];
+    }
+}
+
+- (void)sceneTouched:(UITapGestureRecognizer *)tapRecognizer {
+    if(tapRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"scene up");
+        self.currentPreview.view.alpha = 1;
+        // Set global scene model
+        [[DataManager sharedInstance] getGameModel].currentScene = self.currentSceneNumber;
+        // Out animation & go to SceneManager
+        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+        [self.navigationController pushViewController:sceneManager animated:NO];
     }
 }
 

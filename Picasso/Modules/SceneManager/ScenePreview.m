@@ -54,10 +54,20 @@
     
     [self.background moveTo:CGPointMake(self.previewWidth / 2 - self.background.frame.size.width / 2, screenSize.height / 2 - self.background.frame.size.height / 4)];
     
-    UIImageView *scenePreview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"scene-%li.png", self.model.number + 1]]];
-    [self.view addSubview:scenePreview];
+    UIImage *maskedPreview = [UIImage imageNamed:[NSString stringWithFormat:@"scene-%li.png", self.model.number + 1]];
+    UIImageView *scenePreview = [[UIImageView alloc] initWithImage:maskedPreview];
+    [scenePreview moveTo:CGPointMake(self.background.frame.origin.x, self.background.frame.origin.y - 25)];
     
-    [scenePreview moveTo:CGPointMake(self.background.frame.origin.x, self.background.frame.origin.y - 20)];
+    UIImage *mask = [UIImage imageNamed:@"circleMask.png"];
+    CGImageRef cgImageWithApha = [mask CGImage];
+    CALayer *maskLayer = [CALayer layer];
+    maskLayer.contents = (__bridge id)cgImageWithApha;
+    CALayer *maskedLayer = scenePreview.layer;
+    maskedLayer.mask = maskLayer;
+    maskLayer.frame = CGRectMake(self.background.bounds.origin.x + 3.5, self.background.bounds.origin.y + 10, self.background.bounds.size.width, self.background.bounds.size.height);
+    
+    [self.view addSubview:scenePreview];
+
 }
 
 - (void)initChapterTitle {
@@ -104,10 +114,9 @@
 }
 
 - (void)initButton {
-    if(self.model.unlocked) {
-        [self initExploreButton];
-    }
-    else {
+    [self initExploreLabel];
+    
+    if(!self.model.unlocked) {
         [self initLockedButton];
     }
 }
@@ -118,23 +127,15 @@
     locked.center = self.background.center;
 }
 
-- (void)initExploreButton {
-//    UILabel *exploreLabel = [UILabel 
-    
-    
-    self.exploreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    self.exploreButton.frame = CGRectMake(0, 0, self.previewWidth * 0.4, 40);
-    self.exploreButton.frame = self.background.frame;
-    [self.exploreButton setTitle:[@"explorer" uppercaseString] forState:UIControlStateNormal];
-    [self.exploreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.exploreButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
-    self.exploreButton.backgroundColor = [UIColor darkerColor];
-    [self.exploreButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.view addSubview:self.exploreButton];
-//    [self.exploreButton moveTo:CGPointMake(self.previewWidth / 2 - self.exploreButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2/3 + self.exploreButton.frame.size.height / 2)];
-    [self.exploreButton addTarget:self action:@selector(exploreButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [self.exploreButton addTarget:self action:@selector(exploreButtonDown:) forControlEvents:UIControlEventTouchDown];
-    [self.exploreButton addTarget:self action:@selector(resetButtonColor) forControlEvents:UIControlEventTouchUpOutside];
+- (void)initExploreLabel {
+    NSString *labelText = self.model.unlocked ? [@"explorer" uppercaseString] : [@"bloqué" uppercaseString];
+    UILabel *exploreLabel = [[UILabel alloc] initWithFrame:self.background.frame];
+    exploreLabel.text = labelText;
+    exploreLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
+    exploreLabel.textColor = [UIColor whiteColor];
+    [exploreLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.view addSubview:exploreLabel];
+    exploreLabel.frame = CGRectOffset(exploreLabel.frame, 0, self.background.frame.size.height / 3);
 }
 
 - (void)exploreButtonDown:(id)sender {

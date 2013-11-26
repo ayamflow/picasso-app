@@ -15,15 +15,13 @@
 #import "SceneChooser.h"
 
 #define kLogoPositionVariant -40
-#define kButtonsPositionVariant 40
+#define kButtonsPositionVariant 20
 #define kLogoOpacityDuration 2
-#define kLogoPositionDuration 1.2
+#define kLogoPositionDuration 0.6
 
 @interface Home ()
 
-@property (assign, nonatomic) BOOL orientationWasLandscape;
 @property (assign, nonatomic) BOOL transitionCompleted;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 // Transitions
 @property (assign, nonatomic) NSInteger transitionOutNumber;
@@ -33,56 +31,70 @@
 
 @implementation Home
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (void)stopVideo:(id)sender {
+	[[[MotionVideoPlayer sharedInstance] player] setRate:0.0];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.transitionCompleted = NO;
-    self.backgroundImage.image = [[MotionVideoPlayer sharedInstance] getScreenshot];
-    [self.view sendSubviewToBack:self.backgroundImage];
     
     [self hideNavigationBar];
-    [self initLogo];
+    
+    [self initLabels];
     [self initButtons];
+    [self initLogo];
 //    [self startIntroTransition];
+}
+
+
+- (void)initLabels {
+    self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12.0];
+    self.titleLabel.text = [@"sur les traces\ndu maître picasso" uppercaseString];
+    self.travelLabel.text = [self.travelLabel.text uppercaseString];
+    self.museumLabel.text = [self.museumLabel.text uppercaseString];
+}
+
+- (void)initButtons {
+    // Going to gallery, musem or gallery mode stops the video
+    [self.exploreButton addTarget:self action:@selector(transitionOutToExplore) forControlEvents:UIControlEventTouchUpInside];
+    [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.creditsButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initLogo {
     self.logo = [[Logo alloc] init];
     [self.view addSubview:self.logo.view];
-    CGRect logoFrame = self.logo.view.frame;
-    logoFrame.origin.x = [OrientationUtils deviceSize].size.width / 2 - logoFrame.size.width / 2;
-    logoFrame.origin.y = [OrientationUtils deviceSize].size.height / 2 - logoFrame.size.height;// / 2;
-    self.logo.view.frame = logoFrame;
-}
-
-- (void)initButtons {
-    self.exploreButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-bold" size:15.0];
-    [self.exploreButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 40.0, 0.0, 0.0)];
-    
-    self.galleryButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-bold" size:15.0];
-    [self.galleryButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 40.0, 0.0, 0.0)];
-    
-    self.museumButton.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-bold" size:15.0];
-    [self.museumButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 40.0, 0.0, 0.0)];
-    
-    // Going to gallery or musem mode stops the video
-    [self.exploreButton addTarget:self action:@selector(transitionOutToExplore) forControlEvents:UIControlEventTouchUpInside];
-    [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
-    [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 4 - self.logo.view.frame.size.height)];
+    [self.logo transitionOpenWithDuration:0.8 andDelay:0.2];
 }
 
 - (void)startIntroTransition {
-    self.logo.view.alpha = 0;
-    self.backgroundImage.alpha = 0;
+//    self.logo.view.alpha = 0;
+
+    MotionVideoPlayer *player = [MotionVideoPlayer sharedInstance];
+    player.view.alpha = 0;
+    
     self.exploreButton.alpha = 0;
     self.galleryButton.alpha = 0;
     self.museumButton.alpha = 0;
+    self.creditsButton.alpha = 0;
     
-    [self startTransitionLogoOpacityAt:0.2];
-    [self.logo transitionOpenWithDuration:kLogoOpacityDuration andDelay:0.5];
-    [self startTransitionBackgroundOpacityAt:1.2];
-    [self startTransitionLogoPositionAt: 3.5];
-    [self startTransitionButtonsAt: 3.5];
+//    [self startTransitionLogoOpacityAt:0];
+//    [self.logo transitionOpenWithDuration:kLogoOpacityDuration andDelay:0.5];
+//    [self startTransitionBackgroundOpacityAt:1.2];
+//    [self startTransitionLogoPositionAt: 3.5];
+    [self startTransitionButtonsAt: 0.2];
 }
 
 - (void)startTransitionLogoOpacityAt:(NSTimeInterval)startTime {
@@ -94,8 +106,9 @@
 }
 
 - (void)startTransitionBackgroundOpacityAt:(NSTimeInterval)startTime {
+    MotionVideoPlayer *player = [MotionVideoPlayer sharedInstance];
     [UIView animateWithDuration:kLogoOpacityDuration delay:startTime options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.backgroundImage.alpha = 1;
+        player.view.alpha = 1;
     } completion:^(BOOL finished) {
 
     }];
@@ -112,18 +125,15 @@
 }
 
 - (void)startTransitionButtonsAt:(NSTimeInterval)startTime {
-    NSArray *buttons = [NSArray arrayWithObjects:self.exploreButton, self.galleryButton, self.museumButton, nil];
-    float timeInterval = 0.25;
+    NSArray *buttons = [NSArray arrayWithObjects:self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton, nil];
+    float timeInterval = 0.05;
     int i = 0;
     for(UIButton *button in buttons) {
-        CGPoint oldPosition = button.layer.position;
-        CGPoint newPosition = button.layer.position;
-        newPosition.y += kButtonsPositionVariant;
-        button.layer.position = newPosition;
+        [button moveTo:CGPointMake(button.frame.origin.x, button.frame.origin.y + kButtonsPositionVariant)];
         
         [UIView animateWithDuration:kLogoPositionDuration delay:startTime + i * timeInterval options:UIViewAnimationOptionCurveEaseOut animations:^{
             button.alpha = 1;
-            button.layer.position = oldPosition;
+            [button moveTo:CGPointMake(button.frame.origin.x, button.frame.origin.y - kButtonsPositionVariant)];
         } completion:^(BOOL finished) {
             self.transitionCompleted = YES;
         }];
@@ -142,6 +152,7 @@
     [self translateElementOut:self.logo.view at:0.1 withDuration:outDuration];
     [self translateElementOut:self.galleryButton at:0.05 withDuration:outDuration];
     [self translateElementOut:self.museumButton at:0.1 withDuration:outDuration];
+    [self translateElementOut:self.creditsButton at:0.15 withDuration:outDuration];
 }
 
 - (void)translateElementOut:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
@@ -159,65 +170,6 @@
         SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
         [self.navigationController pushViewController:sceneChooser animated:NO];
     }
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        if(self.orientationWasLandscape) return;
-		[self updatePositionToLandscape];
-        self.orientationWasLandscape = YES;
-    }
-	else if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [self updatePositionToPortrait];
-        self.orientationWasLandscape = NO;
-    }
-}
-
-- (void)updatePositionToPortrait {
-    float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2;
-    float leftPosition = [OrientationUtils nativeDeviceSize].size.width / 2;
-    float topIncrement = self.exploreButton.frame.size.height + 10.0;
-    
-    [self.exploreButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition)];
-    [self.galleryButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement / 2)];
-    [self.museumButton moveTo:CGPointMake(leftPosition - self.exploreButton.frame.size.width / 2, topPosition + topIncrement)];
-
-    self.backgroundImage.frame = [OrientationUtils nativeDeviceSize];
-
-    if(self.transitionCompleted) {
-        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant * 2)];
-    }
-    else {
-        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant)];
-    }
-}
-
-- (void)updatePositionToLandscape {
-    float topPosition = [OrientationUtils nativeDeviceSize].size.height * 2 / 3;
-    float leftPosition = ([OrientationUtils nativeLandscapeDeviceSize].size.width / 2) - self.exploreButton.frame.size.width * 1.5 - 10.0;
-    
-    [self.exploreButton moveTo:CGPointMake(leftPosition, topPosition)];
-    [self.galleryButton moveTo:CGPointMake(leftPosition + self.exploreButton.frame.size.width + 10.0, topPosition)];
-    [self.museumButton moveTo:CGPointMake(leftPosition + 2 * (self.exploreButton.frame.size.width + 10.0), topPosition)];
-
-    self.backgroundImage.frame = [OrientationUtils nativeLandscapeDeviceSize];
-
-    if(self.transitionCompleted) {
-        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2 + kLogoPositionVariant)];
-    }
-    else {
-        [self.logo.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.logo.view.frame.size.height / 2)];
-    }
-}
-
-- (void)stopVideo:(id)sender {
-	[[[MotionVideoPlayer sharedInstance] player] setRate:0.0];
 }
 
 @end

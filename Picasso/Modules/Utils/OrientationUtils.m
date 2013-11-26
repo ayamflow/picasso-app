@@ -35,4 +35,12 @@ static int Portrait = 1;
     return CGRectMake(0, 0, window.size.height, window.size.width);
 }
 
++ (BOOL)isRetina {
+    return ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0));
+}
+
++ (NSInteger)screenScale {
+    return [self isRetina] ? 2 : 1;
+}
+
 @end
