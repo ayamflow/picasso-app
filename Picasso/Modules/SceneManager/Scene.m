@@ -193,6 +193,15 @@
     [self translateElementIn:self.dateImageView at:0 withDuration:1];
     [self translateElementIn:self.dateTitle at:0 withDuration:1];
     [self translateElementIn:self.sceneTitle at:0.05 withDuration:1];
+
+    self.transitionsNumber++;
+    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height + self.timeline.view.frame.size.height)];
+    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseOut animations:^{
+	    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
+    } completion:^(BOOL finished) {
+        [self transitionInComplete];
+    }];
+
 }
 
 - (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {

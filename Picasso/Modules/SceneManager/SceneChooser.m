@@ -29,6 +29,8 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
+@property (assign, nonatomic) BOOL isDragging;
+
 @end
 
 @implementation SceneChooser
@@ -68,11 +70,17 @@
 
 - (void)initCarousel {
     self.carousel = [[iCarousel alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
-//    self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
-    self.carousel.type = iCarouselTypeInvertedCylinder;
+    self.carousel.type = iCarouselTypeCustom;
+    self.carousel.pagingEnabled = YES;
     [self.view addSubview:self.carousel];
+}
+
+- (void)showBackButton {
+	if(self.isDragging && self.carousel.currentItemIndex == 0) {
+		NSLog(@"%f", self.carousel.scrollOffset);
+    }
 }
 
 - (void)initBackground {
@@ -167,10 +175,39 @@
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value {
-    if(option == iCarouselOptionWrap) {
-        return 0;
+    switch(option) {
+		case iCarouselOptionWrap:
+            return 0;
+            break;
+
+        case iCarouselOptionFadeMin:
+            return -0.5;
+            break;
+
+        case iCarouselOptionFadeMax:
+            return 0.5;
+            break;
     }
+
     return value;
+}
+
+- (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform {
+    CGFloat abs = fabsf(offset);
+    CGFloat scale = 0.9 + (1 - (0.9 + abs / 10));
+
+    transform = CATransform3DScale(transform, scale, scale, 1);
+    transform = CATransform3DTranslate(transform, self.carousel.currentItemView.frame.size.width * offset, 1, 1);
+    return transform;
+}
+
+- (void)carouselWillBeginDragging:(iCarousel *)carousel {
+    self.isDragging = YES;
+    [self showBackButton];
+}
+
+- (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
+    self.isDragging = NO;
 }
 
 @end

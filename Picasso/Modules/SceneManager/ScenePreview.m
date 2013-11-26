@@ -14,6 +14,8 @@
 #import "DataManager.h"
 #import "SceneManager.h"
 
+#define kWidthRatio 0.5
+
 @interface ScenePreview ()
 
 @property (strong, nonatomic) SceneModel *model;
@@ -35,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * 0.6, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
+    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * kWidthRatio, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
     
     [self initBackground];
     

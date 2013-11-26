@@ -51,13 +51,13 @@
 
 - (void)initTimelineBackground {
 	UIView *area = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight)];
-    area.backgroundColor = [UIColor blueColor];
-    area.alpha = 0.3;
+//    area.backgroundColor = [UIColor blueColor];
+//    area.alpha = 0.3;
     [self.view addSubview:area];
 
     UIView *backgroundTl = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, 2)];
     backgroundTl.backgroundColor = [UIColor blackColor];
-    [backgroundTl moveTo:CGPointMake(0, kTimelineHeight / 2 - backgroundTl.frame.size.height / 2)];
+    [backgroundTl moveTo:CGPointMake(([OrientationUtils nativeLandscapeDeviceSize].size.width - backgroundTl.frame.size.width) / 2, kTimelineHeight / 2 - backgroundTl.frame.size.height / 2)];
     [self.view addSubview:backgroundTl];
 }
 
@@ -66,7 +66,7 @@
     self.progressBar.backgroundColor = [UIColor textColor];
     [self.view addSubview:self.progressBar];
     self.progressBar.layer.anchorPoint = CGPointMake(0, 0);
-    [self.progressBar moveTo:CGPointMake(0, kTimelineHeight / 2 - self.progressBar.frame.size.height / 2)];
+    [self.progressBar moveTo:CGPointMake(([OrientationUtils nativeLandscapeDeviceSize].size.width - self.progressBar.frame.size.width) / 2, kTimelineHeight / 2 - self.progressBar.frame.size.height / 2)];
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 1);
 }
 
