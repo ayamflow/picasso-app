@@ -15,6 +15,7 @@
 #import "OrientationUtils.h"
 #import "ScenePreview.h"
 #import "SceneModel.h"
+#import "iCarousel.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -22,16 +23,11 @@
 
 @interface SceneChooser ()
 
-@property (strong, nonatomic) ScenePreview *currentPreview;
-@property (strong, nonatomic) ScenePreview *oldPreview;
+@property (strong, nonatomic) NSArray *previews;
+@property (assign, nonatomic) CGFloat previewWidth;
 
-@property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
-@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
-
-@property (assign, nonatomic) NSInteger currentSceneNumber;
-
-@property (assign, nonatomic) float panDistance;
-@property (assign, nonatomic) NSInteger panDirection;
+@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *dateLabel;
 
 @end
 
@@ -46,37 +42,37 @@
     [super viewDidLoad];
     
 	self.view.backgroundColor = [UIColor clearColor];
+    self.previewWidth = [OrientationUtils nativeLandscapeDeviceSize].size.width * 0.6;
     [self rotateToLandscapeOrientation];
     
-    self.currentSceneNumber = 0;
+    [self initPreviews];
+    [self initCarousel];
     
-    [self initBackground];
-    [self initGesture];
-    [self addSceneWithNumber:self.currentSceneNumber];
+    [self initTitle];
+    [self initDate];
+    
+//    [self initBackground];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"transitionIn");
-    [self.currentPreview.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width, 0)];
-    self.currentPreview.view.alpha = 0;
-
-    [UIView animateWithDuration:0.4 animations:^{
-        [self.currentPreview.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.currentPreview.previewWidth / 2, 0)];
-        self.currentPreview.view.alpha = 1;
-    } completion:^(BOOL finished) {
-        [super viewWillAppear:NO];
-    }];
+- (void)initPreviews {
+    DataManager *dataManager = [DataManager sharedInstance];
+    NSMutableArray *tempPreviews = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
+    
+    for(int i = 0; i < [dataManager getScenesNumber]; i++) {
+        ScenePreview *preview = [[ScenePreview alloc] initWithModel:[dataManager getSceneWithNumber:i]];
+        [tempPreviews addObject:preview];
+    }
+    
+    self.previews = [NSArray arrayWithArray:tempPreviews];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"transitionOut"); // NOT WORKING
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        [self.currentPreview.view moveTo:CGPointMake(- self.currentPreview.previewWidth, 0)];
-        self.currentPreview.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [super viewWillDisappear:NO];
-    }];
+- (void)initCarousel {
+    self.carousel = [[iCarousel alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+//    self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.carousel.delegate = self;
+    self.carousel.dataSource = self;
+    self.carousel.type = iCarouselTypeInvertedCylinder;
+    [self.view addSubview:self.carousel];
 }
 
 - (void)initBackground {
@@ -89,131 +85,92 @@
 //    [self.view addSubview:background];
 }
 
-- (void)initGesture {
-    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sceneDragged:)];
-    self.panRecognizer.delegate = self;
-    self.panRecognizer.minimumNumberOfTouches = 1;
-    self.panRecognizer.maximumNumberOfTouches = 1;
-    
-    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sceneTouched:)];
-    self.tapRecognizer.delegate = self;
+- (void)initTitle {
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.6, 35)];
+    self.titleLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].title uppercaseString];
+    self.titleLabel.textColor = [UIColor blackColor];
+    [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:13];
+    self.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.titleLabel.layer.borderWidth = 2;
+    [self.view addSubview:self.titleLabel];
+    [self.titleLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.titleLabel.frame.size.width / 2, 40)];
 }
 
-- (void)addSceneWithNumber:(NSInteger)sceneNumber {
-    SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber:sceneNumber];
-    
-    self.currentPreview = [[ScenePreview alloc] initWithModel:sceneModel];
-    [self.view addSubview:self.currentPreview.view];
-    [self addChildViewController:self.currentPreview];
-    
-//    [self.currentPreview.view addGestureRecognizer:self.panRecognizer];
-    [self.currentPreview.view addGestureRecognizer:self.tapRecognizer];
+- (void)initDate {
+    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.8, 130)];
+    self.dateLabel.text = [[DataManager sharedInstance] getSceneWithNumber:0].date;
+    self.dateLabel.textColor = [UIColor blackColor];
+    [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
+    self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
+    [self.view addSubview:self.dateLabel];
+    [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, 25)];
 }
 
-- (void)removeOldScene {
-    [self.oldPreview removeFromParentViewController];
-    [self.oldPreview.view removeFromSuperview];
-    self.oldPreview = nil;
-}
 
-- (void)addNextSceneAt:(float)nextSceneDestination {
-    // Create & add the next preview
-    [self.currentPreview.view removeGestureRecognizer:self.panRecognizer];
-    self.oldPreview = self.currentPreview;
-    self.currentPreview = nil;
-    [self addSceneWithNumber:self.currentSceneNumber];
-    [self.currentPreview.view moveTo:CGPointMake(nextSceneDestination, 0)];
-    self.currentPreview.view.alpha = 0;
-}
-
-- (void)sceneDragged:(UIPanGestureRecognizer *)panRecognizer {
-    CGPoint translation = [panRecognizer translationInView:self.view];
-    panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x + translation.x, panRecognizer.view.center.y);
-    [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
-    
-    if(panRecognizer.state == UIGestureRecognizerStateBegan) {
-//        panRecognizer.view.alpha = 0.9;
-    }
-    if(panRecognizer.state == UIGestureRecognizerStateChanged) {
-        [self dragPreview];
+- (void)transitionOutWithView:(UIView *)view andIndex:(NSInteger)index {
+    [UIView animateWithDuration:0.8 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.titleLabel moveTo:CGPointMake(- self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y)];
+        self.titleLabel.alpha = 0;
+    } completion:^(BOOL finished) {
         
-    }
-    if(panRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self.currentPreview resetButtonColor];
-        [self switchScene];
-    }
-}
-
-- (void)sceneTouched:(UITapGestureRecognizer *)tapRecognizer {
-    if(tapRecognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"scene up");
-        self.currentPreview.view.alpha = 1;
-        // Set global scene model
-        [[DataManager sharedInstance] getGameModel].currentScene = self.currentSceneNumber;
-        // Out animation & go to SceneManager
+    }];
+    [UIView animateWithDuration:0.8 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.dateLabel moveTo:CGPointMake(- self.dateLabel.frame.size.width, self.dateLabel.frame.origin.y)];
+        self.dateLabel.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [view moveTo:CGPointMake(- view.frame.size.width, view.frame.origin.y)];
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [[DataManager sharedInstance] getGameModel].currentScene = index;
+        
         SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
         [self.navigationController pushViewController:sceneManager animated:NO];
-    }
-}
-
-- (void)dragPreview {
-    float middle = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
-    float previewMiddle = self.panRecognizer.view.frame.origin.x + self.currentPreview.previewWidth / 2;
-    self.panDistance = sqrt((middle - previewMiddle) * (middle - previewMiddle));
-    self.panRecognizer.view.alpha = 0.9 - (self.panDistance / [OrientationUtils nativeLandscapeDeviceSize].size.width / 2);
-    
-    if(previewMiddle > middle) self.panDirection = kDirectionRight;
-    else if (previewMiddle < middle) self.panDirection = kDirectionLeft;
-    else self.panDirection = kDirectionNone;
-}
-
-- (void)switchScene {
-    float destination = 0;
-    float alpha = 0;
-    BOOL addScene = YES;
-    
-    // If the scene has been dragged enough
-    if(self.panDistance > 30) {
-        if(self.panDirection == kDirectionLeft) {
-            destination = - self.currentPreview.previewWidth;
-            if(self.currentSceneNumber >= [[DataManager sharedInstance] getScenesNumber] - 1) {
-                self.currentSceneNumber = 0;
-            }
-            else {
-                self.currentSceneNumber = self.currentSceneNumber + 1;
-            }
-            [self addNextSceneAt:[OrientationUtils nativeLandscapeDeviceSize].size.width];
-        }
-        else if(self.panDirection == kDirectionRight) {
-            destination = [OrientationUtils nativeLandscapeDeviceSize].size.width;
-            if(self.currentSceneNumber < 1) {
-                self.currentSceneNumber = [[DataManager sharedInstance] getScenesNumber] - 1;
-            }
-            else {
-                self.currentSceneNumber = self.currentSceneNumber - 1;
-            }
-            [self addNextSceneAt:- self.currentPreview.previewWidth];
-        }
-    }
-    else {
-        self.oldPreview = self.currentPreview;
-        destination = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.currentPreview.previewWidth / 2;
-        alpha = 1;
-        addScene = NO;
-    }
-    
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        [self.oldPreview.view moveTo:CGPointMake(destination, 0)];
-        self.oldPreview.view.alpha = alpha;
-        if(addScene) {
-            [self.currentPreview.view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.currentPreview.view.frame.size.width / 2, 0)];
-            self.currentPreview.view.alpha = 1;
-        }
-    } completion:^(BOOL finished) {
-        if(addScene) {
-            [self removeOldScene];
-        }
     }];
+}
+
+// iCarousel protocols
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view {
+    
+    SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber:index];
+    view = [[ScenePreview alloc] initWithModel:sceneModel].view;
+    return view;
+}
+
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
+    SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
+    self.titleLabel.text = [sceneModel.title uppercaseString];
+    self.dateLabel.text = sceneModel.date;
+}
+
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
+    return [self.previews count];
+}
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+    if(![[DataManager sharedInstance] getSceneWithNumber:index].unlocked) return;
+    
+    UIView *view = [[ScenePreview alloc] initWithModel:[[DataManager sharedInstance] getSceneWithNumber:index]].view;
+    view.center = carousel.currentItemView.center;
+    [self.view addSubview:view];
+    
+    [view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - view.frame.size.width / 2, 0)];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.carousel.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self transitionOutWithView:view andIndex:index];
+    }];
+}
+
+- (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value {
+    if(option == iCarouselOptionWrap) {
+        return 0;
+    }
+    return value;
 }
 
 @end

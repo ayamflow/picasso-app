@@ -14,8 +14,6 @@
 #import "DataManager.h"
 #import "SceneManager.h"
 
-#define kWidthFactor 0.56
-
 @interface ScenePreview ()
 
 @property (strong, nonatomic) SceneModel *model;
@@ -37,23 +35,29 @@
 {
     [super viewDidLoad];
     
+    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * 0.6, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
+    
     [self initBackground];
-    [self initChapterTitle];
-//    [self initNavArrows];
-    [self initTitle];
-    [self initDate];
-    [self initButton];
+    
+    if(self.model.unlocked) {
+        [self initChapterLabel];
+        [self showScenePreview];
+    }
+    else {
+        [self initLockedButton];
+    }
 }
 
 - (void)initBackground {
     CGSize screenSize = [OrientationUtils nativeLandscapeDeviceSize].size;
     
-    self.previewWidth = screenSize.width * kWidthFactor;
     self.background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circleButton.png"]];
     [self.view addSubview:self.background];
     
-    [self.background moveTo:CGPointMake(self.previewWidth / 2 - self.background.frame.size.width / 2, screenSize.height / 2 - self.background.frame.size.height / 4)];
-    
+    [self.background moveTo:CGPointMake(self.view.frame.size.width / 2 - self.background.frame.size.width / 2, screenSize.height / 2 - self.background.frame.size.height / 4)];
+}
+
+- (void)showScenePreview {
     UIImage *maskedPreview = [UIImage imageNamed:[NSString stringWithFormat:@"scene-%li.png", self.model.number + 1]];
     UIImageView *scenePreview = [[UIImageView alloc] initWithImage:maskedPreview];
     [scenePreview moveTo:CGPointMake(self.background.frame.origin.x, self.background.frame.origin.y - 25)];
@@ -67,17 +71,6 @@
     maskLayer.frame = CGRectMake(self.background.bounds.origin.x + 3.5, self.background.bounds.origin.y + 10, self.background.bounds.size.width, self.background.bounds.size.height);
     
     [self.view addSubview:scenePreview];
-
-}
-
-- (void)initChapterTitle {
-    UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.8, 50)];
-    chapterLabel.text = [[NSString stringWithFormat:@"chapitre %li", self.model.number + 1] uppercaseString];
-    chapterLabel.textColor = [UIColor blackColor];
-    chapterLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:12];
-    [chapterLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.view addSubview:chapterLabel];
-    [chapterLabel moveTo:CGPointMake(self.previewWidth / 2 - chapterLabel.frame.size.width / 2, 5)];
 }
 
 - (void)initNavArrows {
@@ -87,48 +80,18 @@
     
     UIImageView *rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navArrowRight.png"]];
     [self.view addSubview:rightArrow];
-    [rightArrow moveTo:CGPointMake(self.previewWidth - 30 - rightArrow.frame.size.width, 30)];
-}
-
-- (void)initTitle {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.6, 35)];
-    titleLabel.text = [self.model.title uppercaseString];
-    titleLabel.textColor = [UIColor blackColor];
-    [titleLabel setTextAlignment:NSTextAlignmentCenter];
-    titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:13];
-    titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    titleLabel.layer.borderWidth = 2;
-    [self.view addSubview:titleLabel];
-    [titleLabel moveTo:CGPointMake(self.previewWidth / 2 - titleLabel.frame.size.width / 2, 40)];
-}
-
-- (void)initDate {
-    UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.previewWidth * 0.8, 130)];
-    dateLabel.text = self.model.date;
-    dateLabel.textColor = [UIColor blackColor];
-    [dateLabel setTextAlignment:NSTextAlignmentCenter];
-    dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
-    [self.view addSubview:dateLabel];
-    [dateLabel moveTo:CGPointMake(self.previewWidth / 2 - dateLabel.frame.size.width / 2, 25)];
-    
-}
-
-- (void)initButton {
-    [self initExploreLabel];
-    
-    if(!self.model.unlocked) {
-        [self initLockedButton];
-    }
+    [rightArrow moveTo:CGPointMake(self.view.frame.size.width - 30 - rightArrow.frame.size.width, 30)];
 }
 
 - (void)initLockedButton {
     UIImageView *locked = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockedButton.png"]];
+    locked.alpha = 0.6;
     [self.view addSubview:locked];
     locked.center = self.background.center;
 }
 
-- (void)initExploreLabel {
-    NSString *labelText = self.model.unlocked ? [@"explorer" uppercaseString] : [@"bloqué" uppercaseString];
+- (void)initChapterLabel {
+    NSString *labelText = [[NSString stringWithFormat:@"chapitre %li", self.model.number + 1] uppercaseString];
     UILabel *exploreLabel = [[UILabel alloc] initWithFrame:self.background.frame];
     exploreLabel.text = labelText;
     exploreLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];

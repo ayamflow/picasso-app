@@ -11,8 +11,6 @@
 
 @interface ScenePreview : UIViewController
 
-@property (assign, nonatomic) float previewWidth;
-
 - (id)initWithModel:(SceneModel *)model;
 - (void)resetButtonColor;
 

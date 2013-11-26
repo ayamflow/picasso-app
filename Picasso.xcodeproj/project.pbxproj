@@ -29,6 +29,7 @@
 		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
 		62084D561835237D00F9C26C /* logo5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D541835237D00F9C26C /* logo5@2x.png */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
+		6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248E17E1844F8CD001BEF6C /* iCarousel.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
 		624B97921821534A0087C576 /* MenuLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B97911821534A0087C576 /* MenuLandscape.m */; };
@@ -61,10 +62,12 @@
 		62B31CCF1844DE3B0053CC75 /* galleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCB1844DE3B0053CC75 /* galleryButton@2x.png */; };
 		62B31CD01844DE3B0053CC75 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCC1844DE3B0053CC75 /* museumButton@2x.png */; };
 		62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CD11844E1D20053CC75 /* Brandon_reg.otf */; };
+		62B31CD41844F0CE0053CC75 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CD31844F0CE0053CC75 /* backButton@2x.png */; };
 		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
 		62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8E918439F7000CF593F /* scene-1@2x.png */; };
 		62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8EC1843A3B700CF593F /* SceneTimeline.m */; };
 		62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8EE1843B17000CF593F /* circleButton@2x.png */; };
+		62DD8259184505230071690A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DD8258184505230071690A /* QuartzCore.framework */; };
 		62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62E9FA2B181FB56A0080A21D /* scene-2.mp4 */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
@@ -144,6 +147,8 @@
 		62084D541835237D00F9C26C /* logo5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo5@2x.png"; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
+		6248E17D1844F8CD001BEF6C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		6248E17E1844F8CD001BEF6C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
 		624B978918211AC50087C576 /* SceneSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneSlider.h; path = Modules/SceneManager/SceneSlider.h; sourceTree = "<group>"; };
 		624B978A18211AC50087C576 /* SceneSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneSlider.m; path = Modules/SceneManager/SceneSlider.m; sourceTree = "<group>"; };
@@ -191,11 +196,13 @@
 		62B31CCB1844DE3B0053CC75 /* galleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryButton@2x.png"; sourceTree = "<group>"; };
 		62B31CCC1844DE3B0053CC75 /* museumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "museumButton@2x.png"; sourceTree = "<group>"; };
 		62B31CD11844E1D20053CC75 /* Brandon_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_reg.otf; path = Data/Fonts/Brandon_reg.otf; sourceTree = "<group>"; };
+		62B31CD31844F0CE0053CC75 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
 		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
 		62DCA8E918439F7000CF593F /* scene-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-1@2x.png"; sourceTree = "<group>"; };
 		62DCA8EB1843A3B700CF593F /* SceneTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneTimeline.h; path = Modules/SceneManager/SceneTimeline.h; sourceTree = "<group>"; };
 		62DCA8EC1843A3B700CF593F /* SceneTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneTimeline.m; path = Modules/SceneManager/SceneTimeline.m; sourceTree = "<group>"; };
 		62DCA8EE1843B17000CF593F /* circleButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleButton@2x.png"; sourceTree = "<group>"; };
+		62DD8258184505230071690A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		62E9FA2B181FB56A0080A21D /* scene-2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "scene-2.mp4"; sourceTree = "<group>"; };
 		62E9FA33181FCBC20080A21D /* TrackerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackerModel.h; path = Models/TrackerModel.h; sourceTree = "<group>"; };
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
@@ -245,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62DD8259184505230071690A /* QuartzCore.framework in Frameworks */,
 				624E6B2C181E5FE900E7FE58 /* CoreMotion.framework in Frameworks */,
 				624E6B2A181E5FE000E7FE58 /* AVFoundation.framework in Frameworks */,
 				624E6AF7181E5FD300E7FE58 /* CoreGraphics.framework in Frameworks */,
@@ -280,6 +288,7 @@
 		4F20B8E9182D3F960035EEF1 /* SceneChooser */ = {
 			isa = PBXGroup;
 			children = (
+				62B31CD31844F0CE0053CC75 /* backButton@2x.png */,
 				62B31CC318449C0F0053CC75 /* circleMask@2x.png */,
 				62DCA8EE1843B17000CF593F /* circleButton@2x.png */,
 				62CDE0A918435CEA006276C7 /* lockedButton@2x.png */,
@@ -295,6 +304,7 @@
 		4F34E958183CC79100661A68 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6248E17C1844F8CD001BEF6C /* iCarousel */,
 				4F34E96F183CD26900661A68 /* AHEasing */,
 				4F34E96B183CD1D900661A68 /* UIView+EasingFunctions */,
 			);
@@ -377,6 +387,15 @@
 			path = Data/UI/Logo;
 			sourceTree = "<group>";
 		};
+		6248E17C1844F8CD001BEF6C /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				6248E17D1844F8CD001BEF6C /* iCarousel.h */,
+				6248E17E1844F8CD001BEF6C /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 		624B9787182117910087C576 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +453,7 @@
 		624E6AF3181E5FD300E7FE58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62DD8258184505230071690A /* QuartzCore.framework */,
 				624E6B2B181E5FE900E7FE58 /* CoreMotion.framework */,
 				624E6B29181E5FE000E7FE58 /* AVFoundation.framework */,
 				624E6AF4181E5FD300E7FE58 /* Foundation.framework */,
@@ -812,6 +832,7 @@
 				62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				62B31CD41844F0CE0053CC75 /* backButton@2x.png in Resources */,
 				62B31CC418449C0F0053CC75 /* circleMask@2x.png in Resources */,
 				CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */,
 				CEA3E755182E616400B115BC /* Brandon_bold.otf in Resources */,
@@ -876,6 +897,7 @@
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				4F34E975183CD26900661A68 /* easing.c in Sources */,
+				6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
