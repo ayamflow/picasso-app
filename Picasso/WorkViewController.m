@@ -9,14 +9,19 @@
 #import "WorkViewController.h"
 #import "WorkFullViewController.h"
 #import "GalleryViewController.h"
+#import "OrientationUtils.h"
+#import "Colors.h"
 #import "WorkModel.h"
 #import "DataManager.h"
 
 @interface WorkViewController ()
+@property (weak, nonatomic) IBOutlet UIView *scrollViewContent;
 
 @end
 
 @implementation WorkViewController
+
+CGRect deviceSize;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,8 +47,10 @@
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
             //save previous frame
             prevFrame = self.workImage.frame;
-            [self.workImage setFrame:[[UIScreen mainScreen] bounds]];
+            CGRect fullWorkImageFrame = CGRectMake(0, 80, deviceSize.size.width, deviceSize.size.height);
+            [self.workImage setFrame:fullWorkImageFrame];
         }completion:^(BOOL finished){
+            self.workContent.userInteractionEnabled = NO;
             isFullScreen = TRUE;
         }];
         return;
@@ -51,11 +58,14 @@
 }
 
 - (void)imgToMini:(UISwipeGestureRecognizer*)sender {
+    NSLog(@"imgtomini");
     if (isFullScreen) {
+        NSLog(@"is full screen");
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
             [self.workImage setFrame:prevFrame];
         }completion:^(BOOL finished){
-            isFullScreen = FALSE;
+            self.workContent.userInteractionEnabled = YES;
+            isFullScreen = NO;
         }];
         return;
     }
@@ -65,46 +75,72 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {
-    UITextView *calculationView = [[UITextView alloc] init];
-    [calculationView setAttributedText:text];
-    CGSize size = [calculationView sizeThatFits:CGSizeMake(width, FLT_MAX)];
-    return size.height;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    
+    
+    deviceSize = [OrientationUtils deviceSize];
+    _navigationBar.backgroundColor = [UIColor textColor];
+    
     WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
-    NSString *workDescription = [workModel description];
     
     isFullScreen = FALSE;
     
     self.navigationController.navigationBarHidden = YES;
     
-    self.workImage.contentMode = UIViewContentModeScaleAspectFill;
+    _workImage.contentMode = UIViewContentModeScaleAspectFill;
     [self.workImage setClipsToBounds:YES];
-    self.workImage.userInteractionEnabled = YES;
+    _workImage.userInteractionEnabled = YES;
     NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", self.workId];
-    self.workImage.image = [UIImage imageNamed:imageUrl];
-    self.workImage.layer.zPosition = 1;
+    _workImage.image = [UIImage imageNamed:imageUrl];
+    _workImage.layer.zPosition = 1;
     
     swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(imgToFullScreen:)];
     [swipeDown setDirection:UISwipeGestureRecognizerDirectionDown];
-    [self.workImage addGestureRecognizer:swipeDown];
     
     swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(imgToMini:)];
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
+    
+    [self.workImage addGestureRecognizer:swipeDown];
     [self.workImage addGestureRecognizer:swipeUp];
     
     touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToGallery:)];
-    [self.workImage addGestureRecognizer:touch];
+    _comebackGallery.userInteractionEnabled = YES;
+    [self.comebackGallery addGestureRecognizer:touch];
     
-    UITextView *workTextContent = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
-    workTextContent.text = workDescription;
-    workTextContent.textColor = [UIColor blackColor];
-    [self.workContent addSubview:workTextContent];
+    [self.workContent setDelegate:self];
+    _workContent.userInteractionEnabled = YES;
+    _workContent.scrollEnabled = YES;
+    
+    _workTitle.text = (NSString *)[workModel title];
+    _workTitle.textColor = [UIColor textColor];
+    
+    _workYear.text = (NSString *)[workModel year];
+    _workYear.textColor = [UIColor textColor];
+    
+    _workL.text = (NSString *)[@"L: " stringByAppendingString:(NSString *)[workModel l]];
+    _workH.text = (NSString *)[@"H: " stringByAppendingString:(NSString *)[workModel h]];
+    
+    _workTechnical.text = (NSString *)[workModel technical];
+    
+    _workDescription.text = (NSString *)[workModel description];
+    _workDescription.textColor = [UIColor blackColor];
+//    _workDescription.scrollEnabled = NO;
+    
+//    CGSize descriptionSize = [_workDescription sizeThatFits:CGSizeMake(320, 5000)];
+    
+//    _workDescription.bounds = CGRectMake(0, 0, descriptionSize.width, descriptionSize.height);
+    
+    NSLog(NSStringFromCGRect(_workDescription.frame));
+    
+    _workContent.translatesAutoresizingMaskIntoConstraints = NO;
+    _scrollViewContent.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollViewContent, _workContent);
+    [_workContent addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollViewContent]|" options:0 metrics: 0 views:viewsDictionary]];
+    [_workContent addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollViewContent]|" options:0 metrics: 0 views:viewsDictionary]];
 }
 
 - (void)didReceiveMemoryWarning

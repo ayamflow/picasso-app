@@ -14,6 +14,9 @@
 		5FC667D31833C67600F4585F /* background-dev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D21833C67600F4585F /* background-dev@2x.png */; };
 		5FC667D61833CA5000F4585F /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 5FC667D51833CA5000F4585F /* scene-2.mov */; };
 		5FE1CC8C1835294300AC21FB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */; };
+		5FE3CDAA18437D1000FC79CD /* comeback-scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE3CDA918437D1000FC79CD /* comeback-scene@2x.png */; };
+		5FE3CDAC18437D4600FC79CD /* comeback-gallery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE3CDAB18437D4600FC79CD /* comeback-gallery@2x.png */; };
+		5FE3CDB018439EAA00FC79CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE3CDAF18439EAA00FC79CD /* Colors.m */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -88,6 +91,10 @@
 		5FC667D51833CA5000F4585F /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "scene-2.mov"; path = "Picasso/Data/scene-2.mov"; sourceTree = SOURCE_ROOT; };
 		5FE1CC8A1835294300AC21FB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		5FE3CDA918437D1000FC79CD /* comeback-scene@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comeback-scene@2x.png"; path = "Data/comeback-scene@2x.png"; sourceTree = "<group>"; };
+		5FE3CDAB18437D4600FC79CD /* comeback-gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comeback-gallery@2x.png"; path = "Data/comeback-gallery@2x.png"; sourceTree = "<group>"; };
+		5FE3CDAE18439EAA00FC79CD /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		5FE3CDAF18439EAA00FC79CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -197,6 +204,16 @@
 			name = WorkFullView;
 			sourceTree = "<group>";
 		};
+		5FE3CDAD18439EAA00FC79CD /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				5FE3CDAE18439EAA00FC79CD /* Colors.h */,
+				5FE3CDAF18439EAA00FC79CD /* Colors.m */,
+			);
+			name = Constants;
+			path = Modules/Utils/Constants;
+			sourceTree = "<group>";
+		};
 		624B9787182117910087C576 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +239,7 @@
 		624B978C182120420087C576 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5FE3CDAD18439EAA00FC79CD /* Constants */,
 				5FE1CC8A1835294300AC21FB /* UIImage+ImageEffects.h */,
 				5FE1CC8B1835294300AC21FB /* UIImage+ImageEffects.m */,
 				624B978D182120580087C576 /* OrientationUtils.h */,
@@ -461,6 +479,8 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5FE3CDAB18437D4600FC79CD /* comeback-gallery@2x.png */,
+				5FE3CDA918437D1000FC79CD /* comeback-scene@2x.png */,
 				5FC667D21833C67600F4585F /* background-dev@2x.png */,
 				62A2B28918215DC700B4F0E4 /* logo.png */,
 				624B9797182158A20087C576 /* tracker-button.png */,
@@ -574,6 +594,7 @@
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
 				5FC667D61833CA5000F4585F /* scene-2.mov in Resources */,
+				5FE3CDAC18437D4600FC79CD /* comeback-gallery@2x.png in Resources */,
 				62A2B28A18215DC700B4F0E4 /* logo.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
@@ -584,6 +605,7 @@
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
+				5FE3CDAA18437D1000FC79CD /* comeback-scene@2x.png in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +638,7 @@
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				5F09CC841833D1B3003C9686 /* CHTCollectionViewWaterfallCell.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
+				5FE3CDB018439EAA00FC79CD /* Colors.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,

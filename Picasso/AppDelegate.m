@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "Colors.h"
 #import "GalleryViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+    
     // Override point for customization after application launch.
     return YES;
 }
