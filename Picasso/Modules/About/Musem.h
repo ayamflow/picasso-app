@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *hotelSubtitle;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *navBar;
 
 @end

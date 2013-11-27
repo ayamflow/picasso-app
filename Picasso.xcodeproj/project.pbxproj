@@ -33,6 +33,8 @@
 		62367AF01845FDEE0090B819 /* hotel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62367AEF1845FDEE0090B819 /* hotel@2x.png */; };
 		62367AF818460B420090B819 /* cellMinus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62367AF618460B420090B819 /* cellMinus@2x.png */; };
 		62367AF918460B420090B819 /* cellPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62367AF718460B420090B819 /* cellPlus@2x.png */; };
+		62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62367AFC18463A6A0090B819 /* HoursPanel.m */; };
+		62367B00184654D70090B819 /* InfosPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62367AFF184654D70090B819 /* InfosPanel.m */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248E17E1844F8CD001BEF6C /* iCarousel.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
@@ -161,6 +163,10 @@
 		62367AEF1845FDEE0090B819 /* hotel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotel@2x.png"; sourceTree = "<group>"; };
 		62367AF618460B420090B819 /* cellMinus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellMinus@2x.png"; sourceTree = "<group>"; };
 		62367AF718460B420090B819 /* cellPlus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellPlus@2x.png"; sourceTree = "<group>"; };
+		62367AFB18463A6A0090B819 /* HoursPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoursPanel.h; path = Modules/About/HoursPanel.h; sourceTree = "<group>"; };
+		62367AFC18463A6A0090B819 /* HoursPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoursPanel.m; path = Modules/About/HoursPanel.m; sourceTree = "<group>"; };
+		62367AFE184654D70090B819 /* InfosPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfosPanel.h; path = Modules/About/InfosPanel.h; sourceTree = "<group>"; };
+		62367AFF184654D70090B819 /* InfosPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfosPanel.m; path = Modules/About/InfosPanel.m; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		6248E17D1844F8CD001BEF6C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
@@ -420,6 +426,17 @@
 			);
 			name = Museum;
 			path = Data/UI/Museum;
+			sourceTree = "<group>";
+		};
+		62367AFA18463A4E0090B819 /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				62367AFB18463A6A0090B819 /* HoursPanel.h */,
+				62367AFC18463A6A0090B819 /* HoursPanel.m */,
+				62367AFE184654D70090B819 /* InfosPanel.h */,
+				62367AFF184654D70090B819 /* InfosPanel.m */,
+			);
+			name = Panels;
 			sourceTree = "<group>";
 		};
 		6248E17C1844F8CD001BEF6C /* iCarousel */ = {
@@ -752,6 +769,7 @@
 		CE86045E18283E560019657F /* Museum */ = {
 			isa = PBXGroup;
 			children = (
+				62367AFA18463A4E0090B819 /* Panels */,
 				CE86045B18283E520019657F /* Musem.h */,
 				CE86045C18283E520019657F /* Musem.m */,
 			);
@@ -947,11 +965,13 @@
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				620423C818434B5D00648ABA /* ScenePreview.m in Sources */,
+				62367B00184654D70090B819 /* InfosPanel.m in Sources */,
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				4F34E975183CD26900661A68 /* easing.c in Sources */,
 				6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
+				62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
