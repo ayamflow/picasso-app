@@ -68,7 +68,7 @@
 
 - (void)initButtons {
     // Going to gallery, musem or gallery mode stops the video
-    [self.exploreButton addTarget:self action:@selector(transitionOutToExplore) forControlEvents:UIControlEventTouchUpInside];
+    [self.exploreButton addTarget:self action:@selector(transitionOutComplete) forControlEvents:UIControlEventTouchUpInside];
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.museumButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.creditsButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
@@ -161,15 +161,15 @@
     [UIView animateWithDuration:duration delay:startTime options:UIViewAnimationOptionTransitionNone animations:^{
         view.layer.position = CGPointMake(view.layer.position.x - screenSize.size.width, view.layer.position.y);
     } completion:^(BOOL finished) {
-        [self transitionOutComplete];
+        if(++self.transitionOutDone == self.transitionOutNumber) {
+            [self transitionOutComplete];
+        }
     }];
 }
 
 - (void)transitionOutComplete {
-    if(++self.transitionOutDone == self.transitionOutNumber) {
-        SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
-        [self.navigationController pushViewController:sceneChooser animated:NO];
-    }
+    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+    [self.navigationController pushViewController:sceneChooser animated:NO];
 }
 
 @end
