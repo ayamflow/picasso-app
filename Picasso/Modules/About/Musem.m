@@ -46,7 +46,7 @@
     [self initButtons];
     
     // Testing
-    self.scrollView.contentSize = CGSizeMake([OrientationUtils nativeDeviceSize].size.width, kHeaderHeight + self.tableView.frame.size.height);
+//    self.scrollView.contentSize = CGSizeMake([OrientationUtils nativeDeviceSize].size.width, kHeaderHeight + self.tableView.frame.size.height);
     self.tableView.scrollEnabled = NO;
     
     [self initNavBarShadow];
@@ -210,6 +210,10 @@
 }
 
 - (void)updateScrollViewContentSize {
+    NSLog(@"Table height: %f", self.tableView.contentSize.height);
+    CGRect tableFrame = self.tableView.frame;
+    tableFrame.size.height = self.tableView.contentSize.height;
+    self.tableView.frame = tableFrame;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, self.tableView.contentSize.height - kHeaderHeight);
 }
 

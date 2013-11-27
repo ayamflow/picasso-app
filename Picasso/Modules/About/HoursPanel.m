@@ -15,6 +15,8 @@
 
 @interface HoursPanel ()
 
+@property (assign, nonatomic) CGFloat totalHeight;
+
 @end
 
 @implementation HoursPanel
@@ -28,7 +30,10 @@
     
     [self.view sizeToFit];
     [self.view clipsToBounds];
-    self.view.backgroundColor = [UIColor greenColor];
+    
+//    CGRect frame = self.view.frame;
+//    frame.size = CGSizeMake(frame.size.width, self.totalHeight);
+//    self.view.frame = frame;
 }
 
 - (void)initClocks {
@@ -51,6 +56,8 @@
     closeClock.layer.shadowOpacity = 0.5;
     [self.view addSubview:closeClock];
     [closeClock moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width - 25 - closeClock.frame.size.width, 25)];
+    
+    self.totalHeight = openClock.frame.size.height + closeClock.frame.size.height + 50;
 }
 
 - (void)initHours {
@@ -60,6 +67,7 @@
     NSMutableArray *hourLabels = [[NSMutableArray alloc] initWithCapacity:[days count]];
     
     CGFloat topOffset = 25 + kClockSize;
+    self.totalHeight += topOffset;
     
     int i = 1;
     for(NSString *day in days) {
@@ -80,6 +88,7 @@
         [self.view addSubview:hourLabel];
         [hourLabels addObject:hourLabel];
         i++;
+        self.totalHeight += dayLabel.frame.size.height;
     }
 }
 
