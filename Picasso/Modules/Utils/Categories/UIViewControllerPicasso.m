@@ -19,11 +19,10 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
-- (void)rotateToLandscapeOrientation {
-//    [self willRotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft duration:0]; // Cleaner rotate
-    UIViewController* forcePortrait = [[UIViewController alloc] init];
-    [self presentViewController:forcePortrait animated:NO completion:^{
-        [forcePortrait dismissViewControllerAnimated:NO completion:nil];
+- (void)updateRotation {
+    UIViewController* forceRotation = [[UIViewController alloc] init];
+    [self presentViewController:forceRotation animated:NO completion:^{
+        [forceRotation dismissViewControllerAnimated:NO completion:nil];
     }];
 }
 

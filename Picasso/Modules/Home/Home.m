@@ -32,11 +32,11 @@
 @implementation Home
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (void)stopVideo:(id)sender {
@@ -45,6 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self updateRotation];
     
     self.transitionCompleted = NO;
     
@@ -76,7 +78,7 @@
     self.logo = [[Logo alloc] init];
     [self.view addSubview:self.logo.view];
     [self.logo.view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.logo.view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 4 - self.logo.view.frame.size.height)];
-    [self.logo transitionOpenWithDuration:0.8 andDelay:0.2];
+//    [self.logo transitionOpenWithDuration:0.8 andDelay:0.2];
 }
 
 - (void)startIntroTransition {
@@ -142,8 +144,6 @@
 }
 
 - (void)transitionOutToExplore {
-    [self rotateToLandscapeOrientation];
-
     NSTimeInterval outDuration = 1;
     self.transitionOutDone = 0;
     self.transitionOutNumber = 0;

@@ -187,4 +187,6 @@ iCarouselOption;
 - (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform;
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value;
 
+- (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset;
+
 @end

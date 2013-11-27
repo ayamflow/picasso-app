@@ -449,6 +449,10 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     return _delegate? [_delegate carousel:self valueForOption:option withDefault:value]: value;
 }
 
+- (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
+    [self.delegate carouselScrollHasChanged:caroussel withOffset:offset];
+}
+
 - (CATransform3D)transformForItemViewWithOffset:(CGFloat)offset
 {   
     //set up base transform
@@ -1813,6 +1817,8 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
             _scrollOffset = max;
             _startVelocity = 0.0f;
         }
+        [self carouselScrollHasChanged:self withOffset:_scrollOffset];
+        
     }
     
     //check if index has changed

@@ -16,6 +16,7 @@
 #import "ScenePreview.h"
 #import "SceneModel.h"
 #import "iCarousel.h"
+#import "Home.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -29,7 +30,9 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
-@property (assign, nonatomic) BOOL isDragging;
+@property (strong, nonatomic) UIView *backButton;
+@property (assign, nonatomic) BOOL backButtonHidden;
+@property (assign, nonatomic) BOOL navigatingToHome;
 
 @end
 
@@ -45,10 +48,12 @@
     
 	self.view.backgroundColor = [UIColor clearColor];
     self.previewWidth = [OrientationUtils nativeLandscapeDeviceSize].size.width * 0.6;
-    [self rotateToLandscapeOrientation];
+    [self updateRotation];
     
     [self initPreviews];
     [self initCarousel];
+    
+    [self initBackButton];
     
     [self initTitle];
     [self initDate];
@@ -75,21 +80,6 @@
     self.carousel.type = iCarouselTypeCustom;
     self.carousel.pagingEnabled = YES;
     [self.view addSubview:self.carousel];
-
-    [self.carousel addObserver:self forKeyPath:@"scrollOffset" options:0 context:NULL];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if(object == self.carousel && [keyPath isEqualToString:@"scrollOffset"]) {
-        NSLog(@"scroll: %f", self.carousel.scrollOffset);
-    }
-}
-
-- (void)showBackButton {
-	if(self.isDragging && self.carousel.currentItemIndex == 0) {
-		NSLog(@"%f", self.carousel.scrollOffset);
-        [self showBackButton];
-    }
 }
 
 - (void)initBackground {
@@ -100,6 +90,30 @@
     
 //	UIImageView *background = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
 //    [self.view addSubview:background];
+}
+
+- (void)initBackButton {
+
+    UILabel *backLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+    backLabel.text = [@"retour au menu" uppercaseString];
+    backLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15];
+    backLabel.textColor = [UIColor blackColor];
+    
+    UIImageView *backIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"backButton.png"]];
+    
+    self.backButton = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backLabel.frame.size.width, backLabel.frame.size.height + backIcon.frame.size.height + 15)];
+    [self.backButton addSubview:backLabel];
+    [self.backButton addSubview:backIcon];
+    [self.backButton clipsToBounds];
+    
+    [backLabel moveTo:CGPointMake(0, backIcon.frame.size.height + 15)];
+    [backIcon moveTo:CGPointMake(backLabel.frame.size.width / 2 - backIcon.frame.size.width / 2, 0)];
+    
+    self.backButton.alpha = 0;
+    self.backButtonHidden = YES;
+    [self.view addSubview:self.backButton];
+    
+    [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.backButton.frame.size.height / 2)];
 }
 
 - (void)initTitle {
@@ -149,6 +163,27 @@
     }];
 }
 
+- (void)navigateToHome {
+    if(self.navigatingToHome) return;
+    self.navigatingToHome = YES;
+    
+    // deactivate // kill icarousel
+    [self.carousel removeFromSuperview];
+    
+    self.titleLabel.alpha = 0;
+    self.dateLabel.alpha = 0;
+    [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.backButton.frame.size.height / 2)];
+    
+    // move backbutton to center
+   [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+       [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width - self.backButton.frame.size.width * 2, self.backButton.frame.origin.y)];
+       self.backButton.alpha = 0;
+   } completion:^(BOOL finished) {
+       Home *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
+       [self.navigationController pushViewController:homeView animated:NO];
+   }];
+}
+
 // iCarousel protocols
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view {
@@ -170,6 +205,7 @@
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     if(![[DataManager sharedInstance] getSceneWithNumber:index].unlocked) return;
+    if(index != carousel.currentItemIndex) return;
     
     UIView *view = [[ScenePreview alloc] initWithModel:[[DataManager sharedInstance] getSceneWithNumber:index]].view;
     view.center = carousel.currentItemView.center;
@@ -187,15 +223,12 @@
     switch(option) {
 		case iCarouselOptionWrap:
             return 0;
-            break;
 
         case iCarouselOptionFadeMin:
             return -0.5;
-            break;
 
         case iCarouselOptionFadeMax:
             return 0.5;
-            break;
     }
 
     return value;
@@ -210,14 +243,36 @@
     return transform;
 }
 
-- (void)carouselWillBeginDragging:(iCarousel *)carousel {
-    self.isDragging = YES;
-//    [self showBackButton];
-//    [self performSelector:@selector(showBackButton) withObject:self afterDelay:0.2];
+- (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
+    if(!self.backButtonHidden && !self.navigatingToHome) {
+        self.backButtonHidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.backButton.alpha = 0;
+            self.titleLabel.alpha = 1;
+            self.dateLabel.alpha = 1;
+            self.carousel.alpha = 1;
+            [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 5 - self.backButton.frame.size.width / 2, self.backButton.frame.origin.y)];
+        }];
+    }
 }
 
-- (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
-    self.isDragging = NO;
+- (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
+    if(caroussel.isDragging && offset < 0 && caroussel.currentItemIndex == 0) {
+        if(self.backButtonHidden) self.backButtonHidden = NO;
+        CGFloat finalPosition = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2;
+        [self.backButton moveTo:CGPointMake(finalPosition * (1.35 - (offset + 1.1)), self.backButton.frame.origin.y)];
+        
+        CGFloat computedAlpha = 1 - (offset + 1);
+        
+        self.backButton.alpha = computedAlpha;
+        self.titleLabel.alpha = offset + 0.8;
+        self.dateLabel.alpha = offset + 0.8;
+        self.carousel.alpha = offset + 0.8;
+        
+        if(computedAlpha > 0.75) {
+            [self navigateToHome];
+        }
+    }
 }
 
 @end
