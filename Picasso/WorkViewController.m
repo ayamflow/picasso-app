@@ -45,12 +45,11 @@ CGRect deviceSize;
 - (void)imgToFullScreen:(UISwipeGestureRecognizer*)sender {
     if (!isFullScreen) {
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-            //save previous frame
             prevFrame = self.workImage.frame;
             CGRect fullWorkImageFrame = CGRectMake(0, 80, deviceSize.size.width, deviceSize.size.height);
             [self.workImage setFrame:fullWorkImageFrame];
         }completion:^(BOOL finished){
-            self.workContent.userInteractionEnabled = NO;
+            _workContent.userInteractionEnabled = FALSE;
             isFullScreen = TRUE;
         }];
         return;
@@ -58,13 +57,11 @@ CGRect deviceSize;
 }
 
 - (void)imgToMini:(UISwipeGestureRecognizer*)sender {
-    NSLog(@"imgtomini");
     if (isFullScreen) {
-        NSLog(@"is full screen");
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
             [self.workImage setFrame:prevFrame];
         }completion:^(BOOL finished){
-            self.workContent.userInteractionEnabled = YES;
+            _workContent.userInteractionEnabled = TRUE;
             isFullScreen = NO;
         }];
         return;
@@ -79,12 +76,8 @@ CGRect deviceSize;
 {
     [super viewDidLoad];
     
-    
-    
     deviceSize = [OrientationUtils deviceSize];
     _navigationBar.backgroundColor = [UIColor textColor];
-    
-    WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
     
     isFullScreen = FALSE;
     
@@ -110,37 +103,14 @@ CGRect deviceSize;
     _comebackGallery.userInteractionEnabled = YES;
     [self.comebackGallery addGestureRecognizer:touch];
     
-    [self.workContent setDelegate:self];
-    _workContent.userInteractionEnabled = YES;
-    _workContent.scrollEnabled = YES;
-    
-    _workTitle.text = (NSString *)[workModel title];
-    _workTitle.textColor = [UIColor textColor];
-    
-    _workYear.text = (NSString *)[workModel year];
-    _workYear.textColor = [UIColor textColor];
-    
-    _workL.text = (NSString *)[@"L: " stringByAppendingString:(NSString *)[workModel l]];
-    _workH.text = (NSString *)[@"H: " stringByAppendingString:(NSString *)[workModel h]];
-    
-    _workTechnical.text = (NSString *)[workModel technical];
-    
-    _workDescription.text = (NSString *)[workModel description];
-    _workDescription.textColor = [UIColor blackColor];
-//    _workDescription.scrollEnabled = NO;
-    
-//    CGSize descriptionSize = [_workDescription sizeThatFits:CGSizeMake(320, 5000)];
-    
-//    _workDescription.bounds = CGRectMake(0, 0, descriptionSize.width, descriptionSize.height);
-    
-    NSLog(NSStringFromCGRect(_workDescription.frame));
-    
-    _workContent.translatesAutoresizingMaskIntoConstraints = NO;
-    _scrollViewContent.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_scrollViewContent, _workContent);
-    [_workContent addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollViewContent]|" options:0 metrics: 0 views:viewsDictionary]];
-    [_workContent addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollViewContent]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.workContent loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"workContent" ofType:@"html"]isDirectory:NO]]];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
+    NSString *script = [NSString stringWithFormat:@"fillData('%@','%@','%@','%@','%@')", workModel.title, workModel.h, workModel.l, workModel.technical, workModel.description];
+    [self.workContent stringByEvaluatingJavaScriptFromString:script];
 }
 
 - (void)didReceiveMemoryWarning

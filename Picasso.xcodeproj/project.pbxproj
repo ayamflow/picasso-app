@@ -17,6 +17,7 @@
 		5FE3CDAA18437D1000FC79CD /* comeback-scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE3CDA918437D1000FC79CD /* comeback-scene@2x.png */; };
 		5FE3CDAC18437D4600FC79CD /* comeback-gallery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FE3CDAB18437D4600FC79CD /* comeback-gallery@2x.png */; };
 		5FE3CDB018439EAA00FC79CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE3CDAF18439EAA00FC79CD /* Colors.m */; };
+		5FE3CDB2184505E700FC79CD /* workContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 5FE3CDB1184505E700FC79CD /* workContent.html */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
@@ -95,6 +96,7 @@
 		5FE3CDAB18437D4600FC79CD /* comeback-gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comeback-gallery@2x.png"; path = "Data/comeback-gallery@2x.png"; sourceTree = "<group>"; };
 		5FE3CDAE18439EAA00FC79CD /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		5FE3CDAF18439EAA00FC79CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		5FE3CDB1184505E700FC79CD /* workContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = workContent.html; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 			children = (
 				B9FF5303181FBD9400DFCC39 /* WorkViewController.h */,
 				B9FF5304181FBD9400DFCC39 /* WorkViewController.m */,
+				5FE3CDB1184505E700FC79CD /* workContent.html */,
 			);
 			name = WorkView;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				5FE3CDAA18437D1000FC79CD /* comeback-scene@2x.png in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
+				5FE3CDB2184505E700FC79CD /* workContent.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
