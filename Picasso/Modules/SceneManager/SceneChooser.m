@@ -30,7 +30,7 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
-@property (strong, nonatomic) UIView *slider;
+@property (strong, nonatomic) UIButton *slider;
 
 @property (strong, nonatomic) UIView *backButton;
 @property (assign, nonatomic) BOOL backButtonHidden;
@@ -129,7 +129,7 @@
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:13];
     self.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.titleLabel.layer.borderWidth = 2;
-    [self.view addSubview:self.titleLabel];
+    [self.carousel addSubview:self.titleLabel];
     [self.titleLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.titleLabel.frame.size.width / 2, 40)];
 }
 
@@ -139,15 +139,18 @@
     self.dateLabel.textColor = [UIColor blackColor];
     [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
-    [self.view addSubview:self.dateLabel];
+    [self.carousel addSubview:self.dateLabel];
     [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, 25)];
 }
 
 - (void)initSlider {
-    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 45)];
+    self.slider = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 45)];
     self.slider.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.slider];
+    self.slider.layer.anchorPoint = CGPointMake(0, 0.5);
     [self.slider moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.slider.frame.size.height / 2)];
+    self.slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.02, 1);
+    [self.slider addTarget:self action:@selector(sliderDragged) forControlEvents:UIControlEventTouchDragInside];
 }
 
 
@@ -181,24 +184,38 @@
     }];
 }
 
-- (void)navigateToHome {
+- (void)sliderDragged {
+    NSLog(@"drag");
+}
+
+- (void)showMenu {
     if(self.navigatingToHome) return;
     self.navigatingToHome = YES;
     
     // deactivate // kill icarousel
     [self.carousel removeFromSuperview];
+
+    UIView *homeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    homeView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:homeView];
+    [homeView moveTo:CGPointMake(-homeView.frame.size.width, self.view.frame.size.height / 2 - homeView.frame.size.height / 2)];
     
-    self.titleLabel.alpha = 0;
-    self.dateLabel.alpha = 0;
-    [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.backButton.frame.size.height / 2)];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.02, 1);
+        [homeView moveTo:CGPointMake(0, homeView.frame.origin.y)];
+    }];
     
-    // move backbutton to center
-   [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-       [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width - self.backButton.frame.size.width * 2, self.backButton.frame.origin.y)];
-       self.backButton.alpha = 0;
-   } completion:^(BOOL finished) {
-       [self navigateBackToHome];
-   }];
+//    self.titleLabel.alpha = 0;
+//    self.dateLabel.alpha = 0;
+//    [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.backButton.frame.size.height / 2)];
+//    
+//    // move backbutton to center
+//   [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//       [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width - self.backButton.frame.size.width * 2, self.backButton.frame.origin.y)];
+//       self.backButton.alpha = 0;
+//   } completion:^(BOOL finished) {
+//       [self navigateBackToHome];
+//   }];
 }
 
 // iCarousel protocols
@@ -259,7 +276,7 @@
     return transform;
 }
 
-- (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
+/*- (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
     if(!self.backButtonHidden && !self.navigatingToHome) {
         self.backButtonHidden = YES;
         [UIView animateWithDuration:0.3 animations:^{
@@ -267,28 +284,31 @@
             self.titleLabel.alpha = 1;
             self.dateLabel.alpha = 1;
             self.carousel.alpha = 1;
+            self.slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.02, 1);
+            [self.carousel moveTo:CGPointMake(0, 0)];
             [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 5 - self.backButton.frame.size.width / 2, self.backButton.frame.origin.y)];
         }];
     }
-}
+}*/
 
 - (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
-    if(caroussel.isDragging && offset < 0 && caroussel.currentItemIndex == 0) {
-//        if(self.backButtonHidden) self.backButtonHidden = NO;
-//        CGFloat finalPosition = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2;
-//        [self.backButton moveTo:CGPointMake(finalPosition * (1.35 - (offset + 1.1)), self.backButton.frame.origin.y)];
-//        
-//        CGFloat computedAlpha = 1 - (offset + 1);
-//        
+    /*if(caroussel.isDragging && offset < 0 && caroussel.currentItemIndex == 0) {
+        if(self.backButtonHidden) self.backButtonHidden = NO;
+        CGFloat finalPosition = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2;
+        [self.backButton moveTo:CGPointMake(finalPosition * (1.35 - (offset + 1.1)), self.backButton.frame.origin.y)];
+
+        CGFloat computedOffset = (1 - (offset + 1)) / 2;
+        self.slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, computedOffset, 1);
+        [self.carousel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * computedOffset * 2, 0)];
 //        self.backButton.alpha = computedAlpha;
 //        self.titleLabel.alpha = offset + 0.8;
 //        self.dateLabel.alpha = offset + 0.8;
 //        self.carousel.alpha = offset + 0.8;
-//        
-//        if(computedAlpha > 0.75) {
-//            [self navigateToHome];
-//        }
-    }
+
+        if(computedOffset > 0.35) {
+            [self showMenu];
+        }
+    }*/
 }
 
 @end
