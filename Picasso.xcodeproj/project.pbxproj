@@ -63,6 +63,9 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
+		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
+		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
+		62AF0452184753EA00A83599 /* ClockNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AF0451184753EA00A83599 /* ClockNeedleView.m */; };
 		62B31CC418449C0F0053CC75 /* circleMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CC318449C0F0053CC75 /* circleMask@2x.png */; };
 		62B31CCD1844DE3B0053CC75 /* creditButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CC91844DE3B0053CC75 /* creditButton@2x.png */; };
 		62B31CCE1844DE3B0053CC75 /* exploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCA1844DE3B0053CC75 /* exploreButton@2x.png */; };
@@ -212,6 +215,10 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
+		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
+		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
+		62AF0450184753EA00A83599 /* ClockNeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClockNeedleView.h; path = Modules/About/ClockNeedleView.h; sourceTree = "<group>"; };
+		62AF0451184753EA00A83599 /* ClockNeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClockNeedleView.m; path = Modules/About/ClockNeedleView.m; sourceTree = "<group>"; };
 		62B31CC318449C0F0053CC75 /* circleMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleMask@2x.png"; sourceTree = "<group>"; };
 		62B31CC91844DE3B0053CC75 /* creditButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditButton@2x.png"; sourceTree = "<group>"; };
 		62B31CCA1844DE3B0053CC75 /* exploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exploreButton@2x.png"; sourceTree = "<group>"; };
@@ -435,6 +442,10 @@
 				62367AFC18463A6A0090B819 /* HoursPanel.m */,
 				62367AFE184654D70090B819 /* InfosPanel.h */,
 				62367AFF184654D70090B819 /* InfosPanel.m */,
+				62AF044C184733D600A83599 /* HoursPanel.xib */,
+				62AF044E18473A1A00A83599 /* InfosPanel.xib */,
+				62AF0450184753EA00A83599 /* ClockNeedleView.h */,
+				62AF0451184753EA00A83599 /* ClockNeedleView.m */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -903,10 +914,12 @@
 				CE98B41A184524A8004760D3 /* scene-4@2x.png in Resources */,
 				CEA3E755182E616400B115BC /* Brandon_bold.otf in Resources */,
 				B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */,
+				62AF044D184733D600A83599 /* HoursPanel.xib in Resources */,
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
 				620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */,
+				62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */,
 				CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */,
@@ -978,6 +991,7 @@
 				CE86045D18283E520019657F /* Musem.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
+				62AF0452184753EA00A83599 /* ClockNeedleView.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

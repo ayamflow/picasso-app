@@ -9,13 +9,20 @@
 #import "HoursPanel.h"
 #import "OrientationUtils.h"
 #import "UIViewPicasso.h"
+#import "ClockNeedleView.h"
 
 #define kDayHeight 15
 #define kClockSize 111
+#define kClockCenterSize 4
 
 @interface HoursPanel ()
 
 @property (assign, nonatomic) CGFloat totalHeight;
+
+@property (strong, nonatomic) ClockNeedleView *openHour;
+@property (strong, nonatomic) ClockNeedleView *openMinute;
+@property (strong, nonatomic) ClockNeedleView *closedHour;
+@property (strong, nonatomic) ClockNeedleView *closedMinute;
 
 @end
 
@@ -26,70 +33,59 @@
     [super viewDidLoad];
     
     [self initClocks];
-    [self initHours];
-    
-    [self.view sizeToFit];
-    [self.view clipsToBounds];
-    
-//    CGRect frame = self.view.frame;
-//    frame.size = CGSizeMake(frame.size.width, self.totalHeight);
-//    self.view.frame = frame;
+    [self transitionIn];
 }
 
 - (void)initClocks {
-    UIView *openClock = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kClockSize, kClockSize)];
-    openClock.layer.cornerRadius = kClockSize / 2;
-    openClock.backgroundColor = [UIColor blackColor];
-    openClock.layer.masksToBounds = NO;
-    openClock.layer.shadowOffset = CGSizeMake(0, 0);
-    openClock.layer.shadowRadius = 5;
-    openClock.layer.shadowOpacity = 0.5;
-    [self.view addSubview:openClock];
-    [openClock moveTo:CGPointMake(25, 25)];
+    [self initClockWithView:self.openClock];
+    [self initClockWithView:self.closeClock];
     
-    UIView *closeClock = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kClockSize, kClockSize)];
-    closeClock.layer.cornerRadius = kClockSize / 2;
-    closeClock.backgroundColor = [UIColor blackColor];
-    closeClock.layer.masksToBounds = NO;
-    closeClock.layer.shadowOffset = CGSizeMake(0, 0);
-    closeClock.layer.shadowRadius = 5;
-    closeClock.layer.shadowOpacity = 0.5;
-    [self.view addSubview:closeClock];
-    [closeClock moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width - 25 - closeClock.frame.size.width, 25)];
+    self.openHour = [self createNeedleWithLineWidth:30];
+    [self.openClock addSubview:self.openHour];
+
+    self.openMinute = [self createNeedleWithLineWidth:40];
+    [self.openClock addSubview:self.openMinute];
     
-    self.totalHeight = openClock.frame.size.height + closeClock.frame.size.height + 50;
+    self.closedHour = [self createNeedleWithLineWidth:30];
+    [self.closeClock addSubview:self.closedHour];
+    
+    self.closedMinute = [self createNeedleWithLineWidth:40];
+    [self.closeClock addSubview:self.closedMinute];
 }
 
-- (void)initHours {
-    NSArray *days = @[@"Lundi", @"Mardi", @"Mercredi", @"Jeudi", @"Vendredi", @"Samedi"];
+- (void)initClockWithView:(UIView *)view {
+    view.layer.cornerRadius = kClockSize / 2;
+    view.layer.masksToBounds = NO;
+    view.layer.shadowOffset = CGSizeMake(0, 0);
+    view.layer.shadowRadius = 5;
+    view.layer.shadowOpacity = 0.5;
+}
+
+- (ClockNeedleView *)createNeedleWithLineWidth:(CGFloat)lineWidth {
+    ClockNeedleView *needle = [[ClockNeedleView alloc] initWithFrame:self.openClock.bounds];
+    needle.lineLength = 40;
+    needle.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    needle.backgroundColor = [UIColor clearColor];
+    return needle;
+}
+
+- (void)transitionIn {
+    NSTimeInterval duration = 0.5;
+    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.openHour.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * 2 + M_PI * 2 / 3);
+    } completion:nil];
     
-    NSMutableArray *dayLabels = [[NSMutableArray alloc] initWithCapacity:[days count]];
-    NSMutableArray *hourLabels = [[NSMutableArray alloc] initWithCapacity:[days count]];
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.openMinute.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * 2 + M_PI);
+    } completion:nil];
     
-    CGFloat topOffset = 25 + kClockSize;
-    self.totalHeight += topOffset;
+    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.closedHour.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * 2 + M_PI / 6);
+    } completion:nil];
     
-    int i = 1;
-    for(NSString *day in days) {
-        UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 2, kDayHeight)];
-        dayLabel.text = day;
-        dayLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:12];
-        [dayLabel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width * 0.05, topOffset + i * kDayHeight)];
-        
-        [self.view addSubview:dayLabel];
-        [dayLabels addObject:dayLabel];
-        
-        UILabel *hourLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 2, kDayHeight)];
-        hourLabel.text = @"10h-13h / 14h-19h";
-        [hourLabel setTextAlignment:NSTextAlignmentRight];
-        hourLabel.font = [UIFont fontWithName:@"Avenir-Book" size:12];
-        [hourLabel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width - hourLabel.frame.size.width - [OrientationUtils nativeDeviceSize].size.width * 0.05, topOffset + i * kDayHeight)];
-        
-        [self.view addSubview:hourLabel];
-        [hourLabels addObject:hourLabel];
-        i++;
-        self.totalHeight += dayLabel.frame.size.height;
-    }
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.closedMinute.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * 2 + M_PI);
+    } completion:nil];
 }
 
 @end

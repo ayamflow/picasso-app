@@ -187,7 +187,6 @@
 // iCarousel protocols
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view {
-    
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber:index];
     view = [[ScenePreview alloc] initWithModel:sceneModel].view;
     return view;

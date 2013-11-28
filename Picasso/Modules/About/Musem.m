@@ -13,7 +13,6 @@
 #import "HoursPanel.h"
 #import "InfosPanel.h"
 
-#define kHeaderHeight 260
 #define kCellLabelTag 1
 #define kCellDetailTag 2
 
@@ -41,23 +40,43 @@
     [super viewDidLoad];
     
     [self initTableView];
+    [self initTableHeader];
     [self initData];
     [self initTexts];
     [self initButtons];
-    
-    // Testing
-//    self.scrollView.contentSize = CGSizeMake([OrientationUtils nativeDeviceSize].size.width, kHeaderHeight + self.tableView.frame.size.height);
-    self.tableView.scrollEnabled = NO;
     
     [self initNavBarShadow];
 }
 
 - (void)initTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeaderHeight, [OrientationUtils nativeDeviceSize].size.width, [OrientationUtils nativeDeviceSize].size.height - kHeaderHeight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, [OrientationUtils nativeDeviceSize].size.height - self.navBar.frame.size.height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
+}
+
+- (void)initTableHeader {
+    UIImageView *hotelImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hotel.png"]];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, hotelImage.frame.size.height)];
+    [header addSubview:hotelImage];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 3/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];
+    titleLabel.text = [@"L'hôtel salé" uppercaseString];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Black" size:20];
+    titleLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    titleLabel.layer.borderWidth = 2;
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [header addSubview:titleLabel];
+    
+    UILabel *subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 4/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];
+    subtitleLabel.text = [@"c'est ouvert !" uppercaseString];
+    subtitleLabel.textColor = [UIColor whiteColor];
+    subtitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:16];
+    [subtitleLabel setTextAlignment:NSTextAlignmentCenter];
+    [header addSubview:subtitleLabel];
+
+    self.tableView.tableHeaderView = header;
 }
 
 - ( void)initNavBarShadow {
@@ -65,7 +84,7 @@
     self.navBar.layer.shadowOffset = CGSizeMake(0, 5);
     self.navBar.layer.shadowRadius = 3;
     self.navBar.layer.shadowOpacity = 0.3;
-    [self.scrollView bringSubviewToFront:self.navBar];
+    [self.view bringSubviewToFront:self.navBar];
 }
 
 - (void)initData {
@@ -139,14 +158,18 @@
          
 - (void)expandCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [self.openCellIndexes addObject:@(indexPath.row)];
-    Class SubView = NSClassFromString([self.subviewClasses objectAtIndex:indexPath.row]);
-    UIView *view = [[[SubView alloc] init] view];
+    NSString *subviewName = [self.subviewClasses objectAtIndex:indexPath.row];
+    Class SubView = NSClassFromString(subviewName);
+    UIView *view = ((UIViewController *)[[SubView alloc] initWithNibName:subviewName bundle:nil]).view;
     view.tag = kCellDetailTag;
     [cell.contentView addSubview:view];
     [view moveTo:CGPointMake(0, cell.frame.size.height)];
     self.lastUpdatedCellHeight = view.frame.size.height;
     [self updateCell:cell atIndexPath:indexPath];
     [self changeStatusIconForCell:cell atIndexPath:indexPath];
+    
+    // Scroll to cell
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)closeCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -167,7 +190,6 @@
 - (void)updateCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
-    [self updateScrollViewContentSize];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -175,7 +197,6 @@
         return [tableView rowHeight];
     }
     else {
-        NSLog(@"view height: %f", self.lastUpdatedCellHeight);
         return self.lastUpdatedCellHeight;
     }
 }
@@ -207,14 +228,6 @@
         statusIcon.image = animatedIconImage;
         statusIcon.alpha = 1;
     }];
-}
-
-- (void)updateScrollViewContentSize {
-    NSLog(@"Table height: %f", self.tableView.contentSize.height);
-    CGRect tableFrame = self.tableView.frame;
-    tableFrame.size.height = self.tableView.contentSize.height;
-    self.tableView.frame = tableFrame;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, self.tableView.contentSize.height - kHeaderHeight);
 }
 
 @end
