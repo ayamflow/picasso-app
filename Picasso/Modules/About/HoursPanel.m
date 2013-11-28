@@ -13,7 +13,7 @@
 
 #define kDayHeight 15
 #define kClockSize 111
-#define kClockCenterSize 4
+#define kClockCenterSize 3.5
 
 @interface HoursPanel ()
 
@@ -51,6 +51,13 @@
     
     self.closedMinute = [self createNeedleWithLineWidth:40];
     [self.closeClock addSubview:self.closedMinute];
+    
+//     Add a point a the center of the clock ?
+//    UIView *openClockCenter = [self createClockCenterForClock:self.openClock];
+//    [self.openClock addSubview:openClockCenter];
+    
+//    UIView *closedClockCenter = [self createClockCenterForClock:self.closeClock];
+//    [self.closeClock addSubview:closedClockCenter];
 }
 
 - (void)initClockWithView:(UIView *)view {
@@ -63,10 +70,17 @@
 
 - (ClockNeedleView *)createNeedleWithLineWidth:(CGFloat)lineWidth {
     ClockNeedleView *needle = [[ClockNeedleView alloc] initWithFrame:self.openClock.bounds];
-    needle.lineLength = 40;
+    needle.lineLength = lineWidth;
     needle.layer.anchorPoint = CGPointMake(0.5, 0.5);
     needle.backgroundColor = [UIColor clearColor];
     return needle;
+}
+
+- (UIView *)createClockCenterForClock:(UIView *)clock {
+    UIView *clockCenter = [[UIView alloc] initWithFrame:CGRectMake(clock.frame.size.width / 2 - kClockCenterSize / 2, clock.frame.size.height / 2 - kClockCenterSize / 2, kClockCenterSize, kClockCenterSize)];
+    clockCenter.backgroundColor = [UIColor whiteColor];
+    clockCenter.layer.cornerRadius = kClockCenterSize / 2;
+    return clockCenter;
 }
 
 - (void)transitionIn {

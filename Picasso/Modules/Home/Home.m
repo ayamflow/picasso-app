@@ -168,8 +168,7 @@
 }
 
 - (void)transitionOutComplete {
-    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
-    [self.navigationController pushViewController:sceneChooser animated:NO];
+    [self navigateToExploreMode];
 }
 
 @end

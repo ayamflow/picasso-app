@@ -179,8 +179,7 @@
        [self.backButton moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width - self.backButton.frame.size.width * 2, self.backButton.frame.origin.y)];
        self.backButton.alpha = 0;
    } completion:^(BOOL finished) {
-       Home *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
-       [self.navigationController pushViewController:homeView animated:NO];
+       [self navigateBackToHome];
    }];
 }
 

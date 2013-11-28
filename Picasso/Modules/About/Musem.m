@@ -9,6 +9,7 @@
 #import "Musem.h"
 #import "SceneChooser.h"
 #import "UIViewPicasso.h"
+#import "UIViewControllerPicasso.h"
 #import "OrientationUtils.h"
 #import "HoursPanel.h"
 #import "InfosPanel.h"
@@ -112,8 +113,7 @@
 }
 
 - (void)navigateToExplore {
-    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
-    [self.navigationController pushViewController:sceneChooser animated:NO];
+    [self navigateToExploreMode];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -168,7 +168,6 @@
     [self updateCell:cell atIndexPath:indexPath];
     [self changeStatusIconForCell:cell atIndexPath:indexPath];
     
-    // Scroll to cell
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
