@@ -30,6 +30,8 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
+@property (strong, nonatomic) UIView *slider;
+
 @property (strong, nonatomic) UIView *backButton;
 @property (assign, nonatomic) BOOL backButtonHidden;
 @property (assign, nonatomic) BOOL navigatingToHome;
@@ -58,6 +60,8 @@
     [self initTitle];
     [self initDate];
     
+    [self initSlider];
+    
 //    [self initBackground];
 }
 
@@ -79,6 +83,7 @@
     self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeCustom;
     self.carousel.pagingEnabled = YES;
+    self.carousel.contentOffset = CGSizeMake(0, 30);
     [self.view addSubview:self.carousel];
 }
 
@@ -136,6 +141,13 @@
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
     [self.view addSubview:self.dateLabel];
     [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, 25)];
+}
+
+- (void)initSlider {
+    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 45)];
+    self.slider.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.slider];
+    [self.slider moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.slider.frame.size.height / 2)];
 }
 
 
@@ -214,8 +226,8 @@
     UIView *view = [[ScenePreview alloc] initWithModel:[[DataManager sharedInstance] getSceneWithNumber:index]].view;
     view.center = carousel.currentItemView.center;
     [self.view addSubview:view];
+    [view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - view.frame.size.height / 2 + carousel.contentOffset.height +1)];
     
-    [view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - view.frame.size.width / 2, 0)];
     [UIView animateWithDuration:0.4 animations:^{
         self.carousel.alpha = 0;
     } completion:^(BOOL finished) {
@@ -262,20 +274,20 @@
 
 - (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
     if(caroussel.isDragging && offset < 0 && caroussel.currentItemIndex == 0) {
-        if(self.backButtonHidden) self.backButtonHidden = NO;
-        CGFloat finalPosition = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2;
-        [self.backButton moveTo:CGPointMake(finalPosition * (1.35 - (offset + 1.1)), self.backButton.frame.origin.y)];
-        
-        CGFloat computedAlpha = 1 - (offset + 1);
-        
-        self.backButton.alpha = computedAlpha;
-        self.titleLabel.alpha = offset + 0.8;
-        self.dateLabel.alpha = offset + 0.8;
-        self.carousel.alpha = offset + 0.8;
-        
-        if(computedAlpha > 0.75) {
-            [self navigateToHome];
-        }
+//        if(self.backButtonHidden) self.backButtonHidden = NO;
+//        CGFloat finalPosition = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.backButton.frame.size.width / 2;
+//        [self.backButton moveTo:CGPointMake(finalPosition * (1.35 - (offset + 1.1)), self.backButton.frame.origin.y)];
+//        
+//        CGFloat computedAlpha = 1 - (offset + 1);
+//        
+//        self.backButton.alpha = computedAlpha;
+//        self.titleLabel.alpha = offset + 0.8;
+//        self.dateLabel.alpha = offset + 0.8;
+//        self.carousel.alpha = offset + 0.8;
+//        
+//        if(computedAlpha > 0.75) {
+//            [self navigateToHome];
+//        }
     }
 }
 

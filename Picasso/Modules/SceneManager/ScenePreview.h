@@ -12,6 +12,5 @@
 @interface ScenePreview : UIViewController
 
 - (id)initWithModel:(SceneModel *)model;
-- (void)resetButtonColor;
 
 @end
