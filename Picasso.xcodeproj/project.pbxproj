@@ -64,11 +64,11 @@
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF0452184753EA00A83599 /* ClockNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AF0451184753EA00A83599 /* ClockNeedleView.m */; };
+		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
+		62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */; };
+		62AF046F18479DAF00A83599 /* menuGaleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */; };
+		62AF047018479DAF00A83599 /* menuMuseumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046C18479DAF00A83599 /* menuMuseumButton@2x.png */; };
 		62B31CC418449C0F0053CC75 /* circleMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CC318449C0F0053CC75 /* circleMask@2x.png */; };
-		62B31CCD1844DE3B0053CC75 /* creditButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CC91844DE3B0053CC75 /* creditButton@2x.png */; };
-		62B31CCE1844DE3B0053CC75 /* exploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCA1844DE3B0053CC75 /* exploreButton@2x.png */; };
-		62B31CCF1844DE3B0053CC75 /* galleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCB1844DE3B0053CC75 /* galleryButton@2x.png */; };
-		62B31CD01844DE3B0053CC75 /* museumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CCC1844DE3B0053CC75 /* museumButton@2x.png */; };
 		62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CD11844E1D20053CC75 /* Brandon_reg.otf */; };
 		62B31CD41844F0CE0053CC75 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CD31844F0CE0053CC75 /* backButton@2x.png */; };
 		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
@@ -211,11 +211,11 @@
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF0450184753EA00A83599 /* ClockNeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClockNeedleView.h; path = Modules/About/ClockNeedleView.h; sourceTree = "<group>"; };
 		62AF0451184753EA00A83599 /* ClockNeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClockNeedleView.m; path = Modules/About/ClockNeedleView.m; sourceTree = "<group>"; };
+		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
+		62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuExploreButton@2x.png"; sourceTree = "<group>"; };
+		62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuGaleryButton@2x.png"; sourceTree = "<group>"; };
+		62AF046C18479DAF00A83599 /* menuMuseumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuMuseumButton@2x.png"; sourceTree = "<group>"; };
 		62B31CC318449C0F0053CC75 /* circleMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleMask@2x.png"; sourceTree = "<group>"; };
-		62B31CC91844DE3B0053CC75 /* creditButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditButton@2x.png"; sourceTree = "<group>"; };
-		62B31CCA1844DE3B0053CC75 /* exploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exploreButton@2x.png"; sourceTree = "<group>"; };
-		62B31CCB1844DE3B0053CC75 /* galleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "galleryButton@2x.png"; sourceTree = "<group>"; };
-		62B31CCC1844DE3B0053CC75 /* museumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "museumButton@2x.png"; sourceTree = "<group>"; };
 		62B31CD11844E1D20053CC75 /* Brandon_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_reg.otf; path = Data/Fonts/Brandon_reg.otf; sourceTree = "<group>"; };
 		62B31CD31844F0CE0053CC75 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
 		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
@@ -675,10 +675,10 @@
 		62B31CC81844DE3B0053CC75 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				62B31CC91844DE3B0053CC75 /* creditButton@2x.png */,
-				62B31CCA1844DE3B0053CC75 /* exploreButton@2x.png */,
-				62B31CCB1844DE3B0053CC75 /* galleryButton@2x.png */,
-				62B31CCC1844DE3B0053CC75 /* museumButton@2x.png */,
+				62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */,
+				62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */,
+				62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */,
+				62AF046C18479DAF00A83599 /* menuMuseumButton@2x.png */,
 			);
 			name = Home;
 			path = Data/UI/Home;
@@ -845,11 +845,13 @@
 				CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */,
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
+				62AF046F18479DAF00A83599 /* menuGaleryButton@2x.png in Resources */,
+				62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */,
+				62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */,
 				620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				CE32CDE0182ED33C00BBAE33 /* dateTitleSign@2x.png in Resources */,
-				62B31CD01844DE3B0053CC75 /* museumButton@2x.png in Resources */,
 				B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */,
 				62367AF818460B420090B819 /* cellMinus@2x.png in Resources */,
 				CEE3B20C18440EA2000324DD /* map@2x.png in Resources */,
@@ -857,7 +859,6 @@
 				CEF64D56182ACA4200FE9C39 /* scene-1.mov in Resources */,
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
 				62084D551835237D00F9C26C /* logo0@2x.png in Resources */,
-				62B31CCD1844DE3B0053CC75 /* creditButton@2x.png in Resources */,
 				620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */,
 				62E9FA2C181FB56A0080A21D /* scene-2.mp4 in Resources */,
 				620423D81843579300648ABA /* navArrowRight@2x.png in Resources */,
@@ -881,13 +882,13 @@
 				62AF044D184733D600A83599 /* HoursPanel.xib in Resources */,
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
 				620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */,
+				62AF047018479DAF00A83599 /* menuMuseumButton@2x.png in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				62DCA8EF1843B17000CF593F /* circleButton@2x.png in Resources */,
 				62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
 				62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */,
 				CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */,
-				62B31CCE1844DE3B0053CC75 /* exploreButton@2x.png in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button@2x.png in Resources */,
 				62367AF918460B420090B819 /* cellPlus@2x.png in Resources */,
 				CE98B418184524A8004760D3 /* scene-2@2x.png in Resources */,
@@ -900,7 +901,6 @@
 				4F20B8ED182D46030035EEF1 /* chooserTitle@2x.png in Resources */,
 				62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */,
 				CE98B41B184524A8004760D3 /* scene-5@2x.png in Resources */,
-				62B31CCF1844DE3B0053CC75 /* galleryButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

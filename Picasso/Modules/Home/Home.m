@@ -54,7 +54,7 @@
     
     [self initLabels];
     [self initButtons];
-    [self initLogo];
+//    [self initLogo];
 //    [self startIntroTransition];
 }
 
@@ -66,6 +66,9 @@
 }
 
 - (void)initButtons {
+    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+        button.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
+    }
     // Going to gallery, musem or gallery mode stops the video
     [self.exploreButton addTarget:self action:@selector(transitionOutComplete) forControlEvents:UIControlEventTouchUpInside];
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
