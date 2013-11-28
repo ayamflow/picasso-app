@@ -7,7 +7,6 @@
 //
 
 #import "UIViewControllerPicasso.h"
-#import "MenuLandscape.h"
 #import "SceneChooser.h"
 #import "Home.h"
 
@@ -40,39 +39,26 @@
 }
 
 - (void)navigateBackToHome {
-//    self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
-//    [UIView animateWithDuration:0.2 animations:^{
-//        self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
-//        self.view.alpha = 0;
-//    } completion:^(BOOL finished) {
-        Home *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
-        [self.navigationController pushViewController:homeView animated:NO];
-//    }];
+    UIViewController *viewController;
+    UIView *view;
+    
+    if(self.parentViewController == self.navigationController) {
+        viewController = self;
+        view = self.view;
+    }
+    else {
+        viewController = self.parentViewController;
+        view = self.parentViewController.view;
+    }
+    
+    view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    [UIView animateWithDuration:0.2 animations:^{
+        view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        Home *homeView = [viewController.storyboard instantiateViewControllerWithIdentifier:@"Home"];
+        [viewController.navigationController pushViewController:homeView animated:NO];
+    }];
 }
-
-/*- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
-    Menu *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-    menu.wasInExploreMode = isExploreMode;
-    menu.wasInSceneMode = isSceneMode;
-    [self.navigationController pushViewController:menu animated:NO];
-}*/
-
-- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode {
-    MenuLandscape *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-    menu.wasInExploreMode = isExploreMode;
-    menu.wasInSceneMode = isSceneMode;
-    menu.previousOrientation = orientation;
-    [self.navigationController pushViewController:menu animated:NO];
-}
-
-- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andLayer:(CALayer *)screen andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode {
-    MenuLandscape *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-    menu.wasInExploreMode = isExploreMode;
-    menu.wasInSceneMode = isSceneMode;
-    menu.previousOrientation = orientation;
-    menu.screenLayer = screen;
-    [self.navigationController pushViewController:menu animated:NO];
-}
-
 
 @end

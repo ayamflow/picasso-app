@@ -8,12 +8,13 @@
 
 #import "SceneManager.h"
 #import "Scene.h"
+#import "SceneChooser.h"
 #import "SceneModel.h"
 #import "DataManager.h"
 #import "UIViewControllerPicasso.h"
 #import "SceneInterstitial.h"
 #import "OrientationUtils.h"
-#import "MenuButton.h"
+#import "UIViewPicasso.h"
 #import "UIViewControllerPicasso.h"
 
 @interface SceneManager ()
@@ -21,20 +22,10 @@
 @property (strong, nonatomic) Scene *oldScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
 @property (assign, nonatomic) NSInteger scenesNumber;
-@property (strong, nonatomic) MenuButton *menuButton;
 
 @end
 
 @implementation SceneManager
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
@@ -54,24 +45,21 @@
     
     // Auto launch
     [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
-	[self initMenu];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:@"showSceneChooser" object:nil];
 }
 
-- (void)initMenu {
-    self.menuButton = [[MenuButton alloc] initWithExploreMode:YES];
-    [self addChildViewController:self.menuButton];
-    [self.view addSubview:self.menuButton.view];
-    [self.view bringSubviewToFront:self.menuButton.view];
-    CGRect frame = self.menuButton.view.frame;
-    frame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.menuButton.view.frame.size.width / 2;
-    self.menuButton.view.frame = frame;
-}
-
-- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode{
-    NSLog(@"showMenu");
-    [self.currentScene stop];
-    [self showMenuWithOrientation:self.interfaceOrientation andExploreMode:YES andSceneMode:YES];
-//    [super showMenuWithExploreMode:YES andSceneMode:YES];
+- (void)showSceneChooser {
+    SceneChooser *sceneChooser = [[SceneChooser alloc] init];
+    [self addChildViewController:sceneChooser];
+    sceneChooser.view.alpha = 0;
+    [self.view addSubview:sceneChooser.view];
+    [self.view bringSubviewToFront:sceneChooser.view];
+    sceneChooser.view.frame = self.view.frame;
+    [sceneChooser.view moveTo:CGPointMake(sceneChooser.view.frame.origin.x, sceneChooser.view.frame.origin.y + 30)];
+    [UIView animateWithDuration:0.4 animations:^{
+        sceneChooser.view.alpha = 1;
+        [sceneChooser.view moveTo:CGPointMake(sceneChooser.view.frame.origin.x, sceneChooser.view.frame.origin.y - 30)];
+    }];
 }
 
 - (void)showSceneWithNumber:(NSInteger)number {
@@ -95,7 +83,6 @@
     self.currentScene.delegate = self;
     [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];
-    [self.view bringSubviewToFront:self.menuButton.view];
 }
 
 - (void)removeLastSeenScene {
@@ -169,12 +156,6 @@
 
 - (NSInteger)getPreviousSceneNumber {
     return self.currentScene.model.number > 0 ? self.currentScene.model.number - 1 : self.scenesNumber - 1;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

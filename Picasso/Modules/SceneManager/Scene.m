@@ -7,6 +7,7 @@
 //
 
 #import "Scene.h"
+#import "SceneChooser.h"
 #import "SceneModel.h"
 #import "DataManager.h"
 #import "TrackerModel.h"
@@ -129,9 +130,7 @@
 		if(self.panDistance <= self.timeline.view.frame.size.height * 2) {
 			[UIView animateWithDuration:0.4 animations:^{
 			    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-            } completion:^(BOOL finished) {
-
-            }];
+            } completion:nil];
         }
     }
 }
@@ -154,6 +153,7 @@
         playerScreenshot.alpha = 1;
     } completion:^(BOOL finished) {
         [self stop];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSceneChooser" object:nil];
     }];
 }
 

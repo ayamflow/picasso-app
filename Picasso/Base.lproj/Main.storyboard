@@ -19,22 +19,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2N-gZ-ZFw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="-825"/>
+            <point key="canvasLocation" x="1650" y="-557"/>
         </scene>
         <!--Scene Manager-->
         <scene sceneID="Gn4-YD-ynG">
             <objects>
                 <viewController storyboardIdentifier="SceneManager" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uqe-AI-x0G" customClass="SceneManager" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o16-SL-ZSK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="jg2-OL-L8G"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS6-rt-DQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2417" y="-825"/>
+            <point key="canvasLocation" x="2417" y="-557"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="X6E-Hs-n4T">
@@ -259,123 +261,6 @@
             </objects>
             <point key="canvasLocation" x="1056" y="-8"/>
         </scene>
-        <!--Menu Landscape-->
-        <scene sceneID="30T-76-jD5">
-            <objects>
-                <viewController id="bQw-AI-6ho" customClass="MenuLandscape" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hUs-vW-uyV">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="byh-Ap-Pb0">
-                                <rect key="frame" x="20" y="139" width="157" height="42"/>
-                                <state key="normal" title="EXPLORER" backgroundImage="exploreButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dkv-aM-cWv">
-                                <rect key="frame" x="206" y="139" width="157" height="42"/>
-                                <state key="normal" title="GALERIE" backgroundImage="galleryButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UbL-jc-dBj">
-                                <rect key="frame" x="392" y="139" width="156" height="42"/>
-                                <state key="normal" title="LE MUSÉE" backgroundImage="museumButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DqV-mW-CcQ">
-                                <rect key="frame" x="206" y="202" width="156" height="42"/>
-                                <state key="normal" title="RETOUR" backgroundImage="museumButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JyW-Wu-jl5">
-                                <rect key="frame" x="278" y="278" width="12" height="22"/>
-                                <state key="normal" image="menuSliderUp.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HT7-R2-PjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1040" y="1520"/>
-        </scene>
-        <!--Menu Portrait-->
-        <scene sceneID="Tem-qy-T5Q">
-            <objects>
-                <viewController storyboardIdentifier="Menu" id="jTI-Lr-gl6" customClass="MenuPortrait" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleAspectFit" id="BOD-ca-AUp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PT5-MT-RUQ">
-                                <rect key="frame" x="82" y="213" width="157" height="42"/>
-                                <state key="normal" title="EXPLORER" backgroundImage="exploreButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tdj-j0-Vc8">
-                                <rect key="frame" x="82" y="263" width="157" height="42"/>
-                                <state key="normal" title="GALERIE" backgroundImage="galleryButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="nJk-K9-wsr" kind="push" id="1gf-Eu-BiW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jfx-32-63Z">
-                                <rect key="frame" x="83" y="313" width="156" height="42"/>
-                                <state key="normal" title="LE MUSÉE" backgroundImage="museumButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="pw8-1h-sAP" kind="push" id="pMS-7j-2bV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bIf-Nm-Zxu">
-                                <rect key="frame" x="82" y="363" width="156" height="42"/>
-                                <state key="normal" title="RETOUR" backgroundImage="museumButton.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RYi-oX-kSE">
-                                <rect key="frame" x="155" y="526" width="12" height="22"/>
-                                <state key="normal" image="menuSliderUp.png">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="backButton" destination="bIf-Nm-Zxu" id="sFY-7k-ugt"/>
-                        <outlet property="closeButton" destination="RYi-oX-kSE" id="qJo-Oc-GM7"/>
-                        <outlet property="exploreButton" destination="PT5-MT-RUQ" id="sYd-lB-BMP"/>
-                        <outlet property="galleryButton" destination="Tdj-j0-Vc8" id="WlZ-1Z-mmF"/>
-                        <outlet property="museumButton" destination="jfx-32-63Z" id="J30-jK-wIQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bBX-eA-yib" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1040" y="804"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cb5-jg-9ES">
             <objects>
@@ -402,7 +287,6 @@
         <image name="creditButton.png" width="101" height="101"/>
         <image name="exploreButton.png" width="101" height="101"/>
         <image name="galleryButton.png" width="101" height="101"/>
-        <image name="menuSliderUp.png" width="12" height="6"/>
         <image name="museumButton.png" width="101" height="101"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -410,8 +294,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="sJy-tY-RGP"/>
-        <segue reference="WJh-nJ-Fi5"/>
-    </inferredMetricsTieBreakers>
 </document>

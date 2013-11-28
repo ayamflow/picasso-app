@@ -58,7 +58,6 @@
 //    [self startIntroTransition];
 }
 
-
 - (void)initLabels {
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12.0];
     self.titleLabel.text = [@"sur les traces\ndu maître picasso" uppercaseString];

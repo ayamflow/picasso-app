@@ -15,8 +15,5 @@
 - (void)updateRotation;
 - (void)navigateToExploreMode;
 - (void)navigateBackToHome;
-//- (void)showMenuWithExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
-- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
-- (void)showMenuWithOrientation:(UIInterfaceOrientation)orientation andLayer:(CALayer *)screen andExploreMode:(BOOL)isExploreMode andSceneMode:(BOOL)isSceneMode;
 
 @end

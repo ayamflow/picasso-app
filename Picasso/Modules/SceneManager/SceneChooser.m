@@ -158,8 +158,14 @@
     } completion:^(BOOL finished) {
         [[DataManager sharedInstance] getGameModel].currentScene = index;
         
-        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-        [self.navigationController pushViewController:sceneManager animated:NO];
+        if(self.parentViewController == self.navigationController) {
+            SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+            [self.navigationController pushViewController:sceneManager animated:NO];
+        }
+        else {
+            SceneManager *sceneManager = [self.parentViewController.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+            [self.parentViewController.navigationController pushViewController:sceneManager animated:NO];
+        }
     }];
 }
 
