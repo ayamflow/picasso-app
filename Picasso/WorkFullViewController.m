@@ -6,13 +6,17 @@
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
+#import "DataManager.h"
+#import "WorkModel.h"
 #import "WorkFullViewController.h"
 #import "OrientationUtils.h"
 #import "UIImage+ImageEffects.h"
+#import "A3ParallaxScrollView.h"
 
 @interface WorkFullViewController ()
 
 @property (nonatomic, strong) CALayer *maskLayer;
+@property (nonatomic, retain) A3ParallaxScrollView *parallaxScrollView;
 
 @end
 
@@ -33,69 +37,57 @@ CGRect deviceSize;
     [super viewDidLoad];
 	
     deviceSize = [OrientationUtils deviceSize];
-    NSLog(@"device size %f", deviceSize.size.width);
+    WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
     
-    NSString *workImageFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", self.workId]];
-    
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    
-    backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.width, deviceSize.size.height)];
+    backgroundView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"background-dev.png"]]];
     [self.view addSubview:backgroundView];
     
-    firstView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.width, deviceSize.size.height)];
-    [firstView setContentSize:CGSizeMake(deviceSize.size.width, 4300)];
-    [firstView setDelegate:self];
-    [self.view addSubview:firstView];
+    self.parallaxScrollView = [[A3ParallaxScrollView alloc] initWithFrame:self.view.bounds];
+    self.parallaxScrollView.delegate = self;
+    [self.view addSubview:self.parallaxScrollView];
     
-    /*
-    frontView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
-    [frontView setContentSize:CGSizeMake(320, 500)];
+    CGSize contentSize = self.parallaxScrollView.frame.size;
+    contentSize.height *= 5.0f;
     
-    [frontView setDelegate:self];
-    [self.view addSubview:frontView];
-    */
-     
-    NSString *backgroundFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"background-dev.png"];
-    UIImageView *background = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:backgroundFile]];
-    [backgroundView addSubview:background];
+    self.parallaxScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.parallaxScrollView.contentSize = contentSize;
     
-    backgroundFirstView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:workImageFile]];
-    [firstView addSubview:backgroundFirstView];
-    backgroundFirstView.frame = CGRectMake(0, 0,deviceSize.size.width, 4300);
-    backgroundFirstView.image = [backgroundFirstView.image applyDarkEffect];
+    // Add scroll content
+    backgroundWorkView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", self.workId]]]];
+    backgroundWorkView.frame = CGRectMake(0, 0,deviceSize.size.width, 4300);
+    backgroundWorkView.image = [backgroundWorkView.image applyDarkEffect];
+    [self.parallaxScrollView addSubview:backgroundWorkView withAcceleration:CGPointMake(0.0f, 0.2f)];
+
+    headerView = [[UIView alloc] initWithFrame:CGRectMake(20, 20, deviceSize.size.width - 40, deviceSize.size.height - 40)];
+    headerView.backgroundColor = [UIColor clearColor];
     
-    /*
-    self.workImage.contentMode = UIViewContentModeScaleAspectFill;
-    [self.workImage setClipsToBounds:YES];
-    self.workImage.userInteractionEnabled = YES;
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", self.workId];
-    self.workImage.image = [UIImage imageNamed:imageUrl];
-    self.workImage.layer.zPosition = 1;
-    */
+    [headerView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [headerView.layer setBorderWidth:2.0];
+    [self.parallaxScrollView addSubview:headerView withAcceleration:CGPointMake(0.0f, 0.5)];
     
-    /*
-    // load image into second scrollview
-    fileLocation = [[NSBundle mainBundle] pathForResource:@"parallax-02.png" ofType:nil];
-    aImage = [[UIImage alloc] initWithContentsOfFile:fileLocation];
-    aImageView = [[UIImageView alloc] initWithImage:aImage];
-    aImageView.frame = CGRectMake(0, 0, aImage.size.width, aImage.size.height);
-    [_secondScrollView addSubview:aImageView];
-    [aImage release];
-    aImage = nil;
-    [aImageView release];
+    UILabel *headerViewContent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+    headerViewContent.text = [workModel.title uppercaseString];
+    headerViewContent.textColor = [UIColor whiteColor];
+    headerViewContent.font = [headerViewContent.font fontWithSize:25];
+    [headerViewContent setCenter:CGPointMake(headerView.frame.size.width / 2, headerView.frame.size.height / 2)];
+    [headerView addSubview:headerViewContent];
     
+    workDescriptionView = [[UIView alloc] initWithFrame:CGRectMake(deviceSize.size.width - 300, deviceSize.size.height + 100, 600, 800)];
+    workDescriptionView.backgroundColor = [UIColor whiteColor];
+    [self.parallaxScrollView addSubview:workDescriptionView withAcceleration:CGPointMake(0.0f, 0.5)];
+
+    UITextView *workDescriptionViewContent = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 600, 200)];
+    workDescriptionViewContent.text = workModel.description;
+    [workDescriptionViewContent sizeToFit];
+    [workDescriptionViewContent setCenter:CGPointMake(workDescriptionView.frame.size.width / 2, workDescriptionView.frame.origin.y)];
+    [workDescriptionView addSubview:workDescriptionViewContent];
     
-    // load image into third scrollview
-    fileLocation = [[NSBundle mainBundle] pathForResource:@"parallax-01.png" ofType:nil];
-    aImage = [[UIImage alloc] initWithContentsOfFile:fileLocation];
-    aImageView = [[UIImageView alloc] initWithImage:aImage];
-    aImageView.frame = CGRectMake(0, 0, aImage.size.width, aImage.size.height);
-    [_thirdScrollView addSubview:aImageView];
-    [aImage release];
-    aImage = nil;
-    [aImageView release];
-    */
-     
+    workImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg", self.workId]]];
+    CGRect workImageViewFrame = workImageView.frame;
+    workImageViewFrame.origin.x = 40;
+    workImageViewFrame.origin.y = deviceSize.size.height + 20;
+    workImageView.frame = workImageViewFrame;
+    [self.parallaxScrollView addSubview:workImageView withAcceleration:CGPointMake(0.0f, 0.9)];
 }
 
 - (void)didReceiveMemoryWarning
