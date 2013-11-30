@@ -15,5 +15,7 @@
 - (void)updateRotation;
 - (void)navigateToExploreMode;
 - (void)navigateBackToHome;
+- (void)toHome;
+- (void)toSceneChooser;
 
 @end

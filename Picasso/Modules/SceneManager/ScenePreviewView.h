@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SceneModel.h"
 
-@interface ScenePreview : UIViewController
+@interface ScenePreviewView : UIView
 
-- (id)initWithModel:(SceneModel *)model;
+- (id)initWithFrame:(CGRect)frame andModel:(SceneModel *)model;
 
 @end

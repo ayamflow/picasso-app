@@ -69,6 +69,13 @@
     for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
         button.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
     }
+
+    // This one is the reference
+    [self.galleryButton moveTo:CGPointMake(self.galleryButton.frame.origin.x, [OrientationUtils nativeDeviceSize].size.height / 2 - self.galleryButton.frame.size.height / 2 - 40)];
+    [self.exploreButton moveTo:CGPointMake(self.exploreButton.frame.origin.x, self.galleryButton.frame.origin.y - 40 - self.exploreButton.frame.size.height)];
+    [self.museumButton moveTo:CGPointMake(self.museumButton.frame.origin.x, [OrientationUtils nativeDeviceSize].size.height / 2 - self.galleryButton.frame.size.height / 2 + 40)];
+    [self.creditsButton moveTo:CGPointMake(self.creditsButton.frame.origin.x, self.museumButton.frame.origin.y + self.museumButton.frame.size.height + 40)];
+
     // Going to gallery, musem or gallery mode stops the video
     [self.exploreButton addTarget:self action:@selector(transitionOutComplete) forControlEvents:UIControlEventTouchUpInside];
     [self.galleryButton addTarget:self action:@selector(stopVideo:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,7 +177,9 @@
 }
 
 - (void)transitionOutComplete {
-    [self navigateToExploreMode];
+//    [self navigateToExploreMode];
+    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+    [self.navigationController pushViewController:sceneChooser animated:NO];	
 }
 
 @end

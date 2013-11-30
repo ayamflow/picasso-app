@@ -39,6 +39,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
+    [self updateRotation];
     
     DataManager *dataManager = [DataManager sharedInstance];
     self.scenesNumber = [dataManager getScenesNumber];

@@ -38,6 +38,16 @@
     }];
 }
 
+- (void)toSceneChooser {
+    SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+    [self.navigationController pushViewController:sceneChooser animated:NO];
+}
+
+- (void)toHome {
+    Home *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
+    [self.navigationController pushViewController:homeView animated:NO];
+}
+
 - (void)navigateBackToHome {
     UIViewController *viewController;
     UIView *view;
