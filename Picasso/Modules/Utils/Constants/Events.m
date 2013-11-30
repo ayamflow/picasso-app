@@ -38,4 +38,8 @@
     return @"transitionOutComplete";
 }
 
++ (NSString *)MenuExitEvent {
+    return @"exitMenu";
+}
+
 @end

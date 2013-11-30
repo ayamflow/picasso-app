@@ -51,7 +51,6 @@
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
     [self addSubview:self.exploreButton];
-//    [self.exploreButton moveTo:CGPointMake(leftOffset, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
     [self.exploreButton moveTo:CGPointMake(self.frame.size.width - 2 * self.exploreButton.frame.size.width, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
 }
 

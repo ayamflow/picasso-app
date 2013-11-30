@@ -82,6 +82,7 @@
 		B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5307181FE76400DFCC39 /* 2.jpg */; };
 		B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5308181FE76400DFCC39 /* 3.jpg */; };
 		B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5311181FF58500DFCC39 /* GalleryViewController.m */; };
+		CE181CE2184A94FD0040EC9C /* timelineTracker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE181CE1184A94FD0040EC9C /* timelineTracker@2x.png */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -90,6 +91,9 @@
 		CE45E6A61849FAE500DCFF09 /* DashedPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6A51849FAE500DCFF09 /* DashedPathView.m */; };
 		CE45E6A9184A1EB900DCFF09 /* Intro.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6A8184A1EB900DCFF09 /* Intro.m */; };
 		CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6AD184A371800DCFF09 /* SceneMenu.m */; };
+		CE45E6B2184A502100DCFF09 /* worksNumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E6B0184A502100DCFF09 /* worksNumber@2x.png */; };
+		CE45E6B3184A502100DCFF09 /* scenesNumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E6B1184A502100DCFF09 /* scenesNumber@2x.png */; };
+		CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6B5184A5C9800DCFF09 /* SceneChooserLandscape.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button@2x.png */; };
 		CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE719772184106A1006F6CAE /* menuSliderDown@2x.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
@@ -228,6 +232,8 @@
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5310181FF58500DFCC39 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		B9FF5311181FF58500DFCC39 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
+		CE181CE1184A94FD0040EC9C /* timelineTracker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timelineTracker@2x.png"; path = "Data/UI/Scene/timelineTracker@2x.png"; sourceTree = "<group>"; };
+		CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscapeDelegate.h; path = Modules/SceneManager/SceneChooserLandscapeDelegate.h; sourceTree = "<group>"; };
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
 		CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSlider@2x.png"; sourceTree = "<group>"; };
 		CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navBackButton@2x.png"; path = "Data/UI/NavigationBar/navBackButton@2x.png"; sourceTree = "<group>"; };
@@ -239,6 +245,10 @@
 		CE45E6A8184A1EB900DCFF09 /* Intro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Intro.m; path = Modules/Intro/Intro.m; sourceTree = "<group>"; };
 		CE45E6AC184A371800DCFF09 /* SceneMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMenu.h; path = Modules/SceneManager/SceneMenu.h; sourceTree = "<group>"; };
 		CE45E6AD184A371800DCFF09 /* SceneMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneMenu.m; path = Modules/SceneManager/SceneMenu.m; sourceTree = "<group>"; };
+		CE45E6B0184A502100DCFF09 /* worksNumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "worksNumber@2x.png"; path = "Data/UI/Scene/worksNumber@2x.png"; sourceTree = "<group>"; };
+		CE45E6B1184A502100DCFF09 /* scenesNumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scenesNumber@2x.png"; path = "Data/UI/Scene/scenesNumber@2x.png"; sourceTree = "<group>"; };
+		CE45E6B4184A5C9800DCFF09 /* SceneChooserLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscape.h; path = Modules/SceneManager/SceneChooserLandscape.h; sourceTree = "<group>"; };
+		CE45E6B5184A5C9800DCFF09 /* SceneChooserLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooserLandscape.m; path = Modules/SceneManager/SceneChooserLandscape.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button@2x.png"; path = "Data/UI/timeline-button@2x.png"; sourceTree = "<group>"; };
 		CE719772184106A1006F6CAE /* menuSliderDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderDown@2x.png"; sourceTree = "<group>"; };
 		CE86045718283BAB0019657F /* Home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Home.h; path = Modules/Home/Home.h; sourceTree = "<group>"; };
@@ -359,6 +369,8 @@
 				620423C718434B5D00648ABA /* ScenePreviewView.m */,
 				CE45E6A41849FAE500DCFF09 /* DashedPathView.h */,
 				CE45E6A51849FAE500DCFF09 /* DashedPathView.m */,
+				CE45E6B4184A5C9800DCFF09 /* SceneChooserLandscape.h */,
+				CE45E6B5184A5C9800DCFF09 /* SceneChooserLandscape.m */,
 			);
 			name = SceneChooser;
 			sourceTree = "<group>";
@@ -422,6 +434,7 @@
 			children = (
 				624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */,
 				624B97861821174E0087C576 /* SlidingButtonDelegate.h */,
+				CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -716,9 +729,20 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		CE45E6AF184A501700DCFF09 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				CE181CE1184A94FD0040EC9C /* timelineTracker@2x.png */,
+				CE45E6B0184A502100DCFF09 /* worksNumber@2x.png */,
+				CE45E6B1184A502100DCFF09 /* scenesNumber@2x.png */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CE45E6AF184A501700DCFF09 /* Scene */,
 				CE45E69D1849EB3600DCFF09 /* NavigationBar */,
 				624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */,
 				62367AEA1845FC3C0090B819 /* Museum */,
@@ -850,6 +874,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE45E6B2184A502100DCFF09 /* worksNumber@2x.png in Resources */,
 				CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */,
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
@@ -863,6 +888,7 @@
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */,
 				B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */,
+				CE181CE2184A94FD0040EC9C /* timelineTracker@2x.png in Resources */,
 				62367AF818460B420090B819 /* cellMinus@2x.png in Resources */,
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
 				CE45E6A11849EB4200DCFF09 /* navExploreButton@2x.png in Resources */,
@@ -877,6 +903,7 @@
 				620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */,
 				CE98B419184524A8004760D3 /* scene-3@2x.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
+				CE45E6B3184A502100DCFF09 /* scenesNumber@2x.png in Resources */,
 				CE98B41C184524A8004760D3 /* scene-6@2x.png in Resources */,
 				62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
@@ -938,6 +965,7 @@
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
+				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,

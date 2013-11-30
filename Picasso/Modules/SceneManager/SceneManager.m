@@ -93,7 +93,6 @@
         [self.oldScene.view removeFromSuperview];
         [self.oldScene removeFromParentViewController];
         self.oldScene.delegate = nil;
-        self.oldScene = nil;
     }
 }
 
@@ -102,12 +101,10 @@
     self.interstitial = [[SceneInterstitial alloc] initWithModel:self.currentScene.model];
     self.interstitial.slidingButton.delegate = self;
     [self.view addSubview:self.interstitial.view];
-//	[self.navigationController presentViewController:self.interstitial animated:NO completion:nil];
 }
 
 - (void)removeInterstitial {
     [self.interstitial.view removeFromSuperview];
-    self.interstitial = nil;
 }
 
 - (void)skipInterstitial {
@@ -121,10 +118,7 @@
         self.oldScene.view.frame = oldSceneFrame;
         self.interstitial.view.frame = oldSceneFrame;
         // Move new scene into the screen
-        CGPoint currentScenePosition = CGPointMake(0, 0);
-        CGRect currentSceneFrame = self.currentScene.view.frame;
-        currentSceneFrame.origin = currentScenePosition;
-        self.currentScene.view.frame = currentSceneFrame;
+        self.currentScene.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
     } completion:^(BOOL finished) {
         [self removeLastSeenScene];
         [self removeInterstitial];

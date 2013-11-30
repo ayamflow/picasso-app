@@ -17,6 +17,7 @@
 @property (assign, nonatomic) BOOL unlocked;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSArray *trackers;
+@property (strong, nonatomic) NSArray *trackerStarts;
 @property (strong, nonatomic) NSString *description;
 
 - (id)initWithData:(NSDictionary *)data;

@@ -29,6 +29,7 @@
             [trackers addObject:trackerModel];
         }
         self.trackers = [[NSArray alloc] initWithArray:trackers];
+        self.trackerStarts = data[@"trackerStarts"];
     }
     return self;
 }

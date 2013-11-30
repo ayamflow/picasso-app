@@ -12,6 +12,6 @@
 @interface SceneTimeline : UIViewController
 
 - (id)initWithModel:(SceneModel *)model;
-- (void)updateWithCompletion:(float)completion;
+- (void)updateWithCompletion:(CGFloat)completion;
 
 @end

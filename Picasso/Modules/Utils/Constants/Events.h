@@ -19,4 +19,6 @@
 + (NSString *)TransitionInCompleteEvent;
 + (NSString *)TransitionOutCompleteEvent;
 
++ (NSString *)MenuExitEvent;
+
 @end

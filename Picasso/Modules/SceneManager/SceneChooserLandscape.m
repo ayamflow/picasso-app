@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 PowerRangers. All rights reserved.
 //
 
-#import "SceneChooser.h"
+#import "SceneChooserLandscape.h"
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "UIViewControllerPicasso.h"
@@ -24,14 +24,13 @@
 #define kDirectionLeft 1
 #define kDirectionRight 2
 
-@interface SceneChooser ()
+@interface SceneChooserLandscape ()
 
 @property (strong, nonatomic) NSArray *previews;
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
-@property (strong, nonatomic) NavigationBarView *navigationBar;
 @property (strong, nonatomic) DashedPathView *dashedPath;
 
 @property (strong, nonatomic) UIImageView *leftArrow;
@@ -39,54 +38,66 @@
 
 @end
 
-@implementation SceneChooser
+@implementation SceneChooserLandscape
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (id)init {
+    if(self = [super init]) {
+        self.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
 	self.view.backgroundColor = [UIColor clearColor];
 
+    [self initBackground];
     [self initNavBar];
-    [self initArrows];
 
     [self initPreviews];
     [self initCarousel];
-    
-    [self initTitle];
+
     [self initDate];
 
-    [self initPath];
+//    [self initPath];
 
     [self.view bringSubviewToFront:self.navigationBar];
+}
 
-//    [self transitionIn];
+- (void)initBackground {
+    UIView *background = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+    background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+    [self.view addSubview:background];
 }
 
 - (void)initNavBar {
-    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 50) andTitle:@"Explorer" andShowExploreButton:NO];
+    NSString *title = [[[[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex] title] uppercaseString];
+    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:title andShowExploreButton:YES];
+    [self.navigationBar moveTo:CGPointMake(0, 25)];
     [self.view addSubview:self.navigationBar];
 
-    [self.navigationBar.backButton addTarget:self action:@selector(backToHome) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)backToHome {
-    // Transiton then...
-    [self toHome];
+    CGRect titleFrame = self.navigationBar.titleLabel.frame;
+    titleFrame.size.width = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
+    titleFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - titleFrame.size.width / 2;
+    self.navigationBar.titleLabel.frame = titleFrame;
+    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.navigationBar.titleLabel.layer.borderWidth = 2;
 }
 
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.leftArrow];
-    [self.leftArrow moveTo:CGPointMake(0.1 * [OrientationUtils nativeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
+    [self.leftArrow moveTo:CGPointMake(0.1 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
 
     self.rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.rightArrow];
-    [self.rightArrow moveTo:CGPointMake(0.9 * [OrientationUtils nativeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
+    [self.rightArrow moveTo:CGPointMake(0.9 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
     self.rightArrow.layer.anchorPoint = CGPointMake(0.5, 0.5);
     self.rightArrow.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
 }
@@ -94,45 +105,34 @@
 - (void)initPreviews {
     DataManager *dataManager = [DataManager sharedInstance];
     NSMutableArray *tempPreviews = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
-    
+
     for(int i = 0; i < [dataManager getScenesNumber]; i++) {
-        ScenePreviewView *preview = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeDeviceSize] andModel:[dataManager getSceneWithNumber:i]];
+        ScenePreviewView *preview = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize] andModel:[dataManager getSceneWithNumber:i]];
         [tempPreviews addObject:preview];
     }
-    
+
     self.previews = [NSArray arrayWithArray:tempPreviews];
 }
 
 - (void)initCarousel {
-    self.carousel = [[iCarousel alloc] initWithFrame:[OrientationUtils nativeDeviceSize]];
+    self.carousel = [[iCarousel alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeCustom;
     self.carousel.pagingEnabled = YES;
+    self.carousel.contentOffset = CGSizeMake(0, 55);
     self.carousel.bounceDistance = 0.2;
     [self.view addSubview:self.carousel];
 }
 
-- (void)initTitle {
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width * 0.9, 40)];
-    self.titleLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].title uppercaseString];
-    self.titleLabel.textColor = [UIColor blackColor];
-    [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
-    self.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    self.titleLabel.layer.borderWidth = 2;
-    [self.carousel addSubview:self.titleLabel];
-    [self.titleLabel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width * 0.05, self.navigationBar.frame.size.height + 10)];
-}
-
 - (void)initDate {
-    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 30)];
+    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 30)];
     self.dateLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
     self.dateLabel.textColor = [UIColor blackColor];
     [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
     [self.carousel addSubview:self.dateLabel];
-    [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height)];
+    [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height)];
 
 	UIImageView *separator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateSeparator.png"]];
     [self.carousel addSubview:separator];
@@ -140,7 +140,7 @@
 }
 
 - (void)initPath {
-    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeDeviceSize].size.height - 150, [OrientationUtils nativeDeviceSize].size.width * 7, 150)];
+    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 150, [OrientationUtils nativeLandscapeDeviceSize].size.width * 7, 150)];
     [self.view addSubview:self.dashedPath];
     self.dashedPath.backgroundColor = [UIColor clearColor];
     [self.view sendSubviewToBack:self.dashedPath];
@@ -169,7 +169,7 @@
     [UIView animateWithDuration:0.8 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.titleLabel moveTo:CGPointMake(- self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y)];
         self.titleLabel.alpha = 0;
-        [self.rightArrow moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width + 2 * self.rightArrow.frame.size.width, self.rightArrow.frame.origin.y)];
+        [self.rightArrow moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width + 2 * self.rightArrow.frame.size.width, self.rightArrow.frame.origin.y)];
     } completion:^(BOOL finished) {
         [self.rightArrow removeFromSuperview];
         [self.titleLabel removeFromSuperview];
@@ -181,7 +181,7 @@
     } completion:^(BOOL finished) {
         [self.leftArrow removeFromSuperview];
         [self.dateLabel removeFromSuperview];
-        
+
     }];
     [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [view moveTo:CGPointMake(- view.frame.size.width, view.frame.origin.y)];
@@ -190,30 +190,9 @@
         [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
         self.navigationBar.alpha = 0;
     } completion:^(BOOL finished) {
-        [self.navigationBar removeFromSuperview];
-        [self.dashedPath removeFromSuperview];
+//        [self.dashedPath removeFromSuperview];
         [view removeFromSuperview];
-        [self toSceneWithNumber:index];
-    }];
-
-    UIImageView *rotationIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rotationIcon.png"]];
-    [self.view addSubview:rotationIcon];
-    [rotationIcon moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - rotationIcon.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - rotationIcon.frame.size.height / 2)];
-    rotationIcon.alpha = 0;
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveLinear animations:^{
-        rotationIcon.alpha = 1;
-    } completion:nil];
-}
-
-- (void)toSceneWithNumber:(NSInteger)number {
-    self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
-        self.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [[DataManager sharedInstance] getGameModel].currentScene = number;
-        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-        [self.navigationController pushViewController:sceneManager animated:NO];
+        [self.delegate navigateToSceneWithNumber:index];
     }];
 }
 
@@ -221,13 +200,13 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view {
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber:index];
-    return [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeDeviceSize] andModel:sceneModel];
+    return [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize] andModel:sceneModel];
 }
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
-    self.titleLabel.text = [sceneModel.title uppercaseString];
     self.dateLabel.text = [sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    [self.delegate updateNavigationTitleWithString:[sceneModel.title uppercaseString]];
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
@@ -237,11 +216,11 @@
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     if(![[DataManager sharedInstance] getSceneWithNumber:index].unlocked) return;
     if(index != carousel.currentItemIndex) return;
-    
-    UIView *view = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeDeviceSize] andModel:[[DataManager sharedInstance] getSceneWithNumber:index]];
+
+    UIView *view = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize] andModel:[[DataManager sharedInstance] getSceneWithNumber:index]];
     view.center = carousel.currentItemView.center;
     [self.view addSubview:view];
-    [view moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - view.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - view.frame.size.height / 2 + 1)];
+    [view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - view.frame.size.height / 2 + 1 + carousel.contentOffset.height)];
 
     [UIView animateWithDuration:0.4 animations:^{
         self.carousel.alpha = 0;

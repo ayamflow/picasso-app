@@ -14,12 +14,14 @@
 
 #define kTimelineHeight 45
 #define kTimelineWidthRatio 0.8
+#define kInactiveTrackerAlpha 0.4
 
 @interface SceneTimeline ()
 
 @property (strong, nonatomic) SceneModel *sceneModel;
 @property (assign, nonatomic) float timelineWidth;
 @property (strong, nonatomic) UIView *progressBar;
+@property (strong, nonatomic) NSMutableArray *trackers;
 
 @end
 
@@ -44,15 +46,15 @@
     // create progress bar
     [self initProgressBar];
     // create starting dot
-    // show trackers position
+    [self initTrackers];
 
     self.view.frame = CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight);
 }
 
 - (void)initTimelineBackground {
 	UIView *area = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight)];
-    area.backgroundColor = [UIColor blueColor];
-    area.alpha = 0.3;
+//    area.backgroundColor = [UIColor blueColor];
+//    area.alpha = 0.3;
     [self.view addSubview:area];
 
     UIView *backgroundTl = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, 2)];
@@ -66,6 +68,7 @@
 
     UIView *end = [self createCircleWithRadius:8];
     [self.view addSubview:end];
+    end.backgroundColor = [UIColor grayColor];
     [end moveTo:CGPointMake(backgroundTl.frame.origin.x + backgroundTl.frame.size.width, backgroundTl.frame.origin.y - start.frame.size.height / 2 + 1)];
 }
 
@@ -78,8 +81,36 @@
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 1);
 }
 
-- (void)updateWithCompletion:(float)completion {
+- (void)initTrackers {
+    self.trackers = [NSMutableArray arrayWithCapacity:[self.sceneModel.trackerStarts count]];
+    for(int i = 0; i < [self.sceneModel.trackerStarts count]; i++) {
+        UIImageView *tracker = [self createTrackerActivated:NO];
+        [self.trackers addObject:tracker];
+        [self.view addSubview:tracker];
+        [tracker moveTo:CGPointMake( self.progressBar.center.x + self.timelineWidth / 100 * [[self.sceneModel.trackerStarts objectAtIndex:i] intValue], self.progressBar.frame.origin.y + self.progressBar.frame.size.height / 2 - tracker.frame.size.height / 2)];
+    }
+}
+
+- (UIImageView *)createTrackerActivated:(BOOL)activated {
+    UIImageView *tracker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timelineTracker.png"]];
+    if(activated) tracker.alpha = 1;
+    else tracker.alpha = kInactiveTrackerAlpha;
+    return tracker;
+}
+
+- (void)updateWithCompletion:(CGFloat)completion {
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, completion, 1);
+
+    for(int i = 0; i < [self.sceneModel.trackerStarts count]; i++) {
+        UIImageView *tracker = [self.trackers objectAtIndex:i];
+        NSInteger trackerStart = [[self.sceneModel.trackerStarts objectAtIndex:i] intValue];
+        if(completion * 100 > trackerStart && tracker.alpha < 1) {
+            tracker.alpha = 1;
+        }
+        else if(completion * 100 < trackerStart && tracker.alpha > kInactiveTrackerAlpha) {
+            tracker.alpha = kInactiveTrackerAlpha;
+        }
+    }
 }
 
 - (UIView *)createCircleWithRadius:(CGFloat)radius {

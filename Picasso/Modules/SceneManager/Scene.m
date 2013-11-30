@@ -8,6 +8,7 @@
 
 #import "Scene.h"
 #import "SceneChooser.h"
+#import "SceneChooserLandscape.h"
 #import "SceneModel.h"
 #import "DataManager.h"
 #import "TrackerModel.h"
@@ -15,14 +16,12 @@
 #import "WorkViewController.h"
 #import "SceneManager.h"
 #import "Colors.h"
+#import "Events.h"
 #import "UIViewPicasso.h"
 #import "SceneTimeline.h"
 #import "SceneMenu.h"
 
 #define kPlaybackFadePercent 0.90
-#define kDirectionNone 0
-#define kDirectionLeft 1
-#define kDirectionRight 2
 
 #define kSliderHeight 80
 #define kSliderVisibleHeight 10
@@ -42,8 +41,7 @@
 @property (strong, nonatomic) UIView *slider;
 @property (strong, nonatomic) SceneTimeline *timeline;
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
-@property (assign, nonatomic) NSInteger panDistance;
-@property (assign, nonatomic) NSInteger panDirection;
+@property (assign, nonatomic) BOOL menuIsOpen;
 
 @property (strong, nonatomic) SceneMenu *menu;
 
@@ -107,13 +105,15 @@
     self.slider.layer.borderColor = [UIColor blackColor].CGColor;
     self.slider.layer.borderWidth = 2;
     [self.view addSubview:self.slider];
-    [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+    [self resetSliderWithDuration:0];
 
     self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sliderDragged:)];
     self.panRecognizer.maximumNumberOfTouches = 1;
     self.panRecognizer.minimumNumberOfTouches = 1;
     self.panRecognizer.delegate = self;
     [self.slider addGestureRecognizer:self.panRecognizer];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenu) name:[MPPEvents MenuExitEvent] object:nil];
 }
 
 - (void)initTimeline {
@@ -127,52 +127,61 @@
     panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
     [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
 
-    if(panRecognizer.state == UIGestureRecognizerStateBegan) {
-        // Create and show menu above current view
-        self.menu = [[SceneMenu alloc] initWithModel:self.model];
-        self.menu.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
-        [self.view addSubview:self.menu.view];
-        [self.menu.view moveTo:CGPointMake(0, -self.menu.view.frame.size.height)];
-        [self addChildViewController:self.menu];
-    }
     if(panRecognizer.state == UIGestureRecognizerStateChanged) {
         CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
         [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height + sliderBottom - kSliderVisibleHeight)];
 
-        if(sliderBottom >= [OrientationUtils nativeLandscapeDeviceSize].size.height / 2) {
-            [self showMenu];
+        [self.timeline.view moveTo:CGPointMake(self.timeline.view.frame.origin.x, self.timeline.view.frame.origin.y + sliderBottom * 0.05)];
+
+        if(sliderBottom >= kSliderHeight - kSliderVisibleHeight) {
+            [self.slider removeGestureRecognizer:self.panRecognizer];
+            [UIView animateWithDuration:0.4 animations:^{
+                [self.slider moveTo:CGPointMake(self.slider.frame.origin.x, -kSliderHeight)];
+            } completion:^(BOOL finished) {
+                [self showMenu];
+            }];
         }
     }
     if(panRecognizer.state == UIGestureRecognizerStateEnded) {
-        CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
-
-        if(sliderBottom >= [OrientationUtils nativeLandscapeDeviceSize].size.height / 2) {
-            [self showMenu];
-        }
-        else {
-            [self hideMenu];
-        }
+        if(!self.menuIsOpen) [self resetSliderWithDuration:0.4];
     }
 }
 
+- (void)resetSliderWithDuration: (NSTimeInterval)duration {
+    [UIView animateWithDuration:duration animations:^{
+        [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
+    }];
+}
+
 - (void)showMenu {
+    if(self.menuIsOpen) return;
+    self.menuIsOpen = YES;
+
     [self.slider removeGestureRecognizer:self.panRecognizer];
+
+    self.menu = [[SceneMenu alloc] initWithModel:self.model];
+    self.menu.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+    [self.view addSubview:self.menu.view];
+    [self.menu.view moveTo:CGPointMake(0, -self.menu.view.frame.size.height)];
+    [self addChildViewController:self.menu];
+ 
     [UIView animateWithDuration:0.4 animations:^{
         [self.menu.view moveTo:CGPointMake(0, 0)];
+        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
     } completion:^(BOOL finished) {
         [self stop];
-        [self.menu.navigationBar.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
-        [self.menu.navigationBar.exploreButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
     }];
 }
 
 - (void)hideMenu {
+    if(!self.menuIsOpen) return;
+    self.menuIsOpen = NO;
     [self.slider removeGestureRecognizer:self.panRecognizer];
-    [self.menu.navigationBar.backButton removeTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
-    [self.menu.navigationBar.exploreButton removeTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self resetSliderWithDuration:0.4];
     [UIView animateWithDuration:0.4 animations:^{
         [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height)];
-        [self.slider moveTo:CGPointMake(self.slider.frame.origin.x, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
     } completion:^(BOOL finished) {
         [self.menu removeFromParentViewController];
         [self.menu.view removeFromSuperview];
@@ -318,9 +327,9 @@
 }
 
 - (void)toggleTrackers {
-    float currentTime = CMTimeGetSeconds(self.player.currentTime);
-    int currentFrame = self.playerView.frameRate * currentTime;
-    
+    CGFloat currentTime = CMTimeGetSeconds(self.player.currentTime);
+    NSInteger currentFrame = self.playerView.frameRate * currentTime;
+
     // Loop on all trackers (which contains a workId an an array of positions)
     for(int i = 0; i < [self.model.trackers count]; i++) {
         
@@ -371,6 +380,8 @@
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
+    // DEBUG
+    self.player.rate = 2.0;
 }
 
 - (void)didReceiveMemoryWarning

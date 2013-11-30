@@ -12,11 +12,16 @@
 #import "UIViewPicasso.h"
 #import "NavigationBarView.h"
 #import "SceneModel.h"
+#import "Events.h"
 #import "DataManager.h"
+#import "SceneChooserLandscape.h"
+#import "SceneManager.h"
 
 @interface SceneMenu ()
 
 @property (strong, nonatomic) SceneModel *sceneModel;
+@property (strong, nonatomic) SceneChooserLandscape *sceneChooser;
+@property (strong, nonatomic) UIView *bottomInfos;
 
 @end
 
@@ -34,6 +39,7 @@
 
     [self initBackground];
     [self initNavigationBar];
+    [self initBottomInfos];
 }
 
 - (void)initBackground {
@@ -53,6 +59,89 @@
     self.navigationBar.titleLabel.frame = titleFrame;
     self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.navigationBar.titleLabel.layer.borderWidth = 2;
+
+    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)initBottomInfos {
+    self.bottomInfos = [[UIView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 20, [OrientationUtils nativeLandscapeDeviceSize].size.width, 20)];
+    [self.view addSubview:self.bottomInfos];
+    UIImageView *chapterIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scenesNumber.png"]];
+    [self.bottomInfos addSubview:chapterIcon];
+    UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
+    chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
+    chapterLabel.textColor = [UIColor blackColor];
+    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene], [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
+    [chapterLabel sizeToFit];
+    [self.bottomInfos addSubview:chapterLabel];
+
+    CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
+    [chapterLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 3)];
+    [chapterIcon moveTo:CGPointMake(chapterLabel.frame.origin.x - chapterIcon.frame.size.width * 1.5, chapterLabel.frame.origin.y)];
+
+    UIImageView *workIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worksNumber.png"]];
+    [self.bottomInfos addSubview:workIcon];
+    UILabel *worksLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
+    worksLabel.font = chapterLabel.font;
+    worksLabel.textColor = [UIColor blackColor];
+    worksLabel.text = [[NSString stringWithFormat:@"%i / %i oeuvres", 2, 20] uppercaseString];
+    [worksLabel sizeToFit];
+    [self.bottomInfos addSubview:worksLabel];
+
+    tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
+    [worksLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * 2 / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 3)];
+    [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width * 1.5, worksLabel.frame.origin.y)];
+}
+
+- (void)exitMenu {
+    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuExitEvent] object:nil];
+}
+
+- (void)showSceneChooser {
+    [self.bottomInfos removeFromSuperview];
+
+    [self.navigationBar.exploreButton removeTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton removeFromSuperview];
+    [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.navigationBar.exploreButton removeFromSuperview];
+
+    self.sceneChooser = [[SceneChooserLandscape alloc] init];
+    self.sceneChooser.delegate = self;
+    [self.view addSubview:self.sceneChooser.view];
+
+    [self.view bringSubviewToFront:self.navigationBar];
+}
+
+- (void)hideSceneChooser {
+    NSLog(@"hideSceneChooser");
+    self.sceneChooser.delegate = nil;
+    [self.sceneChooser removeFromParentViewController];
+
+    [self.view addSubview:self.bottomInfos];
+
+    [self.navigationBar addSubview:self.navigationBar.exploreButton];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton removeTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+}
+
+// Protocol
+
+- (void)navigateToSceneWithNumber:(NSInteger)number {
+    [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [[DataManager sharedInstance] getGameModel].currentScene = number;
+        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+        [self.navigationController pushViewController:sceneManager animated:NO];
+    }];
+}
+
+- (void)updateNavigationTitleWithString:(NSString *)title {
+    self.navigationBar.titleLabel.text = [title uppercaseString];
 }
 
 @end

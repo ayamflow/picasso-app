@@ -46,12 +46,10 @@
 }
 
 - (void)initBackground {
-    CGSize screenSize = [OrientationUtils nativeLandscapeDeviceSize].size;
-
     self.background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circleButton.png"]];
     [self addSubview:self.background];
 
-    [self.background moveTo:CGPointMake(self.frame.size.width / 2 - self.background.frame.size.width / 2, screenSize.height / 2 - self.background.frame.size.height / 4)];
+    self.background.center = self.center;
 }
 
 - (void)showScenePreview {

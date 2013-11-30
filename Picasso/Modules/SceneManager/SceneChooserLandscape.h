@@ -1,5 +1,5 @@
 //
-//  SceneMenu.h
+//  SceneChooserLandscape.h
 //  Picasso
 //
 //  Created by Florian Morel on 30/11/13.
@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SceneModel.h"
+#import "iCarousel.h"
 #import "NavigationBarView.h"
 #import "SceneChooserLandscapeDelegate.h"
 
-@interface SceneMenu : UIViewController <SceneChooserLandscapeDelegate>
+@interface SceneChooserLandscape : UIViewController <iCarouselDataSource, iCarouselDelegate>
 
-- (id)initWithModel:(SceneModel *)model;
-
+@property (strong, nonatomic) iCarousel *carousel;
 @property (strong, nonatomic) NavigationBarView *navigationBar;
+@property (weak, nonatomic) id<SceneChooserLandscapeDelegate> delegate;
 
 @end

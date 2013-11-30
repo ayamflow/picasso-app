@@ -80,7 +80,7 @@
     self.sceneTitle.text = [title uppercaseString];
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
     self.sceneTitle.textColor = [UIColor lightColor];
-    self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15.0];
+    self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];
 
     self.sceneTitle.layer.borderColor = [UIColor lightColor].CGColor;
     self.sceneTitle.layer.borderWidth = 2.0;
