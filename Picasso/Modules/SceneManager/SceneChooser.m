@@ -42,7 +42,7 @@
 @implementation SceneChooser
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)viewDidLoad
@@ -63,6 +63,8 @@
     [self initPath];
 
     [self.view bringSubviewToFront:self.navigationBar];
+
+    [self transitionIn];
 }
 
 - (void)initNavBar {
@@ -112,16 +114,6 @@
     [self.view addSubview:self.carousel];
 }
 
-- (void)initBackground {
-    UIView *overlay = [[UIView alloc] initWithFrame:[OrientationUtils nativeDeviceSize]];
-    overlay.backgroundColor = [UIColor whiteColor];
-    overlay.alpha = 0.8;
-    [self.view addSubview:overlay];
-    
-//	UIImageView *background = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
-//    [self.view addSubview:background];
-}
-
 - (void)initTitle {
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width * 0.9, 40)];
     self.titleLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].title uppercaseString];
@@ -153,6 +145,25 @@
     [self.view addSubview:self.dashedPath];
     self.dashedPath.backgroundColor = [UIColor clearColor];
     [self.view sendSubviewToBack:self.dashedPath];
+}
+
+- (void)transitionIn {
+    self.navigationBar.alpha = 0;
+    [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
+
+    [self.carousel moveTo:CGPointMake(self.carousel.frame.size.width, 0)];
+    self.carousel.alpha = 0;
+
+    CGFloat duration = 0.8;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.navigationBar moveTo:CGPointMake(0, 0)];
+        self.navigationBar.alpha = 1;
+    } completion:nil];
+
+    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.carousel moveTo:CGPointMake(0, 0)];
+        self.carousel.alpha = 1;
+    } completion:nil];
 }
 
 - (void)transitionOutWithView:(UIView *)view andIndex:(NSInteger)index {

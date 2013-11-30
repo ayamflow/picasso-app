@@ -15,5 +15,6 @@
 @property (assign, nonatomic) BOOL hasExploreButton;
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) UIButton *exploreButton;
+@property (strong, nonatomic) UILabel *titleLabel;
 
 @end

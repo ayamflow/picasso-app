@@ -88,6 +88,8 @@
 		CE45E6A11849EB4200DCFF09 /* navExploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69F1849EB4200DCFF09 /* navExploreButton@2x.png */; };
 		CE45E6A31849F35100DCFF09 /* leftArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E6A21849F35100DCFF09 /* leftArrow@2x.png */; };
 		CE45E6A61849FAE500DCFF09 /* DashedPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6A51849FAE500DCFF09 /* DashedPathView.m */; };
+		CE45E6A9184A1EB900DCFF09 /* Intro.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6A8184A1EB900DCFF09 /* Intro.m */; };
+		CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE45E6AD184A371800DCFF09 /* SceneMenu.m */; };
 		CE488874181EFFA5001D9A09 /* timeline-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE488873181EFFA5001D9A09 /* timeline-button@2x.png */; };
 		CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE719772184106A1006F6CAE /* menuSliderDown@2x.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
@@ -233,6 +235,10 @@
 		CE45E6A21849F35100DCFF09 /* leftArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftArrow@2x.png"; sourceTree = "<group>"; };
 		CE45E6A41849FAE500DCFF09 /* DashedPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DashedPathView.h; path = Modules/SceneManager/DashedPathView.h; sourceTree = "<group>"; };
 		CE45E6A51849FAE500DCFF09 /* DashedPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DashedPathView.m; path = Modules/SceneManager/DashedPathView.m; sourceTree = "<group>"; };
+		CE45E6A7184A1EB900DCFF09 /* Intro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Intro.h; path = Modules/Intro/Intro.h; sourceTree = "<group>"; };
+		CE45E6A8184A1EB900DCFF09 /* Intro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Intro.m; path = Modules/Intro/Intro.m; sourceTree = "<group>"; };
+		CE45E6AC184A371800DCFF09 /* SceneMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneMenu.h; path = Modules/SceneManager/SceneMenu.h; sourceTree = "<group>"; };
+		CE45E6AD184A371800DCFF09 /* SceneMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneMenu.m; path = Modules/SceneManager/SceneMenu.m; sourceTree = "<group>"; };
 		CE488873181EFFA5001D9A09 /* timeline-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timeline-button@2x.png"; path = "Data/UI/timeline-button@2x.png"; sourceTree = "<group>"; };
 		CE719772184106A1006F6CAE /* menuSliderDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderDown@2x.png"; sourceTree = "<group>"; };
 		CE86045718283BAB0019657F /* Home.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Home.h; path = Modules/Home/Home.h; sourceTree = "<group>"; };
@@ -528,9 +534,10 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				624E6B31181E733800E7FE58 /* SceneManager */,
-				624E6B38181E777800E7FE58 /* VideoPlayer */,
+				CE45E6AA184A1FAC00DCFF09 /* Intro */,
 				CE86045A18283BB00019657F /* Home */,
+				620423C518434AE500648ABA /* SceneChooser */,
+				624E6B31181E733800E7FE58 /* Scene */,
 				B9FF530C181FF48300DFCC39 /* GalleryView */,
 				B9FF5302181FBD3A00DFCC39 /* WorkView */,
 				CE86045E18283E560019657F /* Museum */,
@@ -540,16 +547,16 @@
 			name = Modules;
 			sourceTree = "<group>";
 		};
-		624E6B31181E733800E7FE58 /* SceneManager */ = {
+		624E6B31181E733800E7FE58 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				624E6B42181E949C00E7FE58 /* SceneManager.h */,
 				624E6B43181E949C00E7FE58 /* SceneManager.m */,
-				620423C518434AE500648ABA /* SceneChooser */,
+				CE45E6AB184A36FA00DCFF09 /* Menu */,
 				624B978818211AA30087C576 /* Scene */,
 				624B9787182117910087C576 /* Delegates */,
 			);
-			name = SceneManager;
+			name = Scene;
 			sourceTree = "<group>";
 		};
 		624E6B38181E777800E7FE58 /* VideoPlayer */ = {
@@ -631,8 +638,8 @@
 		624E6B62181ECD5300E7FE58 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				CED0FCC21849E5420001C602 /* NavigationBar */,
-				62084D4E183508A800F9C26C /* Logo */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -688,6 +695,25 @@
 				CE45E69F1849EB4200DCFF09 /* navExploreButton@2x.png */,
 			);
 			name = NavigationBar;
+			sourceTree = "<group>";
+		};
+		CE45E6AA184A1FAC00DCFF09 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				62084D4E183508A800F9C26C /* Logo */,
+				CE45E6A7184A1EB900DCFF09 /* Intro.h */,
+				CE45E6A8184A1EB900DCFF09 /* Intro.m */,
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
+		CE45E6AB184A36FA00DCFF09 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CE45E6AC184A371800DCFF09 /* SceneMenu.h */,
+				CE45E6AD184A371800DCFF09 /* SceneMenu.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		CE488875181EFFA9001D9A09 /* UI */ = {
@@ -908,7 +934,9 @@
 				4F836D34183BD4EA00CA63CD /* Colors.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */,
+				CE45E6A9184A1EB900DCFF09 /* Intro.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
+				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,

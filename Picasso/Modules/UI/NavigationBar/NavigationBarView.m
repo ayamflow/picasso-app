@@ -12,7 +12,6 @@
 @interface NavigationBarView ()
 
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) UILabel *titleLabel;
 
 @end
 
@@ -34,14 +33,12 @@
 	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width, backIcon.size.height)];
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 
-    CGFloat leftOffset = 0.1 * self.frame.size.width;
-
     [self addSubview:self.backButton];
-    [self.backButton moveTo:CGPointMake(leftOffset, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
+    [self.backButton moveTo:CGPointMake(self.backButton.frame.size.width, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
 }
 
 - (void)initTitle {
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.15, self.frame.size.height * 0.1, self.frame.size.width * 0.7, self.frame.size.height * 0.8)];
     self.titleLabel.text = [self.title uppercaseString];
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:20];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -53,10 +50,9 @@
 	self.exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, exploreIcon.size.width, exploreIcon.size.height)];
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
-    CGFloat leftOffset = 0.9 * self.frame.size.width - exploreIcon.size.width;
-
     [self addSubview:self.exploreButton];
-    [self.exploreButton moveTo:CGPointMake(leftOffset, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
+//    [self.exploreButton moveTo:CGPointMake(leftOffset, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
+    [self.exploreButton moveTo:CGPointMake(self.frame.size.width - 2 * self.exploreButton.frame.size.width, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
 }
 
 @end

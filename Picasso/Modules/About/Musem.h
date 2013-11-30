@@ -10,13 +10,7 @@
 
 @interface Musem : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *navBar;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *exploreButton;
-@property (weak, nonatomic) IBOutlet UILabel *navTitle;
-
-@property (strong, nonatomic) UILabel *hotelTitle;
-@property (strong, nonatomic) UILabel *hotelSubtitle;
-@property (strong, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *hotelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *hotelSubtitle;
 
 @end

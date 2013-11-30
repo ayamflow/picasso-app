@@ -9,17 +9,16 @@
             <objects>
                 <viewController storyboardIdentifier="SceneChooser" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gjo-LO-52i">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="jRs-o7-ItU"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2N-gZ-ZFw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="-557"/>
+            <point key="canvasLocation" x="1898" y="-721"/>
         </scene>
         <!--Scene Manager-->
         <scene sceneID="Gn4-YD-ynG">
@@ -83,42 +82,29 @@
             </objects>
             <point key="canvasLocation" x="1898" y="-8"/>
         </scene>
+        <!--Intro-->
+        <scene sceneID="uzT-Wn-vSY">
+            <objects>
+                <viewController id="RRh-zj-Qda" customClass="Intro" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IVw-9X-K1E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GYy-9u-lXp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5UR-ec-vRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="529" y="-8"/>
+        </scene>
         <!--Musem-->
         <scene sceneID="6Ri-A0-tsU">
             <objects>
-                <viewController id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Museum" id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ia9-bb-cjq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="91Y-eN-N4f">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WOB-Ql-2JL">
-                                        <rect key="frame" x="266" y="18" width="34" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="blackExploreButton.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ait-8k-p3f">
-                                        <rect key="frame" x="20" y="19" width="34" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="blackBackButton.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LE MUSÉE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jFe-LR-dQ0">
-                                        <rect key="frame" x="85" y="0.0" width="150" height="59"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L'HÔTEL SALÉ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P0b-3d-UB6">
                                 <rect key="frame" x="20" y="171" width="280" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,12 +123,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Sd7-aU-f3Q"/>
-                    <connections>
-                        <outlet property="backButton" destination="Ait-8k-p3f" id="OTP-iR-mNe"/>
-                        <outlet property="exploreButton" destination="WOB-Ql-2JL" id="fEo-bI-iRx"/>
-                        <outlet property="navBar" destination="91Y-eN-N4f" id="764-NB-nz3"/>
-                        <outlet property="navTitle" destination="jFe-LR-dQ0" id="ZJI-zE-ZnX"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2R-7r-gap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -201,9 +181,6 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="nJk-K9-wsr" kind="push" id="WJh-nJ-Fi5"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bvN-8L-DX0">
                                 <rect key="frame" x="66" y="300" width="188" height="43"/>
@@ -213,9 +190,6 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="pw8-1h-sAP" kind="push" id="sJy-tY-RGP"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Aje-Oi-qta">
                                 <rect key="frame" x="66" y="380" width="188" height="43"/>
@@ -252,17 +226,15 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="slh-Y1-crv" kind="relationship" relationship="rootViewController" id="ESs-iY-Ems"/>
+                        <segue destination="i8K-0P-76g" kind="relationship" relationship="rootViewController" id="iT9-29-cOI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqE-M1-TQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="470" y="-8"/>
+            <point key="canvasLocation" x="-82" y="-8"/>
         </scene>
     </scenes>
     <resources>
-        <image name="blackBackButton.png" width="30" height="22"/>
-        <image name="blackExploreButton.png" width="34" height="11"/>
         <image name="menuCreditsButton.png" width="188" height="43"/>
         <image name="menuExploreButton.png" width="188" height="43"/>
         <image name="menuGaleryButton.png" width="188" height="43"/>

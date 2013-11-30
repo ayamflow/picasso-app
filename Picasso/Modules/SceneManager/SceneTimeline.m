@@ -51,19 +51,27 @@
 
 - (void)initTimelineBackground {
 	UIView *area = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, kTimelineHeight)];
-//    area.backgroundColor = [UIColor blueColor];
-//    area.alpha = 0.3;
+    area.backgroundColor = [UIColor blueColor];
+    area.alpha = 0.3;
     [self.view addSubview:area];
 
     UIView *backgroundTl = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, 2)];
-    backgroundTl.backgroundColor = [UIColor blackColor];
+    backgroundTl.backgroundColor = [UIColor grayColor];
     [backgroundTl moveTo:CGPointMake(([OrientationUtils nativeLandscapeDeviceSize].size.width - backgroundTl.frame.size.width) / 2, kTimelineHeight / 2 - backgroundTl.frame.size.height / 2)];
     [self.view addSubview:backgroundTl];
+
+    UIView *start = [self createCircleWithRadius:8];
+    [self.view addSubview:start];
+    [start moveTo:CGPointMake(backgroundTl.frame.origin.x, backgroundTl.frame.origin.y - start.frame.size.height / 2 + 1)];
+
+    UIView *end = [self createCircleWithRadius:8];
+    [self.view addSubview:end];
+    [end moveTo:CGPointMake(backgroundTl.frame.origin.x + backgroundTl.frame.size.width, backgroundTl.frame.origin.y - start.frame.size.height / 2 + 1)];
 }
 
 - (void)initProgressBar {
-    self.progressBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, kTimelineHeight / 6)];
-    self.progressBar.backgroundColor = [UIColor textColor];
+    self.progressBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.timelineWidth, 2)];
+    self.progressBar.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.progressBar];
     self.progressBar.layer.anchorPoint = CGPointMake(0, 0);
     [self.progressBar moveTo:CGPointMake(([OrientationUtils nativeLandscapeDeviceSize].size.width - self.progressBar.frame.size.width) / 2, kTimelineHeight / 2 - self.progressBar.frame.size.height / 2)];
@@ -72,6 +80,13 @@
 
 - (void)updateWithCompletion:(float)completion {
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, completion, 1);
+}
+
+- (UIView *)createCircleWithRadius:(CGFloat)radius {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, radius, radius)];
+    view.layer.cornerRadius = radius / 2;
+    view.backgroundColor = [UIColor blackColor];
+    return view;
 }
 
 @end

@@ -13,12 +13,15 @@
 #import "OrientationUtils.h"
 #import "HoursPanel.h"
 #import "InfosPanel.h"
+#import "NavigationBarView.h"
 
 #define kCellLabelTag 1
 #define kCellDetailTag 2
 
 @interface Musem ()
 
+@property (strong, nonatomic) NavigationBarView *navigationBar;
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *labels;
 @property (strong, nonatomic) NSArray *identifiers;
 @property (strong, nonatomic) NSArray *subviewClasses;
@@ -39,18 +42,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
     [self initData];
     [self initTexts];
-    [self initButtons];
-    
-    [self initNavBarShadow];
+}
+
+- (void)initNavigationBar {
+    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 50) andTitle:@"Le musée" andShowExploreButton:YES];
+    [self.view addSubview:self.navigationBar];
+
+    [self.navigationBar.backButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(navigateToExplore) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, [OrientationUtils nativeDeviceSize].size.height - self.navBar.frame.size.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, [OrientationUtils nativeDeviceSize].size.height - self.navigationBar.frame.size.height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -59,7 +68,7 @@
 
 - (void)initTableHeader {
     UIImageView *hotelImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hotel.png"]];
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, self.navBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, hotelImage.frame.size.height)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, hotelImage.frame.size.height)];
     [header addSubview:hotelImage];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 3/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];
     titleLabel.text = [@"L'hôtel salé" uppercaseString];
@@ -80,14 +89,6 @@
     self.tableView.tableHeaderView = header;
 }
 
-- ( void)initNavBarShadow {
-    self.navBar.layer.masksToBounds = NO;
-    self.navBar.layer.shadowOffset = CGSizeMake(0, 5);
-    self.navBar.layer.shadowRadius = 3;
-    self.navBar.layer.shadowOpacity = 0.3;
-    [self.view bringSubviewToFront:self.navBar];
-}
-
 - (void)initData {
     self.labels = [NSArray arrayWithObjects:[@"Horaires d'ouverture" uppercaseString], [@"informations pratiques" uppercaseString], [@"accéder à la map" uppercaseString], [@"réserver son billet" uppercaseString], [@"à propos du musée" uppercaseString], nil];
     self.identifiers = [NSArray arrayWithObjects:@"Hours", @"Infos", @"Map", @"Booking", @"About", nil];
@@ -96,24 +97,18 @@
 }
 
 - (void)initTexts {
-    self.navTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:20];
     self.hotelTitle.font = [UIFont fontWithName:@"AvenirLTStd-Black" size:20];
     self.hotelTitle.layer.borderColor = [UIColor whiteColor].CGColor;
     self.hotelTitle.layer.borderWidth = 2;
     self.hotelSubtitle.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
 }
 
-- (void)initButtons {
-    [self.backButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
-    [self.exploreButton addTarget:self action:@selector(navigateToExplore) forControlEvents:UIControlEventTouchUpInside];
-}
-
 - (void)navigateBack {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self toHome];
 }
 
 - (void)navigateToExplore {
-    [self navigateToExploreMode];
+    [self toSceneChooser];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

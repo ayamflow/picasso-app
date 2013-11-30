@@ -17,11 +17,15 @@
 #import "Colors.h"
 #import "UIViewPicasso.h"
 #import "SceneTimeline.h"
+#import "SceneMenu.h"
 
 #define kPlaybackFadePercent 0.90
 #define kDirectionNone 0
 #define kDirectionLeft 1
 #define kDirectionRight 2
+
+#define kSliderHeight 80
+#define kSliderVisibleHeight 10
 
 @interface Scene ()
 
@@ -35,10 +39,13 @@
 @property (strong, nonatomic) UILabel *dateTitle;
 @property (strong, nonatomic) UIImageView *dateImageView;
 
+@property (strong, nonatomic) UIView *slider;
 @property (strong, nonatomic) SceneTimeline *timeline;
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
 @property (assign, nonatomic) NSInteger panDistance;
 @property (assign, nonatomic) NSInteger panDirection;
+
+@property (strong, nonatomic) SceneMenu *menu;
 
 @property (assign, nonatomic) NSInteger transitionsDone;
 @property (assign, nonatomic) NSInteger transitionsNumber;
@@ -71,7 +78,8 @@
         
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
-        
+
+        [self initSlider];
         [self initTimeline];
         
         [self transitionIn];
@@ -93,67 +101,83 @@
     return self;
 }
 
+- (void)initSlider {
+    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, kSliderHeight)];
+    self.slider.backgroundColor = [UIColor clearColor];
+    self.slider.layer.borderColor = [UIColor blackColor].CGColor;
+    self.slider.layer.borderWidth = 2;
+    [self.view addSubview:self.slider];
+    [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+
+    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sliderDragged:)];
+    self.panRecognizer.maximumNumberOfTouches = 1;
+    self.panRecognizer.minimumNumberOfTouches = 1;
+    self.panRecognizer.delegate = self;
+    [self.slider addGestureRecognizer:self.panRecognizer];
+}
+
 - (void)initTimeline {
     self.timeline = [[SceneTimeline alloc] initWithModel:self.model];
     [self.view addSubview:self.timeline.view];
     [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-
-    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(timelineDragged:)];
-    self.panRecognizer.maximumNumberOfTouches = 1;
-    self.panRecognizer.minimumNumberOfTouches = 1;
-    self.panRecognizer.delegate = self;
-    [self.timeline.view addGestureRecognizer:self.panRecognizer];
 }
 
-- (void)timelineDragged:(UIPanGestureRecognizer *)panRecognizer {
+- (void)sliderDragged:(UIPanGestureRecognizer *)panRecognizer {
     CGPoint translation = [panRecognizer translationInView:self.view];
     panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
     [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
 
     if(panRecognizer.state == UIGestureRecognizerStateBegan) {
-
+        // Create and show menu above current view
+        self.menu = [[SceneMenu alloc] initWithModel:self.model];
+        self.menu.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+        [self.view addSubview:self.menu.view];
+        [self.menu.view moveTo:CGPointMake(0, -self.menu.view.frame.size.height)];
+        [self addChildViewController:self.menu];
     }
     if(panRecognizer.state == UIGestureRecognizerStateChanged) {
-        float bottom = [OrientationUtils nativeLandscapeDeviceSize].size.height;
-        float timelineBottom = self.panRecognizer.view.frame.origin.y + self.timeline.view.frame.size.height;
-        self.panDistance = sqrt((bottom - timelineBottom) * (bottom - timelineBottom));
+        CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
+        [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height + sliderBottom - kSliderVisibleHeight)];
 
-        if(timelineBottom > bottom) self.panDirection = kDirectionRight;
-        else if (timelineBottom < bottom) self.panDirection = kDirectionLeft;
-        else self.panDirection = kDirectionNone;
-
-   		if(self.panDistance > self.timeline.view.frame.size.height) {
-            [self showMap];
+        if(sliderBottom >= [OrientationUtils nativeLandscapeDeviceSize].size.height / 2) {
+            [self showMenu];
         }
     }
     if(panRecognizer.state == UIGestureRecognizerStateEnded) {
-		if(self.panDistance <= self.timeline.view.frame.size.height * 2) {
-			[UIView animateWithDuration:0.4 animations:^{
-			    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-            } completion:nil];
+        CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
+
+        if(sliderBottom >= [OrientationUtils nativeLandscapeDeviceSize].size.height / 2) {
+            [self showMenu];
+        }
+        else {
+            [self hideMenu];
         }
     }
 }
 
-- (void)showMap {
-    [self.timeline.view removeGestureRecognizer:self.panRecognizer];
-    
-    UIImageView *playerScreenshot = [[UIImageView alloc] initWithImage:[[MotionVideoPlayer sharedInstance] getBlurredScreenshot]];
-    playerScreenshot.alpha = 0;
-    [self.view addSubview:playerScreenshot];
-
-    UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.png"]];
-    [self.view addSubview:map];
-	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
-
-	[UIView animateWithDuration:0.8 animations:^{
-        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2)];
-      	[map moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - map.frame.size.height)];
-        self.timeline.view.alpha = 0;
-        playerScreenshot.alpha = 1;
+- (void)showMenu {
+    [self.slider removeGestureRecognizer:self.panRecognizer];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.menu.view moveTo:CGPointMake(0, 0)];
     } completion:^(BOOL finished) {
         [self stop];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSceneChooser" object:nil];
+        [self.menu.navigationBar.backButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+        [self.menu.navigationBar.exploreButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    }];
+}
+
+- (void)hideMenu {
+    [self.slider removeGestureRecognizer:self.panRecognizer];
+    [self.menu.navigationBar.backButton removeTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.menu.navigationBar.exploreButton removeTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height)];
+        [self.slider moveTo:CGPointMake(self.slider.frame.origin.x, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+    } completion:^(BOOL finished) {
+        [self.menu removeFromParentViewController];
+        [self.menu.view removeFromSuperview];
+        [self.slider addGestureRecognizer:self.panRecognizer];
+        [self resume];
     }];
 }
 
@@ -163,7 +187,7 @@
     self.sceneTitle.text = [title uppercaseString];
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
     self.sceneTitle.textColor = [UIColor textColor];
-    self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15.0];
+    self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];
     
     self.sceneTitle.layer.borderColor = [UIColor textColor].CGColor;
     self.sceneTitle.layer.borderWidth = 2.0;
