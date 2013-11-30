@@ -99,26 +99,25 @@
 }
 
 - (void)showSceneChooser {
-    [self.bottomInfos removeFromSuperview];
+    [self.bottomInfos performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
     [self.navigationBar.exploreButton removeTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.exploreButton removeFromSuperview];
     [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton addTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.navigationBar.exploreButton removeFromSuperview];
+    [self.navigationBar.exploreButton performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
-    self.sceneChooser = [[SceneChooserLandscape alloc] init];
-    self.sceneChooser.delegate = self;
+    if(self.sceneChooser == nil) {
+        self.sceneChooser = [[SceneChooserLandscape alloc] init];
+        self.sceneChooser.delegate = self;
+    }
     [self.view addSubview:self.sceneChooser.view];
-
     [self.view bringSubviewToFront:self.navigationBar];
 }
 
 - (void)hideSceneChooser {
-    NSLog(@"hideSceneChooser");
-    self.sceneChooser.delegate = nil;
-    [self.sceneChooser removeFromParentViewController];
+    [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
     [self.view addSubview:self.bottomInfos];
 
@@ -131,12 +130,12 @@
 // Protocol
 
 - (void)navigateToSceneWithNumber:(NSInteger)number {
-    [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.view.alpha = 0;
+    [UIView animateWithDuration:0.8 animations:^{
+        self.view.alpha = 0;
+        [self.view moveTo:CGPointMake(- self.view.frame.size.width, self.view.frame.origin.y)];
     } completion:^(BOOL finished) {
         [[DataManager sharedInstance] getGameModel].currentScene = number;
-        SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
-        [self.navigationController pushViewController:sceneManager animated:NO];
+        [self.delegate showSceneWithNumber:number];
     }];
 }
 

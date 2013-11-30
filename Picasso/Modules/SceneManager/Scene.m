@@ -20,6 +20,7 @@
 #import "UIViewPicasso.h"
 #import "SceneTimeline.h"
 #import "SceneMenu.h"
+#import "SceneManagerDelegate.h"
 
 #define kPlaybackFadePercent 0.90
 
@@ -148,10 +149,16 @@
 }
 
 - (void)resetSliderWithDuration: (NSTimeInterval)duration {
-    [UIView animateWithDuration:duration animations:^{
+    if(duration == 0) {
         [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
         [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-    }];
+    }
+    else {
+        [UIView animateWithDuration:duration animations:^{
+            [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
+            [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
+        }];
+    }
 }
 
 - (void)showMenu {
@@ -160,7 +167,10 @@
 
     [self.slider removeGestureRecognizer:self.panRecognizer];
 
-    self.menu = [[SceneMenu alloc] initWithModel:self.model];
+    if(self.menu == nil) {
+        self.menu = [[SceneMenu alloc] initWithModel:self.model];
+        self.menu.delegate = (UIViewController <SceneManagerDelegate> *)self.parentViewController;
+    }
     self.menu.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
     [self.view addSubview:self.menu.view];
     [self.menu.view moveTo:CGPointMake(0, -self.menu.view.frame.size.height)];

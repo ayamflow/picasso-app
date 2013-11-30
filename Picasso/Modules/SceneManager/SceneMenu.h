@@ -10,11 +10,13 @@
 #import "SceneModel.h"
 #import "NavigationBarView.h"
 #import "SceneChooserLandscapeDelegate.h"
+#import "SceneManagerDelegate.h"
 
 @interface SceneMenu : UIViewController <SceneChooserLandscapeDelegate>
 
 - (id)initWithModel:(SceneModel *)model;
 
 @property (strong, nonatomic) NavigationBarView *navigationBar;
+@property (weak, nonatomic) id<SceneManagerDelegate> delegate;
 
 @end

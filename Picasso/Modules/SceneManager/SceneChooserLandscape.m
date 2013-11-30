@@ -16,8 +16,6 @@
 #import "ScenePreviewView.h"
 #import "SceneModel.h"
 #import "iCarousel.h"
-#import "Home.h"
-#import "NavigationBarView.h"
 #import "DashedPathView.h"
 
 #define kDirectionNone 0
@@ -58,7 +56,6 @@
 	self.view.backgroundColor = [UIColor clearColor];
 
     [self initBackground];
-    [self initNavBar];
 
     [self initPreviews];
     [self initCarousel];
@@ -66,8 +63,6 @@
     [self initDate];
 
 //    [self initPath];
-
-    [self.view bringSubviewToFront:self.navigationBar];
 }
 
 - (void)initBackground {
@@ -76,28 +71,14 @@
     [self.view addSubview:background];
 }
 
-- (void)initNavBar {
-    NSString *title = [[[[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex] title] uppercaseString];
-    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:title andShowExploreButton:YES];
-    [self.navigationBar moveTo:CGPointMake(0, 25)];
-    [self.view addSubview:self.navigationBar];
-
-    CGRect titleFrame = self.navigationBar.titleLabel.frame;
-    titleFrame.size.width = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
-    titleFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - titleFrame.size.width / 2;
-    self.navigationBar.titleLabel.frame = titleFrame;
-    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    self.navigationBar.titleLabel.layer.borderWidth = 2;
-}
-
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.leftArrow];
-    [self.leftArrow moveTo:CGPointMake(0.1 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
+    [self.leftArrow moveTo:CGPointMake(0.05 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
 
     self.rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.rightArrow];
-    [self.rightArrow moveTo:CGPointMake(0.9 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
+    [self.rightArrow moveTo:CGPointMake(0.95 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
     self.rightArrow.layer.anchorPoint = CGPointMake(0.5, 0.5);
     self.rightArrow.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
 }
@@ -132,7 +113,7 @@
     [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
     [self.carousel addSubview:self.dateLabel];
-    [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height)];
+    [self.dateLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateLabel.frame.size.width / 2, 70)];
 
 	UIImageView *separator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateSeparator.png"]];
     [self.carousel addSubview:separator];
@@ -147,17 +128,10 @@
 }
 
 - (void)transitionIn {
-    self.navigationBar.alpha = 0;
-    [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
-
     [self.carousel moveTo:CGPointMake(self.carousel.frame.size.width, 0)];
     self.carousel.alpha = 0;
 
     CGFloat duration = 0.8;
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.navigationBar moveTo:CGPointMake(0, 0)];
-        self.navigationBar.alpha = 1;
-    } completion:nil];
 
     [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.carousel moveTo:CGPointMake(0, 0)];
@@ -187,8 +161,6 @@
         [view moveTo:CGPointMake(- view.frame.size.width, view.frame.origin.y)];
         view.alpha = 0;
         self.dashedPath.alpha = 0;
-        [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
-        self.navigationBar.alpha = 0;
     } completion:^(BOOL finished) {
 //        [self.dashedPath removeFromSuperview];
         [view removeFromSuperview];

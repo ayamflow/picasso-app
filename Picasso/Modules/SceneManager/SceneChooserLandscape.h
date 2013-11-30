@@ -14,7 +14,6 @@
 @interface SceneChooserLandscape : UIViewController <iCarouselDataSource, iCarouselDelegate>
 
 @property (strong, nonatomic) iCarousel *carousel;
-@property (strong, nonatomic) NavigationBarView *navigationBar;
 @property (weak, nonatomic) id<SceneChooserLandscapeDelegate> delegate;
 
 @end
