@@ -10,7 +10,7 @@
 
 @interface HoursPanel : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIView *openClock;
-@property (weak, nonatomic) IBOutlet UIView *closeClock;
+@property (weak, nonatomic) IBOutlet UILabel *morningLabel;
+@property (weak, nonatomic) IBOutlet UILabel *afternoonLabel;
 
 @end

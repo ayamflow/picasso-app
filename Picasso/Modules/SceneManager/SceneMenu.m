@@ -16,12 +16,14 @@
 #import "DataManager.h"
 #import "SceneChooserLandscape.h"
 #import "SceneManager.h"
+#import "MapView.h"
 
 @interface SceneMenu ()
 
 @property (strong, nonatomic) SceneModel *sceneModel;
 @property (strong, nonatomic) SceneChooserLandscape *sceneChooser;
 @property (strong, nonatomic) UIView *bottomInfos;
+@property (strong, nonatomic) MapView *map;
 
 @end
 
@@ -40,6 +42,7 @@
     [self initBackground];
     [self initNavigationBar];
     [self initBottomInfos];
+    [self initMap];
 }
 
 - (void)initBackground {
@@ -50,7 +53,7 @@
 
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:self.sceneModel.title andShowExploreButton:YES];
-    [self.navigationBar moveTo:CGPointMake(0, 25)];
+    [self.navigationBar moveTo:CGPointMake(0, 15)];
     [self.view addSubview:self.navigationBar];
 
     CGRect titleFrame = self.navigationBar.titleLabel.frame;
@@ -72,13 +75,13 @@
     UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
     chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
     chapterLabel.textColor = [UIColor blackColor];
-    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene], [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
+    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
     [chapterLabel sizeToFit];
     [self.bottomInfos addSubview:chapterLabel];
 
     CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
-    [chapterLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 3)];
-    [chapterIcon moveTo:CGPointMake(chapterLabel.frame.origin.x - chapterIcon.frame.size.width * 1.5, chapterLabel.frame.origin.y)];
+    [chapterLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 2)];
+    [chapterIcon moveTo:CGPointMake(chapterLabel.frame.origin.x - chapterIcon.frame.size.width * 1.5, chapterLabel.frame.origin.y - 2)];
 
     UIImageView *workIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worksNumber.png"]];
     [self.bottomInfos addSubview:workIcon];
@@ -90,8 +93,15 @@
     [self.bottomInfos addSubview:worksLabel];
 
     tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
-    [worksLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * 2 / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 3)];
-    [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width * 1.5, worksLabel.frame.origin.y)];
+    [worksLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * 2 / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 2)];
+    [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width * 1.5, worksLabel.frame.origin.y - 2)];
+}
+
+- (void)initMap {
+    self.map = [[MapView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+    [self.view addSubview:self.map];
+    [self.map moveTo:CGPointMake(0, 20)];
+    [self.view bringSubviewToFront:self.navigationBar];
 }
 
 - (void)exitMenu {
@@ -99,6 +109,7 @@
 }
 
 - (void)showSceneChooser {
+    [self.map performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
     [self.bottomInfos performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
     [self.navigationBar.exploreButton removeTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
@@ -120,11 +131,14 @@
     [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
     [self.view addSubview:self.bottomInfos];
+    [self.view addSubview:self.map];
 
     [self.navigationBar addSubview:self.navigationBar.exploreButton];
     [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton removeTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.view bringSubviewToFront:self.navigationBar];
 }
 
 // Protocol

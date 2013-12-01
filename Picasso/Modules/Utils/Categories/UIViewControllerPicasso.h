@@ -18,4 +18,7 @@
 - (void)toHome;
 - (void)toSceneChooser;
 
+- (void)buttonTouchDown:(id)sender;
+- (void)buttonTouchUp:(id)sender;
+
 @end

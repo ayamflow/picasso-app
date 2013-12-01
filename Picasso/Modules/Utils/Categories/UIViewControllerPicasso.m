@@ -71,4 +71,14 @@
     }];
 }
 
+- (void)buttonTouchDown:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.alpha = 0.7;
+}
+
+- (void)buttonTouchUp:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.alpha = 1;
+}
+
 @end

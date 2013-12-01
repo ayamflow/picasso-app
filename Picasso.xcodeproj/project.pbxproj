@@ -56,7 +56,6 @@
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
-		62AF0452184753EA00A83599 /* ClockNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AF0451184753EA00A83599 /* ClockNeedleView.m */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
 		62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */; };
 		62AF046F18479DAF00A83599 /* menuGaleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */; };
@@ -98,6 +97,15 @@
 		CE719773184106A1006F6CAE /* menuSliderDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE719772184106A1006F6CAE /* menuSliderDown@2x.png */; };
 		CE86045918283BAB0019657F /* Home.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045818283BAB0019657F /* Home.m */; };
 		CE86045D18283E520019657F /* Musem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86045C18283E520019657F /* Musem.m */; };
+		CE9115F4184B5D2600420043 /* Path1View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9115F3184B5D2600420043 /* Path1View.m */; };
+		CE9115F7184B5FED00420043 /* MapPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9115F6184B5FED00420043 /* MapPathView.m */; };
+		CE9115FA184B606500420043 /* MapPathStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9115F9184B606500420043 /* MapPathStatus.m */; };
+		CE9115FD184B61CB00420043 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9115FC184B61CB00420043 /* MapView.m */; };
+		CE911600184B646B00420043 /* Path2View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9115FF184B646B00420043 /* Path2View.m */; };
+		CE911604184B692400420043 /* Path3View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE911603184B692400420043 /* Path3View.m */; };
+		CE911607184B6A6800420043 /* Path4View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE911606184B6A6800420043 /* Path4View.m */; };
+		CE91160A184B6AC900420043 /* Path5View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE911609184B6AC900420043 /* Path5View.m */; };
+		CE91160D184B6B5800420043 /* Path6View.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91160C184B6B5800420043 /* Path6View.m */; };
 		CE98B418184524A8004760D3 /* scene-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE98B412184524A8004760D3 /* scene-2@2x.png */; };
 		CE98B419184524A8004760D3 /* scene-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE98B413184524A8004760D3 /* scene-3@2x.png */; };
 		CE98B41A184524A8004760D3 /* scene-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE98B414184524A8004760D3 /* scene-4@2x.png */; };
@@ -200,8 +208,6 @@
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
-		62AF0450184753EA00A83599 /* ClockNeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClockNeedleView.h; path = Modules/About/ClockNeedleView.h; sourceTree = "<group>"; };
-		62AF0451184753EA00A83599 /* ClockNeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClockNeedleView.m; path = Modules/About/ClockNeedleView.m; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
 		62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuExploreButton@2x.png"; sourceTree = "<group>"; };
 		62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuGaleryButton@2x.png"; sourceTree = "<group>"; };
@@ -255,6 +261,24 @@
 		CE86045818283BAB0019657F /* Home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Home.m; path = Modules/Home/Home.m; sourceTree = "<group>"; };
 		CE86045B18283E520019657F /* Musem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Musem.h; path = Modules/About/Musem.h; sourceTree = "<group>"; };
 		CE86045C18283E520019657F /* Musem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Musem.m; path = Modules/About/Musem.m; sourceTree = "<group>"; };
+		CE9115F2184B5D2600420043 /* Path1View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path1View.h; path = Modules/SceneManager/Path1View.h; sourceTree = "<group>"; };
+		CE9115F3184B5D2600420043 /* Path1View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path1View.m; path = Modules/SceneManager/Path1View.m; sourceTree = "<group>"; };
+		CE9115F5184B5FED00420043 /* MapPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapPathView.h; path = Modules/SceneManager/MapPathView.h; sourceTree = "<group>"; };
+		CE9115F6184B5FED00420043 /* MapPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapPathView.m; path = Modules/SceneManager/MapPathView.m; sourceTree = "<group>"; };
+		CE9115F8184B606500420043 /* MapPathStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapPathStatus.h; path = Modules/Utils/Constants/MapPathStatus.h; sourceTree = "<group>"; };
+		CE9115F9184B606500420043 /* MapPathStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapPathStatus.m; path = Modules/Utils/Constants/MapPathStatus.m; sourceTree = "<group>"; };
+		CE9115FB184B61CB00420043 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapView.h; path = Modules/SceneManager/MapView.h; sourceTree = "<group>"; };
+		CE9115FC184B61CB00420043 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapView.m; path = Modules/SceneManager/MapView.m; sourceTree = "<group>"; };
+		CE9115FE184B646B00420043 /* Path2View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path2View.h; path = Modules/SceneManager/Path2View.h; sourceTree = "<group>"; };
+		CE9115FF184B646B00420043 /* Path2View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path2View.m; path = Modules/SceneManager/Path2View.m; sourceTree = "<group>"; };
+		CE911602184B692400420043 /* Path3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path3View.h; path = Modules/SceneManager/Path3View.h; sourceTree = "<group>"; };
+		CE911603184B692400420043 /* Path3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path3View.m; path = Modules/SceneManager/Path3View.m; sourceTree = "<group>"; };
+		CE911605184B6A6800420043 /* Path4View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path4View.h; path = Modules/SceneManager/Path4View.h; sourceTree = "<group>"; };
+		CE911606184B6A6800420043 /* Path4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path4View.m; path = Modules/SceneManager/Path4View.m; sourceTree = "<group>"; };
+		CE911608184B6AC900420043 /* Path5View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path5View.h; path = Modules/SceneManager/Path5View.h; sourceTree = "<group>"; };
+		CE911609184B6AC900420043 /* Path5View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path5View.m; path = Modules/SceneManager/Path5View.m; sourceTree = "<group>"; };
+		CE91160B184B6B5800420043 /* Path6View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path6View.h; path = Modules/SceneManager/Path6View.h; sourceTree = "<group>"; };
+		CE91160C184B6B5800420043 /* Path6View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path6View.m; path = Modules/SceneManager/Path6View.m; sourceTree = "<group>"; };
 		CE98B412184524A8004760D3 /* scene-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-2@2x.png"; sourceTree = "<group>"; };
 		CE98B413184524A8004760D3 /* scene-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-3@2x.png"; sourceTree = "<group>"; };
 		CE98B414184524A8004760D3 /* scene-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-4@2x.png"; sourceTree = "<group>"; };
@@ -356,6 +380,8 @@
 				4F836D31183BD4EA00CA63CD /* Colors.m */,
 				4F836D32183BD4EA00CA63CD /* Events.h */,
 				4F836D33183BD4EA00CA63CD /* Events.m */,
+				CE9115F8184B606500420043 /* MapPathStatus.h */,
+				CE9115F9184B606500420043 /* MapPathStatus.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -414,8 +440,6 @@
 				62367AFF184654D70090B819 /* InfosPanel.m */,
 				62AF044C184733D600A83599 /* HoursPanel.xib */,
 				62AF044E18473A1A00A83599 /* InfosPanel.xib */,
-				62AF0450184753EA00A83599 /* ClockNeedleView.h */,
-				62AF0451184753EA00A83599 /* ClockNeedleView.m */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -723,6 +747,7 @@
 		CE45E6AB184A36FA00DCFF09 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CE9115F1184B5D0F00420043 /* Map */,
 				CE45E6AC184A371800DCFF09 /* SceneMenu.h */,
 				CE45E6AD184A371800DCFF09 /* SceneMenu.m */,
 			);
@@ -773,6 +798,37 @@
 				CE86045C18283E520019657F /* Musem.m */,
 			);
 			name = Museum;
+			sourceTree = "<group>";
+		};
+		CE9115F1184B5D0F00420043 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				CE911601184B689A00420043 /* Path */,
+				CE9115F5184B5FED00420043 /* MapPathView.h */,
+				CE9115F6184B5FED00420043 /* MapPathView.m */,
+				CE9115FB184B61CB00420043 /* MapView.h */,
+				CE9115FC184B61CB00420043 /* MapView.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		CE911601184B689A00420043 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				CE9115F2184B5D2600420043 /* Path1View.h */,
+				CE9115F3184B5D2600420043 /* Path1View.m */,
+				CE9115FE184B646B00420043 /* Path2View.h */,
+				CE9115FF184B646B00420043 /* Path2View.m */,
+				CE911602184B692400420043 /* Path3View.h */,
+				CE911603184B692400420043 /* Path3View.m */,
+				CE911605184B6A6800420043 /* Path4View.h */,
+				CE911606184B6A6800420043 /* Path4View.m */,
+				CE911608184B6AC900420043 /* Path5View.h */,
+				CE911609184B6AC900420043 /* Path5View.m */,
+				CE91160B184B6B5800420043 /* Path6View.h */,
+				CE91160C184B6B5800420043 /* Path6View.m */,
+			);
+			name = Path;
 			sourceTree = "<group>";
 		};
 		CEA3E756182E616700B115BC /* Fonts */ = {
@@ -951,12 +1007,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE911600184B646B00420043 /* Path2View.m in Sources */,
 				CE45E6A61849FAE500DCFF09 /* DashedPathView.m in Sources */,
+				CE91160A184B6AC900420043 /* Path5View.m in Sources */,
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
+				CE91160D184B6B5800420043 /* Path6View.m in Sources */,
+				CE9115F7184B5FED00420043 /* MapPathView.m in Sources */,
 				4F836D35183BD4EA00CA63CD /* Events.m in Sources */,
 				4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */,
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				62084D51183508C100F9C26C /* Logo.m in Sources */,
+				CE911604184B692400420043 /* Path3View.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				4F836D34183BD4EA00CA63CD /* Colors.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
@@ -968,24 +1029,27 @@
 				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
 				B9FF5312181FF58500DFCC39 /* GalleryViewController.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
+				CE911607184B6A6800420043 /* Path4View.m in Sources */,
 				B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */,
 				62367B00184654D70090B819 /* InfosPanel.m in Sources */,
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
+				CE9115F4184B5D2600420043 /* Path1View.m in Sources */,
 				CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */,
 				CED0FCC81849E6F20001C602 /* NavigationBarView.m in Sources */,
+				CE9115FA184B606500420043 /* MapPathStatus.m in Sources */,
 				6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */,
+				CE9115FD184B61CB00420043 /* MapView.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
 				CE86045D18283E520019657F /* Musem.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
-				62AF0452184753EA00A83599 /* ClockNeedleView.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -81,6 +81,7 @@
 
     self.oldScene = self.currentScene;
     self.currentScene = [[Scene alloc] initWithModel:sceneModel andPosition:position];
+    self.currentScene.view.frame = self.view.frame;
     self.currentScene.delegate = self;
     [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];

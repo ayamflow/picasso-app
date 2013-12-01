@@ -30,10 +30,8 @@
         NSLog(@"[GameModel] init");
         [self load];
         [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
-//        NSLog(@"[GameModel] save loaded -> currentScene: %li, lastUnlockedScene: %li, sceneCurrentTime: %f", self.currentScene, (long)self.lastUnlockedScene, self.sceneCurrentTime);
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sceneUnlocked:) name:[MPPEvents SceneUnlockedEvent] object:nil];
     }
-
     return self;
 }
 

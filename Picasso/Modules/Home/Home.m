@@ -61,6 +61,10 @@
     for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
         button.tag = i++;
         button.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
+        [button addTarget:self action:@selector(prepareTransitionOut:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
+        [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     }
 
     // This one is the reference
@@ -68,11 +72,6 @@
     [self.exploreButton moveTo:CGPointMake(self.exploreButton.frame.origin.x, self.galleryButton.frame.origin.y - 40 - self.exploreButton.frame.size.height)];
     [self.museumButton moveTo:CGPointMake(self.museumButton.frame.origin.x, [OrientationUtils nativeDeviceSize].size.height / 2 - self.galleryButton.frame.size.height / 2 + 40)];
     [self.creditsButton moveTo:CGPointMake(self.creditsButton.frame.origin.x, self.museumButton.frame.origin.y + self.museumButton.frame.size.height + 40)];
-
-    [self.exploreButton addTarget:self action:@selector(prepareTransitionOut:) forControlEvents:UIControlEventTouchUpInside];
-    [self.galleryButton addTarget:self action:@selector(prepareTransitionOut:) forControlEvents:UIControlEventTouchUpInside];
-    [self.museumButton addTarget:self action:@selector(prepareTransitionOut:) forControlEvents:UIControlEventTouchUpInside];
-    [self.creditsButton addTarget:self action:@selector(prepareTransitionOut:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 

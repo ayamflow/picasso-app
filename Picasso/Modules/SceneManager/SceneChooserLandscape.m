@@ -60,6 +60,8 @@
     [self initPreviews];
     [self initCarousel];
 
+    [self initArrows];
+
     [self initDate];
 
 //    [self initPath];
@@ -74,11 +76,11 @@
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.leftArrow];
-    [self.leftArrow moveTo:CGPointMake(0.05 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
+    [self.leftArrow moveTo:CGPointMake(0.05 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2 + self.carousel.contentOffset.height)];
 
     self.rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
     [self.view addSubview:self.rightArrow];
-    [self.rightArrow moveTo:CGPointMake(0.95 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
+    [self.rightArrow moveTo:CGPointMake(0.95 * [OrientationUtils nativeLandscapeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2 + self.carousel.contentOffset.height)];
     self.rightArrow.layer.anchorPoint = CGPointMake(0.5, 0.5);
     self.rightArrow.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
 }
@@ -101,7 +103,7 @@
     self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeCustom;
     self.carousel.pagingEnabled = YES;
-    self.carousel.contentOffset = CGSizeMake(0, 55);
+    self.carousel.contentOffset = CGSizeMake(0, 45);
     self.carousel.bounceDistance = 0.2;
     [self.view addSubview:self.carousel];
 }
@@ -191,6 +193,7 @@
 
     UIView *view = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize] andModel:[[DataManager sharedInstance] getSceneWithNumber:index]];
     view.center = carousel.currentItemView.center;
+    view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.85, 0.85);
     [self.view addSubview:view];
     [view moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - view.frame.size.width / 2, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - view.frame.size.height / 2 + 1 + carousel.contentOffset.height)];
 
@@ -218,7 +221,7 @@
 
 - (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform {
     CGFloat abs = fabsf(offset);
-    CGFloat scale = 0.9 + (1 - (0.9 + abs / 10));
+    CGFloat scale = 0.9 + (1 - (0.9 + abs / 10)) - 0.15;
 
     transform = CATransform3DScale(transform, scale, scale, 1);
     transform = CATransform3DTranslate(transform, self.carousel.currentItemView.frame.size.width * offset, 1, 1);

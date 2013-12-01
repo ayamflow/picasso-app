@@ -379,7 +379,6 @@
     NSLog(@"[Scene #%li] Stopped.", self.model.number);
     GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
     gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
-    gameModel.currentScene = self.model.number;
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;

@@ -13,9 +13,11 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineCap(context, kCGLineCapSquare);
-    CGFloat lines[] = {5, 5, 5, 5, 5};
     CGContextSetRGBStrokeColor(context, 0, 0, 0, 1);
-    CGContextSetLineDash(context, 0, lines, 5);
+
+    CGFloat lines[] = {5, 5};
+    CGContextSetLineDash(context, 0, lines, 2);
+
     CGContextMoveToPoint(context, 0, 0);
 
     CGContextAddCurveToPoint(context, 0, 92, 327, 3, 213,- 20);

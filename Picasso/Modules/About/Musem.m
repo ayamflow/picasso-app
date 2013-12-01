@@ -184,6 +184,7 @@
 - (void)updateCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
+    self.lastUpdatedCellHeight = cell.frame.size.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

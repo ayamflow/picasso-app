@@ -237,7 +237,14 @@
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
     if(![[DataManager sharedInstance] getSceneWithNumber:index].unlocked) return;
     if(index != carousel.currentItemIndex) return;
-    
+
+    carousel.currentItemView.alpha = 0.7;
+    [UIView animateWithDuration:0.2 animations:^{
+
+    } completion:^(BOOL finished) {
+        carousel.currentItemView.alpha = 1;
+    }];
+
     UIView *view = [[ScenePreviewView alloc] initWithFrame:[OrientationUtils nativeDeviceSize] andModel:[[DataManager sharedInstance] getSceneWithNumber:index]];
     view.center = carousel.currentItemView.center;
     [self.view addSubview:view];
