@@ -109,9 +109,6 @@
 }
 
 - (void)showSceneChooser {
-    [self.map performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-    [self.bottomInfos performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-
     [self.navigationBar.exploreButton removeTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.exploreButton removeFromSuperview];
     [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -125,13 +122,37 @@
     }
     [self.view addSubview:self.sceneChooser.view];
     [self.view bringSubviewToFront:self.navigationBar];
+
+    [self.sceneChooser.view moveTo:CGPointMake(0, -20)];
+    self.sceneChooser.view.alpha = 0;
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.sceneChooser.view moveTo:CGPointMake(0, 0)];
+        self.sceneChooser.view.alpha = 1;
+        [self.map moveTo:CGPointMake(0, self.map.frame.origin.y + 20)];
+        self.map.alpha = 0;
+        [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y + 20)];
+        self.bottomInfos.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.map performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
+        [self.bottomInfos performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
+    }];
 }
 
 - (void)hideSceneChooser {
-    [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-
     [self.view addSubview:self.bottomInfos];
     [self.view addSubview:self.map];
+
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.map moveTo:CGPointMake(0, self.map.frame.origin.y - 20)];
+        self.map.alpha = 1;
+        [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y - 20)];
+        self.bottomInfos.alpha = 1;
+        [self.sceneChooser.view moveTo:CGPointMake(0, self.sceneChooser.view.frame.origin.y - 20)];
+        self.sceneChooser.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
+        self.navigationBar.titleLabel.text = [self.sceneModel.title uppercaseString];
+    }];
 
     [self.navigationBar addSubview:self.navigationBar.exploreButton];
     [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];

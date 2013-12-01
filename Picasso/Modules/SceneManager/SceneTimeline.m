@@ -84,17 +84,18 @@
 - (void)initTrackers {
     self.trackers = [NSMutableArray arrayWithCapacity:[self.sceneModel.trackerStarts count]];
     for(int i = 0; i < [self.sceneModel.trackerStarts count]; i++) {
-        UIImageView *tracker = [self createTrackerActivated:NO];
+        UIView *tracker = [self createTrackerActivated:NO];
         [self.trackers addObject:tracker];
         [self.view addSubview:tracker];
         [tracker moveTo:CGPointMake( self.progressBar.center.x + self.timelineWidth / 100 * [[self.sceneModel.trackerStarts objectAtIndex:i] intValue], self.progressBar.frame.origin.y + self.progressBar.frame.size.height / 2 - tracker.frame.size.height / 2)];
+        tracker.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_4);
     }
 }
 
-- (UIImageView *)createTrackerActivated:(BOOL)activated {
-    UIImageView *tracker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timelineTracker.png"]];
-    if(activated) tracker.alpha = 1;
-    else tracker.alpha = kInactiveTrackerAlpha;
+- (UIView *)createTrackerActivated:(BOOL)activated {
+    UIView *tracker = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 4)];
+    if(activated) tracker.backgroundColor = [UIColor blackColor];
+    else tracker.backgroundColor = [UIColor grayColor];
     return tracker;
 }
 
@@ -102,13 +103,17 @@
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, completion, 1);
 
     for(int i = 0; i < [self.sceneModel.trackerStarts count]; i++) {
-        UIImageView *tracker = [self.trackers objectAtIndex:i];
+        UIView *tracker = [self.trackers objectAtIndex:i];
         NSInteger trackerStart = [[self.sceneModel.trackerStarts objectAtIndex:i] intValue];
-        if(completion * 100 > trackerStart && tracker.alpha < 1) {
-            tracker.alpha = 1;
+        if(completion * 100 > trackerStart && tracker.backgroundColor != [UIColor blackColor]) {
+            [UIView animateWithDuration:0.3 animations:^{
+                tracker.backgroundColor = [UIColor blackColor];
+            }];
         }
-        else if(completion * 100 < trackerStart && tracker.alpha > kInactiveTrackerAlpha) {
-            tracker.alpha = kInactiveTrackerAlpha;
+        else if(completion * 100 < trackerStart && tracker.backgroundColor != [UIColor grayColor]) {
+            [UIView animateWithDuration:0.3 animations:^{
+                tracker.backgroundColor = [UIColor grayColor];
+            }];
         }
     }
 }

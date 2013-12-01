@@ -16,7 +16,7 @@
 #import "ScenePreviewView.h"
 #import "SceneModel.h"
 #import "iCarousel.h"
-#import "DashedPathView.h"
+#import "DashedPathViewLandscape.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -29,7 +29,7 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
 
-@property (strong, nonatomic) DashedPathView *dashedPath;
+@property (strong, nonatomic) DashedPathViewLandscape *dashedPath;
 
 @property (strong, nonatomic) UIImageView *leftArrow;
 @property (strong, nonatomic) UIImageView *rightArrow;
@@ -55,6 +55,7 @@
 
 	self.view.backgroundColor = [UIColor clearColor];
 
+    [self initPath];
     [self initBackground];
 
     [self initPreviews];
@@ -63,14 +64,13 @@
     [self initArrows];
 
     [self initDate];
-
-//    [self initPath];
 }
 
 - (void)initBackground {
     UIView *background = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
     [self.view addSubview:background];
+    [self.view sendSubviewToBack:background];
 }
 
 - (void)initArrows {
@@ -123,7 +123,7 @@
 }
 
 - (void)initPath {
-    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 150, [OrientationUtils nativeLandscapeDeviceSize].size.width * 7, 150)];
+    self.dashedPath = [[DashedPathViewLandscape alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * 7 * 0.9, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
     [self.view addSubview:self.dashedPath];
     self.dashedPath.backgroundColor = [UIColor clearColor];
     [self.view sendSubviewToBack:self.dashedPath];
@@ -164,7 +164,7 @@
         view.alpha = 0;
         self.dashedPath.alpha = 0;
     } completion:^(BOOL finished) {
-//        [self.dashedPath removeFromSuperview];
+        [self.dashedPath removeFromSuperview];
         [view removeFromSuperview];
         [self.delegate navigateToSceneWithNumber:index];
     }];

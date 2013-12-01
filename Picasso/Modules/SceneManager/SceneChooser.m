@@ -140,7 +140,7 @@
 }
 
 - (void)initPath {
-    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeDeviceSize].size.height - 150, [OrientationUtils nativeDeviceSize].size.width * 7, 150)];
+    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width * 7 * 0.9, [OrientationUtils nativeDeviceSize].size.height)];
     [self.view addSubview:self.dashedPath];
     self.dashedPath.backgroundColor = [UIColor clearColor];
     [self.view sendSubviewToBack:self.dashedPath];
