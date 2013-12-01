@@ -13,6 +13,7 @@
 #import "NavigationBarView.h"
 #import "SceneModel.h"
 #import "Events.h"
+#import "Colors.h"
 #import "DataManager.h"
 #import "SceneChooserLandscape.h"
 #import "SceneManager.h"
@@ -47,7 +48,8 @@
 
 - (void)initBackground {
     UIView *background = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
-    background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+//    background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+    background.backgroundColor = [UIColor backgroundColor];
     [self.view addSubview:background];
 }
 

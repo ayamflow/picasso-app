@@ -52,10 +52,11 @@
 	self.view.backgroundColor = [UIColor clearColor];
 
     [self initNavBar];
-    [self initArrows];
 
     [self initPreviews];
     [self initCarousel];
+
+    [self initArrows];
     
     [self initTitle];
     [self initDate];
@@ -64,28 +65,23 @@
 
     [self.view bringSubviewToFront:self.navigationBar];
 
-//    [self transitionIn];
+    [self transitionIn];
 }
 
 - (void)initNavBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 50) andTitle:@"Explorer" andShowExploreButton:NO];
     [self.view addSubview:self.navigationBar];
 
-    [self.navigationBar.backButton addTarget:self action:@selector(backToHome) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)backToHome {
-    // Transiton then...
-    [self toHome];
+    [self.navigationBar.backButton addTarget:self action:@selector(transitionOutToHome) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
-    [self.view addSubview:self.leftArrow];
+    [self.carousel addSubview:self.leftArrow];
     [self.leftArrow moveTo:CGPointMake(0.1 * [OrientationUtils nativeDeviceSize].size.width - self.leftArrow.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.leftArrow.frame.size.height / 2)];
 
     self.rightArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
-    [self.view addSubview:self.rightArrow];
+    [self.carousel addSubview:self.rightArrow];
     [self.rightArrow moveTo:CGPointMake(0.9 * [OrientationUtils nativeDeviceSize].size.width - self.rightArrow.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - self.rightArrow.frame.size.height / 2)];
     self.rightArrow.layer.anchorPoint = CGPointMake(0.5, 0.5);
     self.rightArrow.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
@@ -148,61 +144,84 @@
 
 - (void)transitionIn {
     self.navigationBar.alpha = 0;
-    [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
+    [self.navigationBar moveTo:CGPointMake(0, - 20)];
 
-    [self.carousel moveTo:CGPointMake(self.carousel.frame.size.width, 0)];
+    [self.carousel moveTo:CGPointMake(0, - 20)];
     self.carousel.alpha = 0;
 
-    CGFloat duration = 0.8;
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    self.dashedPath.alpha = 0;
+    [self.dashedPath moveTo:CGPointMake(0, self.dashedPath.frame.origin.y - 20)];
+
+    CGFloat duration = 0.6;
+    [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.navigationBar moveTo:CGPointMake(0, 0)];
         self.navigationBar.alpha = 1;
     } completion:nil];
 
-    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:duration delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.carousel moveTo:CGPointMake(0, 0)];
         self.carousel.alpha = 1;
     } completion:nil];
+
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.dashedPath.alpha = 1;
+        [self.dashedPath moveTo:CGPointMake(0, 0)];
+    } completion:nil];
+}
+
+- (void)transitionOutToHome {
+    CGFloat duration = 0.6;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.navigationBar moveTo:CGPointMake(0, - 20)];
+        self.navigationBar.alpha = 0;
+    } completion:nil];
+
+    [UIView animateWithDuration:duration delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.carousel moveTo:CGPointMake(0, - 20)];
+        self.carousel.alpha = 0;
+    } completion:nil];
+
+    [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.dashedPath.alpha = 0;
+        [self.dashedPath moveTo:CGPointMake(0, - 20)];
+    } completion:^(BOOL finished) {
+        [self toHome];
+    }];
 }
 
 - (void)transitionOutWithView:(UIView *)view andIndex:(NSInteger)index {
-    [UIView animateWithDuration:0.8 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.titleLabel moveTo:CGPointMake(- self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y)];
-        self.titleLabel.alpha = 0;
-        [self.rightArrow moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width + 2 * self.rightArrow.frame.size.width, self.rightArrow.frame.origin.y)];
-    } completion:^(BOOL finished) {
-        [self.rightArrow removeFromSuperview];
-        [self.titleLabel removeFromSuperview];
-    }];
-    [UIView animateWithDuration:0.8 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.dateLabel moveTo:CGPointMake(- self.dateLabel.frame.size.width, self.dateLabel.frame.origin.y)];
-        self.dateLabel.alpha = 0;
-        [self.leftArrow moveTo:CGPointMake(2 * - self.leftArrow.frame.size.width, self.leftArrow.frame.origin.y)];
-    } completion:^(BOOL finished) {
-        [self.leftArrow removeFromSuperview];
-        [self.dateLabel removeFromSuperview];
-        
-    }];
-    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [view moveTo:CGPointMake(- view.frame.size.width, view.frame.origin.y)];
-        view.alpha = 0;
-        self.dashedPath.alpha = 0;
+    CGFloat duration = 0.6;
+
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.navigationBar moveTo:CGPointMake(0, -self.navigationBar.frame.size.height)];
         self.navigationBar.alpha = 0;
     } completion:^(BOOL finished) {
         [self.navigationBar removeFromSuperview];
+    }];
+
+    [UIView animateWithDuration:duration delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.dashedPath.alpha = 0;
+        [self.dashedPath moveTo:CGPointMake(0, 20)];
+    } completion:^(BOOL finished) {
         [self.dashedPath removeFromSuperview];
+    }];
+
+    [UIView animateWithDuration:duration delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [view moveTo:CGPointMake(- view.frame.size.width / 4, view.frame.origin.y)];
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
         [view removeFromSuperview];
-        [self toSceneWithNumber:index];
     }];
 
     UIImageView *rotationIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rotationIcon.png"]];
     [self.view addSubview:rotationIcon];
     [rotationIcon moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - rotationIcon.frame.size.width / 2, [OrientationUtils nativeDeviceSize].size.height / 2 - rotationIcon.frame.size.height / 2)];
     rotationIcon.alpha = 0;
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:duration delay:duration / 2 options:UIViewAnimationOptionCurveLinear animations:^{
         rotationIcon.alpha = 1;
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        [self toSceneWithNumber:index];
+    }];
 }
 
 - (void)toSceneWithNumber:(NSInteger)number {

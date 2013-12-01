@@ -34,7 +34,7 @@
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 
     [self addSubview:self.backButton];
-    [self.backButton moveTo:CGPointMake(self.backButton.frame.size.width, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
+    [self.backButton moveTo:CGPointMake(25, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
     [self.backButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
@@ -54,7 +54,7 @@
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
     [self addSubview:self.exploreButton];
-    [self.exploreButton moveTo:CGPointMake(self.frame.size.width - 2 * self.exploreButton.frame.size.width, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
+    [self.exploreButton moveTo:CGPointMake(self.frame.size.width - self.exploreButton.frame.size.width - 25, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
     [self.exploreButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];

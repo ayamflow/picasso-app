@@ -72,14 +72,26 @@
     CGFloat duration = 0.8;
 
     [UIView animateWithDuration:duration animations:^{
-        [self.logo.view moveTo:CGPointMake(- self.logo.view.frame.size.width, self.logo.view.frame.origin.y)];
+        [self.logo.view moveTo:CGPointMake(self.logo.view.frame.origin.x, self.logo.view.frame.origin.y - 20)];
+        self.logo.view.alpha = 0;
     }];
 
     [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.titleLabel moveTo:CGPointMake(- self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y)];
+        [self.titleLabel moveTo:CGPointMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y - 20)];
+        self.titleLabel.alpha = 0;
     } completion:^(BOOL finished) {
         [self toHome];
     }];
+
+//    [UIView animateWithDuration:duration animations:^{
+//        [self.logo.view moveTo:CGPointMake(- self.logo.view.frame.size.width, self.logo.view.frame.origin.y)];
+//    }];
+//
+//    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        [self.titleLabel moveTo:CGPointMake(- self.titleLabel.frame.size.width, self.titleLabel.frame.origin.y)];
+//    } completion:^(BOOL finished) {
+//        [self toHome];
+//    }];
 }
 
 

@@ -40,6 +40,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor clearColor];
     
     [self updateRotation];
     
@@ -76,29 +78,18 @@
 
 
 - (void)transitionIn {
-    [self.exploreButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width + self.exploreButton.frame.size.width, self.exploreButton.frame.origin.y)];
-    [self.galleryButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width +  self.galleryButton.frame.size.width, self.galleryButton.frame.origin.y)];
-    [self.museumButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width +  self.museumButton.frame.size.width, self.museumButton.frame.origin.y)];
-    [self.creditsButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width +  self.creditsButton.frame.size.width, self.creditsButton.frame.origin.y)];
-
-
+    CGFloat delay = 0;
     CGFloat duration = 0.8;
+    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+        [button moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 + button.frame.size.width, button.frame.origin.y)];
+        button.alpha = 0;
 
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.exploreButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.exploreButton.frame.size.width / 2, self.exploreButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.galleryButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.galleryButton.frame.size.width / 2, self.galleryButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.museumButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.museumButton.frame.size.width / 2, self.museumButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.creditsButton moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - self.creditsButton.frame.size.width / 2, self.creditsButton.frame.origin.y)];
-    } completion:nil];
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [button moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - button.frame.size.width / 2, button.frame.origin.y)];
+            button.alpha = 1;
+        } completion:nil];
+        delay += 0.05;
+    }
 }
 
 - (void)prepareTransitionOut:(id)sender {
@@ -121,25 +112,20 @@
 }
 
 - (void)transitionOut {
+    CGFloat delay = 0;
     CGFloat duration = 0.8;
+    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [button moveTo:CGPointMake(-button.frame.size.width, button.frame.origin.y)];
+            button.alpha = 0;
+        } completion:^(BOOL finished) {
 
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.exploreButton moveTo:CGPointMake( - [OrientationUtils nativeDeviceSize].size.width, self.exploreButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.galleryButton moveTo:CGPointMake( - [OrientationUtils nativeDeviceSize].size.width, self.galleryButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.museumButton moveTo:CGPointMake( - [OrientationUtils nativeDeviceSize].size.width, self.museumButton.frame.origin.y)];
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.creditsButton moveTo:CGPointMake(- [OrientationUtils nativeDeviceSize].size.width, self.creditsButton.frame.origin.y)];
-    } completion:^(BOOL finished) {
-        [self transitionOutComplete];
-    }];
+            if(delay > 0.10) {
+                [self transitionOutComplete];
+            }
+        }];
+        delay += 0.05;
+    }
 }
 
 - (void)transitionOutComplete {

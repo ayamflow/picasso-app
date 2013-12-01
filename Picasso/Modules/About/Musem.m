@@ -26,7 +26,7 @@
 @property (strong, nonatomic) NSArray *identifiers;
 @property (strong, nonatomic) NSArray *subviewClasses;
 @property (strong, nonatomic) NSMutableArray *openCellIndexes;
-@property (assign, nonatomic) CGFloat lastUpdatedCellHeight;
+@property (strong, nonatomic) NSMutableArray *cellHeights;
 
 @end
 
@@ -43,18 +43,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
+
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
-    [self initData];
+//    [self initData];
     [self initTexts];
+
+    [self transitionIn];
 }
 
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 50) andTitle:@"Le musée" andShowExploreButton:YES];
     [self.view addSubview:self.navigationBar];
 
-    [self.navigationBar.backButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(transitionOut) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.exploreButton addTarget:self action:@selector(navigateToExplore) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -94,6 +98,10 @@
     self.identifiers = [NSArray arrayWithObjects:@"Hours", @"Infos", @"Map", @"Booking", @"About", nil];
     self.openCellIndexes = [[NSMutableArray alloc] init];
     self.subviewClasses = [NSArray arrayWithObjects:@"HoursPanel", @"InfosPanel", @"HoursPanel", @"HoursPanel", @"HoursPanel", nil];
+    self.cellHeights = [NSMutableArray arrayWithCapacity:[self.identifiers count]];
+    for(int i = 0; i < [self.identifiers count]; i++) {
+        [self.cellHeights addObject:[NSNumber numberWithFloat:[self.tableView rowHeight]]];
+    }
 }
 
 - (void)initTexts {
@@ -144,9 +152,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if([self.openCellIndexes indexOfObject:@(indexPath.row)] == NSNotFound) {
+        NSLog(@"EXPAND");
         [self expandCell:cell atIndexPath:indexPath];
     }
     else {
+        NSLog(@"CLOSE");
         [self closeCell:cell atIndexPath:indexPath];
     }
 }
@@ -159,7 +169,7 @@
     view.tag = kCellDetailTag;
     [cell.contentView addSubview:view];
     [view moveTo:CGPointMake(0, cell.frame.size.height)];
-    self.lastUpdatedCellHeight = view.frame.size.height;
+    [self.cellHeights setObject:[NSNumber numberWithFloat:view.frame.size.height] atIndexedSubscript:indexPath.row];
     [self updateCell:cell atIndexPath:indexPath];
     [self changeStatusIconForCell:cell atIndexPath:indexPath];
     
@@ -184,7 +194,6 @@
 - (void)updateCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
-    self.lastUpdatedCellHeight = cell.frame.size.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -192,7 +201,7 @@
         return [tableView rowHeight];
     }
     else {
-        return self.lastUpdatedCellHeight;
+        return [[self.cellHeights objectAtIndex:indexPath.row] floatValue];
     }
 }
 
@@ -222,6 +231,52 @@
         [animatedIcon removeFromSuperview];
         statusIcon.image = animatedIconImage;
         statusIcon.alpha = 1;
+    }];
+}
+
+- (void)transitionIn {
+    self.navigationBar.alpha = 0;
+    self.tableView.tableHeaderView.alpha = 0;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.navigationBar.alpha = 1;
+        self.tableView.tableHeaderView.alpha = 1;
+    }];
+    [self performSelector:@selector(showTableCells) withObject:self afterDelay:0.2];
+}
+
+- (void)showTableCells {
+    [self initData];
+    [self.tableView reloadData];
+}
+
+- (void)transitionOut {
+    NSArray *cells = [self.tableView visibleCells];
+    for(int i = [cells count] - 1; i >= 0; i--) {
+        UITableViewCell *cell = [cells objectAtIndex:i];
+        [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            cell.alpha = 0;
+            cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
+        } completion:nil];
+    }
+
+    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
+        self.navigationBar.alpha = 0;
+        self.tableView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self toHome];
+    }];
+
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.alpha = 0;
+    cell.layer.anchorPoint = CGPointMake(0.5, 0);
+    cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
+    [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        cell.alpha = 1.0;
+        cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+    } completion:^(BOOL finished) {
+
     }];
 }
 
