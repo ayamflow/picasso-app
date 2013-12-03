@@ -20,7 +20,7 @@
 #import "WorkModel.h"
 #import "DataManager.h"
 
-#define CELL_WIDTH 160
+#define CELL_WIDTH 110
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define HEADER_IDENTIFIER @"WaterfallHeader"
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
@@ -52,7 +52,7 @@
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         layout.delegate = self;
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 95, self.view.bounds.size.width - 20, self.view.bounds.size.height  - 95) collectionViewLayout:layout];
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
@@ -79,6 +79,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = YES;
+    
+    _navBar.layer.borderColor = [UIColor blackColor].CGColor;
+    _navBar.layer.borderWidth = 2.0f;
+    
     [self.collectionView registerClass:[CHTCollectionViewWaterfallCell class] forCellWithReuseIdentifier:@"WaterfallCell"];
     [self.view addSubview:self.collectionView];
 }

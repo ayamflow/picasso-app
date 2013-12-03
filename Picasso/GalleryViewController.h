@@ -12,5 +12,6 @@
 @interface GalleryViewController : UIViewController <UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout>
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) CGFloat cellWidth;
+@property (weak, nonatomic) IBOutlet UIView *navBar;
 
 @end
