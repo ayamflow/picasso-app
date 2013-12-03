@@ -19,6 +19,7 @@
 #import "Events.h"
 #import "UIViewPicasso.h"
 #import "SceneTimeline.h"
+#import "LineDrawView.h"
 #import "SceneMenu.h"
 #import "SceneManagerDelegate.h"
 
@@ -49,6 +50,11 @@
 @property (assign, nonatomic) NSInteger transitionsDone;
 @property (assign, nonatomic) NSInteger transitionsNumber;
 
+@property (strong, nonatomic) NSArray *trackerStarts;
+@property (strong, nonatomic) NSArray *trackerEnds;
+
+@property (strong, nonatomic) LineDrawView *drawView;
+
 @end
 
 @implementation Scene
@@ -63,10 +69,10 @@
     if(self = [super init]) {
         self.model = sceneModel;
         self.hasEnded = NO;
-
+        
         self.playerView = [MotionVideoPlayer sharedInstance];
         self.player = self.playerView.player;
-
+        
         // Play the scene's video
         NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
         NSURL *url = [NSURL fileURLWithPath:filePath];
@@ -77,12 +83,12 @@
         
         [self initTrackers];
         self.playerUpdatesObserver = [self listenForPlayerUpdates];
-
+        
         [self initSlider];
         [self initTimeline];
         
         [self transitionIn];
-
+        
         NSLog(@"[Scene #%li] Started", (long)self.model.number);
         self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
         [self resume]; // seekToTime + enableMotion
@@ -107,13 +113,13 @@
     self.slider.layer.borderWidth = 2;
     [self.view addSubview:self.slider];
     [self resetSliderWithDuration:0];
-
+    
     self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sliderDragged:)];
     self.panRecognizer.maximumNumberOfTouches = 1;
     self.panRecognizer.minimumNumberOfTouches = 1;
     self.panRecognizer.delegate = self;
     [self.slider addGestureRecognizer:self.panRecognizer];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenu) name:[MPPEvents MenuExitEvent] object:nil];
 }
 
@@ -127,13 +133,13 @@
     CGPoint translation = [panRecognizer translationInView:self.view];
     panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
     [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
-
+    
     if(panRecognizer.state == UIGestureRecognizerStateChanged) {
         CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
         [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height + sliderBottom - kSliderVisibleHeight)];
-
+        
         [self.timeline.view moveTo:CGPointMake(self.timeline.view.frame.origin.x, self.timeline.view.frame.origin.y + sliderBottom * 0.05)];
-
+        
         if(sliderBottom >= kSliderHeight - kSliderVisibleHeight) {
             [self.slider removeGestureRecognizer:self.panRecognizer];
             [UIView animateWithDuration:0.4 animations:^{
@@ -164,9 +170,9 @@
 - (void)showMenu {
     if(self.menuIsOpen) return;
     self.menuIsOpen = YES;
-
+    
     [self.slider removeGestureRecognizer:self.panRecognizer];
-
+    
     if(self.menu == nil) {
         self.menu = [[SceneMenu alloc] initWithModel:self.model];
         self.menu.delegate = (UIViewController <SceneManagerDelegate> *)self.parentViewController;
@@ -175,7 +181,7 @@
     [self.view addSubview:self.menu.view];
     [self.menu.view moveTo:CGPointMake(0, -self.menu.view.frame.size.height)];
     [self addChildViewController:self.menu];
- 
+    
     [UIView animateWithDuration:0.4 animations:^{
         [self.menu.view moveTo:CGPointMake(0, 0)];
         [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
@@ -224,10 +230,10 @@
     self.dateTitle.font = [UIFont fontWithName:@"Avenir" size:12.0];
     
     self.dateImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateTitleSign.png"]];
-
+    
     [self.dateImageView moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateImageView.frame.size.width / 2, topPosition + self.dateTitle.frame.size.height - 22)];
     [self.dateTitle moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.dateTitle.frame.size.width / 2, topPosition + 20)];
-
+    
     [self.view addSubview:self.dateTitle];
     [self.view addSubview:self.dateImageView];
 }
@@ -236,7 +242,7 @@
     [self translateElementIn:self.dateImageView at:0 withDuration:1];
     [self translateElementIn:self.dateTitle at:0 withDuration:1];
     [self translateElementIn:self.sceneTitle at:0.05 withDuration:1];
-
+    
     self.transitionsNumber++;
     [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height + self.timeline.view.frame.size.height)];
     [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -244,7 +250,7 @@
     } completion:^(BOOL finished) {
         [self transitionInComplete];
     }];
-
+    
 }
 
 - (void)translateElementIn:(UIView *)view at:(NSTimeInterval)startTime withDuration:(NSTimeInterval)duration {
@@ -262,24 +268,36 @@
     if(++self.transitionsDone == self.transitionsNumber) {
         [UIView animateWithDuration:4 animations:^{
          	self.sceneTitle.alpha = 0;
-	         self.dateImageView.alpha = 0;
-    	     self.dateTitle.alpha = 0;
-         } completion:^(BOOL finished) {
-        	 [self.sceneTitle removeFromSuperview];
-	         [self.dateImageView removeFromSuperview];
-    	     [self.dateTitle removeFromSuperview];
-         }];
+            self.dateImageView.alpha = 0;
+            self.dateTitle.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.sceneTitle removeFromSuperview];
+            [self.dateImageView removeFromSuperview];
+            [self.dateTitle removeFromSuperview];
+        }];
     }
 }
 
 - (void)initTrackers {
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"tracker-button" ofType: @"png"];
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
+    UIImage *image = [UIImage imageNamed:@"tracker.png"];
+    
+    self.drawView = [[LineDrawView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:self.drawView];
+    self.drawView.backgroundColor = [UIColor clearColor];
+    [self.view sendSubviewToBack:self.drawView];
     
     NSUInteger trackerNumber = [self.model.trackers count];
-    NSMutableArray *trackersArray = [[NSMutableArray alloc]initWithCapacity:trackerNumber];
+    NSMutableArray *trackersArray = [NSMutableArray arrayWithCapacity:trackerNumber];
+    NSMutableArray *trackerStarts = [NSMutableArray arrayWithCapacity:trackerNumber];
+    NSMutableArray *trackerEnds = [NSMutableArray arrayWithCapacity:trackerNumber];
     
     for(int i = 0; i < trackerNumber; i++) {
+        NSArray *positions = [[self.model.trackers objectAtIndex:i] positions];
+        NSInteger startTime = [[[positions objectAtIndex: 0] objectAtIndex:0] integerValue];
+        NSInteger endTime = [[[positions objectAtIndex: [positions count] - 1] objectAtIndex:0] integerValue];
+        [trackerStarts addObject:[NSNumber numberWithInteger:startTime]];
+        [trackerEnds addObject:[NSNumber numberWithInteger:endTime]];
+
         UIButton *tracker = [self createTrackerWithImage:image];
         TrackerModel *trackerModel = [self.model.trackers objectAtIndex:i];
         tracker.tag = trackerModel.workId;
@@ -288,13 +306,14 @@
         [self.view addSubview:tracker];
     }
     
+    self.trackerStarts = [NSArray arrayWithArray:trackerStarts];
+    self.trackerEnds = [NSArray arrayWithArray:trackerEnds];
     self.trackersImage = [NSArray arrayWithArray:trackersArray];
 }
 
 - (UIButton *)createTrackerWithImage:(UIImage *)image {
     UIButton *tracker = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [tracker setBackgroundImage:image forState:UIControlStateNormal];
-    [tracker setBackgroundColor:[UIColor blueColor]];
     // Hidden by default
     [tracker setHidden:YES];
     [tracker setEnabled:NO];
@@ -305,12 +324,10 @@
 
 - (void)trackerTouched:(id)sender {
     NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
-    [self stop];
-    WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
-    NSLog(@"workView: %@", workView);
-    NSLog(@"parentVC: %@", self.parentViewController);
-    workView.workId = [sender tag];
-    [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];
+    /*    [self stop];
+     WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
+     workView.workId = [sender tag];
+     [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];*/
 }
 
 - (id)listenForPlayerUpdates {
@@ -328,43 +345,45 @@
 	    if(self.completion > kPlaybackFadePercent) {
     	    // fade to black proportionaly
     	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 5; // -10% opacity * factor
-   	 }
-   	 if(self.completion > 1.0) {
-         self.hasEnded = YES;
-   	     [self playerItemDidReachEnd];
-   	 }
+        }
+        if(self.completion > 1.0) {
+            self.hasEnded = YES;
+            [self playerItemDidReachEnd];
+        }
     }
 }
 
 - (void)toggleTrackers {
     CGFloat currentTime = CMTimeGetSeconds(self.player.currentTime);
     NSInteger currentFrame = self.playerView.frameRate * currentTime;
-
-    // Loop on all trackers (which contains a workId an an array of positions)
+    
     for(int i = 0; i < [self.model.trackers count]; i++) {
-        
-        // Cache current tracker button and current tracker data (workId, positions)
-        NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
         UIButton *currentTracker = [self.trackersImage objectAtIndex:i];
+        
+        if(currentFrame > [[self.trackerStarts objectAtIndex:i] integerValue]
+           && currentFrame < [[self.trackerEnds objectAtIndex:i] integerValue] &&
+           !currentTracker.enabled) {
+            currentTracker.enabled = YES;
+            currentTracker.hidden = NO;
+            NSLog(@"Enable tracker %i", i);
+        }
+        else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
+            currentTracker.enabled = NO;
+            currentTracker.hidden = YES;
+            NSLog(@"Disable tracker %i", i);
+        }
 
-        // Loop on all positions of the current tracker
-        for(int j = 0; j < [currentTrackerPositions count]; j++) {
-            // If a tracker is supposed to show at the current time, show it
-            if(currentFrame == [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:0] integerValue]) {
-                [currentTracker setHidden:NO];
-                [currentTracker setEnabled:YES];
-                NSInteger x = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:1] integerValue];
-                NSInteger y = [[[currentTrackerPositions objectAtIndex:j] objectAtIndex:2] integerValue];
-                CGRect trackerFrame = currentTracker.frame;
-                trackerFrame.origin = CGPointMake(x, y);
-                currentTracker.autoresizingMask = UIViewAutoresizingNone;
-                currentTracker.frame = trackerFrame;
-                return;
-            }
-            else {
-                [currentTracker setHidden:YES];
-                [currentTracker setEnabled:NO];
-            }
+        if(currentTracker.enabled) {
+            NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
+            NSArray *currentPosition = [currentTrackerPositions objectAtIndex:currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue]];
+            NSInteger x = [[currentPosition objectAtIndex:1] integerValue];
+            NSInteger y = [[currentPosition objectAtIndex:2] integerValue];
+            CGPoint trackerPoint = self.view.center;
+            CGPoint trackerAnchor = CGPointMake(x, y);
+            [currentTracker moveTo:trackerPoint];
+            self.drawView.startPoint = trackerPoint;
+            self.drawView.endPoint = trackerAnchor;
+            [self.drawView setNeedsDisplay];
         }
     }
 }

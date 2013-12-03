@@ -12,6 +12,7 @@
 		4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D27183BD41B00CA63CD /* UINavigationControllerPicasso.m */; };
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
 		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
+		4FB559D5184DFC9C0000D076 /* LineDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB559D4184DFC9C0000D076 /* LineDrawView.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreviewView.m */; };
 		620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423C91843510F00648ABA /* AvenirLTStd-Black.otf */; };
@@ -142,6 +143,8 @@
 		4F836D31183BD4EA00CA63CD /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = Modules/Utils/Constants/Colors.m; sourceTree = "<group>"; };
 		4F836D32183BD4EA00CA63CD /* Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Events.h; path = Modules/Utils/Constants/Events.h; sourceTree = "<group>"; };
 		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
+		4FB559D3184DFC9C0000D076 /* LineDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineDrawView.h; path = Modules/SceneManager/LineDrawView.h; sourceTree = "<group>"; };
+		4FB559D4184DFC9C0000D076 /* LineDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineDrawView.m; path = Modules/SceneManager/LineDrawView.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
 		620423C618434B5D00648ABA /* ScenePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScenePreviewView.h; path = Modules/SceneManager/ScenePreviewView.h; sourceTree = "<group>"; };
 		620423C718434B5D00648ABA /* ScenePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScenePreviewView.m; path = Modules/SceneManager/ScenePreviewView.m; sourceTree = "<group>"; };
@@ -473,6 +476,8 @@
 				624B978A18211AC50087C576 /* SceneSlider.m */,
 				62DCA8EB1843A3B700CF593F /* SceneTimeline.h */,
 				62DCA8EC1843A3B700CF593F /* SceneTimeline.m */,
+				4FB559D3184DFC9C0000D076 /* LineDrawView.h */,
+				4FB559D4184DFC9C0000D076 /* LineDrawView.m */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -1028,6 +1033,7 @@
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
 				620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */,
+				4FB559D5184DFC9C0000D076 /* LineDrawView.m in Sources */,
 				62367B00184654D70090B819 /* InfosPanel.m in Sources */,
 				4F34E978183CE42B00661A68 /* UIViewPicasso.m in Sources */,
 				CE9115F4184B5D2600420043 /* Path1View.m in Sources */,
