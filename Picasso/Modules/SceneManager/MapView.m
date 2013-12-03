@@ -27,6 +27,14 @@
         self.backgroundColor = [UIColor clearColor];
         [self initMap];
         [self initPoints];
+        
+        CGRect originalBounds = self.bounds;
+        
+        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2.0, 2.0);
+        
+        CGRect frame = self.frame;
+        frame.origin = CGPointMake(- (self.bounds.origin.x - originalBounds.origin.x) - (self.bounds.size.width - originalBounds.size.width) / 2, - (self.bounds.origin.y - originalBounds.origin.y) - (self.bounds.size.height - originalBounds.size.height) / 2);
+        self.frame = frame;
     }
     return self;
 }
@@ -57,6 +65,7 @@
     CGPoint positions[] = {CGPointMake(41, 123), CGPointMake(123, 208), CGPointMake(225, 138), CGPointMake(354, 92), CGPointMake(328, 193), CGPointMake(441, 242), CGPointMake(524, 137)};
     CGFloat pointSize = 25;
 
+    NSMutableArray *scenes = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
     for(int i = 0; i < [dataManager getScenesNumber]; i++) {
         UILabel *point = [[UILabel alloc] initWithFrame:CGRectMake(positions[i].x - pointSize / 2, positions[i].y - pointSize / 2, pointSize, pointSize)];
         point.text = [NSString stringWithFormat:@"%i", i + 1];
@@ -75,8 +84,10 @@
             point.layer.borderWidth = 2;
         }
 
+        [scenes addObject:point];
         [self addSubview:point];
     }
+    self.scenes = [NSArray arrayWithArray:scenes];
 }
 
 @end

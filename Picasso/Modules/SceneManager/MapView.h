@@ -10,4 +10,6 @@
 
 @interface MapView : UIView
 
+@property (strong, nonatomic) NSArray *scenes;
+
 @end

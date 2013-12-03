@@ -38,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
     self.view.backgroundColor = [UIColor clearColor];
     [self updateRotation];
     

@@ -54,6 +54,8 @@
 @property (strong, nonatomic) NSArray *trackerEnds;
 
 @property (strong, nonatomic) LineDrawView *drawView;
+@property (assign, nonatomic) CGFloat trackerInertiaX;
+@property (assign, nonatomic) CGFloat trackerInertiaY;
 
 @end
 
@@ -90,7 +92,7 @@
         [self transitionIn];
         
         NSLog(@"[Scene #%li] Started", (long)self.model.number);
-        self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
+        self.player.rate = 0.5; // Maybe stars at 1.0 and tween to 0.0 ?
         [self resume]; // seekToTime + enableMotion
     }
     return self;
@@ -281,10 +283,12 @@
 - (void)initTrackers {
     UIImage *image = [UIImage imageNamed:@"tracker.png"];
     
-    self.drawView = [[LineDrawView alloc] initWithFrame:self.view.frame];
+    self.drawView = [[LineDrawView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+    self.drawView.endPoint = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width, 80);
     [self.view addSubview:self.drawView];
     self.drawView.backgroundColor = [UIColor clearColor];
     [self.view sendSubviewToBack:self.drawView];
+    self.drawView.hidden = YES;
     
     NSUInteger trackerNumber = [self.model.trackers count];
     NSMutableArray *trackersArray = [NSMutableArray arrayWithCapacity:trackerNumber];
@@ -365,24 +369,30 @@
            !currentTracker.enabled) {
             currentTracker.enabled = YES;
             currentTracker.hidden = NO;
+            self.drawView.hidden = NO;
+            self.trackerInertiaX = 0;
+            self.trackerInertiaY = 0;
             NSLog(@"Enable tracker %i", i);
         }
         else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
             currentTracker.enabled = NO;
             currentTracker.hidden = YES;
+            self.drawView.hidden = YES;
             NSLog(@"Disable tracker %i", i);
         }
 
         if(currentTracker.enabled) {
+            self.trackerInertiaX += 0.03;
+            self.trackerInertiaY += 0.07;
             NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
             NSArray *currentPosition = [currentTrackerPositions objectAtIndex:currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue]];
             NSInteger x = [[currentPosition objectAtIndex:1] integerValue];
             NSInteger y = [[currentPosition objectAtIndex:2] integerValue];
-            CGPoint trackerPoint = self.view.center;
-            CGPoint trackerAnchor = CGPointMake(x, y);
-            [currentTracker moveTo:trackerPoint];
-            self.drawView.startPoint = trackerPoint;
-            self.drawView.endPoint = trackerAnchor;
+            self.drawView.startPoint = CGPointMake(x, y);
+            CGFloat dx = self.drawView.endPoint.x - x;
+            NSLog(@"c:%f, s:%f", cosf(self.trackerInertiaX), sinf(self.trackerInertiaY));
+            self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x - dx * self.player.rate / 100 + 15 * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + 15 * sinf(self.trackerInertiaY) * 0.01);
+            currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
         }
     }

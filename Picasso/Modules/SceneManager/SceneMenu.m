@@ -104,6 +104,8 @@
     [self.view addSubview:self.map];
     [self.map moveTo:CGPointMake(0, 20)];
     [self.view bringSubviewToFront:self.navigationBar];
+//    UIButton *currentSceneLabel = [self.map.scenes objectAtIndex:self.sceneModel.number];
+//    self.map.center = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width - currentSceneLabel.center.x, [OrientationUtils nativeLandscapeDeviceSize].size.height - currentSceneLabel.center.y);
 }
 
 - (void)exitMenu {
