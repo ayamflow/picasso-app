@@ -27,14 +27,6 @@
         self.backgroundColor = [UIColor clearColor];
         [self initMap];
         [self initPoints];
-        
-        CGRect originalBounds = self.bounds;
-        
-        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2.0, 2.0);
-        
-        CGRect frame = self.frame;
-        frame.origin = CGPointMake(- (self.bounds.origin.x - originalBounds.origin.x) - (self.bounds.size.width - originalBounds.size.width) / 2, - (self.bounds.origin.y - originalBounds.origin.y) - (self.bounds.size.height - originalBounds.size.height) / 2);
-        self.frame = frame;
     }
     return self;
 }
@@ -62,24 +54,25 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [dataManager getGameModel].currentScene;
 
-    CGPoint positions[] = {CGPointMake(41, 123), CGPointMake(123, 208), CGPointMake(225, 138), CGPointMake(354, 92), CGPointMake(328, 193), CGPointMake(441, 242), CGPointMake(524, 137)};
-    CGFloat pointSize = 25;
+    CGPoint positions[] = {CGPointMake(90, 254), CGPointMake(248, 420), CGPointMake(449, 271), CGPointMake(709, 183), CGPointMake(670, 385), CGPointMake(885, 486), CGPointMake(1047, 276)};
+    CGFloat pointSize = 50;
 
     NSMutableArray *scenes = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
     for(int i = 0; i < [dataManager getScenesNumber]; i++) {
-        UILabel *point = [[UILabel alloc] initWithFrame:CGRectMake(positions[i].x - pointSize / 2, positions[i].y - pointSize / 2, pointSize, pointSize)];
-        point.text = [NSString stringWithFormat:@"%i", i + 1];
-        point.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
-        point.textAlignment = NSTextAlignmentCenter;
+        UIButton *point = [[UIButton alloc] initWithFrame:CGRectMake(positions[i].x - pointSize / 2, positions[i].y - pointSize / 2, pointSize, pointSize)];
+        [point setTitle: [NSString stringWithFormat:@"%i", i + 1] forState:UIControlStateNormal];
+        point.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:pointSize / 2];
+        point.titleLabel.textAlignment = NSTextAlignmentCenter;
         point.layer.cornerRadius = pointSize / 2;
+        point.tag = i;
 
         if(i <= currentSceneIndex) {
             point.backgroundColor = [UIColor blackColor];
-            point.textColor = [UIColor whiteColor];
+            [point setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
         else {
             point.backgroundColor = [UIColor whiteColor];
-            point.textColor = [UIColor blackColor];
+            [point setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             point.layer.borderColor = [UIColor blackColor].CGColor;
             point.layer.borderWidth = 2;
         }

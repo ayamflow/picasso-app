@@ -21,25 +21,25 @@
     }
     // else solid or solid/dash
 
-    [context moveToPoint: CGPointMake(41,115)];
-    [context addCurveToPoint: CGPointMake(61,86) controlPoint1: CGPointMake(41,115) controlPoint2: CGPointMake(40,96)];
-    [context addCurveToPoint: CGPointMake(98,91) controlPoint1: CGPointMake(81,75) controlPoint2: CGPointMake(98,91)];
+    [context moveToPoint: CGPointMake(85,231)];
+    [context addCurveToPoint: CGPointMake(124,173) controlPoint1: CGPointMake(85,231) controlPoint2: CGPointMake(82,194)];
+    [context addCurveToPoint: CGPointMake(199,184) controlPoint1: CGPointMake(165,152) controlPoint2: CGPointMake(199,184)];
 
     if(self.status == [MapPathStatus PathStartedStatus]) {
         [strokeColor setStroke];
-        context.lineWidth = 2;
+        context.lineWidth = 4;
         [context stroke];
 
         CGFloat dash[] = {5, 5};
         [context setLineDash:dash count:2 phase:2];
-        [context moveToPoint: CGPointMake(98,91)];
+        [context moveToPoint: CGPointMake(199, 184)];
     }
 
-    [context addCurveToPoint: CGPointMake(105,137) controlPoint1: CGPointMake(98,91) controlPoint2: CGPointMake(122,104)];
-    [context addCurveToPoint: CGPointMake(94,193) controlPoint1: CGPointMake(87,170) controlPoint2: CGPointMake(89,187)];
-    [context addCurveToPoint: CGPointMake(110,205) controlPoint1: CGPointMake(98,198) controlPoint2: CGPointMake(110,205)];
+    [context addCurveToPoint: CGPointMake(212,276) controlPoint1: CGPointMake(199,184) controlPoint2: CGPointMake(247,210)];
+    [context addCurveToPoint: CGPointMake(190,387) controlPoint1: CGPointMake(176,342) controlPoint2: CGPointMake(180,375)];
+    [context addCurveToPoint: CGPointMake(223,411) controlPoint1: CGPointMake(199,398) controlPoint2: CGPointMake(223,411)];
     [strokeColor setStroke];
-    context.lineWidth = 2;
+    context.lineWidth = 4;
     [context stroke];
 }
 
