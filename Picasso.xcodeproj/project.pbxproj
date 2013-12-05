@@ -50,6 +50,7 @@
 		62A2B28A18215DC700B4F0E4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 62A2B28918215DC700B4F0E4 /* logo.png */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
+		B929D0191851325300127F31 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = B929D0181851325300127F31 /* Colors.m */; };
 		B968A703184E85830024FE29 /* arrow-comeback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B968A6FF184E85830024FE29 /* arrow-comeback@2x.png */; };
 		B968A704184E85830024FE29 /* arrow-left-nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B968A700184E85830024FE29 /* arrow-left-nav@2x.png */; };
 		B968A705184E85830024FE29 /* arrow-right-nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B968A701184E85830024FE29 /* arrow-right-nav@2x.png */; };
@@ -148,6 +149,8 @@
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
 		62E9FA3818201CD30080A21D /* SceneInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneInterstitial.h; path = Modules/SceneManager/SceneInterstitial.h; sourceTree = "<group>"; };
 		62E9FA3918201CD30080A21D /* SceneInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneInterstitial.m; path = Modules/SceneManager/SceneInterstitial.m; sourceTree = "<group>"; };
+		B929D0171851322300127F31 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		B929D0181851325300127F31 /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 		B968A6FF184E85830024FE29 /* arrow-comeback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-comeback@2x.png"; path = "Data/UI/arrow-comeback@2x.png"; sourceTree = "<group>"; };
 		B968A700184E85830024FE29 /* arrow-left-nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-left-nav@2x.png"; path = "Data/UI/arrow-left-nav@2x.png"; sourceTree = "<group>"; };
 		B968A701184E85830024FE29 /* arrow-right-nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-right-nav@2x.png"; path = "Data/UI/arrow-right-nav@2x.png"; sourceTree = "<group>"; };
@@ -229,6 +232,7 @@
 		624B978C182120420087C576 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B929D016185131AB00127F31 /* Constants */,
 				624B978D182120580087C576 /* OrientationUtils.h */,
 				624B978E182120580087C576 /* OrientationUtils.m */,
 			);
@@ -449,6 +453,15 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
+		B929D016185131AB00127F31 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B929D0171851322300127F31 /* Colors.h */,
+				B929D0181851325300127F31 /* Colors.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		B9FF5302181FBD3A00DFCC39 /* WorkView */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +663,7 @@
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
 				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
+				B929D0191851325300127F31 /* Colors.m in Sources */,
 				B9AF0C54184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);
