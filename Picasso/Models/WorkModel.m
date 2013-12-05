@@ -15,6 +15,10 @@
     self.workId = data[@"id"];
     self.title = data[@"title"];
     self.description = data[@"description"];
+    self.year = data[@"year"];
+    self.h = data[@"h"];
+    self.l = data[@"l"];
+    self.technical = data[@"technical"];
     
     return [super init];
 }
