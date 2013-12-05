@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GalleryViewController : UIViewController <UICollectionViewDataSource>
-@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
-@property (nonatomic) CGFloat cellWidth;
+@interface GalleryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *navBar;
+@property (weak, nonatomic) IBOutlet UICollectionView *worksCollectionView;
 
 @end
