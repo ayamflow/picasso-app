@@ -15,6 +15,7 @@
 //
 
 #import "CHTCollectionViewWaterfallCell.h"
+#import "ASHSpringyCollectionViewFlowLayout.h"
 #import "GalleryViewController.h"
 #import "WorkViewController.h"
 #import "WorkModel.h"
@@ -47,15 +48,14 @@
 #pragma mark - Accessors
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
-        
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        layout.delegate = self;
+        ASHSpringyCollectionViewFlowLayout *layout = [[ASHSpringyCollectionViewFlowLayout alloc] init];
+        layout.sectionInset = UIEdgeInsetsMake(30, 0, 0, 0);
+        //layout.delegate = self;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 95, self.view.bounds.size.width - 20, self.view.bounds.size.height  - 95) collectionViewLayout:layout];
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _collectionView.dataSource = self;
-        _collectionView.delegate = self;
+        //_collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
     }
     return _collectionView;
@@ -101,10 +101,10 @@
 }
 
 - (void)updateLayout {
-    CHTCollectionViewWaterfallLayout *layout =
-    (CHTCollectionViewWaterfallLayout *)self.collectionView.collectionViewLayout;
-    layout.columnCount = self.collectionView.bounds.size.width / self.cellWidth;
-    layout.itemWidth = self.cellWidth;
+    ASHSpringyCollectionViewFlowLayout *layout =
+    (ASHSpringyCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    //layout.columnCount = self.collectionView.bounds.size.width / self.cellWidth;
+    //layout.itemWidth = self.cellWidth;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -168,7 +168,7 @@
  
 #pragma mark - UICollectionViewWaterfallLayoutDelegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(CHTCollectionViewWaterfallLayout *)collectionViewLayout
+                   layout:(ASHSpringyCollectionViewFlowLayout *)collectionViewLayout
  heightForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *imageUrl = [NSString stringWithFormat: @"min-%d.jpg", indexPath.row];

@@ -65,6 +65,7 @@
 		B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2818204DE400BC6A09 /* 8.jpg */; };
 		B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2918204DE400BC6A09 /* 9.jpg */; };
 		B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2A18204DE400BC6A09 /* 10.jpg */; };
+		B9AF0C54184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */; };
 		B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5300181FBC7400DFCC39 /* 0.jpg */; };
 		B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5304181FBD9400DFCC39 /* WorkViewController.m */; };
 		B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5306181FE76400DFCC39 /* 1.jpg */; };
@@ -170,6 +171,8 @@
 		B98CFC2818204DE400BC6A09 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 8.jpg; path = Picasso/Data/8.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2918204DE400BC6A09 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 9.jpg; path = Picasso/Data/9.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2A18204DE400BC6A09 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 10.jpg; path = Picasso/Data/10.jpg; sourceTree = SOURCE_ROOT; };
+		B9AF0C52184E9ED600BBBD54 /* ASHSpringyCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHSpringyCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHSpringyCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		B9FF5300181FBC7400DFCC39 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 0.jpg; path = Picasso/Data/0.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5303181FBD9400DFCC39 /* WorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkViewController.h; sourceTree = "<group>"; };
 		B9FF5304181FBD9400DFCC39 /* WorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkViewController.m; sourceTree = "<group>"; };
@@ -470,6 +473,8 @@
 		B9FF530C181FF48300DFCC39 /* GalleryView */ = {
 			isa = PBXGroup;
 			children = (
+				B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */,
+				B9AF0C52184E9ED600BBBD54 /* ASHSpringyCollectionViewFlowLayout.h */,
 				5F6691561832692700CBE39F /* CHTCollectionViewWaterfallCell.h */,
 				5F6691571832692700CBE39F /* CHTCollectionViewWaterfallCell.m */,
 				5F6691581832692700CBE39F /* CHTCollectionViewWaterfallFooter.h */,
@@ -669,6 +674,7 @@
 				5F66915D1832692700CBE39F /* CHTCollectionViewWaterfallFooter.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				5F66915C1832692700CBE39F /* CHTCollectionViewWaterfallCell.m in Sources */,
+				B9AF0C54184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
