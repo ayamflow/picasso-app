@@ -22,6 +22,7 @@
 #import "LineDrawView.h"
 #import "SceneMenu.h"
 #import "SceneManagerDelegate.h"
+#import "NavigationBarView.h"
 
 #define kPlaybackFadePercent 0.90
 
@@ -40,7 +41,7 @@
 @property (strong, nonatomic) UILabel *dateTitle;
 @property (strong, nonatomic) UIImageView *dateImageView;
 
-@property (strong, nonatomic) UIView *slider;
+@property (strong, nonatomic) NavigationBarView *navigationBar;
 @property (strong, nonatomic) SceneTimeline *timeline;
 @property (strong, nonatomic) UIPanGestureRecognizer *panRecognizer;
 @property (assign, nonatomic) BOOL menuIsOpen;
@@ -65,35 +66,36 @@
 {
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor clearColor];
+
+    self.hasEnded = NO;
+
+    self.playerView = [MotionVideoPlayer sharedInstance];
+    self.player = self.playerView.player;
+
+    // Play the scene's video
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    [self.playerView loadURL:url];
+
+    [self initTitle:self.model.title];
+    [self initDate:self.model.date];
+
+    [self initTrackers];
+    self.playerUpdatesObserver = [self listenForPlayerUpdates];
+
+    [self initNavigationBar];
+    [self initTimeline];
+
+    [self transitionIn];
+
+    NSLog(@"[Scene #%li] Started", (long)self.model.number);
+    self.player.rate = 0.5; // Maybe stars at 1.0 and tween to 0.0 ?
+    [self resume]; // seekToTime + enableMotion
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel {
     if(self = [super init]) {
         self.model = sceneModel;
-        self.hasEnded = NO;
-        
-        self.playerView = [MotionVideoPlayer sharedInstance];
-        self.player = self.playerView.player;
-        
-        // Play the scene's video
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
-        NSURL *url = [NSURL fileURLWithPath:filePath];
-        [self.playerView loadURL:url];
-        
-        [self initTitle:self.model.title];
-        [self initDate:self.model.date];
-        
-        [self initTrackers];
-        self.playerUpdatesObserver = [self listenForPlayerUpdates];
-        
-        [self initSlider];
-        [self initTimeline];
-        
-        [self transitionIn];
-        
-        NSLog(@"[Scene #%li] Started", (long)self.model.number);
-        self.player.rate = 0.5; // Maybe stars at 1.0 and tween to 0.0 ?
-        [self resume]; // seekToTime + enableMotion
     }
     return self;
 }
@@ -108,19 +110,15 @@
     return self;
 }
 
-- (void)initSlider {
-    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, kSliderHeight)];
-    self.slider.backgroundColor = [UIColor clearColor];
-    self.slider.layer.borderColor = [UIColor blackColor].CGColor;
-    self.slider.layer.borderWidth = 2;
-    [self.view addSubview:self.slider];
-    [self resetSliderWithDuration:0];
-    
-    self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sliderDragged:)];
-    self.panRecognizer.maximumNumberOfTouches = 1;
-    self.panRecognizer.minimumNumberOfTouches = 1;
-    self.panRecognizer.delegate = self;
-    [self.slider addGestureRecognizer:self.panRecognizer];
+- (void)initNavigationBar {
+    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:self.model.title andShowExploreButton:YES];
+    self.navigationBar.titleLabel.hidden = YES;
+    [self.navigationBar.exploreButton setImage:[UIImage imageNamed:@"menuPause.png"] forState:UIControlStateNormal];
+    self.navigationBar.backButton.hidden = YES;
+    self.navigationBar.backButton.enabled = NO;
+    [self.view addSubview:self.navigationBar];
+
+    [self.navigationBar.exploreButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideMenu) name:[MPPEvents MenuExitEvent] object:nil];
 }
@@ -131,49 +129,9 @@
     [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
 }
 
-- (void)sliderDragged:(UIPanGestureRecognizer *)panRecognizer {
-    CGPoint translation = [panRecognizer translationInView:self.view];
-    panRecognizer.view.center = CGPointMake(panRecognizer.view.center.x, panRecognizer.view.center.y + translation.y);
-    [panRecognizer setTranslation: CGPointMake(0, 0) inView:self.view];
-    
-    if(panRecognizer.state == UIGestureRecognizerStateChanged) {
-        CGFloat sliderBottom = self.slider.frame.origin.y + self.slider.frame.size.height;
-        [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height + sliderBottom - kSliderVisibleHeight)];
-        
-        [self.timeline.view moveTo:CGPointMake(self.timeline.view.frame.origin.x, self.timeline.view.frame.origin.y + sliderBottom * 0.05)];
-        
-        if(sliderBottom >= kSliderHeight - kSliderVisibleHeight) {
-            [self.slider removeGestureRecognizer:self.panRecognizer];
-            [UIView animateWithDuration:0.4 animations:^{
-                [self.slider moveTo:CGPointMake(self.slider.frame.origin.x, -kSliderHeight)];
-            } completion:^(BOOL finished) {
-                [self showMenu];
-            }];
-        }
-    }
-    if(panRecognizer.state == UIGestureRecognizerStateEnded) {
-        if(!self.menuIsOpen) [self resetSliderWithDuration:0.4];
-    }
-}
-
-- (void)resetSliderWithDuration: (NSTimeInterval)duration {
-    if(duration == 0) {
-        [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
-        [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-    }
-    else {
-        [UIView animateWithDuration:duration animations:^{
-            [self.slider moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.slider.frame.size.width / 2, -(self.slider.frame.size.height - kSliderVisibleHeight))];
-            [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-        }];
-    }
-}
-
 - (void)showMenu {
     if(self.menuIsOpen) return;
     self.menuIsOpen = YES;
-    
-    [self.slider removeGestureRecognizer:self.panRecognizer];
     
     if(self.menu == nil) {
         self.menu = [[SceneMenu alloc] initWithModel:self.model];
@@ -195,15 +153,12 @@
 - (void)hideMenu {
     if(!self.menuIsOpen) return;
     self.menuIsOpen = NO;
-    [self.slider removeGestureRecognizer:self.panRecognizer];
-    [self resetSliderWithDuration:0.4];
     [UIView animateWithDuration:0.4 animations:^{
         [self.menu.view moveTo:CGPointMake(0, - self.menu.view.frame.size.height)];
         [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
     } completion:^(BOOL finished) {
         [self.menu removeFromParentViewController];
         [self.menu.view removeFromSuperview];
-        [self.slider addGestureRecognizer:self.panRecognizer];
         [self resume];
     }];
 }
@@ -347,8 +302,8 @@
     if(!self.hasEnded) {
         [self.timeline updateWithCompletion:self.completion];
 	    if(self.completion > kPlaybackFadePercent) {
-    	    // fade to black proportionaly
-    	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 5; // -10% opacity * factor
+    	    // fade to white proportionaly
+    	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 10; // -10% opacity * factor
         }
         if(self.completion > 1.0) {
             self.hasEnded = YES;
@@ -390,7 +345,6 @@
             NSInteger y = [[currentPosition objectAtIndex:2] integerValue];
             self.drawView.startPoint = CGPointMake(x, y);
             CGFloat dx = self.drawView.endPoint.x - x;
-            NSLog(@"c:%f, s:%f", cosf(self.trackerInertiaX), sinf(self.trackerInertiaY));
             self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x - dx * self.player.rate / 100 + 15 * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + 15 * sinf(self.trackerInertiaY) * 0.01);
             currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
@@ -420,12 +374,6 @@
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
     // DEBUG
     self.player.rate = 2.0;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

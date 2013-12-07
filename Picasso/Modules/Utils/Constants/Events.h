@@ -20,5 +20,9 @@
 + (NSString *)TransitionOutCompleteEvent;
 
 + (NSString *)MenuExitEvent;
++ (NSString *)BackToHomeEvent;
++ (NSString *)ShowSceneChooserEvent;
+
++ (NSString *)SkipInterstitialEvent;
 
 @end

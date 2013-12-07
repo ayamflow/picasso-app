@@ -113,6 +113,9 @@
 		CE98B41D184524A8004760D3 /* scene-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE98B417184524A8004760D3 /* scene-7@2x.png */; };
 		CEA3E755182E616400B115BC /* Brandon_bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEA3E754182E616400B115BC /* Brandon_bold.otf */; };
 		CEB7A07118284CB100A1F6E8 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB7A07018284CB100A1F6E8 /* GameModel.m */; };
+		CEC93BFE18537B0400E1AF9B /* menuPause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC93BFB18537B0400E1AF9B /* menuPause@2x.png */; };
+		CEC93BFF18537B0400E1AF9B /* menuPlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC93BFC18537B0400E1AF9B /* menuPlay@2x.png */; };
+		CEC93C0018537B0400E1AF9B /* menuHamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC93BFD18537B0400E1AF9B /* menuHamburger@2x.png */; };
 		CED0FCBE1849E19B0001C602 /* circleMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED0FCBC1849E19B0001C602 /* circleMask@2x.png */; };
 		CED0FCBF1849E19B0001C602 /* circleButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED0FCBD1849E19B0001C602 /* circleButton@2x.png */; };
 		CED0FCC11849E3FA0001C602 /* dateSeparator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED0FCC01849E3FA0001C602 /* dateSeparator@2x.png */; };
@@ -168,7 +171,6 @@
 		6248E17D1844F8CD001BEF6C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		6248E17E1844F8CD001BEF6C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rotationIcon@2x.png"; path = "Data/UI/rotationIcon@2x.png"; sourceTree = "<group>"; };
-		624B97861821174E0087C576 /* SlidingButtonDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlidingButtonDelegate.h; path = Modules/SceneManager/SlidingButtonDelegate.h; sourceTree = "<group>"; };
 		624B978918211AC50087C576 /* SceneSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneSlider.h; path = Modules/SceneManager/SceneSlider.h; sourceTree = "<group>"; };
 		624B978A18211AC50087C576 /* SceneSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneSlider.m; path = Modules/SceneManager/SceneSlider.m; sourceTree = "<group>"; };
 		624B978D182120580087C576 /* OrientationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrientationUtils.h; path = Modules/Utils/OrientationUtils.h; sourceTree = "<group>"; };
@@ -288,6 +290,9 @@
 		CEA3E754182E616400B115BC /* Brandon_bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_bold.otf; path = Data/Fonts/Brandon_bold.otf; sourceTree = "<group>"; };
 		CEB7A06F18284CB100A1F6E8 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModel.h; path = Models/GameModel.h; sourceTree = "<group>"; };
 		CEB7A07018284CB100A1F6E8 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModel.m; path = Models/GameModel.m; sourceTree = "<group>"; };
+		CEC93BFB18537B0400E1AF9B /* menuPause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuPause@2x.png"; sourceTree = "<group>"; };
+		CEC93BFC18537B0400E1AF9B /* menuPlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuPlay@2x.png"; sourceTree = "<group>"; };
+		CEC93BFD18537B0400E1AF9B /* menuHamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuHamburger@2x.png"; sourceTree = "<group>"; };
 		CED0FCBC1849E19B0001C602 /* circleMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleMask@2x.png"; sourceTree = "<group>"; };
 		CED0FCBD1849E19B0001C602 /* circleButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleButton@2x.png"; sourceTree = "<group>"; };
 		CED0FCC01849E3FA0001C602 /* dateSeparator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dateSeparator@2x.png"; sourceTree = "<group>"; };
@@ -329,6 +334,9 @@
 		4F20B8E0182D3D9A0035EEF1 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CEC93BFB18537B0400E1AF9B /* menuPause@2x.png */,
+				CEC93BFC18537B0400E1AF9B /* menuPlay@2x.png */,
+				CEC93BFD18537B0400E1AF9B /* menuHamburger@2x.png */,
 				CE719772184106A1006F6CAE /* menuSliderDown@2x.png */,
 				620409201833A64000105A03 /* menuSliderUp@2x.png */,
 				CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */,
@@ -459,7 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */,
-				624B97861821174E0087C576 /* SlidingButtonDelegate.h */,
 				CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */,
 			);
 			name = Delegates;
@@ -932,6 +939,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE45E6B2184A502100DCFF09 /* worksNumber@2x.png in Resources */,
+				CEC93C0018537B0400E1AF9B /* menuHamburger@2x.png in Resources */,
+				CEC93BFE18537B0400E1AF9B /* menuPause@2x.png in Resources */,
 				CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */,
 				B98CFC2D18204DE400BC6A09 /* 6.jpg in Resources */,
 				B98CFC2B18204DE400BC6A09 /* 4.jpg in Resources */,
@@ -941,6 +950,7 @@
 				62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */,
 				CED0FCBF1849E19B0001C602 /* circleButton@2x.png in Resources */,
 				620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */,
+				CEC93BFF18537B0400E1AF9B /* menuPlay@2x.png in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
 				624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */,

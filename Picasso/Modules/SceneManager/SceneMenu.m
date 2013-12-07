@@ -56,6 +56,8 @@
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:self.sceneModel.title andShowExploreButton:YES];
     [self.navigationBar moveTo:CGPointMake(0, 15)];
+    [self.navigationBar.backButton setImage:[UIImage imageNamed:@"menuHamburger.png"] forState:UIControlStateNormal];
+    [self.navigationBar.exploreButton setImage:[UIImage imageNamed:@"menuPlay.png"] forState:UIControlStateNormal];
     [self.view addSubview:self.navigationBar];
 
     CGRect titleFrame = self.navigationBar.titleLabel.frame;
@@ -65,8 +67,13 @@
     self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.navigationBar.titleLabel.layer.borderWidth = 2;
 
-    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationBar.backButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(dispatchBackToHome) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)dispatchBackToHome {
+    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents BackToHomeEvent] object:nil];
 }
 
 - (void)initBottomInfos {
@@ -100,55 +107,12 @@
 }
 
 - (void)initMap {
-    self.map = [[MapView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * 2, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2)];
+    self.map = [[MapView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2)];
     [self.view addSubview:self.map];
     [self.view bringSubviewToFront:self.navigationBar];
 
-    self.map.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.5, 0.5);
-    [self.map moveTo:CGPointMake(0, 20)];
-
-//    CAGradientLayer *l = [CAGradientLayer layer];
-//    l.frame = CGRectMake(0, 0, self.navigationBar.bounds.size.width, self.navigationBar.bounds.size.height * 2);
-//    l.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, (id)[UIColor clearColor].CGColor, nil];
-//    l.startPoint = CGPointMake(0, 0);
-//    l.endPoint = CGPointMake(0, self.navigationBar.bounds.size.height / 2);
-//    self.map.layer.mask = l;
-//    [self.view.layer addSublayer:l];
-
-    for(UIButton *sceneButton in self.map.scenes) {
-        [sceneButton addTarget:self action:@selector(sceneButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    }
-}
-
-- (void)sceneButtonTouched:(id)sender {
-    UIButton *current = (UIButton *)sender;
-    NSInteger buttonIndex = current.tag;
-    UIButton *next;
-    if(buttonIndex == [self.map.scenes count] - 1) {
-        next = [self.map.scenes objectAtIndex:current.tag - 1];
-    }
-    else {
-        next = [self.map.scenes objectAtIndex:current.tag + 1];
-    }
-
-    CGFloat distance = sqrtf((next.center.y - current.center.y) * (next.center.y - current.center.y));
-    CGFloat scale;
-    if(distance > 170) {
-        scale = 0.6;
-    }
-    else if(distance > 120) {
-        scale = 0.8;
-    }
-    else {
-        scale = 1.0;
-    }
-    CGFloat dx = (next.center.x + current.center.x) / 2 * scale;
-    CGFloat dy = (next.center.y + current.center.y) / 2 * scale;
-
-    [UIView animateWithDuration:1 animations:^{
-        self.map.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
-        [self.map moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - dx, [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - dy + 20)];
-    }];
+//    [self.map moveTo:CGPointMake(0, 20)];
+    [self.map moveTo:CGPointMake(0, -self.map.bounds.size.height / 3)];
 }
 
 - (void)exitMenu {

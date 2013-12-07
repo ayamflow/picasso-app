@@ -11,15 +11,15 @@
 #import "DataManager.h"
 #import "Events.h"
 #import "Colors.h"
+#import "UIViewPicasso.h"
+#import "SceneModel.h"
 
 #define MARGIN 15
 
 @interface SceneInterstitial ()
 
-@property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) SceneModel *sceneModel;
 @property (strong, nonatomic) UITextView *textView;
-@property (strong, nonatomic) UIButton *shareButton;
-@property (strong, nonatomic) UIButton *retryButton;
 @property (strong, nonatomic) UILabel *sceneTitle;
 @property (strong, nonatomic) UILabel *dateTitle;
 @property (strong, nonatomic) UIView *sliderZone;
@@ -47,97 +47,96 @@
 
 - (id)initWithModel:(SceneModel *)sceneModel {
     if(self = [super init]) {
-        [self.view setFrame:[OrientationUtils deviceSize]];
-        self.description = sceneModel.description;
-
-		DataManager *dataManager = [DataManager sharedInstance];
-        NSInteger currentSceneId = [[dataManager getGameModel] currentScene];
-
-        if(currentSceneId < [dataManager getScenesNumber] - 1) {
-	    	[[dataManager getSceneWithNumber:currentSceneId + 1] unlockScene];
-        }
-
-		[self initOverlay]; // Maybe put it directly on the scene so its opacity can be animated with the video progress
-
-        [self initTitle:sceneModel.title];
-        [self initDate:sceneModel.date];
-        [self initText];
-//        [self initButtons];
-        [self initSlider];
+        self.sceneModel = sceneModel;
     }
     return self;
 }
 
+- (void)unlockNextScene {
+    DataManager *dataManager = [DataManager sharedInstance];
+    NSInteger currentSceneId = [[dataManager getGameModel] currentScene];
+
+    if(currentSceneId < [dataManager getScenesNumber] - 1) {
+        [[dataManager getSceneWithNumber:currentSceneId + 1] unlockScene];
+    }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+
+    [self unlockNextScene];
+
+    [self initOverlay];
+
+    [self initTitle];
+    [self initDate];
+    [self initText];
+    [self initSlider];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.view.alpha = 0;
+    [UIView animateWithDuration:0.6 animations:^{
+        self.view.alpha = 1;
+    }];
+}
+
+
 - (void)initOverlay {
     UIView *overlay = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
-    overlay.backgroundColor = [UIColor darkColor];
-    overlay.alpha = 0.98;
+    overlay.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
     [self.view addSubview:overlay];
 }
 
-- (void)initTitle:(NSString *)title {
+- (void)initTitle {
     self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - 100.0, 50.0, 200.0, 40.0)];
-    self.sceneTitle.text = [title uppercaseString];
+    self.sceneTitle.text = [self.sceneModel.title uppercaseString];
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
-    self.sceneTitle.textColor = [UIColor lightColor];
+    self.sceneTitle.textColor = [UIColor blackColor];
     self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];
 
-    self.sceneTitle.layer.borderColor = [UIColor lightColor].CGColor;
+    self.sceneTitle.layer.borderColor = [UIColor blackColor].CGColor;
     self.sceneTitle.layer.borderWidth = 2.0;
 
     [self.view addSubview:self.sceneTitle];
 }
 
-- (void)initDate:(NSString *)date {
+- (void)initDate {
     self.dateTitle = [[UILabel alloc] initWithFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - 50.0, 90.0, 100.0, 45.0)];
-    self.dateTitle.text = date;
-    self.dateTitle.textColor = [UIColor lightColor];
+    self.dateTitle.text = [self.sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"    "];
+    self.dateTitle.textColor = [UIColor blackColor];
     [self.dateTitle setTextAlignment:NSTextAlignmentCenter];
-    self.dateTitle.font = [UIFont fontWithName:@"Avenir" size:12.0];
+    self.dateTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12.0];
     [self.view addSubview:self.dateTitle];
 
-    UIImageView *dateImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateTitleSign.png"]];
-	dateImageView.layer.position = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - dateImageView.frame.size.width / 2 + 7.0, 130.0);
-    [self.view addSubview:dateImageView];
+	UIImageView *separator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dateSeparator.png"]];
+    [self.view addSubview:separator];
+    separator.center = self.dateTitle.center;
 }
 
 - (void)initText {
     CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
 
-    float textWidth = screenSize.size.width * 0.45;
-    float leftPosition = (screenSize.size.width - textWidth) / 2;
+    CGFloat textWidth = screenSize.size.width * 0.45;
+    CGFloat leftPosition = (screenSize.size.width - textWidth) / 2;
 
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(leftPosition, self.dateTitle.layer.position.y + 25.0, textWidth, screenSize.size.height / 2) textContainer:nil];
-    [self.textView setText:self.description];
+    [self.textView setText:self.sceneModel.description];
     self.textView.scrollEnabled = YES;
-    [self.textView setTextAlignment:NSTextAlignmentJustified];
+    [self.textView setTextAlignment:NSTextAlignmentCenter];
     [self.textView setEditable:NO];
     [self.textView setBackgroundColor:[UIColor clearColor]];
-    [self.textView setTextColor:[UIColor lightColor]];
+    [self.textView setTextColor:[UIColor blackColor]];
     self.textView.font = [UIFont fontWithName:@"BrandonGrotesque-LightItalic" size:13.0];
     [self.view addSubview:self.textView];
 }
 
-/*- (void)initButtons {
-    CGRect screenSize = [OrientationUtils deviceSize];
-    // Share
-    self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.shareButton setBackgroundColor:[UIColor yellowColor]];
-    [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
-    [self.shareButton setFrame:CGRectMake(15, screenSize.size.height - MARGIN * 3, screenSize.size.width / 3, MARGIN * 2)];
-    [self.view addSubview:self.shareButton];
-    
-    // Retry
-    self.retryButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.retryButton setBackgroundColor:[UIColor yellowColor]];
-    [self.retryButton setTitle:@"Retry" forState:UIControlStateNormal];
-    [self.retryButton setFrame:CGRectMake(screenSize.size.width - self.shareButton.frame.size.width - MARGIN, screenSize.size.height - MARGIN * 3, screenSize.size.width / 3, MARGIN * 2)];
-    [self.view addSubview:self.retryButton];
-}*/
-
 - (void)initSlider {
     CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
-    int buttonSize = 40;
+    CGFloat buttonSize = 40;
     CGRect sliderFrame = CGRectMake(screenSize.size.width - buttonSize, 0, buttonSize, screenSize.size.height);
 
 	UIView *sliderZoneBackground = [[UIView alloc] initWithFrame:sliderFrame];
@@ -148,7 +147,24 @@
     self.sliderZone.backgroundColor = [UIColor sliderColor];
     [self.view addSubview:self.sliderZone];
 
-    self.slidingButton = [[SceneSlider alloc] initWithFrame:sliderFrame andAmplitude:screenSize.size.height - buttonSize / 2 andThreshold:0.7];
+    CALayer *leftBorder = [CALayer layer];
+    leftBorder.borderColor = [UIColor blackColor].CGColor;
+    leftBorder.borderWidth = 1;
+    leftBorder.frame = CGRectMake(-1, -1, sliderZoneBackground.frame.size.width + 2, sliderZoneBackground.frame.size.height + 2);
+    [sliderZoneBackground.layer addSublayer:leftBorder];
+
+    NSInteger nextSceneNumber = self.sceneModel.number >= [[DataManager sharedInstance] getScenesNumber] - 1 ? 0 : self.sceneModel.number + 1;
+    if(nextSceneNumber > 0) {
+        UILabel *nextSceneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
+        nextSceneLabel.text = [NSString stringWithFormat:@"%li", nextSceneNumber];
+        nextSceneLabel.textAlignment = NSTextAlignmentCenter;
+        nextSceneLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15];
+        nextSceneLabel.textColor = [UIColor whiteColor];
+        [self.view addSubview:nextSceneLabel];
+        [nextSceneLabel moveTo:CGPointMake(self.view.bounds.size.width - nextSceneLabel.bounds.size.width, 0)];
+    }
+
+    self.slidingButton = [[SceneSlider alloc] initWithFrame:self.sliderZone.frame andAmplitude:screenSize.size.height - buttonSize / 2 andThreshold:0.9];
     [self.view addSubview:self.slidingButton.view];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSliderZone) name:[MPPEvents SliderHasMovedEvent] object:nil];
@@ -165,21 +181,9 @@
 - (void)resetSliderZone {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
-        int buttonSize = 40;
+        NSInteger buttonSize = 40;
         self.sliderZone.frame = CGRectMake(screenSize.size.width - buttonSize, 0, buttonSize, buttonSize);
     }];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

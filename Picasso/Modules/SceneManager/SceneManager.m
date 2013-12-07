@@ -16,6 +16,7 @@
 #import "OrientationUtils.h"
 #import "UIViewPicasso.h"
 #import "UIViewControllerPicasso.h"
+#import "Events.h"
 
 @interface SceneManager ()
 
@@ -47,7 +48,9 @@
     
     // Auto launch
     [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:@"showSceneChooser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateBackToHome) name:[MPPEvents BackToHomeEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipInterstitial) name:[MPPEvents SkipInterstitialEvent] object:nil];
 }
 
 - (void)showSceneChooser {
@@ -101,7 +104,6 @@
 - (void)showInterstitial {
     if(self.interstitial != nil) [self removeInterstitial];
     self.interstitial = [[SceneInterstitial alloc] initWithModel:self.currentScene.model];
-    self.interstitial.slidingButton.delegate = self;
     [self.view addSubview:self.interstitial.view];
 }
 

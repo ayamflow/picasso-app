@@ -35,7 +35,8 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [[dataManager getGameModel] currentScene];
 
-    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
+//    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
+    for(int i = 0; i < 1; i++) {
         Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", i + 1]);
         MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:self.frame];
         // i < current -> notstarted
@@ -54,8 +55,8 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [dataManager getGameModel].currentScene;
 
-    CGPoint positions[] = {CGPointMake(90, 254), CGPointMake(248, 420), CGPointMake(449, 271), CGPointMake(709, 183), CGPointMake(670, 385), CGPointMake(885, 486), CGPointMake(1047, 276)};
-    CGFloat pointSize = 50;
+    CGPoint positions[] = {CGPointMake(458, 844), CGPointMake(670, 533), CGPointMake(672, 511), CGPointMake(648, 505), CGPointMake(590, 499), CGPointMake(680, 670), CGPointMake(707, 674)};
+    CGFloat pointSize = 25;
 
     NSMutableArray *scenes = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
     for(int i = 0; i < [dataManager getScenesNumber]; i++) {

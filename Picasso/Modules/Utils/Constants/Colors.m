@@ -31,7 +31,7 @@
 }
 
 + (UIColor *)sliderColor {
-    return [UIColor colorWithRed:0.25 green:0.30 blue:0.37 alpha:1.0];
+    return [UIColor colorWithRed:0.39 green:0.39 blue:0.39 alpha:1.0];
 }
 
 @end

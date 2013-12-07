@@ -42,4 +42,17 @@
     return @"exitMenu";
 }
 
++ (NSString *)BackToHomeEvent {
+    return @"backToHome";
+}
+
++ (NSString *)ShowSceneChooserEvent {
+    return @"showSceneChooser";
+}
+
++ (NSString *)SkipInterstitialEvent {
+    return @"skipInterstitial";
+}
+
+
 @end

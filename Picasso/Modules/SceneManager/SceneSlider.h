@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SlidingButtonDelegate.h"
 
 @interface SceneSlider : UIViewController
 
-@property (weak, nonatomic) id<SlidingButtonDelegate> delegate;
 @property (assign, nonatomic) float sliderDistance;
 
-- (id)initWithFrame:(CGRect)frame andAmplitude:(float)amplitude andThreshold:(float)threshold;
+- (id)initWithFrame:(CGRect)frame andAmplitude:(CGFloat)amplitude andThreshold:(CGFloat)threshold;
 
 @end
