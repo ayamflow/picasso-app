@@ -25,6 +25,7 @@
 @property (strong, nonatomic) SceneChooserLandscape *sceneChooser;
 @property (strong, nonatomic) UIView *bottomInfos;
 @property (strong, nonatomic) MapView *map;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -112,16 +113,23 @@
     [self.view bringSubviewToFront:self.navigationBar];
 
 //    [self.map moveTo:CGPointMake(0, 20)];
-    [self.map moveTo:CGPointMake(0, -self.map.bounds.size.height / 3)];
+//    [self.map moveTo:CGPointMake(0, -self.map.bounds.size.height / 3)];
+    self.map.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.5];
+
+    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSceneChooser:)];
+    self.tapRecognizer.delegate = self;
+    [self.map addGestureRecognizer:self.tapRecognizer];
 }
 
 - (void)exitMenu {
     [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuExitEvent] object:nil];
 }
 
-- (void)showSceneChooser {
-    [self.navigationBar.exploreButton removeTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+- (void)showSceneChooser:(UITapGestureRecognizer *)tapRecognizer {
+    [self.map removeGestureRecognizer:self.tapRecognizer];
+
     [self.navigationBar.exploreButton removeFromSuperview];
+    [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
     [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton addTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
 
@@ -165,10 +173,12 @@
         self.navigationBar.titleLabel.text = [self.sceneModel.title uppercaseString];
     }];
 
+    [self.navigationBar.backButton setImage:[UIImage imageNamed:@"menuHamburger.png"] forState:UIControlStateNormal];
     [self.navigationBar addSubview:self.navigationBar.exploreButton];
-    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton removeTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationBar.backButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(dispatchBackToHome) forControlEvents:UIControlEventTouchUpInside];
+    [self.map addGestureRecognizer:self.tapRecognizer];
 
     [self.view bringSubviewToFront:self.navigationBar];
 }

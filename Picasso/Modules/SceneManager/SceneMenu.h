@@ -12,7 +12,7 @@
 #import "SceneChooserLandscapeDelegate.h"
 #import "SceneManagerDelegate.h"
 
-@interface SceneMenu : UIViewController <SceneChooserLandscapeDelegate>
+@interface SceneMenu : UIViewController <SceneChooserLandscapeDelegate, UIGestureRecognizerDelegate>
 
 - (id)initWithModel:(SceneModel *)model;
 
