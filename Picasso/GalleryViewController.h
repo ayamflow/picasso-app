@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GalleryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface GalleryViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *navBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *worksCollectionView;
 

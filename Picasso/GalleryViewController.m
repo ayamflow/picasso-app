@@ -13,13 +13,17 @@
 
 
 @interface GalleryViewController ()
+
 @property (nonatomic, strong) DataManager *dataManager;
+@property (assign) float lastPosition;
+
 @end
 
 @implementation GalleryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.dataManager = [DataManager sharedInstance];
     self.navigationController.navigationBarHidden = YES;
     
@@ -27,12 +31,18 @@
     _navBar.layer.borderWidth = 2.0f;
     
     _worksCollectionView.backgroundColor = [UIColor clearColor];
+    _worksCollectionView.userInteractionEnabled = NO;
     [self.worksCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"workCell"];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.worksCollectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"number work %d", [self.dataManager getWorksNumber]);
     return [self.dataManager getWorksNumber];
 }
 
@@ -63,19 +73,40 @@
     [self.navigationController pushViewController:workViewController animated:YES];
 }
 
-#pragma mark UICollectionViewFlowLayoutDelegate
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIImage *image;
-    NSString *imageName = [NSString stringWithFormat: @"min-%ld.jpg", (long)indexPath.row];
-    image = [UIImage imageNamed:imageName];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    float currentPosition = [touch locationInView:self.view].x;
+    self.lastPosition = currentPosition;
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
     
-    return image.size;
+    float currentPosition = [touch locationInView:self.view].x;
+    float velocity = self.lastPosition - currentPosition;
+    
+    int cellCount = 1;
+    
+    if(currentPosition < self.lastPosition) {
+        NSLog(@"gauche");
+    } else if(currentPosition > self.lastPosition) {
+        NSLog(@"droite");
+    }
+    
+    for (UICollectionViewCell *cell in [self.worksCollectionView visibleCells]) {
+        CGRect originBounds = cell.layer.bounds;
+        //NSLog(@"cell count %d", cellCount);
+        originBounds.origin.x = originBounds.origin.x + 0.008 * (cellCount * velocity);
+        //NSLog(@"velocity %f", ( (cellCount/10) * velocity));
+        cell.layer.bounds = originBounds;
+        cellCount++;
+    }
 }
 
-- (UIEdgeInsets)collectionView:
-(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(20, 0, 0, 0);
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    float currentPosition = [touch locationInView:self.view].x;
+    self.lastPosition = currentPosition;
 }
-
+ 
 @end
