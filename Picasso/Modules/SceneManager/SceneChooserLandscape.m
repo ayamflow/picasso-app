@@ -56,7 +56,7 @@
 	self.view.backgroundColor = [UIColor clearColor];
 
     [self initPath];
-    [self initBackground];
+//    [self initBackground];
 
     [self initPreviews];
     [self initCarousel];
@@ -66,12 +66,12 @@
     [self initDate];
 }
 
-- (void)initBackground {
+/*- (void)initBackground {
     UIView *background = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
     [self.view addSubview:background];
     [self.view sendSubviewToBack:background];
-}
+}*/
 
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];

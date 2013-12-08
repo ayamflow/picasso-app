@@ -50,6 +50,10 @@
     return @"showSceneChooser";
 }
 
++ (NSString *)ShowSceneChooserLandscapeEvent {
+    return @"showSceneChooserLandscape";
+}
+
 + (NSString *)SkipInterstitialEvent {
     return @"skipInterstitial";
 }

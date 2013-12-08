@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSArray *scenes;
 
+- (void)showDetails;
+
 @end

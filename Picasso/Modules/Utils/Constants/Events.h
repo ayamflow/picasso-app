@@ -22,6 +22,7 @@
 + (NSString *)MenuExitEvent;
 + (NSString *)BackToHomeEvent;
 + (NSString *)ShowSceneChooserEvent;
++ (NSString *)ShowSceneChooserLandscapeEvent;
 
 + (NSString *)SkipInterstitialEvent;
 

@@ -7,6 +7,7 @@
 //
 
 #import "MapView.h"
+#import "Events.h"
 #import "MapPathStatus.h"
 #import "DataManager.h"
 #import "TiledMapView.h"
@@ -120,10 +121,41 @@
             point.layer.borderWidth = 2;
         }
 
+        point.tag = i;
+        [point addTarget:self action:@selector(sceneTouched:) forControlEvents:UIControlEventTouchUpInside];
         [scenes addObject:point];
         [self.scrollView addSubview:point];
     }
     self.scenes = [NSArray arrayWithArray:scenes];
+}
+
+- (void)sceneTouched:(id)sender {
+    UILabel *scene = (UILabel *)sender;
+    NSLog(@"scene: %li", scene.tag);
+    [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:YES];
+    [UIView animateWithDuration:0.6 animations:^{
+        // Hide path
+        // Hide button
+        // Hide labels
+        for(int i = 0; i < [self.scenes count]; i++) {
+            [[self.scenes objectAtIndex:i] setAlpha:0];
+            [[self.cityLabels objectAtIndex:i] setAlpha:0];
+        }
+    } completion:^(BOOL finished) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents ShowSceneChooserLandscapeEvent] object:nil];
+    }];
+}
+
+- (void)showDetails {
+    [UIView animateWithDuration:0.6 animations:^{
+        // Show path
+        // Show button
+        // Show labels
+        for(int i = 0; i < [self.scenes count]; i++) {
+            [[self.scenes objectAtIndex:i] setAlpha:1];
+            [[self.cityLabels objectAtIndex:i] setAlpha:1];
+        }
+    }];
 }
 
 // UIScrollView protocol

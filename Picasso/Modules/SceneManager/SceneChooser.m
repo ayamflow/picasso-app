@@ -32,10 +32,11 @@
 @property (strong, nonatomic) UILabel *dateLabel;
 
 @property (strong, nonatomic) NavigationBarView *navigationBar;
-@property (strong, nonatomic) DashedPathView *dashedPath;
 
 @property (strong, nonatomic) UIImageView *leftArrow;
 @property (strong, nonatomic) UIImageView *rightArrow;
+
+@property (strong, nonatomic) UIView *bottomInfos;
 
 @end
 
@@ -53,6 +54,8 @@
 
     [self initNavBar];
 
+    [self initBottomInfos];
+
     [self initPreviews];
     [self initCarousel];
 
@@ -60,8 +63,6 @@
     
     [self initTitle];
     [self initDate];
-
-    [self initPath];
 
     [self.view bringSubviewToFront:self.navigationBar];
 
@@ -97,6 +98,38 @@
     }
     
     self.previews = [NSArray arrayWithArray:tempPreviews];
+}
+
+- (void)initBottomInfos {
+    self.bottomInfos = [[UIView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 20, [OrientationUtils nativeDeviceSize].size.width, 20)];
+    [self.view addSubview:self.bottomInfos];
+    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
+
+    UIImageView *chapterIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scenesNumber.png"]];
+    [self.bottomInfos addSubview:chapterIcon];
+    UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 4, 20)];
+    chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
+    chapterLabel.textColor = [UIColor blackColor];
+    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
+    [chapterLabel sizeToFit];
+    [self.bottomInfos addSubview:chapterLabel];
+
+    CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
+    [chapterLabel moveTo:CGPointMake(50, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 2)];
+    [chapterIcon moveTo:CGPointMake(20, chapterLabel.frame.origin.y - 2)];
+
+    UIImageView *workIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worksNumber.png"]];
+    [self.bottomInfos addSubview:workIcon];
+    UILabel *worksLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 4, 20)];
+    worksLabel.font = chapterLabel.font;
+    worksLabel.textColor = [UIColor blackColor];
+    worksLabel.text = [[NSString stringWithFormat:@"%i / %i oeuvres", 2, 20] uppercaseString];
+    [worksLabel sizeToFit];
+    [self.bottomInfos addSubview:worksLabel];
+
+    tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
+    [worksLabel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width - 20 - worksLabel.frame.size.width, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 2)];
+    [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width - 10, worksLabel.frame.origin.y - 2)];
 }
 
 - (void)initCarousel {
@@ -135,13 +168,6 @@
     separator.center = self.dateLabel.center;
 }
 
-- (void)initPath {
-    self.dashedPath = [[DashedPathView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width * 7 * 0.9, [OrientationUtils nativeDeviceSize].size.height)];
-    [self.view addSubview:self.dashedPath];
-    self.dashedPath.backgroundColor = [UIColor clearColor];
-    [self.view sendSubviewToBack:self.dashedPath];
-}
-
 - (void)transitionIn {
     self.navigationBar.alpha = 0;
     [self.navigationBar moveTo:CGPointMake(0, - 20)];
@@ -149,8 +175,8 @@
     [self.carousel moveTo:CGPointMake(0, - 20)];
     self.carousel.alpha = 0;
 
-    self.dashedPath.alpha = 0;
-    [self.dashedPath moveTo:CGPointMake(0, self.dashedPath.frame.origin.y - 20)];
+//    self.bottomInfos.alpha = 0;
+//    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
 
     CGFloat duration = 0.6;
     [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -163,10 +189,10 @@
         self.carousel.alpha = 1;
     } completion:nil];
 
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.dashedPath.alpha = 1;
-        [self.dashedPath moveTo:CGPointMake(0, 0)];
-    } completion:nil];
+//    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        self.bottomInfos.alpha = 1;
+//        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
+//    } completion:nil];
 }
 
 - (void)transitionOutToHome {
@@ -182,8 +208,8 @@
     } completion:nil];
 
     [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.dashedPath.alpha = 0;
-        [self.dashedPath moveTo:CGPointMake(0, - 20)];
+        self.bottomInfos.alpha = 0;
+    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
     } completion:^(BOOL finished) {
         [self toHome];
     }];
@@ -200,10 +226,10 @@
     }];
 
     [UIView animateWithDuration:duration delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.dashedPath.alpha = 0;
-        [self.dashedPath moveTo:CGPointMake(0, 20)];
+        self.bottomInfos.alpha = 0;
+        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
     } completion:^(BOOL finished) {
-        [self.dashedPath removeFromSuperview];
+        [self.bottomInfos removeFromSuperview];
     }];
 
     [UIView animateWithDuration:duration delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -301,7 +327,7 @@
 }
 
 - (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
-    [self.dashedPath moveTo:CGPointMake( - offset * self.dashedPath.frame.size.width * 0.1, self.dashedPath.frame.origin.y)];
+
 }
 
 @end

@@ -25,7 +25,6 @@
 @property (strong, nonatomic) SceneChooserLandscape *sceneChooser;
 @property (strong, nonatomic) UIView *bottomInfos;
 @property (strong, nonatomic) MapView *map;
-@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -111,11 +110,7 @@
     self.map = [[MapView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     [self.view addSubview:self.map];
 
-//    [self.map moveTo:CGPointMake(0, 20)];
-
-    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSceneChooser:)];
-    self.tapRecognizer.delegate = self;
-    [self.map addGestureRecognizer:self.tapRecognizer];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserLandscapeEvent] object:nil];
 }
 
 - (void)exitMenu {
@@ -126,9 +121,7 @@
     }];
 }
 
-- (void)showSceneChooser:(UITapGestureRecognizer *)tapRecognizer {
-    [self.map removeGestureRecognizer:self.tapRecognizer];
-
+- (void)showSceneChooser {
     [self.navigationBar.exploreButton removeFromSuperview];
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
     [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -148,12 +141,9 @@
     [UIView animateWithDuration:0.4 animations:^{
         [self.sceneChooser.view moveTo:CGPointMake(0, 0)];
         self.sceneChooser.view.alpha = 1;
-        [self.map moveTo:CGPointMake(0, self.map.frame.origin.y + 20)];
-        self.map.alpha = 0;
         [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y + 20)];
         self.bottomInfos.alpha = 0;
     } completion:^(BOOL finished) {
-        [self.map performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
         [self.bottomInfos performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
     }];
 }
@@ -162,9 +152,9 @@
     [self.view addSubview:self.bottomInfos];
     [self.view addSubview:self.map];
 
+    [self.map showDetails];
+
     [UIView animateWithDuration:0.4 animations:^{
-        [self.map moveTo:CGPointMake(0, self.map.frame.origin.y - 20)];
-        self.map.alpha = 1;
         [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y - 20)];
         self.bottomInfos.alpha = 1;
         [self.sceneChooser.view moveTo:CGPointMake(0, self.sceneChooser.view.frame.origin.y - 20)];
@@ -180,9 +170,9 @@
     [self.navigationBar.exploreButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton removeTarget:self action:@selector(hideSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton addTarget:self action:@selector(dispatchBackToHome) forControlEvents:UIControlEventTouchUpInside];
-    [self.map addGestureRecognizer:self.tapRecognizer];
 
     [self.view bringSubviewToFront:self.navigationBar];
+    [self.view bringSubviewToFront:self.bottomInfos];
 }
 
 // Protocol
