@@ -184,7 +184,7 @@
 }
 
 - (void)updateLabel:(UILabel *)label visibilityWithOffset:(CGFloat)offset {
-    if(label.enabled && label.frame.origin.y - offset <= kTopOffset) {
+    if(label.enabled && (label.frame.origin.y - offset <= kTopOffset || label.frame.origin.y - offset > self.frame.size.height - kTopOffset )) {
         label.enabled = NO;
 //        [UIView animateWithDuration:0.3 animations:^{
 //            label.alpha = 0;
@@ -192,7 +192,7 @@
             label.hidden = YES;
 //        }];
     }
-    else if(!label.enabled && label.frame.origin.y - offset > kTopOffset) {
+    else if(!label.enabled && label.frame.origin.y - offset > kTopOffset && label.frame.origin.y - offset <= self.frame.size.height - kTopOffset) {
         label.hidden = NO;
 //        [UIView animateWithDuration:0.3 animations:^{
             label.enabled = YES;
