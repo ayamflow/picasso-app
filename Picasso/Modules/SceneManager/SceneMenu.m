@@ -42,9 +42,9 @@
     [super viewDidLoad];
 
     [self initBackground];
+    [self initMap];
     [self initNavigationBar];
     [self initBottomInfos];
-    [self initMap];
 }
 
 - (void)initBackground {
@@ -55,7 +55,7 @@
 }
 
 - (void)initNavigationBar {
-    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:self.sceneModel.title andShowExploreButton:YES];
+    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:[@"Explorer" uppercaseString] andShowExploreButton:YES];
     [self.navigationBar moveTo:CGPointMake(0, 15)];
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"menuHamburger.png"] forState:UIControlStateNormal];
     [self.navigationBar.exploreButton setImage:[UIImage imageNamed:@"menuPlay.png"] forState:UIControlStateNormal];
@@ -65,8 +65,8 @@
     titleFrame.size.width = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
     titleFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - titleFrame.size.width / 2;
     self.navigationBar.titleLabel.frame = titleFrame;
-    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    self.navigationBar.titleLabel.layer.borderWidth = 2;
+//    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.navigationBar.titleLabel.layer.borderWidth = 2;
 
     [self.navigationBar.exploreButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
 //    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
@@ -108,13 +108,10 @@
 }
 
 - (void)initMap {
-    self.map = [[MapView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, [OrientationUtils nativeLandscapeDeviceSize].size.height * 2)];
+    self.map = [[MapView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
     [self.view addSubview:self.map];
-    [self.view bringSubviewToFront:self.navigationBar];
 
 //    [self.map moveTo:CGPointMake(0, 20)];
-//    [self.map moveTo:CGPointMake(0, -self.map.bounds.size.height / 3)];
-    self.map.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.5];
 
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSceneChooser:)];
     self.tapRecognizer.delegate = self;
@@ -122,7 +119,11 @@
 }
 
 - (void)exitMenu {
-    [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuExitEvent] object:nil];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.map.alpha = 0;
+    } completion:^(BOOL finished) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuExitEvent] object:nil];
+    }];
 }
 
 - (void)showSceneChooser:(UITapGestureRecognizer *)tapRecognizer {
@@ -170,7 +171,8 @@
         self.sceneChooser.view.alpha = 0;
     } completion:^(BOOL finished) {
         [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-        self.navigationBar.titleLabel.text = [self.sceneModel.title uppercaseString];
+        self.navigationBar.titleLabel.text = [@"Explorer" uppercaseString]; //[self.sceneModel.title uppercaseString];
+        self.sceneChooser = nil;
     }];
 
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"menuHamburger.png"] forState:UIControlStateNormal];

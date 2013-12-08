@@ -9,6 +9,7 @@
 #import "MapView.h"
 #import "MapPathStatus.h"
 #import "DataManager.h"
+#import "TiledMapView.h"
 #import "Path1View.h"
 #import "Path2View.h"
 #import "Path3View.h"
@@ -16,7 +17,12 @@
 #import "Path5View.h"
 #import "Path6View.h"
 
+#define kTopOffset 60
+
 @interface MapView ()
+
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) NSArray *cityLabels;
 
 @end
 
@@ -25,13 +31,49 @@
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
-        [self initMap];
+        [self initTiledMap];
+        [self initLabels];
+//        [self initPath];
         [self initPoints];
     }
     return self;
 }
 
-- (void)initMap {
+- (void)initTiledMap {
+    TiledMapView *tiledMap = [[TiledMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 2)];
+    tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil] stringByReplacingOccurrencesOfString:@"x1y1.png" withString:@""];
+    NSLog(@"pathtest: %@", [[NSBundle mainBundle] pathForResource:@"" ofType:nil]);
+
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:tiledMap];
+    self.scrollView.contentSize = tiledMap.frame.size;
+    self.scrollView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+    self.scrollView.delegate = self;
+}
+
+
+- (void)initLabels {
+    NSMutableArray *labels = [NSMutableArray arrayWithCapacity:7];
+    NSArray *cities = [NSArray arrayWithObjects:@"Malaga", @"La Corogne", @"Barcelone", @"Paris", @"Dinard", @"Boisloup", @"Moujin", nil];
+    CGPoint positions[] = {CGPointMake(175, 552), CGPointMake(167, 360), CGPointMake(312, 440), CGPointMake(391, 165), CGPointMake(297, 154), CGPointMake(396, 329), CGPointMake(423, 377)};
+
+    CGSize labelSize = CGSizeMake(80, 15);
+    for(int i = 0; i < [cities count]; i++) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(positions[i].x - labelSize.width / 2, positions[i].y - labelSize.height / 2, labelSize.width, labelSize.height)];
+        label.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12];
+        label.textColor = [UIColor blackColor];
+        label.text = [[cities objectAtIndex:i] uppercaseString];
+        label.textAlignment = NSTextAlignmentCenter;
+        [labels addObject:label];
+        [self.scrollView addSubview:label];
+    }
+
+    self.cityLabels = [NSArray arrayWithArray:labels];
+
+}
+
+- (void)initPath {
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [[dataManager getGameModel] currentScene];
 
@@ -55,7 +97,7 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [dataManager getGameModel].currentScene;
 
-    CGPoint positions[] = {CGPointMake(458, 844), CGPointMake(670, 533), CGPointMake(672, 511), CGPointMake(648, 505), CGPointMake(590, 499), CGPointMake(680, 670), CGPointMake(707, 674)};
+    CGPoint positions[] = {CGPointMake(174, 524), CGPointMake(385, 215), CGPointMake(387, 191), CGPointMake(364, 185), CGPointMake(306, 179), CGPointMake(396, 350), CGPointMake(423, 354)};
     CGFloat pointSize = 25;
 
     NSMutableArray *scenes = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
@@ -79,9 +121,52 @@
         }
 
         [scenes addObject:point];
-        [self addSubview:point];
+        [self.scrollView addSubview:point];
     }
     self.scenes = [NSArray arrayWithArray:scenes];
+}
+
+// UIScrollView protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self toggleLabelsVisibility];
+
+    UILabel *label = [self.cityLabels objectAtIndex:0];
+    NSLog(@"%f/%f", label.frame.origin.y - scrollView.contentOffset.y, self.frame.size.height - kTopOffset);
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(!decelerate) [self toggleLabelsVisibility];
+}
+
+- (void)toggleLabelsVisibility {
+    // Show/hide cityLabels
+    for(int i = 0; i < [self.cityLabels count]; i++) {
+        UILabel *label = [self.cityLabels objectAtIndex:i];
+        [self updateLabel:label visibilityWithOffset:self.scrollView.contentOffset.y];
+
+        UILabel *scene = [self.scenes objectAtIndex:i];
+        [self updateLabel:scene visibilityWithOffset:self.scrollView.contentOffset.y];
+    }
+
+}
+
+- (void)updateLabel:(UILabel *)label visibilityWithOffset:(CGFloat)offset {
+    if(label.enabled && label.frame.origin.y - offset <= kTopOffset) {
+        label.enabled = NO;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            label.alpha = 0;
+//        } completion:^(BOOL finished) {
+            label.hidden = YES;
+//        }];
+    }
+    else if(!label.enabled && label.frame.origin.y - offset > kTopOffset) {
+        label.hidden = NO;
+//        [UIView animateWithDuration:0.3 animations:^{
+            label.enabled = YES;
+//            label.alpha = 1;
+//        }];
+    }
 }
 
 @end

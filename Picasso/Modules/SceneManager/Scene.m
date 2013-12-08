@@ -160,6 +160,7 @@
         [self.menu removeFromParentViewController];
         [self.menu.view removeFromSuperview];
         [self resume];
+        self.menu = nil;
     }];
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MapView : UIView
+@interface MapView : UIView <UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray *scenes;
 
