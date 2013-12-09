@@ -26,6 +26,8 @@ DataManager *dataManager;
             _sceneNumber = 0;
         }
         
+        NSLog(@"scene number %ld", (long)_sceneNumber);
+        
         sceneWorks = [dataManager getWorksWithScene:_sceneNumber];
 
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -43,6 +45,7 @@ DataManager *dataManager;
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"scene works count %lu", (unsigned long)[sceneWorks count]);
     return [sceneWorks count];
 }
 
