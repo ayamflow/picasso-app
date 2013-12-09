@@ -63,8 +63,11 @@
 		B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2818204DE400BC6A09 /* 8.jpg */; };
 		B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2918204DE400BC6A09 /* 9.jpg */; };
 		B98CFC3118204DE400BC6A09 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B98CFC2A18204DE400BC6A09 /* 10.jpg */; };
-		B9AF0C54184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */; };
-		B9CA8AD918534A6A002003C7 /* MoveCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA8AD818534A6A002003C7 /* MoveCollectionViewFlowLayout.m */; };
+		B99C69AF185497E30080ADE7 /* explorer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99C69AB185497E30080ADE7 /* explorer@2x.png */; };
+		B99C69B0185497E30080ADE7 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99C69AC185497E30080ADE7 /* hamburger@2x.png */; };
+		B99C69B1185497E30080ADE7 /* level-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99C69AD185497E30080ADE7 /* level-icon@2x.png */; };
+		B99C69B2185497E30080ADE7 /* work-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99C69AE185497E30080ADE7 /* work-icon@2x.png */; };
+		B99C69B418549FD10080ADE7 /* arrow-top-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B99C69B318549FD10080ADE7 /* arrow-top-icon.png */; };
 		B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5300181FBC7400DFCC39 /* 0.jpg */; };
 		B9FF5305181FBD9400DFCC39 /* WorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9FF5304181FBD9400DFCC39 /* WorkViewController.m */; };
 		B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B9FF5306181FE76400DFCC39 /* 1.jpg */; };
@@ -165,10 +168,11 @@
 		B98CFC2818204DE400BC6A09 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 8.jpg; path = Picasso/Data/8.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2918204DE400BC6A09 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 9.jpg; path = Picasso/Data/9.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2A18204DE400BC6A09 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 10.jpg; path = Picasso/Data/10.jpg; sourceTree = SOURCE_ROOT; };
-		B9AF0C52184E9ED600BBBD54 /* ASHSpringyCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHSpringyCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHSpringyCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		B9CA8AD718534A6A002003C7 /* MoveCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveCollectionViewFlowLayout.h; path = GalleryView/MoveCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		B9CA8AD818534A6A002003C7 /* MoveCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveCollectionViewFlowLayout.m; path = GalleryView/MoveCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		B99C69AB185497E30080ADE7 /* explorer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "explorer@2x.png"; path = "Data/UI/explorer@2x.png"; sourceTree = "<group>"; };
+		B99C69AC185497E30080ADE7 /* hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hamburger@2x.png"; path = "Data/UI/hamburger@2x.png"; sourceTree = "<group>"; };
+		B99C69AD185497E30080ADE7 /* level-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "level-icon@2x.png"; path = "Data/UI/level-icon@2x.png"; sourceTree = "<group>"; };
+		B99C69AE185497E30080ADE7 /* work-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "work-icon@2x.png"; path = "Data/UI/work-icon@2x.png"; sourceTree = "<group>"; };
+		B99C69B318549FD10080ADE7 /* arrow-top-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-top-icon.png"; path = "Data/UI/arrow-top-icon.png"; sourceTree = "<group>"; };
 		B9FF5300181FBC7400DFCC39 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 0.jpg; path = Picasso/Data/0.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5303181FBD9400DFCC39 /* WorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkViewController.h; sourceTree = "<group>"; };
 		B9FF5304181FBD9400DFCC39 /* WorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkViewController.m; sourceTree = "<group>"; };
@@ -480,12 +484,8 @@
 		B9FF530C181FF48300DFCC39 /* GalleryView */ = {
 			isa = PBXGroup;
 			children = (
-				B9AF0C53184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m */,
-				B9AF0C52184E9ED600BBBD54 /* ASHSpringyCollectionViewFlowLayout.h */,
 				5F6691531832666600CBE39F /* GalleryViewController.h */,
 				5F6691541832666600CBE39F /* GalleryViewController.m */,
-				B9CA8AD718534A6A002003C7 /* MoveCollectionViewFlowLayout.h */,
-				B9CA8AD818534A6A002003C7 /* MoveCollectionViewFlowLayout.m */,
 			);
 			name = GalleryView;
 			sourceTree = "<group>";
@@ -493,6 +493,11 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B99C69B318549FD10080ADE7 /* arrow-top-icon.png */,
+				B99C69AB185497E30080ADE7 /* explorer@2x.png */,
+				B99C69AC185497E30080ADE7 /* hamburger@2x.png */,
+				B99C69AD185497E30080ADE7 /* level-icon@2x.png */,
+				B99C69AE185497E30080ADE7 /* work-icon@2x.png */,
 				B968A6FF184E85830024FE29 /* arrow-comeback@2x.png */,
 				B968A700184E85830024FE29 /* arrow-left-nav@2x.png */,
 				B968A701184E85830024FE29 /* arrow-right-nav@2x.png */,
@@ -606,8 +611,10 @@
 				5F66914218322E3400CBE39F /* min-4.jpg in Resources */,
 				5F66914118322E3400CBE39F /* min-3.jpg in Resources */,
 				B9FF530B181FE76400DFCC39 /* 3.jpg in Resources */,
+				B99C69B0185497E30080ADE7 /* hamburger@2x.png in Resources */,
 				5F66914418322E3400CBE39F /* min-6.jpg in Resources */,
 				5F66913E18322E3400CBE39F /* min-0.jpg in Resources */,
+				B99C69B418549FD10080ADE7 /* arrow-top-icon.png in Resources */,
 				5F66914818322E3400CBE39F /* min-10.jpg in Resources */,
 				B968A706184E85830024FE29 /* space-date@2x.png in Resources */,
 				B9FF5301181FBC7400DFCC39 /* 0.jpg in Resources */,
@@ -617,6 +624,7 @@
 				B9FF530A181FE76400DFCC39 /* 2.jpg in Resources */,
 				B929D01B185134E500127F31 /* workContent.html in Resources */,
 				5F66914018322E3400CBE39F /* min-2.jpg in Resources */,
+				B99C69B1185497E30080ADE7 /* level-icon@2x.png in Resources */,
 				62A2B28A18215DC700B4F0E4 /* logo.png in Resources */,
 				B968A703184E85830024FE29 /* arrow-comeback@2x.png in Resources */,
 				624B9799182158A20087C576 /* tracker-button.png in Resources */,
@@ -626,12 +634,14 @@
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				B98CFC2C18204DE400BC6A09 /* 5.jpg in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
+				B99C69B2185497E30080ADE7 /* work-icon@2x.png in Resources */,
 				B9FF5309181FE76400DFCC39 /* 1.jpg in Resources */,
 				5F66914718322E3400CBE39F /* min-9.jpg in Resources */,
 				B98CFC3018204DE400BC6A09 /* 9.jpg in Resources */,
 				B968A705184E85830024FE29 /* arrow-right-nav@2x.png in Resources */,
 				B98CFC2F18204DE400BC6A09 /* 8.jpg in Resources */,
 				B98CFC2E18204DE400BC6A09 /* 7.jpg in Resources */,
+				B99C69AF185497E30080ADE7 /* explorer@2x.png in Resources */,
 				CE488874181EFFA5001D9A09 /* timeline-button.png in Resources */,
 				624E6B54181E9AC100E7FE58 /* data.json in Resources */,
 			);
@@ -657,7 +667,6 @@
 				62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */,
 				CE488872181EFE91001D9A09 /* Timeline.m in Sources */,
 				624B97921821534A0087C576 /* Menu.m in Sources */,
-				B9CA8AD918534A6A002003C7 /* MoveCollectionViewFlowLayout.m in Sources */,
 				624E6B05181E5FD300E7FE58 /* AppDelegate.m in Sources */,
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
@@ -674,7 +683,6 @@
 				CE86045D18283E520019657F /* About.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				B929D0191851325300127F31 /* Colors.m in Sources */,
-				B9AF0C54184E9EE100BBBD54 /* ASHSpringyCollectionViewFlowLayout.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

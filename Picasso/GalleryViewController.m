@@ -31,7 +31,8 @@
     _navBar.layer.borderWidth = 2.0f;
     
     _worksCollectionView.backgroundColor = [UIColor clearColor];
-    _worksCollectionView.userInteractionEnabled = NO;
+    _worksCollectionView.userInteractionEnabled = YES;
+    //_worksCollectionView.userInteractionEnabled = NO;
     [self.worksCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"workCell"];
 }
 
@@ -95,9 +96,7 @@
     
     for (UICollectionViewCell *cell in [self.worksCollectionView visibleCells]) {
         CGRect originBounds = cell.layer.bounds;
-        //NSLog(@"cell count %d", cellCount);
         originBounds.origin.x = originBounds.origin.x + 0.008 * (cellCount * velocity);
-        //NSLog(@"velocity %f", ( (cellCount/10) * velocity));
         cell.layer.bounds = originBounds;
         cellCount++;
     }
