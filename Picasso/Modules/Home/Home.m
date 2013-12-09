@@ -98,30 +98,35 @@
 
 - (void)prepareTransitionOut:(id)sender {
     [self stopVideo];
+    NSArray *buttonsOrder;
     switch([sender tag]) {
         case 0:
             self.nextViewName = @"SceneChooser";
+            buttonsOrder = @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton];
             break;
         case 1:
             self.nextViewName = @"GalleryViewController";
+            buttonsOrder = @[self.galleryButton, self.exploreButton, self.museumButton, self.creditsButton];
             break;
         case 2:
             self.nextViewName = @"Museum";
+            buttonsOrder = @[self.museumButton, self.creditsButton, self.galleryButton, self.exploreButton];
             break;
         case 3:
             self.nextViewName = @"Credits";
+            buttonsOrder = @[self.creditsButton, self.museumButton, self.galleryButton, self.exploreButton];
             break;
     }
-    [self transitionOut];
+    [self transitionOutWithOrder:buttonsOrder];
 }
 
-- (void)transitionOut {
+- (void)transitionOutWithOrder:(NSArray *)order {
     CGFloat delay = 0;
     CGFloat duration = 0.8;
     int i = 0;
-    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+    for(UIButton *button in order) {
         [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [button moveTo:CGPointMake(-button.frame.size.width, button.frame.origin.y)];
+            [button moveTo:CGPointMake(-button.frame.size.width * 1.2, button.frame.origin.y)];
             button.alpha = 0;
         } completion:^(BOOL finished) {
 

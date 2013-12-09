@@ -29,6 +29,10 @@
     [self hideNavigationBar];
     [self initLogo];
     [self initTitle];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 

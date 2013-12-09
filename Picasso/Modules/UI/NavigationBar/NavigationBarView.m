@@ -31,7 +31,7 @@
 
 - (void)initBackButton {
     UIImage *backIcon = [UIImage imageNamed:@"menuHamburger.png"];
-	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width * 1.5, backIcon.size.height * 1.5)];
+	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width * 3, backIcon.size.height * 3)];
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 
     [self addSubview:self.backButton];
@@ -51,7 +51,7 @@
 
 - (void)initExploreButton {
     UIImage *exploreIcon = [UIImage imageNamed:@"navExploreButton.png"];
-	self.exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, exploreIcon.size.width * 1.5, exploreIcon.size.height * 3)];
+	self.exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, exploreIcon.size.width * 2, exploreIcon.size.height * 4)];
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
     [self addSubview:self.exploreButton];

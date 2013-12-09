@@ -87,7 +87,10 @@
 
     [self initNavigationBar];
     [self initTimeline];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 
 //    NSLog(@"[Scene #%li] Started", (long)self.model.number);

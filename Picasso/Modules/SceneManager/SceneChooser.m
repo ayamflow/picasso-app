@@ -65,7 +65,10 @@
     [self initDate];
 
     [self.view bringSubviewToFront:self.navigationBar];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 
