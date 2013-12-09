@@ -48,8 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"KOUKOU");
-    
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];

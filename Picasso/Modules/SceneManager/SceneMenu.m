@@ -148,6 +148,7 @@
 }
 
 - (void)hideSceneChooser {
+        NSLog(@"%@", self.navigationController.viewControllers);
     [self.view addSubview:self.bottomInfos];
     [self.view addSubview:self.map];
 
