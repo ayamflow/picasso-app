@@ -251,7 +251,7 @@
 
 - (void)transitionOut {
     NSArray *cells = [self.tableView visibleCells];
-    for(int i = [cells count] - 1; i >= 0; i--) {
+    for(NSInteger i = [cells count] - 1; i >= 0; i--) {
         UITableViewCell *cell = [cells objectAtIndex:i];
         [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             cell.alpha = 0;
@@ -259,7 +259,7 @@
         } completion:nil];
     }
 
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.navigationBar.alpha = 0;
         self.tableView.alpha = 0;
     } completion:^(BOOL finished) {

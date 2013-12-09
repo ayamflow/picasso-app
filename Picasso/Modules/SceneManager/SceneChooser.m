@@ -303,18 +303,13 @@
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value {
-    switch(option) {
-		case iCarouselOptionWrap:
-            return 0;
+    if(option == iCarouselOptionWrap) return 0;
+        
+    else if(option == iCarouselOptionFadeMin) return -0.5;
 
-        case iCarouselOptionFadeMin:
-            return -0.5;
+    else if(option == iCarouselOptionFadeMax) return 0.5;
 
-        case iCarouselOptionFadeMax:
-            return 0.5;
-    }
-
-    return value;
+    else return value;
 }
 
 - (CATransform3D)carousel:(iCarousel *)carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform {

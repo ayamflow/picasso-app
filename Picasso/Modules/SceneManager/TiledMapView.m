@@ -15,7 +15,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
+
 
     CGSize tileSize = CGSizeMake(50, 50);
 

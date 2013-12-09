@@ -1,4 +1,3 @@
-Picasso/Data/Scenes
-!Picasso/Data/Scenes/Previews
-*.mp4
+Picasso/Data/Scenes/*.mp4
+Picasso/Data/Scenes/*.mov
 .DS_Store
