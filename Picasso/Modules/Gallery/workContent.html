@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <script>
+            function fillData(title, h, l, technique, description) {
+                document.getElementById('work-title').innerHTML = title;
+                document.getElementById('work-h').innerHTML = h;
+                document.getElementById('work-l').innerHTML = l;
+                document.getElementById('work-technique').innerHTML = technique;
+                document.getElementById('work-description').innerHTML = description;
+            }
+        </script>
+    </head>
+    <body>
+        <h1 id="work-title"></h1>
+        <h3>H:<span id="work-h"></span></h3>
+        <h3>L:<span id="work-l"></span></h3>
+        <h3 id="work-technique"></h3>
+        <p id="work-description"></p>
+    </body>
+</html>
