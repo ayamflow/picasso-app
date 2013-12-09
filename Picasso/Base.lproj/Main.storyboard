@@ -179,57 +179,27 @@
                                         <rect key="frame" x="254" y="16" width="6" height="11"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1901" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xfW-lc-j9R">
-                                        <rect key="frame" x="88" y="11" width="39" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1904" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oMQ-1S-E81">
-                                        <rect key="frame" x="153" y="11" width="39" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dateSeparator.png" id="O2h-dd-mvN">
                                         <rect key="frame" x="135" y="20" width="10" height="3"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eo7-Vy-3pr">
+                                        <rect key="frame" x="20" y="11" width="240" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="f1H-BH-RaD">
-                                <rect key="frame" x="0.0" y="95" width="320" height="473"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MIp-1v-K2o">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="workCell" id="efT-f2-0Fp">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="UnM-XB-W8A" id="5g8-2E-SkC"/>
-                                    <outlet property="delegate" destination="UnM-XB-W8A" id="XiX-KH-c1x"/>
-                                </connections>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="H02-CW-4YH"/>
                     <connections>
                         <outlet property="navBar" destination="zLu-j8-8Nx" id="qbw-U9-ysQ"/>
-                        <outlet property="worksCollectionView" destination="f1H-BH-RaD" id="BDo-Zd-Lhz"/>
+                        <outlet property="sceneDate" destination="eo7-Vy-3pr" id="iSK-hJ-iiB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tz9-qA-b9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -378,10 +348,6 @@
     </scenes>
     <resources>
         <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-top-icon.png" width="37" height="20"/>
         <image name="dateSeparator.png" width="10" height="3"/>
@@ -390,7 +356,6 @@
         <image name="menuExploreButton.png" width="188" height="43"/>
         <image name="menuGaleryButton.png" width="188" height="43"/>
         <image name="menuMuseumButton.png" width="188" height="43"/>
-        <image name="navBackButton.png" width="30" height="25"/>
         <image name="navBackButton.png" width="30" height="25"/>
         <image name="navExploreButton.png" width="34" height="11"/>
         <image name="work-icon.png" width="30" height="22"/>

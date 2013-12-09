@@ -25,6 +25,7 @@
 		5F63057F1855D54A002E8547 /* min-8@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305741855D54A002E8547 /* min-8@2x.jpg */; };
 		5F6305801855D54A002E8547 /* min-9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305751855D54A002E8547 /* min-9@2x.jpg */; };
 		5F6305811855D54A002E8547 /* min-10@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305761855D54A002E8547 /* min-10@2x.jpg */; };
+		5F630584185614EA002E8547 /* WorksCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F630583185614EA002E8547 /* WorksCollectionView.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreviewView.m */; };
 		620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423C91843510F00648ABA /* AvenirLTStd-Black.otf */; };
@@ -319,6 +320,8 @@
 		5F6305741855D54A002E8547 /* min-8@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-8@2x.jpg"; sourceTree = "<group>"; };
 		5F6305751855D54A002E8547 /* min-9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-9@2x.jpg"; sourceTree = "<group>"; };
 		5F6305761855D54A002E8547 /* min-10@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-10@2x.jpg"; sourceTree = "<group>"; };
+		5F630582185614EA002E8547 /* WorksCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorksCollectionView.h; path = Modules/Gallery/WorksCollectionView.h; sourceTree = "<group>"; };
+		5F630583185614EA002E8547 /* WorksCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorksCollectionView.m; path = Modules/Gallery/WorksCollectionView.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
 		620423C618434B5D00648ABA /* ScenePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScenePreviewView.h; path = Modules/SceneManager/ScenePreviewView.h; sourceTree = "<group>"; };
 		620423C718434B5D00648ABA /* ScenePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScenePreviewView.m; path = Modules/SceneManager/ScenePreviewView.m; sourceTree = "<group>"; };
@@ -1083,6 +1086,8 @@
 			children = (
 				622504731855C529006D358B /* GalleryViewController.h */,
 				622504741855C529006D358B /* GalleryViewController.m */,
+				5F630582185614EA002E8547 /* WorksCollectionView.h */,
+				5F630583185614EA002E8547 /* WorksCollectionView.m */,
 			);
 			name = GalleryView;
 			sourceTree = "<group>";
@@ -1735,6 +1740,7 @@
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
 				CE86045D18283E520019657F /* Musem.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
+				5F630584185614EA002E8547 /* WorksCollectionView.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,
 			);
