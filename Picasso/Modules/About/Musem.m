@@ -14,9 +14,12 @@
 #import "HoursPanel.h"
 #import "InfosPanel.h"
 #import "NavigationBarView.h"
+#import <MapKit/MapKit.h>
 
 #define kCellLabelTag 1
 #define kCellDetailTag 2
+
+#define kCellMap 2
 
 @interface Musem ()
 
@@ -42,15 +45,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
-
+    
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
 //    [self initData];
     [self initTexts];
 
+    self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
+    
     [self transitionIn];
 }
 
@@ -150,13 +153,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == kCellMap) [self openMaps];
+    if(indexPath.row >= kCellMap) return;
+    
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if([self.openCellIndexes indexOfObject:@(indexPath.row)] == NSNotFound) {
-        NSLog(@"EXPAND");
         [self expandCell:cell atIndexPath:indexPath];
     }
     else {
-        NSLog(@"CLOSE");
         [self closeCell:cell atIndexPath:indexPath];
     }
 }
@@ -268,7 +272,7 @@
 
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     cell.alpha = 0;
     cell.layer.anchorPoint = CGPointMake(0.5, 0);
     cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
@@ -276,8 +280,22 @@
         cell.alpha = 1.0;
         cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     } completion:^(BOOL finished) {
-
+        
     }];
+}
+
+// Opening Maps
+
+- (void)openMaps {
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(48.85967, 2.36242);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:@"Musée National Picasso Paris"];
+        [mapItem openInMapsWithLaunchOptions:nil];
+    }
 }
 
 @end

@@ -15,33 +15,33 @@
     UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
     UIBezierPath* context = [UIBezierPath bezierPath];
 
-    if(self.status == [MapPathStatus PathNotStartedStatus]) { // dash
-        CGFloat dash[] = {5, 5};
+    if(self.status == [MapPathStatus PathNotStartedStatus]) {
+        CGFloat dash[] = {2, 3};
         [context setLineDash:dash count:2 phase:2];
+        context.lineWidth = 1;
     }
-    // else solid or solid/dash
-
-    [context moveToPoint: CGPointMake(900,510)];
-    [context addCurveToPoint: CGPointMake(947,526) controlPoint1: CGPointMake(900,510) controlPoint2: CGPointMake(910,528)];
-    [context addCurveToPoint: CGPointMake(1009,474) controlPoint1: CGPointMake(984,524) controlPoint2: CGPointMake(1007,483)];
-    [context addCurveToPoint: CGPointMake(992,377) controlPoint1: CGPointMake(1011,466) controlPoint2: CGPointMake(1021,413)];
-
-    if(self.status == [MapPathStatus PathStartedStatus]) {
-        [strokeColor setStroke];
+    else {
         context.lineWidth = 4;
-        [context stroke];
-
-        CGFloat dash[] = {5, 5};
-        [context setLineDash:dash count:2 phase:2];
-        [context moveToPoint: CGPointMake(992,377)];
     }
 
-    [context addCurveToPoint: CGPointMake(942,258) controlPoint1: CGPointMake(964,340) controlPoint2: CGPointMake(926,303)];
-    [context addCurveToPoint: CGPointMake(996,211) controlPoint1: CGPointMake(959,213) controlPoint2: CGPointMake(992,211)];
-    [context addCurveToPoint: CGPointMake(1050,259) controlPoint1: CGPointMake(1001,211) controlPoint2: CGPointMake(1046,207)];
+    [context moveToPoint: CGPointMake(390,348)];
+
+    if(self.status != [MapPathStatus PathCompletedStatus]) {
+        [strokeColor setStroke];
+        [context stroke];
+        
+        CGFloat dash[] = {2, 3};
+        [context setLineDash:dash count:2 phase:2];
+    [context moveToPoint: CGPointMake(390,348)];
+        context.lineWidth = 1;
+    }
+//    else {
+//        context.lineWidth = 4;
+//    }
+
+    [context addCurveToPoint: CGPointMake(421,356) controlPoint1: CGPointMake(393,348) controlPoint2: CGPointMake(421,356)];
 
     [strokeColor setStroke];
-    context.lineWidth = 4;
     [context stroke];
 }
 

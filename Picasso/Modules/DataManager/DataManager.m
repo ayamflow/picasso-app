@@ -99,18 +99,22 @@
 }
 
 - (WorkModel *)getWorkWithId:(NSString *)workId {
-    WorkModel *work;
-    for(int i = 0; i < [self.works count]; i++) {
-        work = [self.works objectAtIndex:i];
-        if([work.workId isEqualToString:workId]) {
-            return work;
-        }
-    }
-    return nil;
+    return [[DataManager sharedInstance] getWorkWithId:workId];
 }
 
 - (NSInteger)getWorksNumber {
     return [self.works count];
+}
+
+- (void)unlockWorkWithNumber:(NSInteger)number {
+    SceneModel *work = [self.works objectAtIndex:number];
+    work.unlocked = YES;
+}
+
+- (void)unlockWorkTo:(NSInteger)number {
+    for(int i = 0; i <= number; i++) {
+		[self unlockWorkWithNumber:number];
+    }
 }
 
 @end

@@ -19,6 +19,7 @@
 
 - (id)initWithFrame:(CGRect)frame andTitle:(NSString *)title andShowExploreButton:(BOOL)showExploreButton {
     if(self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor clearColor];
         self.title = title;
         self.hasExploreButton = showExploreButton;
         [self initBackButton];
@@ -29,7 +30,7 @@
 }
 
 - (void)initBackButton {
-    UIImage *backIcon = [UIImage imageNamed:@"navBackButton.png"];
+    UIImage *backIcon = [UIImage imageNamed:@"menuHamburger.png"];
 	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width * 1.5, backIcon.size.height * 1.5)];
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 

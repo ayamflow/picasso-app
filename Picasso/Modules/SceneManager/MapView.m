@@ -12,8 +12,6 @@
 #import "DataManager.h"
 #import "TiledMapView.h"
 #import "Path1View.h"
-#import "Path2View.h"
-#import "Path3View.h"
 #import "Path4View.h"
 #import "Path5View.h"
 #import "Path6View.h"
@@ -24,6 +22,7 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *cityLabels;
+@property (strong, nonatomic) NSArray *paths;
 
 @end
 
@@ -34,7 +33,7 @@
         self.backgroundColor = [UIColor clearColor];
         [self initTiledMap];
         [self initLabels];
-//        [self initPath];
+        [self initPath];
         [self initPoints];
     }
     return self;
@@ -42,8 +41,7 @@
 
 - (void)initTiledMap {
     TiledMapView *tiledMap = [[TiledMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 2)];
-    tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil] stringByReplacingOccurrencesOfString:@"x1y1.png" withString:@""];
-    NSLog(@"%@", [[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil]);
+    tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1@2x" ofType:@".png"] stringByReplacingOccurrencesOfString:@"x1y1@2x.png" withString:@""];
 
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
     [self addSubview:self.scrollView];
@@ -78,10 +76,13 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [[dataManager getGameModel] currentScene];
 
-//    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
-    for(int i = 0; i < 1; i++) {
-        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", i + 1]);
-        MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:self.frame];
+    NSArray *pathClasses = [NSArray arrayWithObjects:[Path1View class], [Path4View class], [Path5View class], [Path6View class], nil];
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[pathClasses count]];
+    
+    int i = 0;
+    for(Class PathClass in pathClasses) {
+        
+        MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
         // i < current -> notstarted
 
         if(i > currentSceneIndex) path.status = [MapPathStatus PathNotStartedStatus];
@@ -90,8 +91,12 @@
         // i == current -> started
         else path.status = [MapPathStatus PathStartedStatus];
 
-        [self addSubview:path];
+        i++;
+        [paths addObject:path];
+        [self.scrollView addSubview:path];
     }
+    
+    self.paths = [NSArray arrayWithArray:paths];
 }
 
 - (void)initPoints {
@@ -131,12 +136,15 @@
 
 - (void)sceneTouched:(id)sender {
     UILabel *scene = (UILabel *)sender;
-    NSLog(@"scene: %li", scene.tag);
     [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:YES];
+    
+    CATransform3D zoom = CATransform3DScale(CATransform3DIdentity, 1.3, 1.3, 1.0);
+    CATransform3D skew = CATransform3DRotate(zoom, 0.3, 1.0, 1.0, 0);
     [UIView animateWithDuration:0.6 animations:^{
-        // Hide path
-        // Hide button
-        // Hide labels
+        self.scrollView.layer.transform = skew;
+        for(MapPathView *path in self.paths) {
+            path.alpha = 0;
+        }
         for(int i = 0; i < [self.scenes count]; i++) {
             [[self.scenes objectAtIndex:i] setAlpha:0];
             [[self.cityLabels objectAtIndex:i] setAlpha:0];
@@ -148,9 +156,10 @@
 
 - (void)showDetails {
     [UIView animateWithDuration:0.6 animations:^{
-        // Show path
-        // Show button
-        // Show labels
+        self.scrollView.layer.transform = CATransform3DIdentity;
+        for(MapPathView *path in self.paths) {
+            path.alpha = 1;
+        }
         for(int i = 0; i < [self.scenes count]; i++) {
             [[self.scenes objectAtIndex:i] setAlpha:1];
             [[self.cityLabels objectAtIndex:i] setAlpha:1];

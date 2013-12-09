@@ -15,29 +15,30 @@
     UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
     UIBezierPath* context = [UIBezierPath bezierPath];
 
-    if(self.status == [MapPathStatus PathNotStartedStatus]) { // dash
-        CGFloat dash[] = {5, 5};
+    if(self.status == [MapPathStatus PathNotStartedStatus]) {
+        CGFloat dash[] = {2, 3};
         [context setLineDash:dash count:2 phase:2];
+        context.lineWidth = 1;
     }
-    // else solid or solid/dash
-
-    [context moveToPoint: CGPointMake(723,200)];
-    [context addCurveToPoint: CGPointMake(717,276) controlPoint1: CGPointMake(723,200) controlPoint2: CGPointMake(754,247)];
-
-    if(self.status == [MapPathStatus PathStartedStatus]) {
-        [strokeColor setStroke];
+    else {
         context.lineWidth = 4;
-        [context stroke];
-
-        CGFloat dash[] = {5, 5};
-        [context setLineDash:dash count:2 phase:2];
-        [context moveToPoint: CGPointMake(717,276)];
     }
 
-    [context addCurveToPoint: CGPointMake(638,312) controlPoint1: CGPointMake(679,293) controlPoint2: CGPointMake(669,283)];
-    [context addCurveToPoint: CGPointMake(641,368) controlPoint1: CGPointMake(608,341) controlPoint2: CGPointMake(641,368)];
+    [context moveToPoint: CGPointMake(385,201)];
+
+    if(self.status != [MapPathStatus PathCompletedStatus]) {
+        [strokeColor setStroke];
+        [context stroke];
+        
+        CGFloat dash[] = {2, 3};
+        [context setLineDash:dash count:2 phase:2];
+    [context moveToPoint: CGPointMake(385,201)];
+        context.lineWidth = 1;
+    }
+
+    [context addCurveToPoint: CGPointMake(298,181) controlPoint1: CGPointMake(381,188) controlPoint2: CGPointMake(343,166)];
+
     [strokeColor setStroke];
-    context.lineWidth = 4;
     [context stroke];
 }
 

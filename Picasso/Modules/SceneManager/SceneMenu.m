@@ -56,7 +56,6 @@
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:[@"Explorer" uppercaseString] andShowExploreButton:YES];
     [self.navigationBar moveTo:CGPointMake(0, 15)];
-    [self.navigationBar.backButton setImage:[UIImage imageNamed:@"menuHamburger.png"] forState:UIControlStateNormal];
     [self.navigationBar.exploreButton setImage:[UIImage imageNamed:@"menuPlay.png"] forState:UIControlStateNormal];
     [self.view addSubview:self.navigationBar];
 
@@ -64,11 +63,10 @@
     titleFrame.size.width = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2;
     titleFrame.origin.x = [OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - titleFrame.size.width / 2;
     self.navigationBar.titleLabel.frame = titleFrame;
-//    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
-//    self.navigationBar.titleLabel.layer.borderWidth = 2;
+    self.navigationBar.titleLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.navigationBar.titleLabel.layer.borderWidth = 0;
 
     [self.navigationBar.exploreButton addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
-//    [self.navigationBar.exploreButton addTarget:self action:@selector(showSceneChooser) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationBar.backButton addTarget:self action:@selector(dispatchBackToHome) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -139,6 +137,7 @@
     [self.sceneChooser.view moveTo:CGPointMake(0, -20)];
     self.sceneChooser.view.alpha = 0;
     [UIView animateWithDuration:0.4 animations:^{
+        self.navigationBar.titleLabel.layer.borderWidth = 2;
         [self.sceneChooser.view moveTo:CGPointMake(0, 0)];
         self.sceneChooser.view.alpha = 1;
         [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y + 20)];
@@ -155,6 +154,8 @@
     [self.map showDetails];
 
     [UIView animateWithDuration:0.4 animations:^{
+        self.navigationBar.titleLabel.layer.borderWidth = 0;
+        
         [self.bottomInfos moveTo:CGPointMake(0, self.bottomInfos.frame.origin.y - 20)];
         self.bottomInfos.alpha = 1;
         [self.sceneChooser.view moveTo:CGPointMake(0, self.sceneChooser.view.frame.origin.y - 20)];

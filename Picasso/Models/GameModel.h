@@ -12,6 +12,7 @@
 
 @property (assign, nonatomic) NSInteger currentScene;
 @property (assign, nonatomic) NSInteger lastUnlockedScene;
+@property (assign, nonatomic) NSInteger lastUnlockedWork;
 @property (assign, nonatomic) float sceneCurrentTime;
 
 + (id)sharedInstance;

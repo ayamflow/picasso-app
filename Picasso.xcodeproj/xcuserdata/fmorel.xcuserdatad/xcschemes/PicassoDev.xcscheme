@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "624E6AF0181E5FD300E7FE58"
-               BuildableName = "Picasso.app"
-               BlueprintName = "Picasso"
+               BlueprintIdentifier = "622505BD1855CD01006D358B"
+               BuildableName = "PicassoDev.app"
+               BlueprintName = "PicassoDev"
                ReferencedContainer = "container:Picasso.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,43 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "624E6B11181E5FD300E7FE58"
-               BuildableName = "PicassoTests.xctest"
-               BlueprintName = "PicassoTests"
-               ReferencedContainer = "container:Picasso.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "622505D91855CD01006D358B"
-               BuildableName = "PicassoDevTests.xctest"
-               BlueprintName = "PicassoDevTests"
-               ReferencedContainer = "container:Picasso.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "624E6AF0181E5FD300E7FE58"
-            BuildableName = "Picasso.app"
-            BlueprintName = "Picasso"
+            BlueprintIdentifier = "622505BD1855CD01006D358B"
+            BuildableName = "PicassoDev.app"
+            BlueprintName = "PicassoDev"
             ReferencedContainer = "container:Picasso.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = ""
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -78,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "624E6AF0181E5FD300E7FE58"
-            BuildableName = "Picasso.app"
-            BlueprintName = "Picasso"
+            BlueprintIdentifier = "622505BD1855CD01006D358B"
+            BuildableName = "PicassoDev.app"
+            BlueprintName = "PicassoDev"
             ReferencedContainer = "container:Picasso.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -96,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "624E6AF0181E5FD300E7FE58"
-            BuildableName = "Picasso.app"
-            BlueprintName = "Picasso"
+            BlueprintIdentifier = "622505BD1855CD01006D358B"
+            BuildableName = "PicassoDev.app"
+            BlueprintName = "PicassoDev"
             ReferencedContainer = "container:Picasso.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

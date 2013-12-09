@@ -88,8 +88,8 @@
 
     [self transitionIn];
 
-    NSLog(@"[Scene #%li] Started", (long)self.model.number);
-    self.player.rate = 0.5; // Maybe stars at 1.0 and tween to 0.0 ?
+//    NSLog(@"[Scene #%li] Started", (long)self.model.number);
+    self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
     [self resume]; // seekToTime + enableMotion
 }
 
@@ -283,7 +283,7 @@
 }
 
 - (void)trackerTouched:(id)sender {
-    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
+//    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
     /*    [self stop];
      WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
      workView.workId = [sender tag];
@@ -328,13 +328,13 @@
             self.drawView.hidden = NO;
             self.trackerInertiaX = 0;
             self.trackerInertiaY = 0;
-            NSLog(@"Enable tracker %i", i);
+//            NSLog(@"Enable tracker %i", i);
         }
         else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
             currentTracker.enabled = NO;
             currentTracker.hidden = YES;
             self.drawView.hidden = YES;
-            NSLog(@"Disable tracker %i", i);
+//            NSLog(@"Disable tracker %i", i);
         }
 
         if(currentTracker.enabled) {
@@ -354,13 +354,13 @@
 }
 
 - (void)playerItemDidReachEnd{
-    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
+//    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
     [self stop];
     [self.delegate showInterstitial];
 }
 
 - (void)stop {
-    NSLog(@"[Scene #%li] Stopped.", self.model.number);
+//    NSLog(@"[Scene #%li] Stopped.", self.model.number);
     GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
     gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
     self.player.rate = 0.0;
@@ -369,7 +369,7 @@
 }
 
 - (void)resume {
-    NSLog(@"[Scene #%li] Resume.", self.model.number);
+//    NSLog(@"[Scene #%li] Resume.", self.model.number);
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];

@@ -10,14 +10,16 @@
 
 @interface WorkModel : NSObject
 
-@property (strong, nonatomic) NSString *workId;
+@property (assign, nonatomic) NSInteger workId;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSString *year;
 @property (strong, nonatomic) NSString *h;
 @property (strong, nonatomic) NSString *l;
 @property (strong, nonatomic) NSString *technical;
+@property (assign, nonatomic) BOOL unlocked;
 
 - (id)initWithData:(NSDictionary *)data;
+- (void)unlockWork;
 
 @end

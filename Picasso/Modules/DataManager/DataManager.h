@@ -25,6 +25,8 @@
 - (WorkModel *)getWorkWithNumber:(NSInteger)number;
 - (void)unlockSceneTo:(NSInteger)number;
 - (void)unlockSceneWithNumber:(NSInteger)number;
+- (void)unlockWorkWithNumber:(NSInteger)number;
+- (void)unlockWorkTo:(NSInteger)number;
 - (NSInteger)getScenesNumber;
 - (NSInteger)getWorksNumber;
 

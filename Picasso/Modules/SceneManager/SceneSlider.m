@@ -60,11 +60,9 @@
 }
 
 - (void)sliderDragEnded:(id)sender withEvent:(UIEvent *)event {
-    NSLog(@"%f/%f", self.sliderDistance, self.sliderDistanceThreshold);
     if(self.sliderDistance > self.sliderDistanceThreshold) {
         // create new scene
         [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SkipInterstitialEvent] object:nil];
-//        [self resetSlidingButtonPositionWithDuration:0.3f];
     }
     else {
         // Replace the slidingButton at his default position
