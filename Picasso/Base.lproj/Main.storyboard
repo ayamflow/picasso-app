@@ -378,10 +378,6 @@
     </scenes>
     <resources>
         <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-top-icon.png" width="37" height="20"/>
         <image name="dateSeparator.png" width="10" height="3"/>
@@ -390,7 +386,6 @@
         <image name="menuExploreButton.png" width="188" height="43"/>
         <image name="menuGaleryButton.png" width="188" height="43"/>
         <image name="menuMuseumButton.png" width="188" height="43"/>
-        <image name="navBackButton.png" width="30" height="25"/>
         <image name="navBackButton.png" width="30" height="25"/>
         <image name="navExploreButton.png" width="34" height="11"/>
         <image name="work-icon.png" width="30" height="22"/>

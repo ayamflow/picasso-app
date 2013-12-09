@@ -43,7 +43,7 @@
 - (void)initTiledMap {
     TiledMapView *tiledMap = [[TiledMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 2)];
     tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil] stringByReplacingOccurrencesOfString:@"x1y1.png" withString:@""];
-    NSLog(@"pathtest: %@", [[NSBundle mainBundle] pathForResource:@"" ofType:nil]);
+    NSLog(@"%@", [[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil]);
 
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
     [self addSubview:self.scrollView];
@@ -164,7 +164,6 @@
     [self toggleLabelsVisibility];
 
     UILabel *label = [self.cityLabels objectAtIndex:0];
-    NSLog(@"%f/%f", label.frame.origin.y - scrollView.contentOffset.y, self.frame.size.height - kTopOffset);
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
