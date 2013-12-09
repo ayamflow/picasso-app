@@ -22,6 +22,10 @@
 		62084D51183508C100F9C26C /* Logo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62084D50183508C100F9C26C /* Logo.m */; };
 		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
 		62084D561835237D00F9C26C /* logo5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D541835237D00F9C26C /* logo5@2x.png */; };
+		6214ECB71856087300C51275 /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB41856087300C51275 /* menu.mov */; };
+		6214ECB81856087300C51275 /* scene-1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB51856087300C51275 /* scene-1.mov */; };
+		6214ECB91856087300C51275 /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB61856087300C51275 /* scene-2.mov */; };
+		6214ECBB18560A7B00C51275 /* tracker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECBA18560A7B00C51275 /* tracker@2x.png */; };
 		622504751855C529006D358B /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622504741855C529006D358B /* GalleryViewController.m */; };
 		622504791855C52E006D358B /* workContent.html in Resources */ = {isa = PBXBuildFile; fileRef = 622504761855C52E006D358B /* workContent.html */; };
 		6225047A1855C52E006D358B /* WorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622504781855C52E006D358B /* WorkViewController.m */; };
@@ -304,6 +308,10 @@
 		62084D50183508C100F9C26C /* Logo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logo.m; path = Modules/UI/Logo/Logo.m; sourceTree = "<group>"; };
 		62084D531835237D00F9C26C /* logo0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo0@2x.png"; sourceTree = "<group>"; };
 		62084D541835237D00F9C26C /* logo5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo5@2x.png"; sourceTree = "<group>"; };
+		6214ECB41856087300C51275 /* menu.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = menu.mov; sourceTree = "<group>"; };
+		6214ECB51856087300C51275 /* scene-1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-1.mov"; sourceTree = "<group>"; };
+		6214ECB61856087300C51275 /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-2.mov"; sourceTree = "<group>"; };
+		6214ECBA18560A7B00C51275 /* tracker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tracker@2x.png"; path = "Data/UI/Scene/tracker@2x.png"; sourceTree = "<group>"; };
 		622504731855C529006D358B /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GalleryViewController.h; path = Modules/Gallery/GalleryViewController.h; sourceTree = "<group>"; };
 		622504741855C529006D358B /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GalleryViewController.m; path = Modules/Gallery/GalleryViewController.m; sourceTree = "<group>"; };
 		622504761855C52E006D358B /* workContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = workContent.html; path = Modules/Gallery/workContent.html; sourceTree = "<group>"; };
@@ -999,6 +1007,9 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6214ECB41856087300C51275 /* menu.mov */,
+				6214ECB51856087300C51275 /* scene-1.mov */,
+				6214ECB61856087300C51275 /* scene-2.mov */,
 				62DCA8E618439EF700CF593F /* Previews */,
 			);
 			name = Scenes;
@@ -1134,6 +1145,7 @@
 		CE45E6AF184A501700DCFF09 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				6214ECBA18560A7B00C51275 /* tracker@2x.png */,
 				CE45E6B0184A502100DCFF09 /* worksNumber@2x.png */,
 				CE45E6B1184A502100DCFF09 /* scenesNumber@2x.png */,
 			);
@@ -1437,6 +1449,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = PowerRangers;
 				TargetAttributes = {
+					624E6AF0181E5FD300E7FE58 = {
+						DevelopmentTeam = 58JZ6T6QPX;
+					};
 					624E6B11181E5FD300E7FE58 = {
 						TestTargetID = 624E6AF0181E5FD300E7FE58;
 					};
@@ -1500,6 +1515,7 @@
 				622505891855CCB4006D358B /* x9y4@2x.png in Resources */,
 				62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */,
 				622504801855C5E3006D358B /* arrow-top-icon.png in Resources */,
+				6214ECBB18560A7B00C51275 /* tracker@2x.png in Resources */,
 				6225053E1855CCB3006D358B /* x3y7@2x.png in Resources */,
 				CED0FCBF1849E19B0001C602 /* circleButton@2x.png in Resources */,
 				620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */,
@@ -1559,6 +1575,7 @@
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				622505481855CCB3006D358B /* x4y4@2x.png in Resources */,
 				CE45E6B3184A502100DCFF09 /* scenesNumber@2x.png in Resources */,
+				6214ECB71856087300C51275 /* menu.mov in Resources */,
 				622505A11855CCB4006D358B /* x11y2@2x.png in Resources */,
 				622505761855CCB3006D358B /* x7y11@2x.png in Resources */,
 				6225047F1855C5E3006D358B /* arrow-right-nav@2x.png in Resources */,
@@ -1629,6 +1646,7 @@
 				622505221855CCB3006D358B /* x1y5@2x.png in Resources */,
 				622505731855CCB3006D358B /* x7y8@2x.png in Resources */,
 				62367AF918460B420090B819 /* cellPlus@2x.png in Resources */,
+				6214ECB81856087300C51275 /* scene-1.mov in Resources */,
 				622505281855CCB3006D358B /* x1y11@2x.png in Resources */,
 				6225047E1855C5E3006D358B /* arrow-left-nav@2x.png in Resources */,
 				622505291855CCB3006D358B /* x1y12@2x.png in Resources */,
@@ -1664,6 +1682,7 @@
 				622505A51855CCB4006D358B /* x11y6@2x.png in Resources */,
 				6225052F1855CCB3006D358B /* x2y5@2x.png in Resources */,
 				6225052C1855CCB3006D358B /* x2y2@2x.png in Resources */,
+				6214ECB91856087300C51275 /* scene-2.mov in Resources */,
 				6225056B1855CCB3006D358B /* x6y13@2x.png in Resources */,
 				6225055B1855CCB3006D358B /* x5y10@2x.png in Resources */,
 				622505411855CCB3006D358B /* x3y10@2x.png in Resources */,
@@ -1883,10 +1902,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Picasso/Picasso-Prefix.pch";
 				INFOPLIST_FILE = "Picasso/Picasso-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1897,10 +1919,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Picasso/Picasso-Prefix.pch";
 				INFOPLIST_FILE = "Picasso/Picasso-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

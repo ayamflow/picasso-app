@@ -159,6 +159,7 @@ static BOOL initialized;
 - (double)getNormalizedPlayerRateWithPitch:(double)pitch {
     double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
     // Stabilizes playback around 0
+    self.pitch = playerRate;
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
 
 	return playerRate;

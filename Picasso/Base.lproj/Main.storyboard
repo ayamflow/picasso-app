@@ -7,7 +7,7 @@
         <!--Scene Chooser-->
         <scene sceneID="dVN-g0-96a">
             <objects>
-                <viewController storyboardIdentifier="SceneChooser" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneChooser" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gjo-LO-52i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,7 +55,7 @@
         <!--Musem-->
         <scene sceneID="6Ri-A0-tsU">
             <objects>
-                <viewController storyboardIdentifier="Museum" id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Museum" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ia9-bb-cjq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,7 +70,7 @@
         <!--Home-->
         <scene sceneID="SbM-vb-Srf">
             <objects>
-                <viewController storyboardIdentifier="Home" id="slh-Y1-crv" customClass="Home" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="slh-Y1-crv" customClass="Home" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sc5-Io-2C9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -378,6 +378,10 @@
     </scenes>
     <resources>
         <image name="arrow-left-nav.png" width="6" height="11"/>
+        <image name="arrow-left-nav.png" width="6" height="11"/>
+        <image name="arrow-left-nav.png" width="6" height="11"/>
+        <image name="arrow-right-nav.png" width="6" height="11"/>
+        <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-top-icon.png" width="37" height="20"/>
         <image name="dateSeparator.png" width="10" height="3"/>
@@ -386,6 +390,7 @@
         <image name="menuExploreButton.png" width="188" height="43"/>
         <image name="menuGaleryButton.png" width="188" height="43"/>
         <image name="menuMuseumButton.png" width="188" height="43"/>
+        <image name="navBackButton.png" width="30" height="25"/>
         <image name="navBackButton.png" width="30" height="25"/>
         <image name="navExploreButton.png" width="34" height="11"/>
         <image name="work-icon.png" width="30" height="22"/>

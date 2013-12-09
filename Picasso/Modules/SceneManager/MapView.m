@@ -171,8 +171,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self toggleLabelsVisibility];
-
-    UILabel *label = [self.cityLabels objectAtIndex:0];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

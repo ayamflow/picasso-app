@@ -53,7 +53,7 @@
 - (void)initBackgroundVideo {
 	self.player = [MotionVideoPlayer sharedInstance];
 
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mov"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self.player loadURL:url];
     self.player.player.rate = 2.0;

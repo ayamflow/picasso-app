@@ -47,8 +47,12 @@
     
     [self initLabels];
     [self initButtons];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
+    NSLog(@"%@", self.navigationController.viewControllers);
 }
 
 - (void)initLabels {
@@ -114,22 +118,25 @@
 - (void)transitionOut {
     CGFloat delay = 0;
     CGFloat duration = 0.8;
+    int i = 0;
     for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
         [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [button moveTo:CGPointMake(-button.frame.size.width, button.frame.origin.y)];
             button.alpha = 0;
         } completion:^(BOOL finished) {
 
-            if(delay > 0.10) {
+            if(i == 3) {
                 [self transitionOutComplete];
             }
         }];
+        i++;
         delay += 0.05;
     }
 }
 
 - (void)transitionOutComplete {
     UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.nextViewName];
+    NSLog(@"vc: %@, %@", self.navigationController,  nextViewController);
     [self.navigationController pushViewController:nextViewController animated:NO];
 }
 

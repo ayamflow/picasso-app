@@ -31,6 +31,8 @@
 @property (strong, nonatomic) NSMutableArray *openCellIndexes;
 @property (strong, nonatomic) NSMutableArray *cellHeights;
 
+@property (assign, nonatomic) BOOL leavingToExplore;
+
 @end
 
 @implementation Musem
@@ -46,6 +48,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"KOUKOU");
+    
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
@@ -53,7 +57,11 @@
     [self initTexts];
 
     self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 
@@ -62,7 +70,12 @@
     [self.view addSubview:self.navigationBar];
 
     [self.navigationBar.backButton addTarget:self action:@selector(transitionOut) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationBar.exploreButton addTarget:self action:@selector(navigateToExplore) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(outToExplore) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)outToExplore {
+    self.leavingToExplore = YES;
+    [self transitionOut];
 }
 
 - (void)initTableView {
@@ -267,9 +280,24 @@
         self.navigationBar.alpha = 0;
         self.tableView.alpha = 0;
     } completion:^(BOOL finished) {
-        [self toHome];
+        [self cleanArrays];
+        if(self.leavingToExplore) {
+            [self navigateToExplore];
+        }
+        else {
+            [self toHome];
+        }
     }];
 
+}
+
+- (void)cleanArrays {
+    self.labels = nil;
+    self.identifiers = nil;
+    self.subviewClasses = nil;
+    self.openCellIndexes = nil;
+    self.cellHeights = nil;
+    [self.tableView removeFromSuperview];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) AVPlayer *player;
 @property (assign, nonatomic) float frameRate;
+@property (assign, nonatomic) CGFloat pitch;
 
 + (id)sharedInstance;
 - (void)enableMotion;

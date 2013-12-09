@@ -58,6 +58,8 @@
 @property (assign, nonatomic) CGFloat trackerInertiaX;
 @property (assign, nonatomic) CGFloat trackerInertiaY;
 
+@property (weak, nonatomic) NSTimer *loopTimer;
+
 @end
 
 @implementation Scene
@@ -81,7 +83,7 @@
     [self initDate:self.model.date];
 
     [self initTrackers];
-    self.playerUpdatesObserver = [self listenForPlayerUpdates];
+//    self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
     [self initNavigationBar];
     [self initTimeline];
@@ -89,7 +91,6 @@
     [self transitionIn];
 
 //    NSLog(@"[Scene #%li] Started", (long)self.model.number);
-    self.player.rate = 2.0; // Maybe stars at 1.0 and tween to 0.0 ?
     [self resume]; // seekToTime + enableMotion
 }
 
@@ -290,6 +291,11 @@
      [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];*/
 }
 
+- (void)sceneLoop:(NSTimer *)timer {
+    [self listenForVideoEnded]; // Watch video status
+    [self toggleTrackers]; // Show/hide/move trackers
+}
+
 - (id)listenForPlayerUpdates {
     __weak typeof(self) weakSelf = self;
     return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
@@ -342,11 +348,15 @@
             self.trackerInertiaY += 0.07;
             NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
             NSArray *currentPosition = [currentTrackerPositions objectAtIndex:currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue]];
-            NSInteger x = [[currentPosition objectAtIndex:1] integerValue];
-            NSInteger y = [[currentPosition objectAtIndex:2] integerValue];
+            
+            CGFloat x = [[currentPosition objectAtIndex:1] floatValue];
+            CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
+            
             self.drawView.startPoint = CGPointMake(x, y);
-            CGFloat dx = self.drawView.endPoint.x - x;
-            self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x - dx * self.player.rate / 100 + 15 * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + 15 * sinf(self.trackerInertiaY) * 0.01);
+            
+            CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
+            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+            
             currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
         }
@@ -366,6 +376,8 @@
     self.player.rate = 0.0;
     [self.playerView disableMotion];
     self.player = nil;
+    [self.loopTimer invalidate];
+    self.loopTimer = nil;
 }
 
 - (void)resume {
@@ -373,8 +385,7 @@
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
-    // DEBUG
-    self.player.rate = 2.0;
+    self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1/3 target:self selector:@selector(sceneLoop:) userInfo:nil repeats:YES];
 }
 
 @end
