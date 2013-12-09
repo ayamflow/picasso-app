@@ -13,10 +13,13 @@
 @interface MotionVideoPlayer : UIViewController
 
 @property (strong, nonatomic) AVPlayer *player;
+@property (assign, nonatomic) float frameRate;
 
 + (id)sharedInstance;
 - (void)enableMotion;
 - (void)disableMotion;
-
+- (void)loadURL:(NSURL *)url;
+- (UIImage *)getScreenshot;
+- (UIImage *)getBlurredScreenshot;
 
 @end

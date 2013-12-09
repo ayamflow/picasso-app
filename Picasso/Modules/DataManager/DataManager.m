@@ -8,11 +8,9 @@
 
 #import "DataManager.h"
 #import "GameModel.h"
+#import "Events.h"
 
 @interface DataManager ()
-
-@property (strong, nonatomic) NSArray *scenes;
-@property (strong, nonatomic) NSArray *works;
 
 @end
 
@@ -39,11 +37,11 @@
         }
         else {
             NSArray *scenes = picassoDictionnary[@"scenes"];
-            int scenesNumber = [scenes count];
+            NSInteger scenesNumber = [scenes count];
 			NSMutableArray *scenesArray = [[NSMutableArray alloc] initWithCapacity:scenesNumber];
 
             NSArray *works = picassoDictionnary[@"works"];
-            int worksNumber = [works count];
+            NSInteger worksNumber = [works count];
 			NSMutableArray *worksArray = [[NSMutableArray alloc] initWithCapacity:worksNumber];
 
             for(int i = 0; i < scenesNumber; i++) {
@@ -69,39 +67,34 @@
 	return [GameModel sharedInstance];
 }
 
-- (SceneModel *)getSceneWithId:(NSString *)sceneId {
-    NSDictionary *scene;
-    for(int i = 0; i < [self.scenes count]; i++) {
-        scene = [self.scenes objectAtIndex:i];
-        if([[scene valueForKey:@"sceneId"] isEqualToString:sceneId]) {
-            return [[SceneModel alloc] initWithData:scene];
-        }
-    }
-    return nil;
-}
-
-- (SceneModel *)getSceneWithNumber:(int) number {
+- (SceneModel *)getSceneWithNumber:(NSInteger) number {
     return [self.scenes objectAtIndex:number];
 }
 
-- (void)unlockSceneWithNumber:(int)number {
-    NSDictionary *scene = [self.scenes objectAtIndex:number];
-    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
-    [scene setValue:@"true" forKey:@"unlocked"];
-    NSLog(@"value for unlocked: %@", [scene valueForKey:@"unlocked"]);
+- (void)unlockSceneTo:(NSInteger)number {
+	for(int i = 0; i <= number; i++) {
+		[self unlockSceneWithNumber:i];
+    }
+}
+
+- (void)unlockSceneWithNumber:(NSInteger)number {
+    SceneModel *scene = [self.scenes objectAtIndex:number];
+    NSDictionary *unlockedSceneDictionnary = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:number] forKey:@"number"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SceneUnlockedEvent] object:self userInfo:unlockedSceneDictionnary];
+    scene.unlocked = YES;
 }
 
 -(SceneModel *)getCurrentSceneModel {
-    int currentScene = [[GameModel sharedInstance] currentScene];
+    NSInteger currentScene = [[GameModel sharedInstance] currentScene];
     return [self.scenes objectAtIndex:currentScene];
 }
 
 
-- (int)getScenesNumber {
+- (NSInteger)getScenesNumber {
     return [self.scenes count];
 }
 
-- (WorkModel *)getWorkWithNumber:(int) number {
+- (WorkModel *)getWorkWithNumber:(NSInteger) number {
     return [self.works objectAtIndex:number];
 }
 
@@ -116,7 +109,7 @@
     return nil;
 }
 
-- (int)getWorksNumber {
+- (NSInteger)getWorksNumber {
     return [self.works count];
 }
 

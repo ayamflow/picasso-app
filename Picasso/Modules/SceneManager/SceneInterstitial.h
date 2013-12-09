@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SceneSlider.h"
+#import "SceneModel.h"
 
 @interface SceneInterstitial : UIViewController
 
 @property (strong, nonatomic) SceneSlider *slidingButton;
 
-- (id)initWithDescription:(NSString *)description;
+- (id)initWithModel:(SceneModel *)sceneModel;
 
 @end

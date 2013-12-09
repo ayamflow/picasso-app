@@ -12,7 +12,7 @@
 
 - (id)initWithData:(NSDictionary *)data {
     if(self = [super init]) {
-        self.workId = data[@"workId"];
+        self.workId = [data[@"workId"] integerValue];
         self.positions = data[@"positions"];
     }
     return self;

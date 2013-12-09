@@ -10,6 +10,9 @@
 
 @implementation OrientationUtils
 
+static int Landscape = 0;
+static int Portrait = 1;
+
 + (int)deviceOrientation {
     return [[UIApplication sharedApplication] statusBarOrientation] <= 1 ? Portrait : Landscape;
 }
@@ -25,6 +28,19 @@
 
 + (CGRect)nativeDeviceSize {
     return[[UIScreen mainScreen] bounds];
+}
+
++ (CGRect)nativeLandscapeDeviceSize {
+    CGRect window = [[UIScreen mainScreen] bounds];
+    return CGRectMake(0, 0, window.size.height, window.size.width);
+}
+
++ (BOOL)isRetina {
+    return ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0));
+}
+
++ (NSInteger)screenScale {
+    return [self isRetina] ? 2 : 1;
 }
 
 @end

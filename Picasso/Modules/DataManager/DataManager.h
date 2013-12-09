@@ -13,16 +13,19 @@
 
 @interface DataManager : NSObject
 
+@property (strong, nonatomic) NSArray *scenes;
+@property (strong, nonatomic) NSArray *works;
+
 + (id)sharedInstance;
 
 - (GameModel *)getGameModel;
-- (SceneModel *)getSceneWithId:(NSString *)sceneId;
-- (SceneModel *)getSceneWithNumber:(int)number;
+- (SceneModel *)getSceneWithNumber:(NSInteger)number;
 -(SceneModel *)getCurrentSceneModel;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
-- (WorkModel *)getWorkWithNumber:(int)number;
-- (void)unlockSceneWithNumber:(int)number;
-- (int)getScenesNumber;
-- (int)getWorksNumber;
+- (WorkModel *)getWorkWithNumber:(NSInteger)number;
+- (void)unlockSceneTo:(NSInteger)number;
+- (void)unlockSceneWithNumber:(NSInteger)number;
+- (NSInteger)getScenesNumber;
+- (NSInteger)getWorksNumber;
 
 @end

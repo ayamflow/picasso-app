@@ -10,6 +10,7 @@
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
+#import "UIImage+ImageEffects.h"
 #import <CoreMotion/CoreMotion.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -23,13 +24,26 @@
 
 @implementation MotionVideoPlayer
 
+static BOOL initialized;
+
 + (id)sharedInstance {
     static MotionVideoPlayer *sharedInstance = nil;
     @synchronized(self) {
         if (sharedInstance == nil)
             sharedInstance = [[self alloc] init];
+//            [sharedInstance updateViewControllerRotation];
+
     }
     return sharedInstance;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 // Addind call to initMotionManager to default init methods.
@@ -46,23 +60,18 @@
     if(self = [super init]) {
         self.playbackCompleted = NO;
         self.motionEnabled = NO;
-//        [self initPlayerWithURL:URL];
+
         [self initPlayer];
         [self initMotionManager];
     }
     return self;
 }
 
-- (void)loadURL:(NSURL *)url {
-    AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
-	// play this item
-    [self.player replaceCurrentItemWithPlayerItem:item];
-}
-
 - (void)initPlayer {
     // Automatically starts with the current scene (previously set on the according button touch)
-    SceneModel *currentScene = [[DataManager sharedInstance] getCurrentSceneModel];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:currentScene.sceneId ofType:currentScene.videoType];
+//    SceneModel *currentScene = [[DataManager sharedInstance] getCurrentSceneModel];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:currentScene.sceneId ofType:currentScene.videoType];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     
     self.player = [AVPlayer playerWithURL:url];
@@ -70,10 +79,11 @@
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.height, screenSize.size.width);
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
-
+    
+    self.frameRate = [self getPlayerFrameRate];
 }
 
 - (void)initPlayerWithURL:(NSURL *)URL {
@@ -82,16 +92,33 @@
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
     // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.height, screenSize.size.width);
+    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
+    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
     [self.view.layer addSublayer:layer];
+
+    self.frameRate = [self getPlayerFrameRate];
 }
 
 - (void)initMotionManager {
     self.motionManager = [[CMMotionManager alloc] init];
 }
 
+- (void)loadURL:(NSURL *)url {
+	if(!initialized) {
+		[self initPlayerWithURL:url];
+        initialized = YES;
+    }
+    else {
+        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
+        [self.player replaceCurrentItemWithPlayerItem:item];
+        self.frameRate = [self getPlayerFrameRate];
+    }
+}
+
+// Motion methods
+
 - (void)enableMotion {
+    if(self.motionEnabled) return;
     if (self.motionManager.deviceMotionAvailable ) {
         self.motionManager.deviceMotionUpdateInterval = 1.0/30.0;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
@@ -110,21 +137,48 @@
     self.motionEnabled = NO;
 }
 
+
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
-    double playerRate = motion.attitude.pitch;
-    
-    // Normalizes it in [-2, 2]
-    playerRate = fmin(0.5, fmax(-0.5, playerRate)) * 4;
+    double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
+
+    self.player.rate = playerRate;
+//    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
+//        NSLog(@"[MotionVideoPlayer] Completed !");
+//        self.playbackCompleted = YES;
+//    }
+}
+
+// This one slowly updates the player rate with the pitch
+- (double)getSmoothedPlayerRateWithPitch:(double)pitch {
+    if(pitch > 0.2) return fmin(2, self.player.rate + 0.2);
+    else if(pitch < -0.2) return fmax(-2, self.player.rate - 0.2);
+    else return 0.0;
+}
+
+// This method mirrors the device motion to the player rate, normalized to [-2, 2]
+- (double)getNormalizedPlayerRateWithPitch:(double)pitch {
+    double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
     // Stabilizes playback around 0
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
-    
-//    NSLog(@"Pitch: %f", playerRate);
-    self.player.rate = playerRate;
-//    NSLog(@"rate: %i, time: %f, duration: %f", self.rate, CMTimeGetSeconds(self.currentTime), CMTimeGetSeconds(self.currentItem.asset.duration));
-    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
-        NSLog(@"[MotionVideoPlayer] Completed !");
-        self.playbackCompleted = YES;
-    }
+
+	return playerRate;
+}
+
+- (UIImage *)getScreenshot {
+	AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:self.player.currentItem.asset];
+    CGImageRef thumb = [imageGenerator copyCGImageAtTime:CMTimeMakeWithSeconds(10.0, 1.0) actualTime:NULL error:NULL];
+    UIImage *screenShot = [UIImage imageWithCGImage:thumb];
+    CGImageRelease(thumb);
+    return screenShot;
+}
+
+- (UIImage *)getBlurredScreenshot {
+	return [[self getScreenshot] applySubtleEffect];
+}
+
+-(float)getPlayerFrameRate {
+    AVAssetTrack *track = [[self.player.currentItem.asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
+    return track.nominalFrameRate;
 }
 
 @end

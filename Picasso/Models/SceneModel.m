@@ -15,6 +15,7 @@
 - (id)initWithData:(NSDictionary *)data {
     if(self = [super init]) {
         self.sceneId = data[@"sceneId"];
+        self.date = data[@"date"];
         self.number = [data[@"number"] integerValue];
         self.unlocked = [data[@"unlocked"] boolValue];
         self.videoType = data[@"videoType"];
@@ -28,6 +29,7 @@
             [trackers addObject:trackerModel];
         }
         self.trackers = [[NSArray alloc] initWithArray:trackers];
+        self.trackerStarts = data[@"trackerStarts"];
     }
     return self;
 }

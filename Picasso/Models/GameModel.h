@@ -10,9 +10,11 @@
 
 @interface GameModel : NSObject
 
-@property (assign, nonatomic) int currentScene;
+@property (assign, nonatomic) NSInteger currentScene;
+@property (assign, nonatomic) NSInteger lastUnlockedScene;
 @property (assign, nonatomic) float sceneCurrentTime;
 
 + (id)sharedInstance;
+- (void)save;
 
 @end

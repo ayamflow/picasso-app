@@ -66,7 +66,7 @@ NSString *kCellID = @"cellID";
     
     UIImageView *cellImageView = cell.contentView.subviews[0];
     
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", indexPath.row];
+    NSString *imageUrl = [NSString stringWithFormat: @"%li.jpg", indexPath.row];
     cellImageView.image = [UIImage imageNamed:imageUrl];
     
     return cell;
@@ -91,7 +91,7 @@ NSString *kCellID = @"cellID";
 #pragma mark – UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", indexPath.row];
+    NSString *imageUrl = [NSString stringWithFormat: @"%ld.jpg", (long)indexPath.row];
     UIImage *workImage = [UIImage imageNamed:imageUrl];
     
     float workImageWidth = workImage.size.width;

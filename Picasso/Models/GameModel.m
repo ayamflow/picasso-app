@@ -7,6 +7,13 @@
 //
 
 #import "GameModel.h"
+#import "DataManager.h"
+#import "Events.h"
+
+#define kSavePath @"PicassoSave.plist"
+#define kCurrentScene @"currentScene"
+#define kLastUnlockedScene @"lastUnlockedScene"
+#define kSceneCurrentTime @"sceneCurrentTime"
 
 @implementation GameModel
 
@@ -20,11 +27,37 @@
 }
 - (id)init {
     if(self = [super init]) {
-	    self.currentScene = 0;
-        self.sceneCurrentTime = 0.0;
+        NSLog(@"[GameModel] init");
+        [self load];
+        [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sceneUnlocked:) name:[MPPEvents SceneUnlockedEvent] object:nil];
     }
-
     return self;
+}
+
+- (void)sceneUnlocked:(NSNotification *)notification {
+    self.lastUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
+}
+
+- (void)save {
+    NSString *savePlist = [self getSavePlistPath];
+
+    NSArray *savedData = [NSArray arrayWithObjects: [NSNumber numberWithInteger: self.currentScene], [NSNumber numberWithInteger: self.lastUnlockedScene], [NSNumber numberWithFloat: self.sceneCurrentTime ], nil];
+    [savedData writeToFile:savePlist atomically:YES];
+}
+
+- (void)load {
+    NSString *savePlist = [self getSavePlistPath];
+
+    NSArray *savedData = [NSArray arrayWithContentsOfFile:savePlist];
+    self.currentScene = [[savedData objectAtIndex:0] integerValue] || 0;
+    self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue] || 0;
+    self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue] || 0.0;
+}
+
+- (NSString *)getSavePlistPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:kSavePath];
 }
 
 @end

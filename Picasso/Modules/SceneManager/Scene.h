@@ -11,9 +11,8 @@
 #import "SceneModel.h"
 #import "SceneManagerDelegate.h"
 
-@interface Scene : UIViewController
+@interface Scene : UIViewController <UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) MotionVideoPlayer *playerView;
 @property (strong, nonatomic) SceneModel *model;
 @property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;

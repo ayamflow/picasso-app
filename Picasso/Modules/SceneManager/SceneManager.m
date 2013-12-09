@@ -8,43 +8,66 @@
 
 #import "SceneManager.h"
 #import "Scene.h"
+#import "SceneChooser.h"
 #import "SceneModel.h"
 #import "DataManager.h"
+#import "UIViewControllerPicasso.h"
 #import "SceneInterstitial.h"
+#import "OrientationUtils.h"
+#import "UIViewPicasso.h"
+#import "UIViewControllerPicasso.h"
+#import "Events.h"
 
 @interface SceneManager ()
 
 @property (strong, nonatomic) Scene *oldScene;
-@property (strong, nonatomic) Scene *currentScene;
 @property (strong, nonatomic) SceneInterstitial *interstitial;
-@property (assign, nonatomic) int scenesNumber;
+@property (assign, nonatomic) NSInteger scenesNumber;
 
 @end
 
 @implementation SceneManager
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+    self.view.backgroundColor = [UIColor clearColor];
+    [self updateRotation];
     
     DataManager *dataManager = [DataManager sharedInstance];
     self.scenesNumber = [dataManager getScenesNumber];
     
-    // Auto launch if needed
-    [self showSceneWithNumber:[dataManager getGameModel].currentScene];
+    // Auto launch
+    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateBackToHome) name:[MPPEvents BackToHomeEvent] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipInterstitial) name:[MPPEvents SkipInterstitialEvent] object:nil];
 }
 
-- (void)showSceneWithNumber:(int)number {
+- (void)showSceneChooser {
+    SceneChooser *sceneChooser = [[SceneChooser alloc] init];
+    [self addChildViewController:sceneChooser];
+    sceneChooser.view.alpha = 0;
+    [self.view addSubview:sceneChooser.view];
+    [self.view bringSubviewToFront:sceneChooser.view];
+    sceneChooser.view.frame = self.view.frame;
+    [sceneChooser.view moveTo:CGPointMake(sceneChooser.view.frame.origin.x, sceneChooser.view.frame.origin.y + 30)];
+    [UIView animateWithDuration:0.4 animations:^{
+        sceneChooser.view.alpha = 1;
+        [sceneChooser.view moveTo:CGPointMake(sceneChooser.view.frame.origin.x, sceneChooser.view.frame.origin.y - 30)];
+    }];
+}
+
+- (void)showSceneWithNumber:(NSInteger)number {
     // update oldScene
     if(self.currentScene) {
         [self.currentScene stop];
@@ -56,42 +79,40 @@
     [self createSceneWithNumber:number andPosition:CGPointMake(0, 0)];
 }
 
-- (void)createSceneWithNumber:(int)number andPosition:(CGPoint)position {
+- (void)createSceneWithNumber:(NSInteger)number andPosition:(CGPoint)position {
     DataManager *dataManager = [DataManager sharedInstance];
     SceneModel *sceneModel = [dataManager getSceneWithNumber:number];
-    
+
     self.oldScene = self.currentScene;
     self.currentScene = [[Scene alloc] initWithModel:sceneModel andPosition:position];
+    self.currentScene.view.frame = self.view.frame;
     self.currentScene.delegate = self;
+    [self addChildViewController:self.currentScene];
     [self.view addSubview:self.currentScene.view];
-    NSLog(@"new scene #%i", self.currentScene.model.number);
 }
 
 - (void)removeLastSeenScene {
+//    NSLog(@"[SceneManager] RemoveLastSeenScene #%li", (long)self.oldScene.model.number);
     if(self.oldScene) {
         [self.oldScene stop];
         [self.oldScene.view removeFromSuperview];
-        self.oldScene = nil;
+        [self.oldScene removeFromParentViewController];
+        self.oldScene.delegate = nil;
     }
-}
-
-- (NSString *)getSceneIdFormat:(int)number {
-    return [NSString stringWithFormat:@"scene-%i", number];
 }
 
 - (void)showInterstitial {
     if(self.interstitial != nil) [self removeInterstitial];
-    self.interstitial = [[SceneInterstitial alloc] initWithDescription:self.currentScene.model.description];
-    self.interstitial.slidingButton.delegate = self;
+    self.interstitial = [[SceneInterstitial alloc] initWithModel:self.currentScene.model];
     [self.view addSubview:self.interstitial.view];
 }
 
 - (void)removeInterstitial {
     [self.interstitial.view removeFromSuperview];
-    self.interstitial = nil;
 }
 
 - (void)skipInterstitial {
+    [[[DataManager sharedInstance] getGameModel] setSceneCurrentTime:0.0];
     [self createSceneWithNumber:[self getNextSceneNumber] andPosition:CGPointMake(0, self.currentScene.view.frame.size.height)];
     [UIView animateWithDuration:0.4f animations:^{
         // Move old scene & interstitial out of the screen
@@ -101,10 +122,7 @@
         self.oldScene.view.frame = oldSceneFrame;
         self.interstitial.view.frame = oldSceneFrame;
         // Move new scene into the screen
-        CGPoint currentScenePosition = CGPointMake(0, 0);
-        CGRect currentSceneFrame = self.currentScene.view.frame;
-        currentSceneFrame.origin = currentScenePosition;
-        self.currentScene.view.frame = currentSceneFrame;
+        self.currentScene.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
     } completion:^(BOOL finished) {
         [self removeLastSeenScene];
         [self removeInterstitial];
@@ -122,25 +140,21 @@
 }
 
 - (void)showNextScene {
+    [[[DataManager sharedInstance] getGameModel] setCurrentScene:[self getNextSceneNumber]];
     [self showSceneWithNumber:[self getNextSceneNumber]];
 }
 
 - (void)showPreviousScene {
+    [[[DataManager sharedInstance] getGameModel] setCurrentScene:[self getPreviousSceneNumber]];
     [self showSceneWithNumber:[self getPreviousSceneNumber]];
 }
 
-- (int)getNextSceneNumber {
+- (NSInteger)getNextSceneNumber {
     return self.currentScene.model.number < self.scenesNumber - 1 ? self.currentScene.model.number + 1 : 0;
 }
 
-- (int)getPreviousSceneNumber {
+- (NSInteger)getPreviousSceneNumber {
     return self.currentScene.model.number > 0 ? self.currentScene.model.number - 1 : self.scenesNumber - 1;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
