@@ -136,7 +136,7 @@
 
 - (void)transitionOutComplete {
     UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.nextViewName];
-    NSLog(@"vc: %@, %@", self.navigationController,  nextViewController);
+//    NSLog(@"vc: %@, %@", self.navigationController,  nextViewController);
     [self.navigationController pushViewController:nextViewController animated:NO];
 }
 
