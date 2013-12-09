@@ -139,7 +139,7 @@
     [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:YES];
     
     CATransform3D zoom = CATransform3DScale(CATransform3DIdentity, 1.3, 1.3, 1.0);
-    CATransform3D skew = CATransform3DRotate(zoom, 0.3, 1.0, 1.0, 0);
+    CATransform3D skew = CATransform3DRotate(zoom, 0.4, 1.0, 1.0, 0);
     [UIView animateWithDuration:0.6 animations:^{
         self.scrollView.layer.transform = skew;
         for(MapPathView *path in self.paths) {

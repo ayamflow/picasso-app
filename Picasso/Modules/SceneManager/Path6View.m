@@ -35,9 +35,6 @@
     [context moveToPoint: CGPointMake(390,348)];
         context.lineWidth = 1;
     }
-//    else {
-//        context.lineWidth = 4;
-//    }
 
     [context addCurveToPoint: CGPointMake(421,356) controlPoint1: CGPointMake(393,348) controlPoint2: CGPointMake(421,356)];
 

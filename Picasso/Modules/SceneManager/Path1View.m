@@ -41,9 +41,6 @@
         [context moveToPoint: CGPointMake(261,387)];
         context.lineWidth = 1;
     }
-//    else {
-//        context.lineWidth = 4;
-//    }
     
     [context addCurveToPoint: CGPointMake(290,419) controlPoint1: CGPointMake(261,387) controlPoint2: CGPointMake(274,411)];
     [context addCurveToPoint: CGPointMake(336,415) controlPoint1: CGPointMake(299,424) controlPoint2: CGPointMake(312,429)];
@@ -54,6 +51,14 @@
 
     [strokeColor setStroke];
     [context stroke];
+
+    // Draw black dots
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(contextRef, 0, 0, 0, 1.0);
+    CGFloat circleSize = 8;
+    CGContextFillEllipseInRect(contextRef, CGRectMake(150, 325, circleSize, circleSize));
+    CGContextFillEllipseInRect(contextRef, CGRectMake(310, 420, circleSize, circleSize));
+
 }
 
 @end
