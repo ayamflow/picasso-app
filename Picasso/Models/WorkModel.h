@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSString *workId;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *description;
+@property (assign, nonatomic) NSInteger sceneNumber;
 @property (strong, nonatomic) NSString *year;
 @property (strong, nonatomic) NSString *h;
 @property (strong, nonatomic) NSString *l;

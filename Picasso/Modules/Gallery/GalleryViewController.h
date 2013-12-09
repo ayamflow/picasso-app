@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *navBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *worksCollectionView;
 
+@property (assign, nonatomic) NSInteger sceneNumber;
+
 @end

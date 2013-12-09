@@ -21,18 +21,24 @@
 
 @implementation GalleryViewController
 
+NSMutableArray *sceneWorks;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.dataManager = [DataManager sharedInstance];
     self.navigationController.navigationBarHidden = YES;
     
+    if(!_sceneNumber) {
+        _sceneNumber = 0;
+    }
+    
+    sceneWorks = [self.dataManager getWorksWithScene:_sceneNumber];
+    
     _navBar.layer.borderColor = [UIColor blackColor].CGColor;
     _navBar.layer.borderWidth = 2.0f;
     
     _worksCollectionView.backgroundColor = [UIColor clearColor];
-    _worksCollectionView.userInteractionEnabled = YES;
-    //_worksCollectionView.userInteractionEnabled = NO;
     [self.worksCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"workCell"];
 }
 
@@ -44,7 +50,7 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.dataManager getWorksNumber];
+    return [sceneWorks count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -58,9 +64,11 @@
         [cell.contentView addSubview:[[UIImageView alloc] initWithFrame:cell.contentView.bounds]];
     }
     
+    WorkModel *currentWork = [sceneWorks objectAtIndex:indexPath.row];
+    
     UIImageView *cellImageView = cell.contentView.subviews[0];
     
-    NSString *imageName = [NSString stringWithFormat: @"min-%ld.jpg", (long)indexPath.row];
+    NSString *imageName = [NSString stringWithFormat: @"min-%@.jpg", currentWork.workId];
     cellImageView.image = [UIImage imageNamed:imageName];
     
     return cell;
@@ -72,6 +80,20 @@
     WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
     workViewController.workId = indexPath.row;
     [self.navigationController pushViewController:workViewController animated:YES];
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    WorkModel *currentWork = [sceneWorks objectAtIndex:indexPath.row];
+    NSString *imageName = [NSString stringWithFormat: @"min-%@.jpg", currentWork.workId];
+    UIImage *image = [UIImage imageNamed:imageName];
+    // Solution provisoire pour afficher les images, à remplacer avec un template
+    return CGSizeMake(image.size.width/2, image.size.height/2);
+}
+
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(20, 20, 20, 20);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
