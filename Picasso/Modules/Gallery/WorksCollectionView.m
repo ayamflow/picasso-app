@@ -8,6 +8,7 @@
 
 #import "WorksCollectionView.h"
 #import "WorkModel.h"
+#import "SceneModel.h"
 #import "DataManager.h"
 
 @interface WorksCollectionView ()
@@ -25,13 +26,12 @@
     if (self) {
         
         _dataManager = [DataManager sharedInstance];
-        
-        if(!sceneNumber) {
-            sceneNumber = 0;
-        }
-        
         _sceneWorks = [self.dataManager getWorksWithScene:sceneNumber];
-
+        
+        NSLog(@"scene number %ld", (long)sceneNumber);
+        SceneModel *currentScene = [self.dataManager getSceneWithNumber:sceneNumber];
+        NSLog(@"scene %@", currentScene.title);
+        
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
         [self.collectionView setDataSource:self];
@@ -43,12 +43,6 @@
         
     }
     return self;
-}
-
-- (void)updateWithNewScene:(NSInteger)sceneNumber
-{
-    _sceneWorks = [self.dataManager getWorksWithScene:sceneNumber];
-    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -80,11 +74,8 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
-    workViewController.workId = indexPath.row;
-    [self.navigationController pushViewController:workViewController animated:YES];
-    */
+    NSLog(@"ok");
+    [self.delegate workTouchedWithIndex:indexPath.row];
 }
 
 #pragma mark – UICollectionViewDelegateFlowLayout

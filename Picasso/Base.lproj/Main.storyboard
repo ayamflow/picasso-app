@@ -193,6 +193,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" id="cBT-Di-Ing">
+                                <rect key="frame" x="0.0" y="123" width="320" height="445"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -200,6 +204,7 @@
                     <connections>
                         <outlet property="navBar" destination="zLu-j8-8Nx" id="qbw-U9-ysQ"/>
                         <outlet property="sceneDate" destination="eo7-Vy-3pr" id="iSK-hJ-iiB"/>
+                        <outlet property="scrollViewScenes" destination="cBT-Di-Ing" id="N5L-kX-EFC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tz9-qA-b9t" userLabel="First Responder" sceneMemberID="firstResponder"/>

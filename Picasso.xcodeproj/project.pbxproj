@@ -308,6 +308,7 @@
 		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
 		4FB559D3184DFC9C0000D076 /* LineDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineDrawView.h; path = Modules/SceneManager/LineDrawView.h; sourceTree = "<group>"; };
 		4FB559D4184DFC9C0000D076 /* LineDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineDrawView.m; path = Modules/SceneManager/LineDrawView.m; sourceTree = "<group>"; };
+		5F52051318577FB00054E0EE /* WorkCollectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkCollectionDelegate.h; path = Modules/Gallery/WorkCollectionDelegate.h; sourceTree = "<group>"; };
 		5F63056C1855D54A002E8547 /* min-0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-0@2x.jpg"; sourceTree = "<group>"; };
 		5F63056D1855D54A002E8547 /* min-1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-1@2x.jpg"; sourceTree = "<group>"; };
 		5F63056E1855D54A002E8547 /* min-2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-2@2x.jpg"; sourceTree = "<group>"; };
@@ -1088,6 +1089,7 @@
 				622504741855C529006D358B /* GalleryViewController.m */,
 				5F630582185614EA002E8547 /* WorksCollectionView.h */,
 				5F630583185614EA002E8547 /* WorksCollectionView.m */,
+				5F52051318577FB00054E0EE /* WorkCollectionDelegate.h */,
 			);
 			name = GalleryView;
 			sourceTree = "<group>";

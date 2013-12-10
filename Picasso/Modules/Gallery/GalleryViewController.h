@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkCollectionDelegate.h"
 
-@interface GalleryViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface GalleryViewController : UIViewController <UIGestureRecognizerDelegate, WorkCollectionDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *navBar;
 
 @property (assign, nonatomic) NSInteger sceneNumber;
 @property (weak, nonatomic) IBOutlet UILabel *sceneDate;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollViewScenes;
 
 @end

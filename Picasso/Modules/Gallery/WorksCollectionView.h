@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkCollectionDelegate.h"
 
 @interface WorksCollectionView : UIView <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (weak, nonatomic) id<WorkCollectionDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame andWithScene:(NSInteger)sceneNumber;
-- (void)updateWithNewScene:(NSInteger)sceneNumber;
 
 @end
