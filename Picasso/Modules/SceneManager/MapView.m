@@ -185,7 +185,10 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     self.infoMask.position = CGPointMake(self.infoMask.position.x, self.scrollView.contentOffset.y + self.infoMask.bounds.size.height / 2);
+    [CATransaction commit];
 }
 
 @end
