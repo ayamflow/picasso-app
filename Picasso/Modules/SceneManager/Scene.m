@@ -344,12 +344,12 @@
             CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
             
             self.drawView.startPoint = CGPointMake(x, y);
-            
             CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
-            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.05);
-            
+            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
             currentTracker.center = self.drawView.endPoint;
-            [self.drawView setNeedsDisplay];
+            [UIView animateWithDuration:1/30 animations:^{
+                [self.drawView setNeedsDisplay];
+            }];
         }
     }
 }
