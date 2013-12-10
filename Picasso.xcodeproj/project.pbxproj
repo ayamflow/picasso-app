@@ -13,7 +13,6 @@
 		4F836D34183BD4EA00CA63CD /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D31183BD4EA00CA63CD /* Colors.m */; };
 		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
 		4FB559D5184DFC9C0000D076 /* LineDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB559D4184DFC9C0000D076 /* LineDrawView.m */; };
-		5F63056B1855C946002E8547 /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056A1855C946002E8547 /* menu.mov */; };
 		5F6305771855D54A002E8547 /* min-0@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056C1855D54A002E8547 /* min-0@2x.jpg */; };
 		5F6305781855D54A002E8547 /* min-1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056D1855D54A002E8547 /* min-1@2x.jpg */; };
 		5F6305791855D54A002E8547 /* min-2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056E1855D54A002E8547 /* min-2@2x.jpg */; };
@@ -86,6 +85,7 @@
 		62DD8259184505230071690A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DD8258184505230071690A /* QuartzCore.framework */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
+		B93248E91856706C000BF92E /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = B93248E81856706C000BF92E /* menu.mov */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -308,7 +308,6 @@
 		4F836D33183BD4EA00CA63CD /* Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Events.m; path = Modules/Utils/Constants/Events.m; sourceTree = "<group>"; };
 		4FB559D3184DFC9C0000D076 /* LineDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineDrawView.h; path = Modules/SceneManager/LineDrawView.h; sourceTree = "<group>"; };
 		4FB559D4184DFC9C0000D076 /* LineDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineDrawView.m; path = Modules/SceneManager/LineDrawView.m; sourceTree = "<group>"; };
-		5F63056A1855C946002E8547 /* menu.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = menu.mov; sourceTree = "<group>"; };
 		5F63056C1855D54A002E8547 /* min-0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-0@2x.jpg"; sourceTree = "<group>"; };
 		5F63056D1855D54A002E8547 /* min-1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-1@2x.jpg"; sourceTree = "<group>"; };
 		5F63056E1855D54A002E8547 /* min-2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-2@2x.jpg"; sourceTree = "<group>"; };
@@ -406,6 +405,7 @@
 		62E9FA34181FCBC20080A21D /* TrackerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackerModel.m; path = Models/TrackerModel.m; sourceTree = "<group>"; };
 		62E9FA3818201CD30080A21D /* SceneInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneInterstitial.h; path = Modules/SceneManager/SceneInterstitial.h; sourceTree = "<group>"; };
 		62E9FA3918201CD30080A21D /* SceneInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneInterstitial.m; path = Modules/SceneManager/SceneInterstitial.m; sourceTree = "<group>"; };
+		B93248E81856706C000BF92E /* menu.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = menu.mov; sourceTree = "<group>"; };
 		B98CFC2418204DE400BC6A09 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 4.jpg; path = Picasso/Data/4.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2518204DE400BC6A09 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 5.jpg; path = Picasso/Data/5.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2618204DE400BC6A09 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 6.jpg; path = Picasso/Data/6.jpg; sourceTree = SOURCE_ROOT; };
@@ -975,7 +975,7 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				5F63056A1855C946002E8547 /* menu.mov */,
+				B93248E81856706C000BF92E /* menu.mov */,
 				62DCA8E618439EF700CF593F /* Previews */,
 			);
 			name = Scenes;
@@ -1558,7 +1558,6 @@
 				CE76B0E81854925A000166C3 /* x3y4@2x.png in Resources */,
 				CED0FCC11849E3FA0001C602 /* dateSeparator@2x.png in Resources */,
 				CE76B1621854925A000166C3 /* x12y9@2x.png in Resources */,
-				5F63056B1855C946002E8547 /* menu.mov in Resources */,
 				CE76B0D71854925A000166C3 /* x1y13@2x.png in Resources */,
 				CE76B15A1854925A000166C3 /* x12y1@2x.png in Resources */,
 				CE76B1661854925A000166C3 /* x12y13@2x.png in Resources */,
@@ -1652,6 +1651,7 @@
 				6225047E1855C5E3006D358B /* arrow-left-nav@2x.png in Resources */,
 				CE98B418184524A8004760D3 /* scene-2@2x.png in Resources */,
 				CE76B0FE1854925A000166C3 /* x4y13@2x.png in Resources */,
+				B93248E91856706C000BF92E /* menu.mov in Resources */,
 				CE76B1121854925A000166C3 /* x6y7@2x.png in Resources */,
 				CE76B13D1854925A000166C3 /* x9y11@2x.png in Resources */,
 				CED0FCBE1849E19B0001C602 /* circleMask@2x.png in Resources */,

@@ -26,6 +26,8 @@ NSMutableArray *sceneWorks;
 WorksCollectionView *currentWorksCollectionView;
 WorksCollectionView *nextWorksCollectionView;
 UIPanGestureRecognizer *worksCollectionViewPan;
+int scenesCount;
+int nextScene;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +39,8 @@ UIPanGestureRecognizer *worksCollectionViewPan;
         _sceneNumber = 0;
     }
     
-    sceneWorks = [self.dataManager getWorksWithScene:_sceneNumber];
+    nextScene = _sceneNumber;
+    scenesCount = [self.dataManager getScenesNumber];
     
     _navBar.layer.borderColor = [UIColor blackColor].CGColor;
     _navBar.layer.borderWidth = 2.0f;
@@ -64,22 +67,22 @@ UIPanGestureRecognizer *worksCollectionViewPan;
     CGPoint translation = [recognizer translationInView:self.view];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, recognizer.view.center.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
-    //NSLog(@"translation %f", recognizer.view.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateBegan) {
         if(recognizer.view.center.x < self.view.center.x) {
-            NSLog(@"in left");
             if(!nextWorksCollectionView) {
+                nextScene++;
+                nextWorksCollectionView.sceneNumber = nextScene;
                 nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
-                nextWorksCollectionView.sceneNumber = _sceneNumber + 1;
                 nextWorksCollectionView.backgroundColor = [UIColor redColor];
                 [self.view addSubview:nextWorksCollectionView];
             }
         } else if(recognizer.view.center.x > self.view.center.x) {
-            NSLog(@"in right");
             if(!nextWorksCollectionView) {
-                nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
-                nextWorksCollectionView.sceneNumber = _sceneNumber - 1;
+                nextScene--;
+                nextWorksCollectionView.sceneNumber = nextScene;
+                nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(-self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
+                nextWorksCollectionView.backgroundColor = [UIColor redColor];
                 [self.view addSubview:nextWorksCollectionView];
             }
         }
@@ -87,20 +90,34 @@ UIPanGestureRecognizer *worksCollectionViewPan;
     
     if(recognizer.state == UIGestureRecognizerStateChanged) {
         nextWorksCollectionView.center = CGPointMake(nextWorksCollectionView.center.x + translation.x, nextWorksCollectionView.center.y);
-        if(recognizer.view.center.x < self.view.center.x - 200) {
+        if(recognizer.view.center.x < self.view.center.x - self.view.frame.size.width/2) {
             [currentWorksCollectionView removeGestureRecognizer:worksCollectionViewPan];
             [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
                 [currentWorksCollectionView setFrame:CGRectMake(-self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
                 [nextWorksCollectionView setFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
             }completion:^(BOOL finished){
                 [currentWorksCollectionView removeFromSuperview];
+                [nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
                 currentWorksCollectionView = nextWorksCollectionView;
+                nextWorksCollectionView = NULL;
+            }];
+        } else if(recognizer.view.center.x > self.view.center.x + self.view.frame.size.width/2) {
+            [currentWorksCollectionView removeGestureRecognizer:worksCollectionViewPan];
+            [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+                [currentWorksCollectionView setFrame:CGRectMake(self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
+                [nextWorksCollectionView setFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
+            }completion:^(BOOL finished){
+                [currentWorksCollectionView removeFromSuperview];
+                [nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
+                currentWorksCollectionView = nextWorksCollectionView;
+                nextWorksCollectionView = NULL;
             }];
         }
     }
     
     if(recognizer.state == UIGestureRecognizerStateEnded) {
-        
+        //[currentWorksCollectionView removeFromSuperview];
+        //[nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
     }
     
 }
