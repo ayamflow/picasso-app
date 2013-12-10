@@ -205,7 +205,6 @@
 - (void)clearPaths {
     for(MapPathView *path in self.paths) {
         [path.layer removeAllAnimations];
-        [path removeFromSuperview];
     }
 }
 

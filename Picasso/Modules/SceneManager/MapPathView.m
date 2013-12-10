@@ -80,56 +80,34 @@
 - (void)animatePath {
     if(self.pathLayer == nil) {
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-        
-        if(self.status == [MapPathStatus PathCompletedStatus]) { // 1 solid
-            shapeLayer.lineWidth = 2;
-        }
-        else { // 1 dash
-            shapeLayer.lineWidth = 1;
-            shapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
-        }
-
         UIBezierPath *path = [self getStartPath];
         [path appendPath:[self getEndPath]];
         shapeLayer.path = [path CGPath];
+        shapeLayer.lineWidth = 1;
+        shapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
         shapeLayer.strokeColor = [[UIColor blackColor] CGColor];
         shapeLayer.fillColor = [[UIColor clearColor] CGColor];
         shapeLayer.lineJoin = kCALineJoinBevel;
         [self.layer addSublayer:shapeLayer];
         self.pathLayer = shapeLayer;
     }
-    
-/*    if(self.status == [MapPathStatus PathStartedStatus]) { // 1 dash + half solid
-        if(self.endPathLayer == nil) {
-            CAShapeLayer *endShapeLayer = [CAShapeLayer layer];
-            endShapeLayer.lineWidth = 2;
-            
-            UIBezierPath *path = [self getStartPath];
-            endShapeLayer.path = [path CGPath];
-            
-            endShapeLayer.path = [path CGPath];
-            endShapeLayer.strokeColor = [[UIColor blackColor] CGColor];
-            endShapeLayer.fillColor = [[UIColor clearColor] CGColor];
-            endShapeLayer.lineJoin = kCALineJoinBevel;
-            
-            [self.layer addSublayer:endShapeLayer];
-            self.endPathLayer = endShapeLayer;
-            
-            CABasicAnimation *endPathAnimation = [self getPathAnimationWithDuration:0.8];
-            [self.endPathLayer addAnimation:endPathAnimation forKey:@"strokeEnd"];
-        }
-    }*/
 
-    CABasicAnimation *pathAnimation = [self getPathAnimationWithDuration:1.6];
-    [self.pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
-}
+    // Animating the dots
+/*    CGFloat circleSize = 4;
+    UIBezierPath *circle = [UIBezierPath bezierPath];
+    [circle addArcWithCenter:self.startPoint radius:circleSize startAngle:0.0 endAngle:M_PI * 2.0 clockwise:YES];
+    CAShapeLayer *startCircle = [CAShapeLayer layer];
+    startCircle.path = [circle CGPath];
+    startCircle.fillColor = [[UIColor blackColor] CGColor];
+    [self.layer addSublayer:startCircle];*/
 
-- (CABasicAnimation *)getPathAnimationWithDuration:(NSTimeInterval)duration {
+    [CATransaction begin];
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = duration;
+    pathAnimation.duration = 0.6;
     pathAnimation.fromValue = @(0.0f);
     pathAnimation.toValue = @(1.0f);
-    return pathAnimation;
+    [self.pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
+    [CATransaction commit];
 }
 
 @end

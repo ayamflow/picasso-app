@@ -141,24 +141,27 @@ static BOOL initialized;
 
 
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
-//    double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
-    double playerRate = [self getNormalizedPlayerRateWithAttitude: motion.attitude];
+    double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
+//    double playerRate = [self getNormalizedPlayerRateWithAttitude: motion.attitude];
     self.player.rate = playerRate;
     
     [self.delegate motionDidChange];
 }
 
 // This method mirrors the device motion to the player rate, normalized to [-2, 2]
-/*- (double)getNormalizedPlayerRateWithPitch:(double)pitch {
+- (double)getNormalizedPlayerRateWithPitch:(double)pitch {
     double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
     // Stabilizes playback around 0
-    self.pitch = playerRate;
+
+    self.pitch = playerRate + (playerRate - self.lastPitch) * 0.1;
+    self.lastPitch = self.pitch;
+
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
 
 	return playerRate;
-}*/
+}
 
-- (double)getNormalizedPlayerRateWithAttitude:(CMAttitude *)attitude {
+/*- (double)getNormalizedPlayerRateWithAttitude:(CMAttitude *)attitude {
     CMQuaternion quat = attitude.quaternion;
     double playerRate = asin(2 * (quat.x * quat.z - quat.w * quat.y));
     
@@ -180,7 +183,7 @@ static BOOL initialized;
     self.lastPitch = x;
     
     return playerRate;
-}
+}*/
 
 - (UIImage *)getScreenshot {
 	AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:self.player.currentItem.asset];

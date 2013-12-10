@@ -81,7 +81,6 @@
     [self initDate:self.model.date];
 
     [self initTrackers];
-//    self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
     [self initNavigationBar];
     [self initTimeline];
@@ -287,14 +286,6 @@
     [self toggleTrackers]; // Show/hide/move trackers
 }
 
-- (id)listenForPlayerUpdates {
-    __weak typeof(self) weakSelf = self;
-    return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
-        [weakSelf listenForVideoEnded]; // Watch video status
-        [weakSelf toggleTrackers]; // Show/hide/move trackers
-    }];
-}
-
 - (void)listenForVideoEnded {
     self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
     if(!self.hasEnded) {
@@ -344,10 +335,18 @@
             CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
             
             self.drawView.startPoint = CGPointMake(x, y);
+
             CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
-            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
-            currentTracker.center = self.drawView.endPoint;
+
+//            self.drawView.endPoint = CGPointMake(trackerX * 0.97 + currentTracker.bounds.size.width * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+            self.drawView.endPoint = CGPointMake(trackerX + (trackerX - self.drawView.endPoint.x) * 0.1, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+
+//            currentTracker.center = self.drawView.endPoint;
+//            [self.drawView setNeedsDisplay];
+
+//            self.drawView.alpha = 0;
             [UIView animateWithDuration:1/30 animations:^{
+                currentTracker.center = self.drawView.endPoint;
                 [self.drawView setNeedsDisplay];
             }];
         }

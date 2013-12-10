@@ -12,7 +12,6 @@
 
 @property (assign, nonatomic) NSInteger status;
 @property (strong, nonatomic) CAShapeLayer *pathLayer;
-@property (strong, nonatomic) CAShapeLayer *endPathLayer;
 @property (assign, nonatomic) BOOL animated;
 @property (assign, nonatomic) BOOL onlyPoints;
 @property (assign, nonatomic) CGPoint startPoint;

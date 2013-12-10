@@ -13,19 +13,19 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
-        self.startPoint = CGPointMake(297, 184);
-        self.endPoint = CGPointMake(387, 350);
+        self.startPoint = CGPointMake(297, 183);
+        self.endPoint = CGPointMake(386, 350);
     }
     return self;
 }
 
 - (UIBezierPath *)getStartPath {
     UIBezierPath* context =  [UIBezierPath bezierPath];
-    [context moveToPoint: CGPointMake(297,184)];
-    [context addCurveToPoint: CGPointMake(287,208) controlPoint1: CGPointMake(297,184) controlPoint2: CGPointMake(283,194)];
-    [context addCurveToPoint: CGPointMake(332,229) controlPoint1: CGPointMake(291,225) controlPoint2: CGPointMake(321,229)];
-    [context addCurveToPoint: CGPointMake(381,207) controlPoint1: CGPointMake(344,229) controlPoint2: CGPointMake(378,218)];
-    [context moveToPoint: CGPointMake(391,188)];
+    [context moveToPoint: CGPointMake(297,183)];
+    [context addCurveToPoint: CGPointMake(286,208) controlPoint1: CGPointMake(297,183) controlPoint2: CGPointMake(283,193)];
+    [context addCurveToPoint: CGPointMake(331,229) controlPoint1: CGPointMake(290,225) controlPoint2: CGPointMake(320,228)];
+    [context addCurveToPoint: CGPointMake(384,196) controlPoint1: CGPointMake(344,229) controlPoint2: CGPointMake(386,218)];
+    [context addCurveToPoint: CGPointMake(390,188) controlPoint1: CGPointMake(384,190) controlPoint2: CGPointMake(384,189)];
 
 
     return context;
@@ -33,11 +33,11 @@
 
 - (UIBezierPath *)getEndPath {
     UIBezierPath* context =  [UIBezierPath bezierPath];
-    [context moveToPoint: CGPointMake(391, 188)];
-    [context addCurveToPoint: CGPointMake(429,191) controlPoint1: CGPointMake(391,188) controlPoint2: CGPointMake(412,174)];
-    [context addCurveToPoint: CGPointMake(419,253) controlPoint1: CGPointMake(455,217) controlPoint2: CGPointMake(439,245)];
-    [context addCurveToPoint: CGPointMake(334,325) controlPoint1: CGPointMake(403,259) controlPoint2: CGPointMake(314,284)];
-    [context addCurveToPoint: CGPointMake(387,350) controlPoint1: CGPointMake(347,352) controlPoint2: CGPointMake(387,350)];
+    [context moveToPoint: CGPointMake(390,188)];
+    [context addCurveToPoint: CGPointMake(428,190) controlPoint1: CGPointMake(390,188) controlPoint2: CGPointMake(412,174)];
+    [context addCurveToPoint: CGPointMake(418,252) controlPoint1: CGPointMake(454,216) controlPoint2: CGPointMake(438,244)];
+    [context addCurveToPoint: CGPointMake(333,324) controlPoint1: CGPointMake(402,258) controlPoint2: CGPointMake(313,283)];
+    [context addCurveToPoint: CGPointMake(386,350) controlPoint1: CGPointMake(346,352) controlPoint2: CGPointMake(386,350)];
     return context;
 }
 
