@@ -221,6 +221,7 @@
 		624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B58181E9EEE00E7FE58 /* DataManager.m */; };
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
+		625BFA4918570A6D00FD9B91 /* sceneSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
@@ -539,6 +540,7 @@
 		624E6B5E181EA2B700E7FE58 /* SceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneModel.h; path = Models/SceneModel.h; sourceTree = "<group>"; };
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
+		625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sceneSlider@2x.png"; path = "Data/UI/Scene/sceneSlider@2x.png"; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
@@ -1145,6 +1147,7 @@
 		CE45E6AF184A501700DCFF09 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */,
 				6214ECBA18560A7B00C51275 /* tracker@2x.png */,
 				CE45E6B0184A502100DCFF09 /* worksNumber@2x.png */,
 				CE45E6B1184A502100DCFF09 /* scenesNumber@2x.png */,
@@ -1599,6 +1602,7 @@
 				622505491855CCB3006D358B /* x4y5@2x.png in Resources */,
 				622505711855CCB3006D358B /* x7y6@2x.png in Resources */,
 				CE98B41A184524A8004760D3 /* scene-4@2x.png in Resources */,
+				625BFA4918570A6D00FD9B91 /* sceneSlider@2x.png in Resources */,
 				622505B61855CCB4006D358B /* x12y10@2x.png in Resources */,
 				622505381855CCB3006D358B /* x3y1@2x.png in Resources */,
 				622505371855CCB3006D358B /* x2y13@2x.png in Resources */,

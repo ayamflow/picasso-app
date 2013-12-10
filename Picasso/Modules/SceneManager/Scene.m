@@ -104,16 +104,6 @@
     return self;
 }
 
-- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position {
-    if(self = [self initWithModel:sceneModel]) {
-        CGRect frame = self.view.frame;
-        frame.origin = position;
-        self.view.frame = frame;
-    }
-    
-    return self;
-}
-
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 50) andTitle:self.model.title andShowExploreButton:YES];
     self.navigationBar.titleLabel.hidden = YES;

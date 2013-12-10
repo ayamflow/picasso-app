@@ -52,7 +52,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self transitionIn];
-    NSLog(@"%@", self.navigationController.viewControllers);
 }
 
 - (void)initLabels {
