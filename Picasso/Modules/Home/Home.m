@@ -12,6 +12,8 @@
 #import "UIViewControllerPicasso.h"
 #import "UIViewPicasso.h"
 #import "SceneChooser.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 20
@@ -70,6 +72,7 @@
         [button addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+        [button setEasingFunction:QuadraticEaseOut forKeyPath:@"frame"];
     }
 
     // This one is the reference
@@ -128,7 +131,6 @@
             [button moveTo:CGPointMake(-button.frame.size.width * 1.2, button.frame.origin.y)];
             button.alpha = 0;
         } completion:^(BOOL finished) {
-
             if(i == 3) {
                 [self transitionOutComplete];
             }

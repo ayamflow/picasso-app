@@ -237,6 +237,9 @@
 		62DD8259184505230071690A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DD8258184505230071690A /* QuartzCore.framework */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
+		CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */; };
+		CE1C18B31857BF0400950552 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B01857BF0400950552 /* easing.c */; };
+		CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -577,6 +580,12 @@
 		B9FF5307181FE76400DFCC39 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 2.jpg; path = Picasso/Data/2.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscapeDelegate.h; path = Modules/SceneManager/SceneChooserLandscapeDelegate.h; sourceTree = "<group>"; };
+		CE1C18AE1857BF0400950552 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAKeyframeAnimation+AHEasing.h"; path = "AHEasing/CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
+		CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
+		CE1C18B01857BF0400950552 /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = AHEasing/easing.c; sourceTree = "<group>"; };
+		CE1C18B11857BF0400950552 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = AHEasing/easing.h; sourceTree = "<group>"; };
+		CE1C18B51857C01B00950552 /* UIView+EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+EasingFunctions.h"; path = "UIView+EasingFunctions/UIView+EasingFunctions.h"; sourceTree = "<group>"; };
+		CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+EasingFunctions.m"; path = "UIView+EasingFunctions/UIView+EasingFunctions.m"; sourceTree = "<group>"; };
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
 		CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSlider@2x.png"; sourceTree = "<group>"; };
 		CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navBackButton@2x.png"; path = "Data/UI/NavigationBar/navBackButton@2x.png"; sourceTree = "<group>"; };
@@ -693,6 +702,8 @@
 		4F34E958183CC79100661A68 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE1C18B81857C02000950552 /* UIView+Easing */,
+				CE1C18B41857BF0900950552 /* AHEasing */,
 				6248E17C1844F8CD001BEF6C /* iCarousel */,
 			);
 			path = Libs;
@@ -1123,6 +1134,26 @@
 				622504741855C529006D358B /* GalleryViewController.m */,
 			);
 			name = GalleryView;
+			sourceTree = "<group>";
+		};
+		CE1C18B41857BF0900950552 /* AHEasing */ = {
+			isa = PBXGroup;
+			children = (
+				CE1C18AE1857BF0400950552 /* CAKeyframeAnimation+AHEasing.h */,
+				CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */,
+				CE1C18B01857BF0400950552 /* easing.c */,
+				CE1C18B11857BF0400950552 /* easing.h */,
+			);
+			name = AHEasing;
+			sourceTree = "<group>";
+		};
+		CE1C18B81857C02000950552 /* UIView+Easing */ = {
+			isa = PBXGroup;
+			children = (
+				CE1C18B51857C01B00950552 /* UIView+EasingFunctions.h */,
+				CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */,
+			);
+			name = "UIView+Easing";
 			sourceTree = "<group>";
 		};
 		CE45E69D1849EB3600DCFF09 /* NavigationBar */ = {
@@ -1726,8 +1757,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1C18B31857BF0400950552 /* easing.c in Sources */,
 				CE76AEF51854897A000166C3 /* TiledMapView.m in Sources */,
 				CE45E6A61849FAE500DCFF09 /* DashedPathView.m in Sources */,
+				CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */,
 				CE91160A184B6AC900420043 /* Path5View.m in Sources */,
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				CE91160D184B6B5800420043 /* Path6View.m in Sources */,
@@ -1747,6 +1780,7 @@
 				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
 				625BFA4F185768F200FD9B91 /* Path2View.m in Sources */,
+				CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				CE911607184B6A6800420043 /* Path4View.m in Sources */,

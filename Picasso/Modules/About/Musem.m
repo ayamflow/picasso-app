@@ -14,6 +14,8 @@
 #import "HoursPanel.h"
 #import "InfosPanel.h"
 #import "NavigationBarView.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 #import <MapKit/MapKit.h>
 
 #define kCellLabelTag 1
@@ -268,13 +270,15 @@
     NSArray *cells = [self.tableView visibleCells];
     for(NSInteger i = [cells count] - 1; i >= 0; i--) {
         UITableViewCell *cell = [cells objectAtIndex:i];
-        [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+        [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:0 animations:^{
             cell.alpha = 0;
             cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
         } completion:nil];
     }
 
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.4 options:0 animations:^{
         self.navigationBar.alpha = 0;
         self.tableView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -302,7 +306,9 @@
     cell.alpha = 0;
     cell.layer.anchorPoint = CGPointMake(0.5, 0);
     cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
-    [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+    [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:0 animations:^{
         cell.alpha = 1.0;
         cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     } completion:^(BOOL finished) {
