@@ -12,22 +12,23 @@
 #import "WorkModel.h"
 #import "SceneModel.h"
 #import "DataManager.h"
+#import "UIViewPicasso.h"
+#import "OrientationUtils.h"
 
 @interface GalleryViewController ()
 
 @property (nonatomic, strong) DataManager *dataManager;
-@property (assign) float lastPosition;
+@property (assign, nonatomic) NSInteger lastSceneNumber;
+@property (strong, nonatomic) UIPanGestureRecognizer *worksCollectionViewPan;
+
+@property (strong, nonatomic) WorksCollectionView *currentWorksCollectionView;
+@property (strong, nonatomic) WorksCollectionView *nextWorksCollectionView;
 
 @end
 
 @implementation GalleryViewController
 
 NSMutableArray *sceneWorks;
-WorksCollectionView *currentWorksCollectionView;
-WorksCollectionView *nextWorksCollectionView;
-UIPanGestureRecognizer *worksCollectionViewPan;
-int scenesCount;
-int nextScene;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,20 +40,16 @@ int nextScene;
         _sceneNumber = 0;
     }
     
-    nextScene = _sceneNumber;
-    scenesCount = [self.dataManager getScenesNumber];
-    
     _navBar.layer.borderColor = [UIColor blackColor].CGColor;
     _navBar.layer.borderWidth = 2.0f;
     
-    currentWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
-    currentWorksCollectionView.sceneNumber = _sceneNumber;
-    [self.view addSubview:currentWorksCollectionView];
+    _nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 95, self.view.frame.size.width, 473) andWithScene:_sceneNumber];
+    _currentWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(0, 95, self.view.frame.size.width, 473) andWithScene:_sceneNumber];
+    [self.view addSubview:_nextWorksCollectionView];
+    [self.view addSubview:_currentWorksCollectionView];
     
-    worksCollectionViewPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(switchScenes:)];
-    [currentWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
-    
-    [self.view addSubview:currentWorksCollectionView];
+    _worksCollectionViewPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(switchScenes:)];
+    [_currentWorksCollectionView addGestureRecognizer:self.worksCollectionViewPan];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -69,55 +66,63 @@ int nextScene;
     [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
     
     if(recognizer.state == UIGestureRecognizerStateBegan) {
+        _lastSceneNumber = _sceneNumber;
         if(recognizer.view.center.x < self.view.center.x) {
-            if(!nextWorksCollectionView) {
-                nextScene++;
-                nextWorksCollectionView.sceneNumber = nextScene;
-                nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
-                nextWorksCollectionView.backgroundColor = [UIColor redColor];
-                [self.view addSubview:nextWorksCollectionView];
-            }
+            _sceneNumber++;
+            [self.nextWorksCollectionView updateWithNewScene:_sceneNumber];
+            //_nextWorksCollectionView.frame = CGRectMake(self.view.frame.size.width, 95, [OrientationUtils nativeDeviceSize].size.width, 473);
         } else if(recognizer.view.center.x > self.view.center.x) {
-            if(!nextWorksCollectionView) {
-                nextScene--;
-                nextWorksCollectionView.sceneNumber = nextScene;
-                nextWorksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(-self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
-                nextWorksCollectionView.backgroundColor = [UIColor redColor];
-                [self.view addSubview:nextWorksCollectionView];
-            }
+            _sceneNumber--;
+            [self.nextWorksCollectionView updateWithNewScene:_sceneNumber];
+            //_nextWorksCollectionView.frame = CGRectMake(-self.view.frame.size.width, 95, [OrientationUtils nativeDeviceSize].size.width, 473);
         }
+        _nextWorksCollectionView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
+        _currentWorksCollectionView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.2];
     }
     
     if(recognizer.state == UIGestureRecognizerStateChanged) {
-        nextWorksCollectionView.center = CGPointMake(nextWorksCollectionView.center.x + translation.x, nextWorksCollectionView.center.y);
+        _nextWorksCollectionView.center = CGPointMake(_nextWorksCollectionView.center.x + translation.x, _nextWorksCollectionView.center.y);
         if(recognizer.view.center.x < self.view.center.x - self.view.frame.size.width/2) {
-            [currentWorksCollectionView removeGestureRecognizer:worksCollectionViewPan];
+            [self.currentWorksCollectionView removeGestureRecognizer:self.worksCollectionViewPan];
             [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-                [currentWorksCollectionView setFrame:CGRectMake(-self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
-                [nextWorksCollectionView setFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
+                [self.currentWorksCollectionView moveTo:CGPointMake(-self.view.frame.size.width, 95)];
+                [self.nextWorksCollectionView moveTo:CGPointMake(0, 95)];
             }completion:^(BOOL finished){
-                [currentWorksCollectionView removeFromSuperview];
-                [nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
-                currentWorksCollectionView = nextWorksCollectionView;
-                nextWorksCollectionView = NULL;
+                
+                WorksCollectionView *prevWorksCollectionView = self.currentWorksCollectionView;
+                self.currentWorksCollectionView = self.nextWorksCollectionView;
+                self.nextWorksCollectionView = prevWorksCollectionView;
+                
+                [self.nextWorksCollectionView removeGestureRecognizer:self.worksCollectionViewPan];
+                [self.currentWorksCollectionView addGestureRecognizer:self.worksCollectionViewPan];
             }];
         } else if(recognizer.view.center.x > self.view.center.x + self.view.frame.size.width/2) {
-            [currentWorksCollectionView removeGestureRecognizer:worksCollectionViewPan];
+            [self.currentWorksCollectionView removeGestureRecognizer:self.worksCollectionViewPan];
             [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-                [currentWorksCollectionView setFrame:CGRectMake(self.view.frame.size.width, 95, self.view.frame.size.width, 473)];
-                [nextWorksCollectionView setFrame:CGRectMake(0, 95, self.view.frame.size.width, 473)];
+                [self.currentWorksCollectionView moveTo:CGPointMake(self.view.frame.size.width, 95)];
+                [self.nextWorksCollectionView moveTo:CGPointMake(0, 95)];
             }completion:^(BOOL finished){
-                [currentWorksCollectionView removeFromSuperview];
-                [nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
-                currentWorksCollectionView = nextWorksCollectionView;
-                nextWorksCollectionView = NULL;
+                
+                WorksCollectionView *prevWorksCollectionView = self.currentWorksCollectionView;
+                self.currentWorksCollectionView = self.nextWorksCollectionView;
+                self.nextWorksCollectionView = prevWorksCollectionView;
+                
+                [self.nextWorksCollectionView removeGestureRecognizer:self.worksCollectionViewPan];
+                [self.currentWorksCollectionView addGestureRecognizer:self.worksCollectionViewPan];
             }];
         }
     }
     
     if(recognizer.state == UIGestureRecognizerStateEnded) {
-        //[currentWorksCollectionView removeFromSuperview];
-        //[nextWorksCollectionView addGestureRecognizer:worksCollectionViewPan];
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.currentWorksCollectionView moveTo:CGPointMake(0, 95)];
+            if(_sceneNumber > _lastSceneNumber) {
+                [self.nextWorksCollectionView moveTo:CGPointMake(self.view.frame.size.width, 95)];
+            } else {
+                [self.nextWorksCollectionView moveTo:CGPointMake(-self.view.frame.size.width, 95)];
+            }
+            _sceneNumber = _lastSceneNumber;
+        }];
     }
     
 }

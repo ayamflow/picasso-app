@@ -10,7 +10,9 @@
 
 @interface WorksCollectionView : UIView <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
-@property (assign, nonatomic) NSInteger sceneNumber;
-@property (nonatomic, retain) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, retain) UICollectionView *collectionView;
+
+- (id)initWithFrame:(CGRect)frame andWithScene:(NSInteger)sceneNumber;
+- (void)updateWithNewScene:(NSInteger)sceneNumber;
 
 @end

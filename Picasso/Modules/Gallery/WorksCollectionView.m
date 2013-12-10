@@ -10,25 +10,27 @@
 #import "WorkModel.h"
 #import "DataManager.h"
 
+@interface WorksCollectionView ()
+
+@property (nonatomic, strong) NSMutableArray *sceneWorks;
+@property (strong, nonatomic) DataManager *dataManager;
+
+@end
+
 @implementation WorksCollectionView
 
-NSMutableArray *sceneWorks;
-DataManager *dataManager;
-
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andWithScene:(NSInteger)sceneNumber
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-        dataManager = [DataManager sharedInstance];
+        _dataManager = [DataManager sharedInstance];
         
-        if(!_sceneNumber) {
-            _sceneNumber = 0;
+        if(!sceneNumber) {
+            sceneNumber = 0;
         }
         
-        NSLog(@"scene number %ld", (long)_sceneNumber);
-        
-        sceneWorks = [dataManager getWorksWithScene:_sceneNumber];
+        _sceneWorks = [self.dataManager getWorksWithScene:sceneNumber];
 
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
@@ -43,10 +45,15 @@ DataManager *dataManager;
     return self;
 }
 
+- (void)updateWithNewScene:(NSInteger)sceneNumber
+{
+    _sceneWorks = [self.dataManager getWorksWithScene:sceneNumber];
+    [self.collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"scene works count %lu", (unsigned long)[sceneWorks count]);
-    return [sceneWorks count];
+    return [self.sceneWorks count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -60,7 +67,7 @@ DataManager *dataManager;
         [cell.contentView addSubview:[[UIImageView alloc] initWithFrame:cell.contentView.bounds]];
     }
     
-    WorkModel *currentWork = [sceneWorks objectAtIndex:indexPath.row];
+    WorkModel *currentWork = [self.sceneWorks objectAtIndex:indexPath.row];
     
     UIImageView *cellImageView = cell.contentView.subviews[0];
     
@@ -82,7 +89,7 @@ DataManager *dataManager;
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    WorkModel *currentWork = [sceneWorks objectAtIndex:indexPath.row];
+    WorkModel *currentWork = [self.sceneWorks objectAtIndex:indexPath.row];
     NSString *imageName = [NSString stringWithFormat: @"min-%@.jpg", currentWork.workId];
     UIImage *image = [UIImage imageNamed:imageName];
     // Solution provisoire pour afficher les images, à remplacer avec un template
