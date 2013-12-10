@@ -115,7 +115,7 @@
     [[[DataManager sharedInstance] getGameModel] setSceneCurrentTime:0.0];
     [self createSceneWithNumber:[self getNextSceneNumber]];
     [self.currentScene.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
-    [UIView animateWithDuration:0.6 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         // Move old scene & interstitial out of the screen
         [self.oldScene.view moveTo:CGPointMake(0, -[OrientationUtils nativeLandscapeDeviceSize].size.height)];
         [self.interstitial.view moveTo:CGPointMake(0, -[OrientationUtils nativeLandscapeDeviceSize].size.height)];

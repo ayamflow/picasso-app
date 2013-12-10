@@ -23,6 +23,8 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *cityLabels;
 @property (strong, nonatomic) NSArray *paths;
+@property (strong, nonatomic) UIView *infoView;
+@property (strong, nonatomic) CAGradientLayer *infoMask;
 
 @end
 
@@ -35,6 +37,8 @@
         [self initLabels];
         [self initPath];
         [self initPoints];
+        
+        [self addGradientMaskToMap];
     }
     return self;
 }
@@ -51,8 +55,22 @@
     self.scrollView.delegate = self;
 }
 
+- (void)addGradientMaskToMap {
+    self.infoMask = [CAGradientLayer layer];
+    self.infoMask.frame = self.bounds;
+    self.infoMask.colors = @[(id)[[UIColor clearColor] CGColor], (id)[[UIColor whiteColor] CGColor], (id)[[UIColor whiteColor] CGColor], (id)[[UIColor clearColor] CGColor]];
+    self.infoMask.locations = @[[NSNumber numberWithFloat:0.1], [NSNumber numberWithFloat:0.4], [NSNumber numberWithFloat:0.7], [NSNumber numberWithFloat:0.9]];
+    self.infoMask.startPoint = CGPointMake(0.5, 0.0);
+    self.infoMask.endPoint = CGPointMake(0.5, 1.0);
+    
+    [self.infoView.layer setMask:self.infoMask];
+}
+
 
 - (void)initLabels {
+    self.infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+    [self.scrollView addSubview:self.infoView];
+    
     NSMutableArray *labels = [NSMutableArray arrayWithCapacity:7];
     NSArray *cities = [NSArray arrayWithObjects:@"Malaga", @"La Corogne", @"Barcelone", @"Paris", @"Dinard", @"Boisloup", @"Moujin", nil];
     CGPoint positions[] = {CGPointMake(175, 552), CGPointMake(167, 360), CGPointMake(312, 440), CGPointMake(391, 165), CGPointMake(297, 154), CGPointMake(396, 329), CGPointMake(423, 377)};
@@ -65,11 +83,10 @@
         label.text = [[cities objectAtIndex:i] uppercaseString];
         label.textAlignment = NSTextAlignmentCenter;
         [labels addObject:label];
-        [self.scrollView addSubview:label];
+        [self.infoView addSubview:label];
     }
 
     self.cityLabels = [NSArray arrayWithArray:labels];
-
 }
 
 - (void)initPath {
@@ -93,7 +110,7 @@
 
         i++;
         [paths addObject:path];
-        [self.scrollView addSubview:path];
+        [self.infoView addSubview:path];
     }
     
     self.paths = [NSArray arrayWithArray:paths];
@@ -129,7 +146,7 @@
         point.tag = i;
         [point addTarget:self action:@selector(sceneTouched:) forControlEvents:UIControlEventTouchUpInside];
         [scenes addObject:point];
-        [self.scrollView addSubview:point];
+        [self.infoView addSubview:point];
     }
     self.scenes = [NSArray arrayWithArray:scenes];
 }
@@ -167,44 +184,8 @@
     }];
 }
 
-// UIScrollView protocol
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self toggleLabelsVisibility];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if(!decelerate) [self toggleLabelsVisibility];
-}
-
-- (void)toggleLabelsVisibility {
-    // Show/hide cityLabels
-    for(int i = 0; i < [self.cityLabels count]; i++) {
-        UILabel *label = [self.cityLabels objectAtIndex:i];
-        [self updateLabel:label visibilityWithOffset:self.scrollView.contentOffset.y];
-
-        UILabel *scene = [self.scenes objectAtIndex:i];
-        [self updateLabel:scene visibilityWithOffset:self.scrollView.contentOffset.y];
-    }
-
-}
-
-- (void)updateLabel:(UILabel *)label visibilityWithOffset:(CGFloat)offset {
-    if(label.enabled && (label.frame.origin.y - offset <= kTopOffset || label.frame.origin.y - offset > self.frame.size.height - kTopOffset )) {
-        label.enabled = NO;
-//        [UIView animateWithDuration:0.3 animations:^{
-//            label.alpha = 0;
-//        } completion:^(BOOL finished) {
-            label.hidden = YES;
-//        }];
-    }
-    else if(!label.enabled && label.frame.origin.y - offset > kTopOffset && label.frame.origin.y - offset <= self.frame.size.height - kTopOffset) {
-        label.hidden = NO;
-//        [UIView animateWithDuration:0.3 animations:^{
-            label.enabled = YES;
-//            label.alpha = 1;
-//        }];
-    }
+    self.infoMask.position = CGPointMake(self.infoMask.position.x, self.scrollView.contentOffset.y + self.infoMask.bounds.size.height / 2);
 }
 
 @end

@@ -18,7 +18,6 @@
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
-- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position;
 - (void)stop;
 
 @end
