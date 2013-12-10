@@ -7,11 +7,14 @@
 //
 
 #import "MapView.h"
+#import "UIViewPicasso.h"
 #import "Events.h"
 #import "MapPathStatus.h"
 #import "DataManager.h"
 #import "TiledMapView.h"
 #import "Path1View.h"
+#import "Path2View.h"
+#import "Path3View.h"
 #import "Path4View.h"
 #import "Path5View.h"
 #import "Path6View.h"
@@ -25,6 +28,7 @@
 @property (strong, nonatomic) NSArray *paths;
 @property (strong, nonatomic) UIView *infoView;
 @property (strong, nonatomic) CAGradientLayer *infoMask;
+@property (strong, nonatomic) MapPathView *animatedPath;
 
 @end
 
@@ -39,8 +43,20 @@
         [self initPoints];
         
         [self addGradientMaskToMap];
+        
+     /*   CGFloat delay = 0;
+        int i = 0;
+        for(MapPathView *path in self.paths) {
+            [self performSelector:@selector(animatePath:) withObject:path afterDelay:delay];
+            delay += 0.75;
+            i++;
+        }*/
     }
     return self;
+}
+
+- (void)animatePath:(MapPathView *)path {
+    [path animatePath];
 }
 
 - (void)initTiledMap {
@@ -93,23 +109,20 @@
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [[dataManager getGameModel] currentScene];
 
-    NSArray *pathClasses = [NSArray arrayWithObjects:[Path1View class], [Path4View class], [Path5View class], [Path6View class], nil];
-    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[pathClasses count]];
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
     
-    int i = 0;
-    for(Class PathClass in pathClasses) {
-        
+    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
+        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", i + 1]);
         MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
-        // i < current -> notstarted
-
+            // i < current -> notstarted
         if(i > currentSceneIndex) path.status = [MapPathStatus PathNotStartedStatus];
-        // i > current -> completed
+            // i > current -> completed
         else if(i < currentSceneIndex) path.status = [MapPathStatus PathCompletedStatus];
-        // i == current -> started
+            // i == current -> started
         else path.status = [MapPathStatus PathStartedStatus];
 
-        i++;
         [paths addObject:path];
+        path.tag = i;
         [self.infoView addSubview:path];
     }
     
@@ -156,7 +169,7 @@
     [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:YES];
     
     CATransform3D zoom = CATransform3DScale(CATransform3DIdentity, 1.3, 1.3, 1.0);
-    CATransform3D skew = CATransform3DRotate(zoom, 0.4, 1.0, 1.0, 0);
+    CATransform3D skew = CATransform3DRotate(zoom, 0.4, 0.0, 1.0, 0);
     [UIView animateWithDuration:0.6 animations:^{
         self.scrollView.layer.transform = skew;
         for(MapPathView *path in self.paths) {
@@ -181,7 +194,27 @@
             [[self.scenes objectAtIndex:i] setAlpha:1];
             [[self.cityLabels objectAtIndex:i] setAlpha:1];
         }
+    } completion:^(BOOL finished) {
+        if(self.animatedPath != nil) {
+         [self.animatedPath removeFromSuperview];
+            self.animatedPath = nil;
+        }
     }];
+}
+
+- (void)clearPaths {
+    for(MapPathView *path in self.paths) {
+        [path.layer removeAllAnimations];
+        [path removeFromSuperview];
+    }
+}
+
+- (void)clearAnimatedPath {
+    if(self.animatedPath != nil) {
+        [self.animatedPath.layer removeAllAnimations];
+        [self.animatedPath removeFromSuperview];
+        self.animatedPath = nil;
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -189,6 +222,38 @@
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     self.infoMask.position = CGPointMake(self.infoMask.position.x, self.scrollView.contentOffset.y + self.infoMask.bounds.size.height / 2);
     [CATransaction commit];
+}
+
+- (void)scrollToIndex:(NSInteger)index {
+    UIButton *scene = [self.scenes objectAtIndex:index];
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
+    } completion:nil];
+}
+
+// Map Translate Protocol
+
+- (void)translateMapToIndex:(NSInteger)index {
+    UIButton *scene = [self.scenes objectAtIndex:index];
+    [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
+    } completion:nil];
+    
+    [self clearAnimatedPath];
+    
+    if(index > 0) {
+        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", index--]);
+        self.animatedPath = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+        self.animatedPath.animated = YES;
+        [self.scrollView addSubview:self.animatedPath];
+        [self.animatedPath animatePath];
+    }
+    else {
+        self.animatedPath = (MapPathView *)[[Path1View alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+        self.animatedPath.onlyPoints = YES;
+        self.animatedPath.animated = NO;
+        [self.scrollView addSubview:self.animatedPath];
+    }
 }
 
 @end

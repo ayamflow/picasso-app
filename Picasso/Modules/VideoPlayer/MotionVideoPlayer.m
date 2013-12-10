@@ -140,12 +140,9 @@ static BOOL initialized;
 
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
     double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
-
     self.player.rate = playerRate;
-//    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
-//        NSLog(@"[MotionVideoPlayer] Completed !");
-//        self.playbackCompleted = YES;
-//    }
+    
+    [self.delegate motionDidChange];
 }
 
 // This one slowly updates the player rate with the pitch

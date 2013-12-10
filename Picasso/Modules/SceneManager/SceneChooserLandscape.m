@@ -159,6 +159,7 @@
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
     self.dateLabel.text = [sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
     [self.delegate updateNavigationTitleWithString:[sceneModel.title uppercaseString]];
+    [self.mapDelegate translateMapToIndex:carousel.currentItemIndex];
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {

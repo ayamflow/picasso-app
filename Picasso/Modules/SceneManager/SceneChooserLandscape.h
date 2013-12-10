@@ -10,10 +10,12 @@
 #import "iCarousel.h"
 #import "NavigationBarView.h"
 #import "SceneChooserLandscapeDelegate.h"
+#import "MapTranslationDelegate.h"
 
 @interface SceneChooserLandscape : UIViewController <iCarouselDataSource, iCarouselDelegate>
 
 @property (strong, nonatomic) iCarousel *carousel;
 @property (weak, nonatomic) id<SceneChooserLandscapeDelegate> delegate;
+@property (weak, nonatomic) id<MapTranslationDelegate> mapDelegate;
 
 @end

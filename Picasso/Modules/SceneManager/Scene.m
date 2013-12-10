@@ -58,8 +58,6 @@
 @property (assign, nonatomic) CGFloat trackerInertiaX;
 @property (assign, nonatomic) CGFloat trackerInertiaY;
 
-@property (weak, nonatomic) NSTimer *loopTimer;
-
 @end
 
 @implementation Scene
@@ -153,8 +151,8 @@
     } completion:^(BOOL finished) {
         [self.menu removeFromParentViewController];
         [self.menu.view removeFromSuperview];
-        [self resume];
         self.menu = nil;
+        [self resume];
     }];
 }
 
@@ -284,7 +282,7 @@
      [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];*/
 }
 
-- (void)sceneLoop:(NSTimer *)timer {
+- (void)motionDidChange {
     [self listenForVideoEnded]; // Watch video status
     [self toggleTrackers]; // Show/hide/move trackers
 }
@@ -348,7 +346,7 @@
             self.drawView.startPoint = CGPointMake(x, y);
             
             CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
-            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+            self.drawView.endPoint = CGPointMake(trackerX * 0.97, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.05);
             
             currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
@@ -368,17 +366,16 @@
     gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
     self.player.rate = 0.0;
     [self.playerView disableMotion];
+    self.playerView.delegate = nil;
     self.player = nil;
-    [self.loopTimer invalidate];
-    self.loopTimer = nil;
 }
 
 - (void)resume {
 //    NSLog(@"[Scene #%li] Resume.", self.model.number);
+    self.playerView.delegate = self;
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
-    self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1/3 target:self selector:@selector(sceneLoop:) userInfo:nil repeats:YES];
 }
 
 @end

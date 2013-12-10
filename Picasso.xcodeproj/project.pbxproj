@@ -222,6 +222,8 @@
 		624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5C181EA2AB00E7FE58 /* WorkModel.m */; };
 		624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 624E6B5F181EA2B700E7FE58 /* SceneModel.m */; };
 		625BFA4918570A6D00FD9B91 /* sceneSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */; };
+		625BFA4F185768F200FD9B91 /* Path2View.m in Sources */ = {isa = PBXBuildFile; fileRef = 625BFA4C185768F200FD9B91 /* Path2View.m */; };
+		625BFA50185768F200FD9B91 /* Path3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 625BFA4E185768F200FD9B91 /* Path3View.m */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
@@ -541,6 +543,12 @@
 		624E6B5F181EA2B700E7FE58 /* SceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneModel.m; path = Models/SceneModel.m; sourceTree = "<group>"; };
 		624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneManagerDelegate.h; path = Modules/SceneManager/SceneManagerDelegate.h; sourceTree = "<group>"; };
 		625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sceneSlider@2x.png"; path = "Data/UI/Scene/sceneSlider@2x.png"; sourceTree = "<group>"; };
+		625BFA4A1857421B00FD9B91 /* MapTranslationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MapTranslationDelegate.h; path = Modules/SceneManager/MapTranslationDelegate.h; sourceTree = "<group>"; };
+		625BFA4B185768F200FD9B91 /* Path2View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path2View.h; path = Modules/SceneManager/Path2View.h; sourceTree = "<group>"; };
+		625BFA4C185768F200FD9B91 /* Path2View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path2View.m; path = Modules/SceneManager/Path2View.m; sourceTree = "<group>"; };
+		625BFA4D185768F200FD9B91 /* Path3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path3View.h; path = Modules/SceneManager/Path3View.h; sourceTree = "<group>"; };
+		625BFA4E185768F200FD9B91 /* Path3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path3View.m; path = Modules/SceneManager/Path3View.m; sourceTree = "<group>"; };
+		625BFA5118577B7100FD9B91 /* MotionVideoPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MotionVideoPlayerDelegate.h; path = Modules/SceneManager/MotionVideoPlayerDelegate.h; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
@@ -729,6 +737,7 @@
 				CE45E6A51849FAE500DCFF09 /* DashedPathView.m */,
 				CE45E6B4184A5C9800DCFF09 /* SceneChooserLandscape.h */,
 				CE45E6B5184A5C9800DCFF09 /* SceneChooserLandscape.m */,
+				625BFA4A1857421B00FD9B91 /* MapTranslationDelegate.h */,
 			);
 			name = SceneChooser;
 			sourceTree = "<group>";
@@ -843,6 +852,7 @@
 			children = (
 				624E6B61181EBD1700E7FE58 /* SceneManagerDelegate.h */,
 				CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */,
+				625BFA5118577B7100FD9B91 /* MotionVideoPlayerDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -1372,6 +1382,10 @@
 			children = (
 				CE9115F2184B5D2600420043 /* Path1View.h */,
 				CE9115F3184B5D2600420043 /* Path1View.m */,
+				625BFA4B185768F200FD9B91 /* Path2View.h */,
+				625BFA4C185768F200FD9B91 /* Path2View.m */,
+				625BFA4D185768F200FD9B91 /* Path3View.h */,
+				625BFA4E185768F200FD9B91 /* Path3View.m */,
 				CE911605184B6A6800420043 /* Path4View.h */,
 				CE911606184B6A6800420043 /* Path4View.m */,
 				CE911608184B6AC900420043 /* Path5View.h */,
@@ -1732,6 +1746,7 @@
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,
 				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
+				625BFA4F185768F200FD9B91 /* Path2View.m in Sources */,
 				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				CE911607184B6A6800420043 /* Path4View.m in Sources */,
@@ -1752,6 +1767,7 @@
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
+				625BFA50185768F200FD9B91 /* Path3View.m in Sources */,
 				CE86045D18283E520019657F /* Musem.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,

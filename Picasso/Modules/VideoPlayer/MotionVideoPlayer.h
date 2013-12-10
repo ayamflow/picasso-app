@@ -9,12 +9,14 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
+#import "MotionVideoPlayerDelegate.h"
 
 @interface MotionVideoPlayer : UIViewController
 
 @property (strong, nonatomic) AVPlayer *player;
 @property (assign, nonatomic) float frameRate;
 @property (assign, nonatomic) CGFloat pitch;
+@property (weak, nonatomic) id<MotionVideoPlayerDelegate> delegate;
 
 + (id)sharedInstance;
 - (void)enableMotion;

@@ -11,44 +11,34 @@
 
 @implementation Path5View
 
-- (void)drawRect:(CGRect)rect {
-    UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-    UIBezierPath* context = [UIBezierPath bezierPath];
-
-    if(self.status == [MapPathStatus PathNotStartedStatus]) {
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-        context.lineWidth = 1;
+- (id)initWithFrame:(CGRect)frame {
+    if(self = [super initWithFrame:frame]) {
+        self.startPoint = CGPointMake(297, 184);
+        self.endPoint = CGPointMake(387, 350);
     }
-    else {
-        context.lineWidth = 4;
-    }
+    return self;
+}
 
-    [context moveToPoint: CGPointMake(307,177)];
-    [context addCurveToPoint: CGPointMake(291,216) controlPoint1: CGPointMake(293,183) controlPoint2: CGPointMake(277,198)];
-    [context addCurveToPoint: CGPointMake(348,226) controlPoint1: CGPointMake(305,234) controlPoint2: CGPointMake(348,226)];
-    [context addCurveToPoint: CGPointMake(390,191) controlPoint1: CGPointMake(348,226) controlPoint2: CGPointMake(382,220)];
-    [context addCurveToPoint: CGPointMake(429,189) controlPoint1: CGPointMake(390,191) controlPoint2: CGPointMake(409,173)];
-    [context addCurveToPoint: CGPointMake(440,231) controlPoint1: CGPointMake(449,205) controlPoint2: CGPointMake(440,231)];
-    
-    if(self.status != [MapPathStatus PathCompletedStatus]) {
-        [strokeColor setStroke];
-        [context stroke];
-        
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-        [context moveToPoint: CGPointMake(440, 231)];
-        context.lineWidth = 1;
-    }
+- (UIBezierPath *)getStartPath {
+    UIBezierPath* context =  [UIBezierPath bezierPath];
+    [context moveToPoint: CGPointMake(297,184)];
+    [context addCurveToPoint: CGPointMake(287,208) controlPoint1: CGPointMake(297,184) controlPoint2: CGPointMake(283,194)];
+    [context addCurveToPoint: CGPointMake(332,229) controlPoint1: CGPointMake(291,225) controlPoint2: CGPointMake(321,229)];
+    [context addCurveToPoint: CGPointMake(381,207) controlPoint1: CGPointMake(344,229) controlPoint2: CGPointMake(378,218)];
+    [context moveToPoint: CGPointMake(391,188)];
 
-    [context addCurveToPoint: CGPointMake(420,251) controlPoint1: CGPointMake(440,231) controlPoint2: CGPointMake(432,249)];
-    [context addCurveToPoint: CGPointMake(336,296) controlPoint1: CGPointMake(357,272) controlPoint2: CGPointMake(336,296)];
-    [context addLineToPoint: CGPointMake(336,296)];
-    [context addCurveToPoint: CGPointMake(340,333) controlPoint1: CGPointMake(334,301) controlPoint2: CGPointMake(323,320)];
-    [context addCurveToPoint: CGPointMake(390,348) controlPoint1: CGPointMake(364,355) controlPoint2: CGPointMake(387,348)];
-    
-    [strokeColor setStroke];
-    [context stroke];
+
+    return context;
+}
+
+- (UIBezierPath *)getEndPath {
+    UIBezierPath* context =  [UIBezierPath bezierPath];
+    [context moveToPoint: CGPointMake(391, 188)];
+    [context addCurveToPoint: CGPointMake(429,191) controlPoint1: CGPointMake(391,188) controlPoint2: CGPointMake(412,174)];
+    [context addCurveToPoint: CGPointMake(419,253) controlPoint1: CGPointMake(455,217) controlPoint2: CGPointMake(439,245)];
+    [context addCurveToPoint: CGPointMake(334,325) controlPoint1: CGPointMake(403,259) controlPoint2: CGPointMake(314,284)];
+    [context addCurveToPoint: CGPointMake(387,350) controlPoint1: CGPointMake(347,352) controlPoint2: CGPointMake(387,350)];
+    return context;
 }
 
 @end

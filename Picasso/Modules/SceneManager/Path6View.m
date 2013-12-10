@@ -11,35 +11,26 @@
 
 @implementation Path6View
 
-- (void)drawRect:(CGRect)rect {
-    UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
-    UIBezierPath* context = [UIBezierPath bezierPath];
-
-    if(self.status == [MapPathStatus PathNotStartedStatus]) {
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-        context.lineWidth = 1;
+- (id)initWithFrame:(CGRect)frame {
+    if(self = [super initWithFrame:frame]) {
+        self.startPoint = CGPointMake(407, 351);
+        self.endPoint = CGPointMake(420,355);
     }
-    else {
-        context.lineWidth = 4;
-    }
+    return self;
+}
 
-    [context moveToPoint: CGPointMake(390,348)];
+- (UIBezierPath *)getStartPath {
+    UIBezierPath* context =  [UIBezierPath bezierPath];
+    [context moveToPoint: CGPointMake(407,351)];
+    return context;
+}
 
-    if(self.status != [MapPathStatus PathCompletedStatus]) {
-        [strokeColor setStroke];
-        [context stroke];
-        
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-    [context moveToPoint: CGPointMake(390,348)];
-        context.lineWidth = 1;
-    }
-
-    [context addCurveToPoint: CGPointMake(421,356) controlPoint1: CGPointMake(393,348) controlPoint2: CGPointMake(421,356)];
-
-    [strokeColor setStroke];
-    [context stroke];
+- (UIBezierPath *)getEndPath {
+    UIBezierPath* context =  [UIBezierPath bezierPath];
+    [context moveToPoint: CGPointMake(407,351)];
+    [context addLineToPoint: CGPointMake(420,355)];
+    return context;
 }
 
 @end
+

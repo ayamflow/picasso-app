@@ -44,6 +44,8 @@
     [self initMap];
     [self initNavigationBar];
     [self initBottomInfos];
+    
+    [self.map scrollToIndex:self.sceneModel.number];
 }
 
 - (void)initBackground {
@@ -77,6 +79,8 @@
 - (void)initBottomInfos {
     self.bottomInfos = [[UIView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 20, [OrientationUtils nativeLandscapeDeviceSize].size.width, 20)];
     [self.view addSubview:self.bottomInfos];
+    
+    // Chapter icon + label
     UIImageView *chapterIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scenesNumber.png"]];
     [self.bottomInfos addSubview:chapterIcon];
     UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
@@ -86,10 +90,12 @@
     [chapterLabel sizeToFit];
     [self.bottomInfos addSubview:chapterLabel];
 
+    // Position
     CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
     [chapterLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 2)];
     [chapterIcon moveTo:CGPointMake(chapterLabel.frame.origin.x - chapterIcon.frame.size.width * 1.5, chapterLabel.frame.origin.y - 2)];
 
+    // Work icon / label
     UIImageView *workIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worksNumber.png"]];
     [self.bottomInfos addSubview:workIcon];
     UILabel *worksLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
@@ -99,6 +105,7 @@
     [worksLabel sizeToFit];
     [self.bottomInfos addSubview:worksLabel];
 
+    // Position
     tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
     [worksLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * 2 / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 2)];
     [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width * 1.5, worksLabel.frame.origin.y - 2)];
@@ -115,11 +122,13 @@
     [UIView animateWithDuration:0.4 animations:^{
         self.map.alpha = 0;
     } completion:^(BOOL finished) {
+        [self.map clearPaths];
         [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents MenuExitEvent] object:nil];
     }];
 }
 
 - (void)showSceneChooser {
+    [self.map clearPaths];
     [self.navigationBar.exploreButton removeFromSuperview];
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
     [self.navigationBar.backButton removeTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -130,6 +139,7 @@
     if(self.sceneChooser == nil) {
         self.sceneChooser = [[SceneChooserLandscape alloc] init];
         self.sceneChooser.delegate = self;
+        self.sceneChooser.mapDelegate = self.map;
     }
     [self.view addSubview:self.sceneChooser.view];
     [self.view bringSubviewToFront:self.navigationBar];
@@ -148,6 +158,8 @@
 }
 
 - (void)hideSceneChooser {
+    [self.map clearAnimatedPath];
+    
     [self.view addSubview:self.bottomInfos];
     [self.view addSubview:self.map];
 
@@ -163,6 +175,8 @@
     } completion:^(BOOL finished) {
         [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
         self.navigationBar.titleLabel.text = [@"Explorer" uppercaseString]; //[self.sceneModel.title uppercaseString];
+        self.sceneChooser.delegate = nil;
+        self.sceneChooser.mapDelegate = nil;
         self.sceneChooser = nil;
     }];
 

@@ -47,7 +47,8 @@
     self.scenesNumber = [dataManager getScenesNumber];
     
     // Auto launch
-    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
+    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];   
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserEvent] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateBackToHome) name:[MPPEvents BackToHomeEvent] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipInterstitial) name:[MPPEvents SkipInterstitialEvent] object:nil];
@@ -109,6 +110,7 @@
 
 - (void)removeInterstitial {
     [self.interstitial.view removeFromSuperview];
+    self.interstitial = nil;
 }
 
 - (void)skipInterstitial {
