@@ -8,6 +8,8 @@
 
 #import "NavigationBarView.h"
 #import "UIViewPicasso.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 
 @interface NavigationBarView ()
 
@@ -19,6 +21,7 @@
 
 - (id)initWithFrame:(CGRect)frame andTitle:(NSString *)title andShowExploreButton:(BOOL)showExploreButton {
     if(self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor clearColor];
         self.title = title;
         self.hasExploreButton = showExploreButton;
         [self initBackButton];
@@ -29,8 +32,8 @@
 }
 
 - (void)initBackButton {
-    UIImage *backIcon = [UIImage imageNamed:@"navBackButton.png"];
-	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width * 1.5, backIcon.size.height * 1.5)];
+    UIImage *backIcon = [UIImage imageNamed:@"menuHamburger.png"];
+	self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backIcon.size.width * 3, backIcon.size.height * 3)];
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 
     [self addSubview:self.backButton];
@@ -38,6 +41,9 @@
     [self.backButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
+
+    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)initTitle {
@@ -50,7 +56,7 @@
 
 - (void)initExploreButton {
     UIImage *exploreIcon = [UIImage imageNamed:@"navExploreButton.png"];
-	self.exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, exploreIcon.size.width * 1.5, exploreIcon.size.height * 3)];
+	self.exploreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, exploreIcon.size.width * 2, exploreIcon.size.height * 4)];
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
     [self addSubview:self.exploreButton];
@@ -58,6 +64,9 @@
     [self.exploreButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
+
+    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)buttonTouchDown:(id)sender {

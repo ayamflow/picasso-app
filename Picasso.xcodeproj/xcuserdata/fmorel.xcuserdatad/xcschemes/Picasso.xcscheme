@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Picasso.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "622505D91855CD01006D358B"
+               BuildableName = "PicassoDevTests.xctest"
+               BlueprintName = "PicassoDevTests"
+               ReferencedContainer = "container:Picasso.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

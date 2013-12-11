@@ -14,6 +14,7 @@
 + (NSString *)SliderHasMovedEvent;
 + (NSString *)UpdateRotationEvent;
 + (NSString *)SceneUnlockedEvent;
++ (NSString *)WorkUnlockedEvent;
 + (NSString *)MenuShownEvent;
 
 + (NSString *)TransitionInCompleteEvent;

@@ -94,23 +94,38 @@
     return [self.scenes count];
 }
 
+- (NSMutableArray *)getWorksWithScene:(NSInteger) sceneNumber {
+    NSMutableArray *works = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [self.works count]; i++) {
+        WorkModel *work = [self.works objectAtIndex:i];
+        if(work.sceneNumber == sceneNumber) {
+            [works addObject:work];
+        }
+    }
+    return works;
+}
+
 - (WorkModel *)getWorkWithNumber:(NSInteger) number {
     return [self.works objectAtIndex:number];
 }
 
 - (WorkModel *)getWorkWithId:(NSString *)workId {
-    WorkModel *work;
-    for(int i = 0; i < [self.works count]; i++) {
-        work = [self.works objectAtIndex:i];
-        if([work.workId isEqualToString:workId]) {
-            return work;
-        }
-    }
-    return nil;
+    return [[DataManager sharedInstance] getWorkWithId:workId];
 }
 
 - (NSInteger)getWorksNumber {
     return [self.works count];
+}
+
+- (void)unlockWorkWithNumber:(NSInteger)number {
+    SceneModel *work = [self.works objectAtIndex:number];
+    work.unlocked = YES;
+}
+
+- (void)unlockWorkTo:(NSInteger)number {
+    for(int i = 0; i <= number; i++) {
+		[self unlockWorkWithNumber:number];
+    }
 }
 
 @end

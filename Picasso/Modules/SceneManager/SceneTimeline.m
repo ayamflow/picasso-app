@@ -100,6 +100,7 @@
 }
 
 - (void)updateWithCompletion:(CGFloat)completion {
+    if(completion < 0.0) return;
     self.progressBar.transform = CGAffineTransformScale(CGAffineTransformIdentity, completion, 1);
 
     for(int i = 0; i < [self.sceneModel.trackerStarts count]; i++) {

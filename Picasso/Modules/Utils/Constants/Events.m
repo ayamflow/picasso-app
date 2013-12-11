@@ -22,6 +22,10 @@
     return @"sceneUnlocked";
 }
 
++ (NSString *)WorkUnlockedEvent {
+    return @"workUnlocked";
+}
+
 + (NSString *)UpdateRotationEvent {
     return @"updateRotation";
 }

@@ -41,7 +41,7 @@
 - (void)initButtonWithFrame {
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.button.backgroundColor = [UIColor sliderColor];
-    [self.button setImage:[UIImage imageNamed:@"sliderInterstitial.png"] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"sceneSlider.png"] forState:UIControlStateNormal];
     [self.view setFrame:self.buttonFrame];
     [self.button setFrame:CGRectMake(0, 0, self.buttonFrame.size.width, self.buttonFrame.size.width)];
     [self.button addTarget:self action:@selector(sliderDragStarted:withEvent:) forControlEvents:UIControlEventTouchDragInside];
@@ -60,11 +60,9 @@
 }
 
 - (void)sliderDragEnded:(id)sender withEvent:(UIEvent *)event {
-    NSLog(@"%f/%f", self.sliderDistance, self.sliderDistanceThreshold);
     if(self.sliderDistance > self.sliderDistanceThreshold) {
         // create new scene
         [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents SkipInterstitialEvent] object:nil];
-//        [self resetSlidingButtonPositionWithDuration:0.3f];
     }
     else {
         // Replace the slidingButton at his default position
