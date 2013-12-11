@@ -16,6 +16,8 @@
 #import "UIViewControllerPicasso.h"
 #import "OrientationUtils.h"
 #import "NavigationBarView.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 
 @interface GalleryViewController ()
 
@@ -40,10 +42,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    CGFloat duration = 0.6;
+    CGFloat duration = 0.4;
     CGFloat delay = 0;
     
     for(UIView *view in @[self.scrollViewScenes, self.sceneDate, self.leftArrow, self.rightArrow, self.dateSeparator, self.navigationBar]) {
+        [view setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
         view.alpha = 0;
         [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
     }
@@ -62,7 +65,6 @@
             view.alpha = 1;
         } completion:nil];
     }
-
 }
 
 - (void)initTexts {
@@ -122,8 +124,30 @@
 }
 
 - (void)transitionOutToHome {
-    // Animation then toHome
-    [self toHome];
+    CGFloat duration = 0.4;
+    CGFloat delay = 0;
+    NSInteger numberOfView = 3;
+    NSInteger transitionDone = 0;
+    
+    for(UIView *view in @[self.navigationBar, self.sceneDate, self.scrollViewScenes]) {
+        [UIView animateWithDuration:duration delay:delay options:0 animations:^{
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+            view.alpha = 0;
+        } completion:^(BOOL finished) {
+            if(transitionDone == numberOfView - 1) {
+                [self toHome];
+            }
+        }];
+        transitionDone++;
+        delay += 0.15;
+    }
+    
+    for(UIView *view in @[self.leftArrow, self.rightArrow, self.dateSeparator]) {
+        [UIView animateWithDuration:duration delay:0.3 options:0 animations:^{
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+            view.alpha = 0;
+        } completion:nil];
+    }
 }
 
 @end

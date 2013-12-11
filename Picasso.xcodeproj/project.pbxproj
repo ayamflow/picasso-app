@@ -234,6 +234,9 @@
 		625BFA4918570A6D00FD9B91 /* sceneSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 625BFA4818570A6D00FD9B91 /* sceneSlider@2x.png */; };
 		625BFA4F185768F200FD9B91 /* Path2View.m in Sources */ = {isa = PBXBuildFile; fileRef = 625BFA4C185768F200FD9B91 /* Path2View.m */; };
 		625BFA50185768F200FD9B91 /* Path3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 625BFA4E185768F200FD9B91 /* Path3View.m */; };
+		629AC66B1858961000BAE2BA /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66A1858961000BAE2BA /* UIView+EasingFunctions.m */; };
+		629AC6701858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */; };
+		629AC6711858961600BAE2BA /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66E1858961600BAE2BA /* easing.c */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
@@ -252,9 +255,6 @@
 		B95520081857D78A00BE90C7 /* grid-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520071857D78A00BE90C7 /* grid-bg@2x.png */; };
 		B955200A1857D78E00BE90C7 /* map-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520091857D78E00BE90C7 /* map-bg@2x.png */; };
 		B955200C1857E19900BE90C7 /* arrow-bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */; };
-		CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */; };
-		CE1C18B31857BF0400950552 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B01857BF0400950552 /* easing.c */; };
-		CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -579,6 +579,12 @@
 		625BFA4D185768F200FD9B91 /* Path3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path3View.h; path = Modules/SceneManager/Path3View.h; sourceTree = "<group>"; };
 		625BFA4E185768F200FD9B91 /* Path3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path3View.m; path = Modules/SceneManager/Path3View.m; sourceTree = "<group>"; };
 		625BFA5118577B7100FD9B91 /* MotionVideoPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MotionVideoPlayerDelegate.h; path = Modules/SceneManager/MotionVideoPlayerDelegate.h; sourceTree = "<group>"; };
+		629AC6691858961000BAE2BA /* UIView+EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+EasingFunctions.h"; path = "UIView+EasingFunctions/UIView+EasingFunctions.h"; sourceTree = "<group>"; };
+		629AC66A1858961000BAE2BA /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+EasingFunctions.m"; path = "UIView+EasingFunctions/UIView+EasingFunctions.m"; sourceTree = "<group>"; };
+		629AC66C1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAKeyframeAnimation+AHEasing.h"; path = "AHEasing/CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
+		629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
+		629AC66E1858961600BAE2BA /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = AHEasing/easing.c; sourceTree = "<group>"; };
+		629AC66F1858961600BAE2BA /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = AHEasing/easing.h; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
@@ -614,12 +620,6 @@
 		B9FF5307181FE76400DFCC39 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 2.jpg; path = Picasso/Data/2.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscapeDelegate.h; path = Modules/SceneManager/SceneChooserLandscapeDelegate.h; sourceTree = "<group>"; };
-		CE1C18AE1857BF0400950552 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CAKeyframeAnimation+AHEasing.h"; path = "AHEasing/CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
-		CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
-		CE1C18B01857BF0400950552 /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = AHEasing/easing.c; sourceTree = "<group>"; };
-		CE1C18B11857BF0400950552 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = AHEasing/easing.h; sourceTree = "<group>"; };
-		CE1C18B51857C01B00950552 /* UIView+EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+EasingFunctions.h"; path = "UIView+EasingFunctions/UIView+EasingFunctions.h"; sourceTree = "<group>"; };
-		CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+EasingFunctions.m"; path = "UIView+EasingFunctions/UIView+EasingFunctions.m"; sourceTree = "<group>"; };
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
 		CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSlider@2x.png"; sourceTree = "<group>"; };
 		CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navBackButton@2x.png"; path = "Data/UI/NavigationBar/navBackButton@2x.png"; sourceTree = "<group>"; };
@@ -736,8 +736,8 @@
 		4F34E958183CC79100661A68 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				CE1C18B81857C02000950552 /* UIView+Easing */,
-				CE1C18B41857BF0900950552 /* AHEasing */,
+				629AC6731858962300BAE2BA /* AHEasing */,
+				629AC6721858961A00BAE2BA /* UIView+EasingFunctions */,
 				B95520001857CA0F00BE90C7 /* A3Parallax */,
 				6248E17C1844F8CD001BEF6C /* iCarousel */,
 			);
@@ -1140,6 +1140,26 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		629AC6721858961A00BAE2BA /* UIView+EasingFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				629AC6691858961000BAE2BA /* UIView+EasingFunctions.h */,
+				629AC66A1858961000BAE2BA /* UIView+EasingFunctions.m */,
+			);
+			name = "UIView+EasingFunctions";
+			sourceTree = "<group>";
+		};
+		629AC6731858962300BAE2BA /* AHEasing */ = {
+			isa = PBXGroup;
+			children = (
+				629AC66C1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.h */,
+				629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */,
+				629AC66E1858961600BAE2BA /* easing.c */,
+				629AC66F1858961600BAE2BA /* easing.h */,
+			);
+			name = AHEasing;
+			sourceTree = "<group>";
+		};
 		62B31CC81844DE3B0053CC75 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1214,26 +1234,6 @@
 				5F630583185614EA002E8547 /* WorksCollectionView.m */,
 			);
 			name = GalleryView;
-			sourceTree = "<group>";
-		};
-		CE1C18B41857BF0900950552 /* AHEasing */ = {
-			isa = PBXGroup;
-			children = (
-				CE1C18AE1857BF0400950552 /* CAKeyframeAnimation+AHEasing.h */,
-				CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */,
-				CE1C18B01857BF0400950552 /* easing.c */,
-				CE1C18B11857BF0400950552 /* easing.h */,
-			);
-			name = AHEasing;
-			sourceTree = "<group>";
-		};
-		CE1C18B81857C02000950552 /* UIView+Easing */ = {
-			isa = PBXGroup;
-			children = (
-				CE1C18B51857C01B00950552 /* UIView+EasingFunctions.h */,
-				CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */,
-			);
-			name = "UIView+Easing";
 			sourceTree = "<group>";
 		};
 		CE45E69D1849EB3600DCFF09 /* NavigationBar */ = {
@@ -1846,10 +1846,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE1C18B31857BF0400950552 /* easing.c in Sources */,
 				CE76AEF51854897A000166C3 /* TiledMapView.m in Sources */,
 				CE45E6A61849FAE500DCFF09 /* DashedPathView.m in Sources */,
-				CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */,
 				CE91160A184B6AC900420043 /* Path5View.m in Sources */,
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				CE91160D184B6B5800420043 /* Path6View.m in Sources */,
@@ -1870,13 +1868,13 @@
 				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
 				625BFA4F185768F200FD9B91 /* Path2View.m in Sources */,
-				CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
 				B95520031857CA6E00BE90C7 /* A3ParallaxScrollView.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				CE911607184B6A6800420043 /* Path4View.m in Sources */,
 				6248626618225E7C00F5927A /* SceneChooser.m in Sources */,
 				62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */,
+				629AC6711858961600BAE2BA /* easing.c in Sources */,
 				620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */,
 				4FB559D5184DFC9C0000D076 /* LineDrawView.m in Sources */,
 				62367B00184654D70090B819 /* InfosPanel.m in Sources */,
@@ -1886,10 +1884,12 @@
 				CED0FCC81849E6F20001C602 /* NavigationBarView.m in Sources */,
 				CE9115FA184B606500420043 /* MapPathStatus.m in Sources */,
 				6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */,
+				629AC66B1858961000BAE2BA /* UIView+EasingFunctions.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
 				62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */,
 				CE9115FD184B61CB00420043 /* MapView.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,
+				629AC6701858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				624B978F182120580087C576 /* OrientationUtils.m in Sources */,
 				624B978B18211AC50087C576 /* SceneSlider.m in Sources */,
 				625BFA50185768F200FD9B91 /* Path3View.m in Sources */,

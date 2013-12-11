@@ -44,8 +44,8 @@
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
 
-//    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
-//    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)initTitle {
@@ -67,8 +67,8 @@
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
 
-//    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
-//    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)buttonTouchDown:(id)sender {
