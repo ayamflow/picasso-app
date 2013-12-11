@@ -8,18 +8,28 @@
 
 #import "GalleryViewController.h"
 #import "WorkViewController.h"
+#import "WorksCollectionView.h"
 #import "WorkModel.h"
+#import "SceneModel.h"
 #import "DataManager.h"
-
+#import "UIViewPicasso.h"
+#import "OrientationUtils.h"
 
 @interface GalleryViewController ()
 
 @property (nonatomic, strong) DataManager *dataManager;
-@property (assign) float lastPosition;
 
 @end
 
 @implementation GalleryViewController
+
+- (void)workTouchedWithIndex:(NSInteger)index {
+    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
+    workViewController.workId = index;
+    [self.navigationController pushViewController:workViewController animated:YES];
+}
+
+NSMutableArray *sceneWorks;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,85 +37,34 @@
     self.dataManager = [DataManager sharedInstance];
     self.navigationController.navigationBarHidden = YES;
     
+    if(!_sceneNumber) {
+        _sceneNumber = 0;
+    }
+    
     _navBar.layer.borderColor = [UIColor blackColor].CGColor;
     _navBar.layer.borderWidth = 2.0f;
     
-    _worksCollectionView.backgroundColor = [UIColor clearColor];
-    _worksCollectionView.userInteractionEnabled = YES;
-    //_worksCollectionView.userInteractionEnabled = NO;
-    [self.worksCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"workCell"];
+    NSInteger scenesNumber = [self.dataManager getScenesNumber];
+    
+    for (int i = 0; i < 3; i++) {
+        WorksCollectionView *worksCollectionView = [[WorksCollectionView alloc] initWithFrame:CGRectMake(self.scrollViewScenes.frame.size.width * i, 0, self.scrollViewScenes.frame.size.width, self.scrollViewScenes.frame.size.height) andWithScene:i];
+        worksCollectionView.delegate = self;
+        worksCollectionView.collectionView.userInteractionEnabled = TRUE;
+        [self.scrollViewScenes addSubview:worksCollectionView];
+    }
+    
+    self.scrollViewScenes.contentSize = CGSizeMake(self.scrollViewScenes.frame.size.width * 3, self.scrollViewScenes.frame.size.height);
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.worksCollectionView.collectionViewLayout invalidateLayout];
+    SceneModel *currentScene = [self.dataManager getSceneWithNumber:_sceneNumber];
+    self.sceneDate.text = [currentScene.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
 }
 
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.dataManager getWorksNumber];
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"workCell" forIndexPath:indexPath];
-    
-    if([cell.contentView.subviews count] == 0) {
-        [cell.contentView addSubview:[[UIImageView alloc] initWithFrame:cell.contentView.bounds]];
-    }
-    
-    UIImageView *cellImageView = cell.contentView.subviews[0];
-    
-    NSString *imageName = [NSString stringWithFormat: @"min-%ld.jpg", (long)indexPath.row];
-    cellImageView.image = [UIImage imageNamed:imageName];
-    
-    return cell;
-}
-
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
-    workViewController.workId = indexPath.row;
-    [self.navigationController pushViewController:workViewController animated:YES];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    float currentPosition = [touch locationInView:self.view].x;
-    self.lastPosition = currentPosition;
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    
-    float currentPosition = [touch locationInView:self.view].x;
-    float velocity = self.lastPosition - currentPosition;
-    
-    int cellCount = 1;
-    
-    if(currentPosition < self.lastPosition) {
-        NSLog(@"gauche");
-    } else if(currentPosition > self.lastPosition) {
-        NSLog(@"droite");
-    }
-    
-    for (UICollectionViewCell *cell in [self.worksCollectionView visibleCells]) {
-        CGRect originBounds = cell.layer.bounds;
-        originBounds.origin.x = originBounds.origin.x + 0.008 * (cellCount * velocity);
-        cell.layer.bounds = originBounds;
-        cellCount++;
-    }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    float currentPosition = [touch locationInView:self.view].x;
-    self.lastPosition = currentPosition;
-}
- 
 @end
