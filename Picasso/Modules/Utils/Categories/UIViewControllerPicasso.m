@@ -27,16 +27,16 @@
     }];
 }
 
-- (void)navigateToExploreMode {
-    self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    [UIView animateWithDuration:0.2 animations:^{
-        self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
-        self.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
-        [self.navigationController pushViewController:sceneChooser animated:NO];
-    }];
-}
+//- (void)navigateToExploreMode {
+//    self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//    [UIView animateWithDuration:0.2 animations:^{
+//        self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
+//        self.view.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
+//        [self.navigationController pushViewController:sceneChooser animated:NO];
+//    }];
+//}
 
 - (void)toSceneChooser {
     SceneChooser *sceneChooser = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneChooser"];
@@ -62,7 +62,7 @@
     
     view.layer.anchorPoint = CGPointMake(0.5, 0.5);
     [UIView animateWithDuration:0.2 animations:^{
-        view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
+        view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
         view.alpha = 0;
     } completion:^(BOOL finished) {
         [viewController.navigationController popToRootViewControllerAnimated:NO];

@@ -285,7 +285,7 @@
     } completion:^(BOOL finished) {
         [self cleanArrays];
         if(self.leavingToExplore) {
-            [self navigateToExplore];
+            [self toSceneChooser];
         }
         else {
             [self toHome];

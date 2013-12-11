@@ -238,6 +238,10 @@
 		629AC6701858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */; };
 		629AC6711858961600BAE2BA /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66E1858961600BAE2BA /* easing.c */; };
 		629AC6761858A47700BAE2BA /* StatsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC6751858A47700BAE2BA /* StatsFooterView.m */; };
+		629AC67B1858A92E00BAE2BA /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC67A1858A92E00BAE2BA /* Credits.m */; };
+		629AC67D1858A9DD00BAE2BA /* logoGobelins@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 629AC67C1858A9DD00BAE2BA /* logoGobelins@2x.png */; };
+		629AC6801858AD6C00BAE2BA /* AvenirLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 629AC67F1858AD6C00BAE2BA /* AvenirLTStd-Roman.otf */; };
+		629AC6821858B02000BAE2BA /* Names.xib in Resources */ = {isa = PBXBuildFile; fileRef = 629AC6811858B02000BAE2BA /* Names.xib */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
@@ -588,6 +592,11 @@
 		629AC66F1858961600BAE2BA /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = AHEasing/easing.h; sourceTree = "<group>"; };
 		629AC6741858A47700BAE2BA /* StatsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsFooterView.h; path = Modules/UI/StatsFooter/StatsFooterView.h; sourceTree = "<group>"; };
 		629AC6751858A47700BAE2BA /* StatsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsFooterView.m; path = Modules/UI/StatsFooter/StatsFooterView.m; sourceTree = "<group>"; };
+		629AC6791858A92E00BAE2BA /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Modules/Credits/Credits.h; sourceTree = "<group>"; };
+		629AC67A1858A92E00BAE2BA /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Modules/Credits/Credits.m; sourceTree = "<group>"; };
+		629AC67C1858A9DD00BAE2BA /* logoGobelins@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logoGobelins@2x.png"; path = "Data/UI/Credits/logoGobelins@2x.png"; sourceTree = "<group>"; };
+		629AC67F1858AD6C00BAE2BA /* AvenirLTStd-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Roman.otf"; path = "Data/Fonts/AvenirLTStd-Roman.otf"; sourceTree = "<group>"; };
+		629AC6811858B02000BAE2BA /* Names.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Names.xib; path = Modules/Credits/Names.xib; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
@@ -1029,6 +1038,7 @@
 				B9FF530C181FF48300DFCC39 /* GalleryView */,
 				B9FF5302181FBD3A00DFCC39 /* WorkView */,
 				CE86045E18283E560019657F /* Museum */,
+				629AC6781858A90200BAE2BA /* Credits */,
 				624B978C182120420087C576 /* Utils */,
 				624E6B62181ECD5300E7FE58 /* UI */,
 			);
@@ -1173,6 +1183,24 @@
 			name = StatsFooter;
 			sourceTree = "<group>";
 		};
+		629AC6781858A90200BAE2BA /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				629AC6791858A92E00BAE2BA /* Credits.h */,
+				629AC67A1858A92E00BAE2BA /* Credits.m */,
+				629AC6811858B02000BAE2BA /* Names.xib */,
+			);
+			name = Credits;
+			sourceTree = "<group>";
+		};
+		629AC67E1858A9DF00BAE2BA /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				629AC67C1858A9DD00BAE2BA /* logoGobelins@2x.png */,
+			);
+			name = Credits;
+			sourceTree = "<group>";
+		};
 		62B31CC81844DE3B0053CC75 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1292,6 +1320,7 @@
 		CE488875181EFFA9001D9A09 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				629AC67E1858A9DF00BAE2BA /* Credits */,
 				622504811855C5E7006D358B /* Gallery */,
 				CE45E6AF184A501700DCFF09 /* Scene */,
 				CE45E69D1849EB3600DCFF09 /* NavigationBar */,
@@ -1522,6 +1551,7 @@
 		CEA3E756182E616700B115BC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				629AC67F1858AD6C00BAE2BA /* AvenirLTStd-Roman.otf */,
 				620423C91843510F00648ABA /* AvenirLTStd-Black.otf */,
 				620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */,
 				620423CC1843510F00648ABA /* Brandon_med.otf */,
@@ -1633,6 +1663,7 @@
 				CEC93BFE18537B0400E1AF9B /* menuPause@2x.png in Resources */,
 				6225057D1855CCB3006D358B /* x8y5@2x.png in Resources */,
 				622505641855CCB3006D358B /* x6y6@2x.png in Resources */,
+				629AC6821858B02000BAE2BA /* Names.xib in Resources */,
 				CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */,
 				CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */,
 				622505621855CCB3006D358B /* x6y4@2x.png in Resources */,
@@ -1702,6 +1733,7 @@
 				622505451855CCB3006D358B /* x4y1@2x.png in Resources */,
 				622505331855CCB3006D358B /* x2y9@2x.png in Resources */,
 				622505201855CCB3006D358B /* x1y3@2x.png in Resources */,
+				629AC67D1858A9DD00BAE2BA /* logoGobelins@2x.png in Resources */,
 				CED0FCC11849E3FA0001C602 /* dateSeparator@2x.png in Resources */,
 				622505A21855CCB4006D358B /* x11y3@2x.png in Resources */,
 				6225054E1855CCB3006D358B /* x4y10@2x.png in Resources */,
@@ -1720,6 +1752,7 @@
 				622505481855CCB3006D358B /* x4y4@2x.png in Resources */,
 				CE45E6B3184A502100DCFF09 /* scenesNumber@2x.png in Resources */,
 				622505A11855CCB4006D358B /* x11y2@2x.png in Resources */,
+				629AC6801858AD6C00BAE2BA /* AvenirLTStd-Roman.otf in Resources */,
 				622505761855CCB3006D358B /* x7y11@2x.png in Resources */,
 				6225047F1855C5E3006D358B /* arrow-right-nav@2x.png in Resources */,
 				622505AB1855CCB4006D358B /* x11y12@2x.png in Resources */,
@@ -1875,6 +1908,7 @@
 				CE86045918283BAB0019657F /* Home.m in Sources */,
 				6225047A1855C52E006D358B /* WorkViewController.m in Sources */,
 				622504751855C529006D358B /* GalleryViewController.m in Sources */,
+				629AC67B1858A92E00BAE2BA /* Credits.m in Sources */,
 				62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */,
 				CE45E6A9184A1EB900DCFF09 /* Intro.m in Sources */,
 				624E6B01181E5FD300E7FE58 /* main.m in Sources */,

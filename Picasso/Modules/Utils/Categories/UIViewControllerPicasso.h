@@ -13,7 +13,7 @@
 - (void)hideNavigationBar;
 - (void)showNavigationBar;
 - (void)updateRotation;
-- (void)navigateToExploreMode;
+//- (void)navigateToExploreMode;
 - (void)navigateBackToHome;
 - (void)toHome;
 - (void)toSceneChooser;

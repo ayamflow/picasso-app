@@ -9,6 +9,7 @@
 #import "StatsFooterView.h"
 #import "DataManager.h"
 #import "UIViewPicasso.h"
+#import "OrientationUtils.h"
 
 @interface StatsFooterView ()
 
@@ -44,14 +45,13 @@
     [worksLabel sizeToFit];
     [self addSubview:worksLabel];
     
-    
-    if(self.bounds.size.width < self.bounds.size.height) {
+    if(self.bounds.size.width < [OrientationUtils nativeDeviceSize].size.height) {
         CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
         [chapterLabel moveTo:CGPointMake(70, self.bounds.size.height - chapterLabel.frame.size.height * 2)];
         [chapterIcon moveTo:CGPointMake(40, chapterLabel.frame.origin.y - 2)];
         
         tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
-        [worksLabel moveTo:CGPointMake(self.bounds.size.width - 30 - worksLabel.frame.size.width, self.bounds.size.height - worksLabel.frame.size.height * 2)];
+        [worksLabel moveTo:CGPointMake(self.bounds.size.width - 40 - worksLabel.frame.size.width, self.bounds.size.height - worksLabel.frame.size.height * 2)];
         [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width - 10, worksLabel.frame.origin.y - 2)];
     }
     else {

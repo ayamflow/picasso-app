@@ -28,12 +28,12 @@
 
 - (void)drawRect:(CGRect)rect {
     if(self.animated || self.onlyPoints) {
-    /*    // Draw black dots
+        // Draw black dots
         CGContextRef contextRef = UIGraphicsGetCurrentContext();
         CGContextSetRGBFillColor(contextRef, 0, 0, 0, 1.0);
         CGFloat circleSize = 8;
         CGContextFillEllipseInRect(contextRef, CGRectMake(self.startPoint.x - circleSize / 2, self.startPoint.y - circleSize / 2, circleSize, circleSize));
-        CGContextFillEllipseInRect(contextRef, CGRectMake(self.endPoint.x - circleSize / 2, self.endPoint.y - circleSize / 2, circleSize, circleSize));*/
+        CGContextFillEllipseInRect(contextRef, CGRectMake(self.endPoint.x - circleSize / 2, self.endPoint.y - circleSize / 2, circleSize, circleSize));
     }
     else {
         [self drawPath];
@@ -69,7 +69,7 @@
     [strokeColor setStroke];
     [context stroke];
     
-    // Draw black dots
+    // Draw corogne/barcelone black dots
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     CGContextSetRGBFillColor(contextRef, 0, 0, 0, 1.0);
     CGFloat circleSize = 8;
@@ -92,10 +92,10 @@
         self.pathLayer = shapeLayer;
     }
     
-    CAShapeLayer *startCircle = [self getCircleShapeAtPoint:self.startPoint];
-    [self.layer addSublayer:startCircle];
-    CAShapeLayer *endCircle = [self getCircleShapeAtPoint:self.endPoint];
-    [self.layer addSublayer:endCircle];
+//    CAShapeLayer *startCircle = [self getCircleShapeAtPoint:self.startPoint];
+//    [self.layer addSublayer:startCircle];
+//    CAShapeLayer *endCircle = [self getCircleShapeAtPoint:self.endPoint];
+//    [self.layer addSublayer:endCircle];
     
     [CATransaction begin];
     /*int i = 0;
