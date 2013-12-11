@@ -87,7 +87,8 @@
 }
 
 - (void)initTableHeader {
-    UIImageView *hotelImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hotel.png"]];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"hotel" ofType:@".png"];
+    UIImageView *hotelImage = [[UIImageView alloc] initWithImage: [UIImage imageWithContentsOfFile:path]];
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, hotelImage.frame.size.height)];
     [header addSubview:hotelImage];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 3/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];

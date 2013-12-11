@@ -194,6 +194,7 @@
 		62367AF918460B420090B819 /* cellPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62367AF718460B420090B819 /* cellPlus@2x.png */; };
 		62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62367AFC18463A6A0090B819 /* HoursPanel.m */; };
 		62367B00184654D70090B819 /* InfosPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62367AFF184654D70090B819 /* InfosPanel.m */; };
+		62423CBF18585971001E7B74 /* hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 62423CBE18585971001E7B74 /* hotel.png */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248E17E1844F8CD001BEF6C /* iCarousel.m */; };
 		624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */; };
@@ -503,6 +504,7 @@
 		62367AFC18463A6A0090B819 /* HoursPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoursPanel.m; path = Modules/About/HoursPanel.m; sourceTree = "<group>"; };
 		62367AFE184654D70090B819 /* InfosPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfosPanel.h; path = Modules/About/InfosPanel.h; sourceTree = "<group>"; };
 		62367AFF184654D70090B819 /* InfosPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfosPanel.m; path = Modules/About/InfosPanel.m; sourceTree = "<group>"; };
+		62423CBE18585971001E7B74 /* hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotel.png; sourceTree = "<group>"; };
 		6248626418225E7C00F5927A /* SceneChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneChooser.h; path = Modules/SceneManager/SceneChooser.h; sourceTree = "<group>"; };
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		6248E17D1844F8CD001BEF6C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
@@ -828,6 +830,7 @@
 		62367AEA1845FC3C0090B819 /* Museum */ = {
 			isa = PBXGroup;
 			children = (
+				62423CBE18585971001E7B74 /* hotel.png */,
 				62367AF618460B420090B819 /* cellMinus@2x.png */,
 				62367AF718460B420090B819 /* cellPlus@2x.png */,
 				62367AEF1845FDEE0090B819 /* hotel@2x.png */,
@@ -1699,6 +1702,7 @@
 				622505281855CCB3006D358B /* x1y11@2x.png in Resources */,
 				6225047E1855C5E3006D358B /* arrow-left-nav@2x.png in Resources */,
 				622505291855CCB3006D358B /* x1y12@2x.png in Resources */,
+				62423CBF18585971001E7B74 /* hotel.png in Resources */,
 				6225053C1855CCB3006D358B /* x3y5@2x.png in Resources */,
 				CE98B418184524A8004760D3 /* scene-2@2x.png in Resources */,
 				6225053B1855CCB3006D358B /* x3y4@2x.png in Resources */,

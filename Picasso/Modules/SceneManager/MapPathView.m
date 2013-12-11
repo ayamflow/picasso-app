@@ -28,12 +28,12 @@
 
 - (void)drawRect:(CGRect)rect {
     if(self.animated || self.onlyPoints) {
-        // Draw black dots
+    /*    // Draw black dots
         CGContextRef contextRef = UIGraphicsGetCurrentContext();
         CGContextSetRGBFillColor(contextRef, 0, 0, 0, 1.0);
         CGFloat circleSize = 8;
         CGContextFillEllipseInRect(contextRef, CGRectMake(self.startPoint.x - circleSize / 2, self.startPoint.y - circleSize / 2, circleSize, circleSize));
-        CGContextFillEllipseInRect(contextRef, CGRectMake(self.endPoint.x - circleSize / 2, self.endPoint.y - circleSize / 2, circleSize, circleSize));
+        CGContextFillEllipseInRect(contextRef, CGRectMake(self.endPoint.x - circleSize / 2, self.endPoint.y - circleSize / 2, circleSize, circleSize));*/
     }
     else {
         [self drawPath];
@@ -91,23 +91,42 @@
         [self.layer addSublayer:shapeLayer];
         self.pathLayer = shapeLayer;
     }
-
-    // Animating the dots
-/*    CGFloat circleSize = 4;
-    UIBezierPath *circle = [UIBezierPath bezierPath];
-    [circle addArcWithCenter:self.startPoint radius:circleSize startAngle:0.0 endAngle:M_PI * 2.0 clockwise:YES];
-    CAShapeLayer *startCircle = [CAShapeLayer layer];
-    startCircle.path = [circle CGPath];
-    startCircle.fillColor = [[UIColor blackColor] CGColor];
-    [self.layer addSublayer:startCircle];*/
-
+    
+    CAShapeLayer *startCircle = [self getCircleShapeAtPoint:self.startPoint];
+    [self.layer addSublayer:startCircle];
+    CAShapeLayer *endCircle = [self getCircleShapeAtPoint:self.endPoint];
+    [self.layer addSublayer:endCircle];
+    
     [CATransaction begin];
+    /*int i = 0;
+    CABasicAnimation *circleAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    circleAnim.fromValue = @(0.0);
+    circleAnim.toValue = @(1.0);
+    circleAnim.duration = 0.1;
+    circleAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    for(CAShapeLayer *circle in @[startCircle, endCircle]) {
+        circleAnim.beginTime = CACurrentMediaTime() + i++ * 0.6;
+        [startCircle addAnimation:circleAnim forKey:circleAnim.keyPath];
+    }*/
+    
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     pathAnimation.duration = 0.6;
     pathAnimation.fromValue = @(0.0f);
     pathAnimation.toValue = @(1.0f);
     [self.pathLayer addAnimation:pathAnimation forKey:@"strokeEnd"];
     [CATransaction commit];
+}
+
+- (CAShapeLayer *)getCircleShapeAtPoint:(CGPoint)point {
+    CGFloat circleSize = 8;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    circle.fillColor = [UIColor blackColor].CGColor;
+    circle.anchorPoint = CGPointMake(0.5, 0.5);
+    CGRect bounds = CGRectMake(point.x - circleSize / 2, point.y - circleSize / 2, circleSize, circleSize);
+    circle.path = [UIBezierPath bezierPathWithOvalInRect:bounds].CGPath;
+//    circle.bounds = bounds;
+    return circle;
 }
 
 @end
