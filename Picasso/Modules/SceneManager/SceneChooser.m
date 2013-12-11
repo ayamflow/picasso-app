@@ -113,7 +113,7 @@
     UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 4, 20)];
     chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
     chapterLabel.textColor = [UIColor blackColor];
-    chapterLabel.text = [[NSString stringWithFormat:@"%i / %i chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
+    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
     [chapterLabel sizeToFit];
     [self.bottomInfos addSubview:chapterLabel];
 

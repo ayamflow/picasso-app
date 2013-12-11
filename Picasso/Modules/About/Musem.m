@@ -271,8 +271,8 @@
     NSArray *cells = [self.tableView visibleCells];
     for(NSInteger i = [cells count] - 1; i >= 0; i--) {
         UITableViewCell *cell = [cells objectAtIndex:i];
-        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
-        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+//        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+//        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
         [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:0 animations:^{
             cell.alpha = 0;
             cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
@@ -307,8 +307,8 @@
     cell.alpha = 0;
     cell.layer.anchorPoint = CGPointMake(0.5, 0);
     cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
-    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
-    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+//    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+//    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
     [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:0 animations:^{
         cell.alpha = 1.0;
         cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);

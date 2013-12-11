@@ -11,6 +11,8 @@
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
 
+#define kMenuMargin 20
+
 @interface NavigationBarView ()
 
 @property (strong, nonatomic) NSString *title;
@@ -37,17 +39,17 @@
     [self.backButton setImage:backIcon forState:UIControlStateNormal];
 
     [self addSubview:self.backButton];
-    [self.backButton moveTo:CGPointMake(25, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
+    [self.backButton moveTo:CGPointMake(0, self.frame.size.height / 2 - self.backButton.frame.size.height / 2)];
     [self.backButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
 
-    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
-    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+//    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+//    [self.backButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)initTitle {
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.15, self.frame.size.height * 0.1, self.frame.size.width * 0.7, self.frame.size.height * 0.8)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 2 * kMenuMargin, self.frame.size.height * 0.1, self.frame.size.width * 0.7, self.frame.size.height * 0.8)];
     self.titleLabel.text = [self.title uppercaseString];
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:18];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -60,13 +62,13 @@
     [self.exploreButton setImage:exploreIcon forState:UIControlStateNormal];
 
     [self addSubview:self.exploreButton];
-    [self.exploreButton moveTo:CGPointMake(self.frame.size.width - self.exploreButton.frame.size.width - 25, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
+    [self.exploreButton moveTo:CGPointMake(self.frame.size.width - self.exploreButton.frame.size.width, self.frame.size.height / 2 - self.exploreButton.frame.size.height / 2)];
     [self.exploreButton addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.exploreButton addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
 
-    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
-    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+//    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+//    [self.exploreButton setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
 }
 
 - (void)buttonTouchDown:(id)sender {

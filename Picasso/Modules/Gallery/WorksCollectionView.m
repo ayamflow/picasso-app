@@ -11,10 +11,12 @@
 #import "SceneModel.h"
 #import "DataManager.h"
 
+#define kImageMargin 20
+
 @interface WorksCollectionView ()
 
 @property (nonatomic, strong) NSMutableArray *sceneWorks;
-@property (strong, nonatomic) DataManager *dataManager;
+@property (assign, nonatomic) NSInteger sceneNumber;
 
 @end
 
@@ -22,27 +24,24 @@
 
 - (id)initWithFrame:(CGRect)frame andWithScene:(NSInteger)sceneNumber
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-        _dataManager = [DataManager sharedInstance];
-        _sceneWorks = [self.dataManager getWorksWithScene:sceneNumber];
-        
-        NSLog(@"scene number %ld", (long)sceneNumber);
-        SceneModel *currentScene = [self.dataManager getSceneWithNumber:sceneNumber];
-        NSLog(@"scene %@", currentScene.title);
-        
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
-        [self.collectionView setDataSource:self];
-        [self.collectionView setDelegate:self];
-        
-        [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"workCell"];
-        [self.collectionView setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:self.collectionView];
-        
+    if(self = [super initWithFrame:frame]) {
+        self.sceneNumber = sceneNumber;
+        [self initCollectionView];
     }
     return self;
+}
+
+- (void)initCollectionView {
+    self.sceneWorks = [[DataManager sharedInstance] getWorksWithScene:self.sceneNumber];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:self.collectionView];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -55,7 +54,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"workCell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
     if([cell.contentView.subviews count] == 0) {
         [cell.contentView addSubview:[[UIImageView alloc] initWithFrame:cell.contentView.bounds]];
@@ -64,9 +63,15 @@
     WorkModel *currentWork = [self.sceneWorks objectAtIndex:indexPath.row];
     
     UIImageView *cellImageView = cell.contentView.subviews[0];
-    
-    NSString *imageName = [NSString stringWithFormat: @"min-%li.jpg", currentWork.workId];
-    cellImageView.image = [UIImage imageNamed:imageName];
+    if(currentWork.unlocked) {
+        NSString *imageName = [NSString stringWithFormat: @"min-%li.jpg", currentWork.workId];
+        cellImageView.image = [UIImage imageNamed:imageName];
+   }
+    else {
+        cellImageView.image = [UIImage imageNamed:@"lockedButton.png"];
+        cellImageView.contentMode = UIViewContentModeCenter;
+        cellImageView.backgroundColor = [UIColor blackColor];
+    }
     
     return cell;
 }
@@ -74,7 +79,6 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"ok");
     [self.delegate workTouchedWithIndex:indexPath.row];
 }
 
@@ -83,13 +87,24 @@
     WorkModel *currentWork = [self.sceneWorks objectAtIndex:indexPath.row];
     NSString *imageName = [NSString stringWithFormat: @"min-%li.jpg", currentWork.workId];
     UIImage *image = [UIImage imageNamed:imageName];
-    // Solution provisoire pour afficher les images, à remplacer avec un template
-    return CGSizeMake(image.size.width/2, image.size.height/2);
+
+    CGFloat width;
+    CGFloat height;
+    
+    if(image.size.width > self.bounds.size.width / 2 - kImageMargin) {
+        width = self.bounds.size.width / 2 - kImageMargin;
+        height = width / image.size.height * image.size.width;
+    }
+    else {
+        width = image.size.width;
+        height = image.size.height;
+    }
+    return CGSizeMake(width , height);
 }
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(20, 20, 20, 20);
+    return UIEdgeInsetsMake(kImageMargin, kImageMargin, kImageMargin, kImageMargin);
 }
 
 @end

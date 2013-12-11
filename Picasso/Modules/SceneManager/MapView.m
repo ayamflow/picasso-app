@@ -241,7 +241,7 @@
     [self clearAnimatedPath];
     
     if(index > 0) {
-        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", index--]);
+        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%liView", index--]);
         self.animatedPath = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
         self.animatedPath.animated = YES;
         [self.scrollView addSubview:self.animatedPath];

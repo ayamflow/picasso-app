@@ -156,7 +156,7 @@
     NSInteger nextSceneNumber = self.sceneModel.number >= [[DataManager sharedInstance] getScenesNumber] - 1 ? 0 : self.sceneModel.number + 1;
     if(nextSceneNumber > 0) {
         UILabel *nextSceneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
-        nextSceneLabel.text = [NSString stringWithFormat:@"%i", nextSceneNumber];
+        nextSceneLabel.text = [NSString stringWithFormat:@"%li", nextSceneNumber];
         nextSceneLabel.textAlignment = NSTextAlignmentCenter;
         nextSceneLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15];
         nextSceneLabel.textColor = [UIColor whiteColor];

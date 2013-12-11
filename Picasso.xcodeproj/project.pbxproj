@@ -29,12 +29,10 @@
 		620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreviewView.m */; };
 		620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423C91843510F00648ABA /* AvenirLTStd-Black.otf */; };
 		620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */; };
-		620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */; };
 		620423D01843510F00648ABA /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 620423CC1843510F00648ABA /* Brandon_med.otf */; };
 		62084D51183508C100F9C26C /* Logo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62084D50183508C100F9C26C /* Logo.m */; };
 		62084D551835237D00F9C26C /* logo0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D531835237D00F9C26C /* logo0@2x.png */; };
 		62084D561835237D00F9C26C /* logo5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62084D541835237D00F9C26C /* logo5@2x.png */; };
-		6214ECB71856087300C51275 /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB41856087300C51275 /* menu.mov */; };
 		6214ECB81856087300C51275 /* scene-1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB51856087300C51275 /* scene-1.mov */; };
 		6214ECB91856087300C51275 /* scene-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECB61856087300C51275 /* scene-2.mov */; };
 		6214ECBB18560A7B00C51275 /* tracker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6214ECBA18560A7B00C51275 /* tracker@2x.png */; };
@@ -209,7 +207,6 @@
 		62423CBF18585971001E7B74 /* hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 62423CBE18585971001E7B74 /* hotel.png */; };
 		6248626618225E7C00F5927A /* SceneChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248626518225E7C00F5927A /* SceneChooser.m */; };
 		6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248E17E1844F8CD001BEF6C /* iCarousel.m */; };
-		624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */; };
 		624B978B18211AC50087C576 /* SceneSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978A18211AC50087C576 /* SceneSlider.m */; };
 		624B978F182120580087C576 /* OrientationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 624B978E182120580087C576 /* OrientationUtils.m */; };
 		624E6AF5181E5FD300E7FE58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E6AF4181E5FD300E7FE58 /* Foundation.framework */; };
@@ -243,22 +240,21 @@
 		62AF046E18479DAF00A83599 /* menuExploreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */; };
 		62AF046F18479DAF00A83599 /* menuGaleryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */; };
 		62AF047018479DAF00A83599 /* menuMuseumButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046C18479DAF00A83599 /* menuMuseumButton@2x.png */; };
-		62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62B31CD11844E1D20053CC75 /* Brandon_reg.otf */; };
 		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
 		62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8E918439F7000CF593F /* scene-1@2x.png */; };
 		62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8EC1843A3B700CF593F /* SceneTimeline.m */; };
 		62DD8259184505230071690A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DD8258184505230071690A /* QuartzCore.framework */; };
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
-		CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */; };
-		CE1C18B31857BF0400950552 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B01857BF0400950552 /* easing.c */; };
-		CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */; };
 		B93248E91856706C000BF92E /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = B93248E81856706C000BF92E /* menu.mov */; };
 		B9551FFF1857C99300BE90C7 /* WorkFullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9551FFE1857C99300BE90C7 /* WorkFullViewController.m */; };
 		B95520031857CA6E00BE90C7 /* A3ParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95520021857CA6E00BE90C7 /* A3ParallaxScrollView.m */; };
 		B95520081857D78A00BE90C7 /* grid-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520071857D78A00BE90C7 /* grid-bg@2x.png */; };
 		B955200A1857D78E00BE90C7 /* map-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520091857D78E00BE90C7 /* map-bg@2x.png */; };
 		B955200C1857E19900BE90C7 /* arrow-bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */; };
+		CE1C18B21857BF0400950552 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18AF1857BF0400950552 /* CAKeyframeAnimation+AHEasing.m */; };
+		CE1C18B31857BF0400950552 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B01857BF0400950552 /* easing.c */; };
+		CE1C18B71857C01B00950552 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C18B61857C01B00950552 /* UIView+EasingFunctions.m */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -341,13 +337,11 @@
 		620423C718434B5D00648ABA /* ScenePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScenePreviewView.m; path = Modules/SceneManager/ScenePreviewView.m; sourceTree = "<group>"; };
 		620423C91843510F00648ABA /* AvenirLTStd-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Black.otf"; path = "Data/Fonts/AvenirLTStd-Black.otf"; sourceTree = "<group>"; };
 		620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Light.otf"; path = "Data/Fonts/AvenirLTStd-Light.otf"; sourceTree = "<group>"; };
-		620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AvenirLTStd-Roman.otf"; path = "Data/Fonts/AvenirLTStd-Roman.otf"; sourceTree = "<group>"; };
 		620423CC1843510F00648ABA /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_med.otf; path = Data/Fonts/Brandon_med.otf; sourceTree = "<group>"; };
 		62084D4F183508C100F9C26C /* Logo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logo.h; path = Modules/UI/Logo/Logo.h; sourceTree = "<group>"; };
 		62084D50183508C100F9C26C /* Logo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logo.m; path = Modules/UI/Logo/Logo.m; sourceTree = "<group>"; };
 		62084D531835237D00F9C26C /* logo0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo0@2x.png"; sourceTree = "<group>"; };
 		62084D541835237D00F9C26C /* logo5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo5@2x.png"; sourceTree = "<group>"; };
-		6214ECB41856087300C51275 /* menu.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = menu.mov; sourceTree = "<group>"; };
 		6214ECB51856087300C51275 /* scene-1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-1.mov"; sourceTree = "<group>"; };
 		6214ECB61856087300C51275 /* scene-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-2.mov"; sourceTree = "<group>"; };
 		6214ECBA18560A7B00C51275 /* tracker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tracker@2x.png"; path = "Data/UI/Scene/tracker@2x.png"; sourceTree = "<group>"; };
@@ -541,7 +535,6 @@
 		6248626518225E7C00F5927A /* SceneChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneChooser.m; path = Modules/SceneManager/SceneChooser.m; sourceTree = "<group>"; };
 		6248E17D1844F8CD001BEF6C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		6248E17E1844F8CD001BEF6C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rotationIcon@2x.png"; path = "Data/UI/rotationIcon@2x.png"; sourceTree = "<group>"; };
 		624B978918211AC50087C576 /* SceneSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneSlider.h; path = Modules/SceneManager/SceneSlider.h; sourceTree = "<group>"; };
 		624B978A18211AC50087C576 /* SceneSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneSlider.m; path = Modules/SceneManager/SceneSlider.m; sourceTree = "<group>"; };
 		624B978D182120580087C576 /* OrientationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrientationUtils.h; path = Modules/Utils/OrientationUtils.h; sourceTree = "<group>"; };
@@ -592,7 +585,6 @@
 		62AF046A18479DAF00A83599 /* menuExploreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuExploreButton@2x.png"; sourceTree = "<group>"; };
 		62AF046B18479DAF00A83599 /* menuGaleryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuGaleryButton@2x.png"; sourceTree = "<group>"; };
 		62AF046C18479DAF00A83599 /* menuMuseumButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuMuseumButton@2x.png"; sourceTree = "<group>"; };
-		62B31CD11844E1D20053CC75 /* Brandon_reg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_reg.otf; path = Data/Fonts/Brandon_reg.otf; sourceTree = "<group>"; };
 		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
 		62DCA8E918439F7000CF593F /* scene-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-1@2x.png"; sourceTree = "<group>"; };
 		62DCA8EB1843A3B700CF593F /* SceneTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneTimeline.h; path = Modules/SceneManager/SceneTimeline.h; sourceTree = "<group>"; };
@@ -1076,7 +1068,6 @@
 		624E6B51181E9AC100E7FE58 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				6214ECB41856087300C51275 /* menu.mov */,
 				6214ECB51856087300C51275 /* scene-1.mov */,
 				6214ECB61856087300C51275 /* scene-2.mov */,
 				B93248E81856706C000BF92E /* menu.mov */,
@@ -1218,9 +1209,9 @@
 			children = (
 				622504731855C529006D358B /* GalleryViewController.h */,
 				622504741855C529006D358B /* GalleryViewController.m */,
+				5F52051318577FB00054E0EE /* WorkCollectionDelegate.h */,
 				5F630582185614EA002E8547 /* WorksCollectionView.h */,
 				5F630583185614EA002E8547 /* WorksCollectionView.m */,
-				5F52051318577FB00054E0EE /* WorkCollectionDelegate.h */,
 			);
 			name = GalleryView;
 			sourceTree = "<group>";
@@ -1291,7 +1282,6 @@
 				622504811855C5E7006D358B /* Gallery */,
 				CE45E6AF184A501700DCFF09 /* Scene */,
 				CE45E69D1849EB3600DCFF09 /* NavigationBar */,
-				624A4A3F1847ACD800A9124E /* rotationIcon@2x.png */,
 				62367AEA1845FC3C0090B819 /* Museum */,
 				62B31CC81844DE3B0053CC75 /* Home */,
 				62084D521835237D00F9C26C /* Logo */,
@@ -1519,10 +1509,8 @@
 		CEA3E756182E616700B115BC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				62B31CD11844E1D20053CC75 /* Brandon_reg.otf */,
 				620423C91843510F00648ABA /* AvenirLTStd-Black.otf */,
 				620423CA1843510F00648ABA /* AvenirLTStd-Light.otf */,
-				620423CB1843510F00648ABA /* AvenirLTStd-Roman.otf */,
 				620423CC1843510F00648ABA /* Brandon_med.otf */,
 				CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */,
 				CEA3E754182E616400B115BC /* Brandon_bold.otf */,
@@ -1628,10 +1616,6 @@
 				622505321855CCB3006D358B /* x2y8@2x.png in Resources */,
 				622505661855CCB3006D358B /* x6y8@2x.png in Resources */,
 				CEC93C0018537B0400E1AF9B /* menuHamburger@2x.png in Resources */,
-				CE76B1091854925A000166C3 /* x5y11@2x.png in Resources */,
-				CE76B1011854925A000166C3 /* x5y3@2x.png in Resources */,
-				CE76B0F81854925A000166C3 /* x4y7@2x.png in Resources */,
-				CE76B1541854925A000166C3 /* x11y8@2x.png in Resources */,
 				5F6305781855D54A002E8547 /* min-1@2x.jpg in Resources */,
 				CEC93BFE18537B0400E1AF9B /* menuPause@2x.png in Resources */,
 				6225057D1855CCB3006D358B /* x8y5@2x.png in Resources */,
@@ -1660,40 +1644,18 @@
 				6214ECBB18560A7B00C51275 /* tracker@2x.png in Resources */,
 				6225053E1855CCB3006D358B /* x3y7@2x.png in Resources */,
 				CED0FCBF1849E19B0001C602 /* circleButton@2x.png in Resources */,
-				CE76B1501854925A000166C3 /* x11y4@2x.png in Resources */,
-				CE76B1141854925A000166C3 /* x6y9@2x.png in Resources */,
 				5F63057D1855D54A002E8547 /* min-6@2x.jpg in Resources */,
-				CE76B1191854925A000166C3 /* x7y1@2x.png in Resources */,
-				CE76B0F51854925A000166C3 /* x4y4@2x.png in Resources */,
-				CE76B1591854925A000166C3 /* x11y13@2x.png in Resources */,
-				CE76B0EF1854925A000166C3 /* x3y11@2x.png in Resources */,
-				CE76B1131854925A000166C3 /* x6y8@2x.png in Resources */,
-				CE76B1361854925A000166C3 /* x9y4@2x.png in Resources */,
-				CE76B1641854925A000166C3 /* x12y11@2x.png in Resources */,
-				CE76B1341854925A000166C3 /* x9y2@2x.png in Resources */,
 				620423CD1843510F00648ABA /* AvenirLTStd-Black.otf in Resources */,
 				622505341855CCB3006D358B /* x2y10@2x.png in Resources */,
 				622505951855CCB4006D358B /* x10y3@2x.png in Resources */,
 				CEC93BFF18537B0400E1AF9B /* menuPlay@2x.png in Resources */,
-				624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */,
 				622505931855CCB4006D358B /* x10y1@2x.png in Resources */,
 				6225054D1855CCB3006D358B /* x4y9@2x.png in Resources */,
 				622505251855CCB3006D358B /* x1y8@2x.png in Resources */,
 				622505841855CCB4006D358B /* x8y12@2x.png in Resources */,
 				6225051E1855CCB3006D358B /* x1y1@2x.png in Resources */,
-				CE76B10C1854925A000166C3 /* x6y1@2x.png in Resources */,
-				CE76B1231854925A000166C3 /* x7y11@2x.png in Resources */,
-				CE76B11A1854925A000166C3 /* x7y2@2x.png in Resources */,
-				CE76B0E21854925A000166C3 /* x2y11@2x.png in Resources */,
 				5F6305771855D54A002E8547 /* min-0@2x.jpg in Resources */,
-				624A4A401847ACD800A9124E /* rotationIcon@2x.png in Resources */,
 				5F63057F1855D54A002E8547 /* min-8@2x.jpg in Resources */,
-				CE76B14A1854925A000166C3 /* x10y11@2x.png in Resources */,
-				CE76B1081854925A000166C3 /* x5y10@2x.png in Resources */,
-				CE76B14D1854925A000166C3 /* x11y1@2x.png in Resources */,
-				CE76B1551854925A000166C3 /* x11y9@2x.png in Resources */,
-				CE76B1481854925A000166C3 /* x10y9@2x.png in Resources */,
-				CE76B1421854925A000166C3 /* x10y3@2x.png in Resources */,
 				62367AF818460B420090B819 /* cellMinus@2x.png in Resources */,
 				622505851855CCB4006D358B /* x8y13@2x.png in Resources */,
 				624E6B0D181E5FD300E7FE58 /* Images.xcassets in Resources */,
@@ -1711,21 +1673,7 @@
 				6225055D1855CCB3006D358B /* x5y12@2x.png in Resources */,
 				6225051F1855CCB3006D358B /* x1y2@2x.png in Resources */,
 				622505421855CCB3006D358B /* x3y11@2x.png in Resources */,
-				CE76B0E91854925A000166C3 /* x3y5@2x.png in Resources */,
 				5F6305801855D54A002E8547 /* min-9@2x.jpg in Resources */,
-				CE76B0D91854925A000166C3 /* x2y2@2x.png in Resources */,
-				CE76B1041854925A000166C3 /* x5y6@2x.png in Resources */,
-				CE76B15E1854925A000166C3 /* x12y5@2x.png in Resources */,
-				CE76B1161854925A000166C3 /* x6y11@2x.png in Resources */,
-				CE76B0CD1854925A000166C3 /* x1y3@2x.png in Resources */,
-				CE76B1391854925A000166C3 /* x9y7@2x.png in Resources */,
-				CE76B0D81854925A000166C3 /* x2y1@2x.png in Resources */,
-				CE76B1401854925A000166C3 /* x10y1@2x.png in Resources */,
-				CE76B0EE1854925A000166C3 /* x3y10@2x.png in Resources */,
-				CE76B0E41854925A000166C3 /* x2y13@2x.png in Resources */,
-				CE76B0E71854925A000166C3 /* x3y3@2x.png in Resources */,
-				CE76B1251854925A000166C3 /* x7y13@2x.png in Resources */,
-				CE76B0F41854925A000166C3 /* x4y3@2x.png in Resources */,
 				62084D551835237D00F9C26C /* logo0@2x.png in Resources */,
 				6225056D1855CCB3006D358B /* x7y2@2x.png in Resources */,
 				6225055A1855CCB3006D358B /* x5y9@2x.png in Resources */,
@@ -1746,60 +1694,28 @@
 				6225054E1855CCB3006D358B /* x4y10@2x.png in Resources */,
 				622505691855CCB3006D358B /* x6y11@2x.png in Resources */,
 				62367AF01845FDEE0090B819 /* hotel@2x.png in Resources */,
-				620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */,
 				622505A01855CCB4006D358B /* x11y1@2x.png in Resources */,
 				622505A31855CCB4006D358B /* x11y4@2x.png in Resources */,
 				622505741855CCB3006D358B /* x7y9@2x.png in Resources */,
-				CE76B1651854925A000166C3 /* x12y12@2x.png in Resources */,
 				5F63057B1855D54A002E8547 /* min-4@2x.jpg in Resources */,
-				CE76B0DD1854925A000166C3 /* x2y6@2x.png in Resources */,
-				620423CF1843510F00648ABA /* AvenirLTStd-Roman.otf in Resources */,
-				CE76B14C1854925A000166C3 /* x10y13@2x.png in Resources */,
-				CE76B0D41854925A000166C3 /* x1y10@2x.png in Resources */,
-				CE76B10F1854925A000166C3 /* x6y4@2x.png in Resources */,
-				CE76B1291854925A000166C3 /* x8y4@2x.png in Resources */,
-				CE76B1281854925A000166C3 /* x8y3@2x.png in Resources */,
 				5F63057A1855D54A002E8547 /* min-3@2x.jpg in Resources */,
-				CE76B0D61854925A000166C3 /* x1y12@2x.png in Resources */,
-				CE76B0F91854925A000166C3 /* x4y8@2x.png in Resources */,
-				CE76B0E51854925A000166C3 /* x3y1@2x.png in Resources */,
-				CE76B0D01854925A000166C3 /* x1y6@2x.png in Resources */,
-				CE76B14F1854925A000166C3 /* x11y3@2x.png in Resources */,
-				CE76B1311854925A000166C3 /* x8y12@2x.png in Resources */,
-				CE76B13F1854925A000166C3 /* x9y13@2x.png in Resources */,
-				CE76B0FC1854925A000166C3 /* x4y11@2x.png in Resources */,
 				B955200A1857D78E00BE90C7 /* map-bg@2x.png in Resources */,
-				CE76B1471854925A000166C3 /* x10y8@2x.png in Resources */,
 				CE98B419184524A8004760D3 /* scene-3@2x.png in Resources */,
 				622505301855CCB3006D358B /* x2y6@2x.png in Resources */,
 				622505B31855CCB4006D358B /* x12y7@2x.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
 				622505481855CCB3006D358B /* x4y4@2x.png in Resources */,
 				CE45E6B3184A502100DCFF09 /* scenesNumber@2x.png in Resources */,
-				6214ECB71856087300C51275 /* menu.mov in Resources */,
 				622505A11855CCB4006D358B /* x11y2@2x.png in Resources */,
 				622505761855CCB3006D358B /* x7y11@2x.png in Resources */,
 				6225047F1855C5E3006D358B /* arrow-right-nav@2x.png in Resources */,
 				622505AB1855CCB4006D358B /* x11y12@2x.png in Resources */,
 				CE98B41C184524A8004760D3 /* scene-6@2x.png in Resources */,
-				62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */,
 				622505901855CCB4006D358B /* x9y11@2x.png in Resources */,
 				5F63057C1855D54A002E8547 /* min-5@2x.jpg in Resources */,
-				CE76B1451854925A000166C3 /* x10y6@2x.png in Resources */,
-				CE76B1171854925A000166C3 /* x6y12@2x.png in Resources */,
 				B95520081857D78A00BE90C7 /* grid-bg@2x.png in Resources */,
-				CE76B1071854925A000166C3 /* x5y9@2x.png in Resources */,
-				CE76B12A1854925A000166C3 /* x8y5@2x.png in Resources */,
-				CE76B1181854925A000166C3 /* x6y13@2x.png in Resources */,
-				CE76B1241854925A000166C3 /* x7y12@2x.png in Resources */,
-				CE76B0D11854925A000166C3 /* x1y7@2x.png in Resources */,
-				CE76B0EC1854925A000166C3 /* x3y8@2x.png in Resources */,
-				CE76B1321854925A000166C3 /* x8y13@2x.png in Resources */,
 				B955200C1857E19900BE90C7 /* arrow-bottom@2x.png in Resources */,
-				62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */,
-				CE76B0F21854925A000166C3 /* x4y1@2x.png in Resources */,
 				5F6305791855D54A002E8547 /* min-2@2x.jpg in Resources */,
-				CE76B0E31854925A000166C3 /* x2y12@2x.png in Resources */,
 				624E6B08181E5FD300E7FE58 /* Main.storyboard in Resources */,
 				622505601855CCB3006D358B /* x6y2@2x.png in Resources */,
 				622505AA1855CCB4006D358B /* x11y11@2x.png in Resources */,
@@ -1828,7 +1744,6 @@
 				622505871855CCB4006D358B /* x9y2@2x.png in Resources */,
 				620423CE1843510F00648ABA /* AvenirLTStd-Light.otf in Resources */,
 				5F6305811855D54A002E8547 /* min-10@2x.jpg in Resources */,
-				CE76B11E1854925A000166C3 /* x7y6@2x.png in Resources */,
 				62AF047018479DAF00A83599 /* menuMuseumButton@2x.png in Resources */,
 				622505441855CCB3006D358B /* x3y13@2x.png in Resources */,
 				622505791855CCB3006D358B /* x8y1@2x.png in Resources */,
@@ -1877,10 +1792,7 @@
 				6225059D1855CCB4006D358B /* x10y11@2x.png in Resources */,
 				622505531855CCB3006D358B /* x5y2@2x.png in Resources */,
 				6225059F1855CCB4006D358B /* x10y13@2x.png in Resources */,
-				CE76B0FE1854925A000166C3 /* x4y13@2x.png in Resources */,
 				B93248E91856706C000BF92E /* menu.mov in Resources */,
-				CE76B1121854925A000166C3 /* x6y7@2x.png in Resources */,
-				CE76B13D1854925A000166C3 /* x9y11@2x.png in Resources */,
 				CED0FCBE1849E19B0001C602 /* circleMask@2x.png in Resources */,
 				622505941855CCB4006D358B /* x10y2@2x.png in Resources */,
 				622505671855CCB3006D358B /* x6y9@2x.png in Resources */,
@@ -1915,10 +1827,7 @@
 				CE98B41B184524A8004760D3 /* scene-5@2x.png in Resources */,
 				622505261855CCB3006D358B /* x1y9@2x.png in Resources */,
 				622505AE1855CCB4006D358B /* x12y2@2x.png in Resources */,
-				CE76B1411854925A000166C3 /* x10y2@2x.png in Resources */,
 				5F63057E1855D54A002E8547 /* min-7@2x.jpg in Resources */,
-				CE76B0CF1854925A000166C3 /* x1y5@2x.png in Resources */,
-				CE76B0FF1854925A000166C3 /* x5y1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

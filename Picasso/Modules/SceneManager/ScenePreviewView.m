@@ -53,7 +53,7 @@
 }
 
 - (void)showScenePreview {
-    UIImage *maskedPreview = [UIImage imageNamed:[NSString stringWithFormat:@"scene-%i.png", self.model.number + 1]];
+    UIImage *maskedPreview = [UIImage imageNamed:[NSString stringWithFormat:@"scene-%li.png", self.model.number + 1]];
     UIImageView *scenePreview = [[UIImageView alloc] initWithImage:maskedPreview];
     [scenePreview moveTo:CGPointMake(self.background.frame.origin.x - 6, self.background.frame.origin.y - 37)];
 
@@ -77,7 +77,7 @@
 }
 
 - (void)initChapterLabel {
-    NSString *labelText = [[NSString stringWithFormat:@"chapitre %i", self.model.number + 1] uppercaseString];
+    NSString *labelText = [[NSString stringWithFormat:@"chapitre %li", self.model.number + 1] uppercaseString];
     UILabel *exploreLabel = [[UILabel alloc] initWithFrame:self.background.frame];
     exploreLabel.text = labelText;
     exploreLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];

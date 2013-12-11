@@ -72,7 +72,7 @@
         [button addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
-        [button setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+//        [button setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
     }
 
     // This one is the reference
