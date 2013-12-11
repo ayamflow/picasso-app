@@ -29,6 +29,8 @@
 #define kSliderHeight 80
 #define kSliderVisibleHeight 10
 
+#define kTrackerGap 45
+
 @interface Scene ()
 
 @property (weak, nonatomic) MotionVideoPlayer *playerView;
@@ -313,16 +315,15 @@
            !currentTracker.enabled) {
             currentTracker.enabled = YES;
             currentTracker.hidden = NO;
+            [[DataManager sharedInstance] unlockWorkWithNumber:[[self.model.trackers objectAtIndex:i] workId]];
             self.drawView.hidden = NO;
             self.trackerInertiaX = 0;
             self.trackerInertiaY = 0;
-//            NSLog(@"Enable tracker %i", i);
         }
         else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
             currentTracker.enabled = NO;
             currentTracker.hidden = YES;
             self.drawView.hidden = YES;
-//            NSLog(@"Disable tracker %i", i);
         }
 
         if(currentTracker.enabled) {
@@ -336,19 +337,13 @@
             
             self.drawView.startPoint = CGPointMake(x, y);
 
-            CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
+            CGFloat trackerX = self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch);
 
 //            self.drawView.endPoint = CGPointMake(trackerX * 0.97 + currentTracker.bounds.size.width * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
             self.drawView.endPoint = CGPointMake(trackerX + (trackerX - self.drawView.endPoint.x) * 0.1, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
 
-//            currentTracker.center = self.drawView.endPoint;
-//            [self.drawView setNeedsDisplay];
-
-//            self.drawView.alpha = 0;
-            [UIView animateWithDuration:1/30 animations:^{
-                currentTracker.center = self.drawView.endPoint;
-                [self.drawView setNeedsDisplay];
-            }];
+            currentTracker.center = self.drawView.endPoint;
+            [self.drawView setNeedsDisplay];
         }
     }
 }

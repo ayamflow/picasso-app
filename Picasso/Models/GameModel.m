@@ -24,7 +24,6 @@
 }
 - (id)init {
     if(self = [super init]) {
-//        NSLog(@"[GameModel] init");
         [self load];
         [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
         [[DataManager sharedInstance] unlockWorkTo:self.lastUnlockedWork];
@@ -56,10 +55,10 @@
     if(savedData == nil || [savedData count] < 4) {
         savedData = [NSArray arrayWithObjects: [NSNumber numberWithInteger: 0], [NSNumber numberWithInteger: 0], [NSNumber numberWithFloat: 0.0], [NSNumber numberWithInteger:0], nil];
     }
-    self.currentScene = [[savedData objectAtIndex:0] integerValue] || 0;
-    self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue] || 0;
-    self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue] || 0.0;
-    self.lastUnlockedWork = [[savedData objectAtIndex:3] integerValue] || 0;
+    self.currentScene = [[savedData objectAtIndex:0] integerValue];
+    self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue];
+    self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue];
+    self.lastUnlockedWork = [[savedData objectAtIndex:3] integerValue];
 }
 
 - (NSString *)getSavePlistPath {

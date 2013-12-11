@@ -18,12 +18,13 @@
 #import "SceneChooserLandscape.h"
 #import "SceneManager.h"
 #import "MapView.h"
+#import "StatsFooterView.h"
 
 @interface SceneMenu ()
 
 @property (strong, nonatomic) SceneModel *sceneModel;
 @property (strong, nonatomic) SceneChooserLandscape *sceneChooser;
-@property (strong, nonatomic) UIView *bottomInfos;
+@property (strong, nonatomic) StatsFooterView *bottomInfos;
 @property (strong, nonatomic) MapView *map;
 
 @end
@@ -77,38 +78,9 @@
 }
 
 - (void)initBottomInfos {
-    self.bottomInfos = [[UIView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - 20, [OrientationUtils nativeLandscapeDeviceSize].size.width, 20)];
+    self.bottomInfos = [[StatsFooterView alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 20)];
     [self.view addSubview:self.bottomInfos];
-    
-    // Chapter icon + label
-    UIImageView *chapterIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scenesNumber.png"]];
-    [self.bottomInfos addSubview:chapterIcon];
-    UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
-    chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
-    chapterLabel.textColor = [UIColor blackColor];
-    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
-    [chapterLabel sizeToFit];
-    [self.bottomInfos addSubview:chapterLabel];
-
-    // Position
-    CGFloat tempWidth = chapterIcon.frame.size.width * 1.5 + chapterLabel.frame.size.width;
-    [chapterLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - chapterLabel.frame.size.height * 2)];
-    [chapterIcon moveTo:CGPointMake(chapterLabel.frame.origin.x - chapterIcon.frame.size.width * 1.5, chapterLabel.frame.origin.y - 2)];
-
-    // Work icon / label
-    UIImageView *workIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worksNumber.png"]];
-    [self.bottomInfos addSubview:workIcon];
-    UILabel *worksLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width / 4, 20)];
-    worksLabel.font = chapterLabel.font;
-    worksLabel.textColor = [UIColor blackColor];
-    worksLabel.text = [[NSString stringWithFormat:@"%i / %i oeuvres", 2, 20] uppercaseString];
-    [worksLabel sizeToFit];
-    [self.bottomInfos addSubview:worksLabel];
-
-    // Position
-    tempWidth = workIcon.frame.size.width * 1.5 + worksLabel.frame.size.width;
-    [worksLabel moveTo:CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width * 2 / 3 - tempWidth / 2, self.bottomInfos.frame.size.height - worksLabel.frame.size.height * 2)];
-    [workIcon moveTo:CGPointMake(worksLabel.frame.origin.x - workIcon.frame.size.width * 1.5, worksLabel.frame.origin.y - 2)];
+    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
 }
 
 - (void)initMap {

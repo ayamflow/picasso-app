@@ -237,6 +237,7 @@
 		629AC66B1858961000BAE2BA /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66A1858961000BAE2BA /* UIView+EasingFunctions.m */; };
 		629AC6701858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */; };
 		629AC6711858961600BAE2BA /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 629AC66E1858961600BAE2BA /* easing.c */; };
+		629AC6761858A47700BAE2BA /* StatsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 629AC6751858A47700BAE2BA /* StatsFooterView.m */; };
 		62AF044D184733D600A83599 /* HoursPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044C184733D600A83599 /* HoursPanel.xib */; };
 		62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62AF044E18473A1A00A83599 /* InfosPanel.xib */; };
 		62AF046D18479DAF00A83599 /* menuCreditsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */; };
@@ -585,6 +586,8 @@
 		629AC66D1858961600BAE2BA /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAKeyframeAnimation+AHEasing.m"; path = "AHEasing/CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
 		629AC66E1858961600BAE2BA /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = easing.c; path = AHEasing/easing.c; sourceTree = "<group>"; };
 		629AC66F1858961600BAE2BA /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = AHEasing/easing.h; sourceTree = "<group>"; };
+		629AC6741858A47700BAE2BA /* StatsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsFooterView.h; path = Modules/UI/StatsFooter/StatsFooterView.h; sourceTree = "<group>"; };
+		629AC6751858A47700BAE2BA /* StatsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsFooterView.m; path = Modules/UI/StatsFooter/StatsFooterView.m; sourceTree = "<group>"; };
 		62AF044C184733D600A83599 /* HoursPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoursPanel.xib; path = Modules/About/HoursPanel.xib; sourceTree = "<group>"; };
 		62AF044E18473A1A00A83599 /* InfosPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfosPanel.xib; path = Modules/About/InfosPanel.xib; sourceTree = "<group>"; };
 		62AF046918479DAF00A83599 /* menuCreditsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuCreditsButton@2x.png"; sourceTree = "<group>"; };
@@ -1136,6 +1139,7 @@
 			children = (
 				624E6B38181E777800E7FE58 /* VideoPlayer */,
 				CED0FCC21849E5420001C602 /* NavigationBar */,
+				629AC6771858A47A00BAE2BA /* StatsFooter */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1158,6 +1162,15 @@
 				629AC66F1858961600BAE2BA /* easing.h */,
 			);
 			name = AHEasing;
+			sourceTree = "<group>";
+		};
+		629AC6771858A47A00BAE2BA /* StatsFooter */ = {
+			isa = PBXGroup;
+			children = (
+				629AC6741858A47700BAE2BA /* StatsFooterView.h */,
+				629AC6751858A47700BAE2BA /* StatsFooterView.m */,
+			);
+			name = StatsFooter;
 			sourceTree = "<group>";
 		};
 		62B31CC81844DE3B0053CC75 /* Home */ = {
@@ -1895,6 +1908,7 @@
 				625BFA50185768F200FD9B91 /* Path3View.m in Sources */,
 				CE86045D18283E520019657F /* Musem.m in Sources */,
 				624E6B5D181EA2AB00E7FE58 /* WorkModel.m in Sources */,
+				629AC6761858A47700BAE2BA /* StatsFooterView.m in Sources */,
 				5F630584185614EA002E8547 /* WorksCollectionView.m in Sources */,
 				624E6B44181E949C00E7FE58 /* SceneManager.m in Sources */,
 				4F836D28183BD41B00CA63CD /* UINavigationControllerPicasso.m in Sources */,

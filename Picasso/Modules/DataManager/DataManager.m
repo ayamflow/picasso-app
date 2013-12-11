@@ -119,6 +119,8 @@
 
 - (void)unlockWorkWithNumber:(NSInteger)number {
     SceneModel *work = [self.works objectAtIndex:number];
+    NSDictionary *unlockedWorkDictionnary = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:number] forKey:@"number"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents WorkUnlockedEvent] object:self userInfo:unlockedWorkDictionnary];
     work.unlocked = YES;
 }
 
