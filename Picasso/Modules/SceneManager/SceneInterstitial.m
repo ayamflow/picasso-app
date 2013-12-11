@@ -13,6 +13,7 @@
 #import "Colors.h"
 #import "UIViewPicasso.h"
 #import "SceneModel.h"
+#import "MotionVideoPlayer.h"
 
 #define MARGIN 15
 
@@ -81,6 +82,8 @@
     self.view.alpha = 0;
     [UIView animateWithDuration:0.6 animations:^{
         self.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
     }];
 }
 

@@ -248,6 +248,7 @@
 }
 
 - (void)toSceneWithNumber:(NSInteger)number {
+    [[MotionVideoPlayer sharedInstance] fadeOut];
     self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
     [UIView animateWithDuration:0.4 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
         self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);

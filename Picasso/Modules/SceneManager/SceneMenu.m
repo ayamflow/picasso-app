@@ -74,7 +74,6 @@
 }
 
 - (void)dispatchBackToHome {
-    NSLog(@"dispatchback");
     [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
     [self pauseVideo];
     [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents BackToHomeEvent] object:nil];
@@ -168,6 +167,7 @@
 // Protocol
 
 - (void)navigateToSceneWithNumber:(NSInteger)number {
+    [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
     [UIView animateWithDuration:0.8 animations:^{
         self.view.alpha = 0;
         [self.view moveTo:CGPointMake(- self.view.frame.size.width, self.view.frame.origin.y)];

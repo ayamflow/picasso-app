@@ -90,10 +90,13 @@
 
     [self initNavigationBar];
     [self initTimeline];
+
+    [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[MotionVideoPlayer sharedInstance] fadeIn];
     [self transitionIn];
     [self resume];
 }
@@ -219,7 +222,7 @@
 
 - (void)transitionInComplete {
     if(++self.transitionsDone == self.transitionsNumber) {
-        [UIView animateWithDuration:4 animations:^{
+        [UIView animateWithDuration:3 animations:^{
          	self.sceneTitle.alpha = 0;
             self.dateImageView.alpha = 0;
             self.dateTitle.alpha = 0;
