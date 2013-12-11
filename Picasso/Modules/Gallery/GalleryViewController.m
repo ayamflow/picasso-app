@@ -31,6 +31,11 @@
 
 @implementation GalleryViewController
 
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
