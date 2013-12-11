@@ -16,6 +16,7 @@
     self.workId = [data[@"id"] integerValue];
     self.title = data[@"title"];
     self.description = data[@"description"];
+    self.sceneNumber = [data[@"sceneNumber"] integerValue];
     self.year = data[@"year"];
     self.h = data[@"h"];
     self.l = data[@"l"];

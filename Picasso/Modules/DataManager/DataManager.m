@@ -94,6 +94,17 @@
     return [self.scenes count];
 }
 
+- (NSMutableArray *)getWorksWithScene:(NSInteger) sceneNumber {
+    NSMutableArray *works = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [self.works count]; i++) {
+        WorkModel *work = [self.works objectAtIndex:i];
+        if(work.sceneNumber == sceneNumber) {
+            [works addObject:work];
+        }
+    }
+    return works;
+}
+
 - (WorkModel *)getWorkWithNumber:(NSInteger) number {
     return [self.works objectAtIndex:number];
 }
