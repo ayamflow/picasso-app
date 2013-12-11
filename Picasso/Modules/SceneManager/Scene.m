@@ -81,15 +81,16 @@
     [self initDate:self.model.date];
 
     [self initTrackers];
-    self.playerUpdatesObserver = [self listenForPlayerUpdates];
 
     [self initNavigationBar];
     [self initTimeline];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 
-    NSLog(@"[Scene #%li] Started", (long)self.model.number);
-    self.player.rate = 0.5; // Maybe stars at 1.0 and tween to 0.0 ?
+//    NSLog(@"[Scene #%li] Started", (long)self.model.number);
     [self resume]; // seekToTime + enableMotion
 }
 
@@ -97,16 +98,6 @@
     if(self = [super init]) {
         self.model = sceneModel;
     }
-    return self;
-}
-
-- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position {
-    if(self = [self initWithModel:sceneModel]) {
-        CGRect frame = self.view.frame;
-        frame.origin = position;
-        self.view.frame = frame;
-    }
-    
     return self;
 }
 
@@ -159,8 +150,8 @@
     } completion:^(BOOL finished) {
         [self.menu removeFromParentViewController];
         [self.menu.view removeFromSuperview];
-        [self resume];
         self.menu = nil;
+        [self resume];
     }];
 }
 
@@ -283,19 +274,16 @@
 }
 
 - (void)trackerTouched:(id)sender {
-    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
+//    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
     /*    [self stop];
      WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
      workView.workId = [sender tag];
      [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];*/
 }
 
-- (id)listenForPlayerUpdates {
-    __weak typeof(self) weakSelf = self;
-    return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
-        [weakSelf listenForVideoEnded]; // Watch video status
-        [weakSelf toggleTrackers]; // Show/hide/move trackers
-    }];
+- (void)motionDidChange {
+    [self listenForVideoEnded]; // Watch video status
+    [self toggleTrackers]; // Show/hide/move trackers
 }
 
 - (void)listenForVideoEnded {
@@ -328,13 +316,13 @@
             self.drawView.hidden = NO;
             self.trackerInertiaX = 0;
             self.trackerInertiaY = 0;
-            NSLog(@"Enable tracker %i", i);
+//            NSLog(@"Enable tracker %i", i);
         }
         else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
             currentTracker.enabled = NO;
             currentTracker.hidden = YES;
             self.drawView.hidden = YES;
-            NSLog(@"Disable tracker %i", i);
+//            NSLog(@"Disable tracker %i", i);
         }
 
         if(currentTracker.enabled) {
@@ -342,39 +330,51 @@
             self.trackerInertiaY += 0.07;
             NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
             NSArray *currentPosition = [currentTrackerPositions objectAtIndex:currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue]];
-            NSInteger x = [[currentPosition objectAtIndex:1] integerValue];
-            NSInteger y = [[currentPosition objectAtIndex:2] integerValue];
+            
+            CGFloat x = [[currentPosition objectAtIndex:1] floatValue];
+            CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
+            
             self.drawView.startPoint = CGPointMake(x, y);
-            CGFloat dx = self.drawView.endPoint.x - x;
-            self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x - dx * self.player.rate / 100 + 15 * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + 15 * sinf(self.trackerInertiaY) * 0.01);
-            currentTracker.center = self.drawView.endPoint;
-            [self.drawView setNeedsDisplay];
+
+            CGFloat trackerX = self.drawView.startPoint.x + (45 * self.playerView.pitch);
+
+//            self.drawView.endPoint = CGPointMake(trackerX * 0.97 + currentTracker.bounds.size.width * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+            self.drawView.endPoint = CGPointMake(trackerX + (trackerX - self.drawView.endPoint.x) * 0.1, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+
+//            currentTracker.center = self.drawView.endPoint;
+//            [self.drawView setNeedsDisplay];
+
+//            self.drawView.alpha = 0;
+            [UIView animateWithDuration:1/30 animations:^{
+                currentTracker.center = self.drawView.endPoint;
+                [self.drawView setNeedsDisplay];
+            }];
         }
     }
 }
 
 - (void)playerItemDidReachEnd{
-    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
+//    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
     [self stop];
     [self.delegate showInterstitial];
 }
 
 - (void)stop {
-    NSLog(@"[Scene #%li] Stopped.", self.model.number);
+//    NSLog(@"[Scene #%li] Stopped.", self.model.number);
     GameModel *gameModel = [[DataManager sharedInstance] getGameModel];
     gameModel.sceneCurrentTime = CMTimeGetSeconds(self.player.currentTime);
     self.player.rate = 0.0;
     [self.playerView disableMotion];
+    self.playerView.delegate = nil;
     self.player = nil;
 }
 
 - (void)resume {
-    NSLog(@"[Scene #%li] Resume.", self.model.number);
+//    NSLog(@"[Scene #%li] Resume.", self.model.number);
+    self.playerView.delegate = self;
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
-    // DEBUG
-    self.player.rate = 2.0;
 }
 
 @end

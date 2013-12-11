@@ -11,49 +11,35 @@
 
 @implementation Path1View
 
-- (void)drawRect:(CGRect)rect {
-    UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
+- (id)initWithFrame:(CGRect)frame {
+    if(self = [super initWithFrame:frame]) {
+        self.startPoint = CGPointMake(180, 517);
+        self.endPoint = CGPointMake(388,208);
+    }
+    return self;
+}
+
+- (UIBezierPath *)getStartPath {
     UIBezierPath* context = [UIBezierPath bezierPath];
+    [context moveToPoint: CGPointMake(180,517)];
+    [context addCurveToPoint: CGPointMake(200,432) controlPoint1: CGPointMake(180,517) controlPoint2: CGPointMake(215,482)];
+    [context addCurveToPoint: CGPointMake(117,372) controlPoint1: CGPointMake(189,397) controlPoint2: CGPointMake(148,382)];
+    [context addCurveToPoint: CGPointMake(106,347) controlPoint1: CGPointMake(103,367) controlPoint2: CGPointMake(101,356)];
+    [context addCurveToPoint: CGPointMake(119,337) controlPoint1: CGPointMake(109,340) controlPoint2: CGPointMake(119,337)];
+    [context addCurveToPoint: CGPointMake(208,339) controlPoint1: CGPointMake(114,340) controlPoint2: CGPointMake(154,317)];
+    [context addCurveToPoint: CGPointMake(262,388) controlPoint1: CGPointMake(243,353) controlPoint2: CGPointMake(255,375)];
+    return context;
+}
 
-    if(self.status == [MapPathStatus PathNotStartedStatus]) { // dash
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-            context.lineWidth = 1;
-    }
-    else {
-        context.lineWidth = 4;
-    }
-    // else solid or solid/dash
-
-    [context moveToPoint: CGPointMake(179,518)];
-    [context addCurveToPoint: CGPointMake(197,425) controlPoint1: CGPointMake(179,518) controlPoint2: CGPointMake(214,482)];
-    [context addCurveToPoint: CGPointMake(130,374) controlPoint1: CGPointMake(192,398) controlPoint2: CGPointMake(130,374)];
-    [context addCurveToPoint: CGPointMake(103,350) controlPoint1: CGPointMake(109,371) controlPoint2: CGPointMake(101,363)];
-    [context addCurveToPoint: CGPointMake(152,329) controlPoint1: CGPointMake(105,338) controlPoint2: CGPointMake(140,329)];
-
-    if(self.status == [MapPathStatus PathStartedStatus]) {
-        [strokeColor setStroke];
-        [context stroke];
-
-        CGFloat dash[] = {2, 3};
-        [context setLineDash:dash count:2 phase:2];
-        [context moveToPoint: CGPointMake(152,329)];
-        context.lineWidth = 1;
-    }
-    else {
-        context.lineWidth = 4;
-    }
-
-    [context addCurveToPoint: CGPointMake(245,364) controlPoint1: CGPointMake(164,328) controlPoint2: CGPointMake(212,331)];
-    [context addCurveToPoint: CGPointMake(312,423) controlPoint1: CGPointMake(279,403) controlPoint2: CGPointMake(269,424)];
-    [context addCurveToPoint: CGPointMake(346,365) controlPoint1: CGPointMake(357,416) controlPoint2: CGPointMake(353,374)];
-    [context addCurveToPoint: CGPointMake(330,348) controlPoint1: CGPointMake(346,365) controlPoint2: CGPointMake(336,352)];
-    [context addCurveToPoint: CGPointMake(308,294) controlPoint1: CGPointMake(324,344) controlPoint2: CGPointMake(302,323)];
-    [context addCurveToPoint: CGPointMake(342,252) controlPoint1: CGPointMake(313,264) controlPoint2: CGPointMake(342,252)];
-    [context addCurveToPoint: CGPointMake(386,204) controlPoint1: CGPointMake(342,252) controlPoint2: CGPointMake(386,222)];
-
-    [strokeColor setStroke];
-    [context stroke];
+- (UIBezierPath *)getEndPath {
+    UIBezierPath* context = [UIBezierPath bezierPath];
+    [context moveToPoint:CGPointMake(262,388)];
+    [context addCurveToPoint: CGPointMake(295,422) controlPoint1: CGPointMake(268,400) controlPoint2: CGPointMake(282,419)];
+    [context addCurveToPoint: CGPointMake(351,387) controlPoint1: CGPointMake(311,424) controlPoint2: CGPointMake(344,425)];
+    [context addCurveToPoint: CGPointMake(329,347) controlPoint1: CGPointMake(354,369) controlPoint2: CGPointMake(339,354)];
+    [context addCurveToPoint: CGPointMake(336,257) controlPoint1: CGPointMake(303,327) controlPoint2: CGPointMake(295,283)];
+    [context addCurveToPoint: CGPointMake(388,208) controlPoint1: CGPointMake(384,224) controlPoint2: CGPointMake(388,208)];
+    return context;
 }
 
 @end

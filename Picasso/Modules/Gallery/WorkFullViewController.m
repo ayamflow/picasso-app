@@ -91,7 +91,7 @@ CGRect deviceSize;
 -(void)viewDidAppear:(BOOL)animated
 {
     _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%@ / %ld oeuvres", _work.workId, (long)[_datamanager getWorksNumber]] uppercaseString];
+    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%i / %ld oeuvres", _work.workId, [_datamanager getWorksNumber]] uppercaseString];
 }
 
 - (void)didReceiveMemoryWarning

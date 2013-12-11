@@ -38,7 +38,6 @@
 - (UIImage*)tileAtCol:(int)col row:(int)row
 {
     NSString *path = [NSString stringWithFormat:@"%@/x%iy%u.png", self.directoryPath, col + 1, row + 1];
-
     return [UIImage imageWithContentsOfFile:path];
 }
 

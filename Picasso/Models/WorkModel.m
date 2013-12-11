@@ -7,12 +7,13 @@
 //
 
 #import "WorkModel.h"
+#import "DataManager.h"
 
 @implementation WorkModel
 
 - (id)initWithData:(NSDictionary *)data {
     
-    self.workId = data[@"id"];
+    self.workId = [data[@"id"] integerValue];
     self.title = data[@"title"];
     self.description = data[@"description"];
     self.sceneNumber = [data[@"sceneNumber"] integerValue];
@@ -20,8 +21,14 @@
     self.h = data[@"h"];
     self.l = data[@"l"];
     self.technical = data[@"technical"];
+    self.unlocked = NO;
     
     return [super init];
+}
+
+- (void)unlockWork {
+    self.unlocked = YES;
+    [[DataManager sharedInstance] unlockWorkWithNumber:self.workId];
 }
 
 @end

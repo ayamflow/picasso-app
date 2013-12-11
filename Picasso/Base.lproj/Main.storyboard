@@ -7,7 +7,7 @@
         <!--Scene Chooser-->
         <scene sceneID="dVN-g0-96a">
             <objects>
-                <viewController storyboardIdentifier="SceneChooser" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneChooser" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i8K-0P-76g" customClass="SceneChooser" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gjo-LO-52i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,7 +55,7 @@
         <!--Musem-->
         <scene sceneID="6Ri-A0-tsU">
             <objects>
-                <viewController storyboardIdentifier="Museum" id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Museum" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pw8-1h-sAP" customClass="Musem" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ia9-bb-cjq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,7 +70,7 @@
         <!--Home-->
         <scene sceneID="SbM-vb-Srf">
             <objects>
-                <viewController storyboardIdentifier="Home" id="slh-Y1-crv" customClass="Home" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="slh-Y1-crv" customClass="Home" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sc5-Io-2C9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -136,7 +136,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="slh-Y1-crv" kind="relationship" relationship="rootViewController" id="N89-JG-o7h"/>
+                        <segue destination="slh-Y1-crv" kind="relationship" relationship="rootViewController" id="SZu-Tt-Ma1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqE-M1-TQm" userLabel="First Responder" sceneMemberID="firstResponder"/>

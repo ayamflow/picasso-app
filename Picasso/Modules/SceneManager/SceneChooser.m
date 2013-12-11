@@ -65,7 +65,10 @@
     [self initDate];
 
     [self.view bringSubviewToFront:self.navigationBar];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 
@@ -110,7 +113,7 @@
     UILabel *chapterLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width / 4, 20)];
     chapterLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
     chapterLabel.textColor = [UIColor blackColor];
-    chapterLabel.text = [[NSString stringWithFormat:@"%li / %li chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
+    chapterLabel.text = [[NSString stringWithFormat:@"%i / %i chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
     [chapterLabel sizeToFit];
     [self.bottomInfos addSubview:chapterLabel];
 
@@ -175,8 +178,8 @@
     [self.carousel moveTo:CGPointMake(0, - 20)];
     self.carousel.alpha = 0;
 
-//    self.bottomInfos.alpha = 0;
-//    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
+    self.bottomInfos.alpha = 0;
+    [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
 
     CGFloat duration = 0.6;
     [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -189,10 +192,10 @@
         self.carousel.alpha = 1;
     } completion:nil];
 
-//    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//        self.bottomInfos.alpha = 1;
-//        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
-//    } completion:nil];
+    [UIView animateWithDuration:duration delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.bottomInfos.alpha = 1;
+        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
+    } completion:nil];
 }
 
 - (void)transitionOutToHome {

@@ -14,9 +14,14 @@
 #import "HoursPanel.h"
 #import "InfosPanel.h"
 #import "NavigationBarView.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
+#import <MapKit/MapKit.h>
 
 #define kCellLabelTag 1
 #define kCellDetailTag 2
+
+#define kCellMap 2
 
 @interface Musem ()
 
@@ -27,6 +32,8 @@
 @property (strong, nonatomic) NSArray *subviewClasses;
 @property (strong, nonatomic) NSMutableArray *openCellIndexes;
 @property (strong, nonatomic) NSMutableArray *cellHeights;
+
+@property (assign, nonatomic) BOOL leavingToExplore;
 
 @end
 
@@ -42,15 +49,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
-
+    
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
 //    [self initData];
     [self initTexts];
 
+    self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 
@@ -59,7 +70,12 @@
     [self.view addSubview:self.navigationBar];
 
     [self.navigationBar.backButton addTarget:self action:@selector(transitionOut) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationBar.exploreButton addTarget:self action:@selector(navigateToExplore) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.exploreButton addTarget:self action:@selector(outToExplore) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)outToExplore {
+    self.leavingToExplore = YES;
+    [self transitionOut];
 }
 
 - (void)initTableView {
@@ -150,13 +166,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == kCellMap) [self openMaps];
+    if(indexPath.row >= kCellMap) return;
+    
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if([self.openCellIndexes indexOfObject:@(indexPath.row)] == NSNotFound) {
-        NSLog(@"EXPAND");
         [self expandCell:cell atIndexPath:indexPath];
     }
     else {
-        NSLog(@"CLOSE");
         [self closeCell:cell atIndexPath:indexPath];
     }
 }
@@ -253,31 +270,64 @@
     NSArray *cells = [self.tableView visibleCells];
     for(NSInteger i = [cells count] - 1; i >= 0; i--) {
         UITableViewCell *cell = [cells objectAtIndex:i];
-        [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+        [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:0 animations:^{
             cell.alpha = 0;
             cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
         } completion:nil];
     }
 
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.4 options:0 animations:^{
         self.navigationBar.alpha = 0;
         self.tableView.alpha = 0;
     } completion:^(BOOL finished) {
-        [self toHome];
+        [self cleanArrays];
+        if(self.leavingToExplore) {
+            [self navigateToExplore];
+        }
+        else {
+            [self toHome];
+        }
     }];
 
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)cleanArrays {
+    self.labels = nil;
+    self.identifiers = nil;
+    self.subviewClasses = nil;
+    self.openCellIndexes = nil;
+    self.cellHeights = nil;
+    [self.tableView removeFromSuperview];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     cell.alpha = 0;
     cell.layer.anchorPoint = CGPointMake(0.5, 0);
     cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
-    [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
+    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
+    [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:0 animations:^{
         cell.alpha = 1.0;
         cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     } completion:^(BOOL finished) {
-
+        
     }];
+}
+
+// Opening Maps
+
+- (void)openMaps {
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(48.85967, 2.36242);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:@"Musée National Picasso Paris"];
+        [mapItem openInMapsWithLaunchOptions:nil];
+    }
 }
 
 @end

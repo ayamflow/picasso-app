@@ -1,3 +1,7 @@
 Picasso/Data/Scenes
 *.mp4
 .DS_Store
+*.pbxuser
+*.xcworkspace
+xcuserdata
+*.xcodeproj/ !*.xcodeproj/project.pbxproj

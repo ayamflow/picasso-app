@@ -20,6 +20,8 @@
 @property (assign, nonatomic) BOOL motionEnabled;
 @property (assign, nonatomic) BOOL playbackCompleted;
 
+@property (assign, nonatomic) double lastPitch;
+
 @end
 
 @implementation MotionVideoPlayer
@@ -140,29 +142,48 @@ static BOOL initialized;
 
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
     double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
-
+//    double playerRate = [self getNormalizedPlayerRateWithAttitude: motion.attitude];
     self.player.rate = playerRate;
-//    if(CMTimeCompare(self.player.currentTime, self.player.currentItem.asset.duration) == 0) {
-//        NSLog(@"[MotionVideoPlayer] Completed !");
-//        self.playbackCompleted = YES;
-//    }
-}
-
-// This one slowly updates the player rate with the pitch
-- (double)getSmoothedPlayerRateWithPitch:(double)pitch {
-    if(pitch > 0.2) return fmin(2, self.player.rate + 0.2);
-    else if(pitch < -0.2) return fmax(-2, self.player.rate - 0.2);
-    else return 0.0;
+    
+    [self.delegate motionDidChange];
 }
 
 // This method mirrors the device motion to the player rate, normalized to [-2, 2]
 - (double)getNormalizedPlayerRateWithPitch:(double)pitch {
     double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
     // Stabilizes playback around 0
+
+    self.pitch = playerRate + (playerRate - self.lastPitch) * 0.1;
+    self.lastPitch = self.pitch;
+
     if(playerRate < 0.2 && playerRate > -0.2) playerRate = 0;
 
 	return playerRate;
 }
+
+/*- (double)getNormalizedPlayerRateWithAttitude:(CMAttitude *)attitude {
+    CMQuaternion quat = attitude.quaternion;
+    double playerRate = asin(2 * (quat.x * quat.z - quat.w * quat.y));
+    
+    if (self.lastPitch == 0) {
+        self.lastPitch = playerRate;
+    }
+    
+    // kalman filtering
+    static float q = 0.1;   // process noise
+    static float r = 0.1;   // sensor noise
+    static float p = 0.1;   // estimated error
+    static float k = 0.5;   // kalman filter gain
+    
+    float x = self.lastPitch;
+    p = p + q;
+    k = p / (p + r);
+    x = x + k*( playerRate - x);
+    p = (1 - k) * p;
+    self.lastPitch = x;
+    
+    return playerRate;
+}*/
 
 - (UIImage *)getScreenshot {
 	AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:self.player.currentItem.asset];

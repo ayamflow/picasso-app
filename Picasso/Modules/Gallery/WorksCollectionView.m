@@ -65,7 +65,7 @@
     
     UIImageView *cellImageView = cell.contentView.subviews[0];
     
-    NSString *imageName = [NSString stringWithFormat: @"min-%@.jpg", currentWork.workId];
+    NSString *imageName = [NSString stringWithFormat: @"min-%li.jpg", currentWork.workId];
     cellImageView.image = [UIImage imageNamed:imageName];
     
     return cell;
@@ -81,7 +81,7 @@
 #pragma mark – UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     WorkModel *currentWork = [self.sceneWorks objectAtIndex:indexPath.row];
-    NSString *imageName = [NSString stringWithFormat: @"min-%@.jpg", currentWork.workId];
+    NSString *imageName = [NSString stringWithFormat: @"min-%li.jpg", currentWork.workId];
     UIImage *image = [UIImage imageNamed:imageName];
     // Solution provisoire pour afficher les images, à remplacer avec un template
     return CGSizeMake(image.size.width/2, image.size.height/2);
