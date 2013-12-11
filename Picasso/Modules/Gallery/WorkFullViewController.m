@@ -8,6 +8,7 @@
 
 #import "DataManager.h"
 #import "WorkModel.h"
+#import "QuestionModel.h"
 #import "WorkFullViewController.h"
 #import "OrientationUtils.h"
 #import "A3ParallaxScrollView.h"
@@ -21,6 +22,8 @@
 @property (nonatomic, strong) UIImageView *imageWorkView;
 @property (nonatomic, strong) DataManager *datamanager;
 @property (nonatomic, strong) WorkModel *work;
+@property (nonatomic, strong) QuestionModel *question;
+@property (nonatomic, assign) int parallaxY;
 
 @end
 
@@ -44,16 +47,19 @@ CGRect deviceSize;
     
     _datamanager = [[DataManager sharedInstance] init];
     _work = [_datamanager getWorkWithNumber:self.workId];
+    _question = [_datamanager getRandomQuestion];
 
-    self.parallaxScrollView = [[A3ParallaxScrollView alloc] initWithFrame:self.view.bounds];
-    self.parallaxScrollView.delegate = self;
+    _parallaxScrollView = [[A3ParallaxScrollView alloc] initWithFrame:self.view.bounds];
+    _parallaxScrollView.delegate = self;
     [self.view addSubview:self.parallaxScrollView];
     
     CGSize contentSize = self.parallaxScrollView.frame.size;
-    contentSize.height *= 5.0f;
+    contentSize.height *= 10.0f;
     
-    self.parallaxScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.parallaxScrollView.contentSize = contentSize;
+    _parallaxScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _parallaxScrollView.contentSize = contentSize;
+    
+    _parallaxY = 0;
     
     // Scroll Content
     _mapBackgroundView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"map-bg.png"]]];
@@ -70,28 +76,73 @@ CGRect deviceSize;
     
     [_imageWorkView.layer setBorderColor: [[UIColor textColor] CGColor]];
     [_imageWorkView.layer setBorderWidth: 20.0];
+    _imageWorkView.layer.zPosition = 1;
     
-    [self.parallaxScrollView addSubview:_imageWorkView withAcceleration:CGPointMake(0.0f, 0.4f)];
+    [self.parallaxScrollView addSubview:_imageWorkView withAcceleration:CGPointMake(0.0f, 0.5f)];
+    _parallaxY = _imageWorkView.frame.origin.y + _imageWorkView.frame.size.height;
     
-    _textWorkView.frame = CGRectMake(_imageWorkView.layer.bounds.origin.x + _imageWorkView.layer.bounds.size.width + 61, _imageWorkView.bounds.origin.y + _imageWorkView.bounds.size.height + 60, _textWorkView.frame.size.width, _textWorkView.frame.size.height);
+    _textWorkView.frame = CGRectMake(_imageWorkView.layer.bounds.origin.x + _imageWorkView.layer.bounds.size.width + 61, _parallaxY - _imageWorkView.layer.bounds.size.height/2, _textWorkView.frame.size.width, _textWorkView.frame.size.height);
     _textWorkView.backgroundColor = [UIColor whiteColor];
     _textWorkView.layer.masksToBounds = NO;
     _textWorkView.layer.shadowOffset = CGSizeMake(5, 5);
     _textWorkView.layer.shadowRadius = 5;
     _textWorkView.layer.shadowOpacity = 0.1;
     [self.parallaxScrollView addSubview:_textWorkView withAcceleration:CGPointMake(0.0f, 0.5f)];
+    _parallaxY = _textWorkView.frame.origin.y + _textWorkView.frame.size.height;
+    
+    _descriptionWorkView.frame = CGRectMake(70, (_parallaxY - 10) / 1.35, _descriptionWorkView.frame.size.width, _descriptionWorkView.frame.size.height);
+    _descriptionWorkView.backgroundColor = [UIColor whiteColor];
+    _descriptionWorkView.layer.masksToBounds = NO;
+    _descriptionWorkView.layer.shadowOffset = CGSizeMake(5, 5);
+    _descriptionWorkView.layer.shadowRadius = 5;
+    _descriptionWorkView.layer.shadowOpacity = 0.1;
+    [self.parallaxScrollView addSubview:_descriptionWorkView withAcceleration:CGPointMake(0.0f, 0.25f)];
+    _parallaxY = _descriptionWorkView.frame.origin.y + _descriptionWorkView.frame.size.height;
+    
+    _questionView.frame = CGRectMake(_questionView.frame.origin.x, _parallaxY + 100, _questionView.frame.size.width, _questionView.frame.size.height);
+    [self.parallaxScrollView addSubview:_questionView withAcceleration:CGPointMake(0.0f, 0.25f)];
+    _parallaxY = _questionView.frame.origin.y + _questionView.frame.size.height;
+    
+    _answerView.frame = CGRectMake(_answerView.frame.origin.x, _parallaxY + 25, _answerView.frame.size.width, _answerView.frame.size.height);
+    [self.parallaxScrollView addSubview:_answerView withAcceleration:CGPointMake(0.0f, 0.25f)];
     
     _titleLabel.layer.zPosition = 1;
     [self.parallaxScrollView addSubview:_titleLabel withAcceleration:CGPointMake(0.0f, 0.5f)];
     
     _headerView.layer.zPosition = 1;
     [self.parallaxScrollView addSubview:_headerView withAcceleration:CGPointMake(0.0f, 0.3f)];
+    
+    _footerView.frame = CGRectMake(_footerView.frame.origin.x, _parallaxScrollView.contentSize.height - 80, _footerView.frame.size.width, _footerView.frame.size.height);
+    [self.parallaxScrollView addSubview:_footerView];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSLog(@"text view did change");
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textView.frame = newFrame;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint contentOffset = _parallaxScrollView.contentOffset;
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%i / %ld oeuvres", _work.workId, [_datamanager getWorksNumber]] uppercaseString];
+    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%li / %ld oeuvres", (long)_work.workId + 1, [_datamanager getWorksNumber] + 1] uppercaseString];
+    _textTitleLabel.text = _work.title;
+    _textHLabel.text = [NSString stringWithFormat:@"H: %@", _work.h];
+    _textLLabel.text = [NSString stringWithFormat:@"L: %@", _work.l];
+    _textTechniqueLabel.text = _work.technical;
+    _descriptionWorkTextView.text = _work.description;
+    
+    _questionLabel.text = _question.question;
+    _choice1Label.text = _question.choice_1;
+    _choice2label.text = _question.choice_2;
 }
 
 - (void)didReceiveMemoryWarning

@@ -44,6 +44,10 @@
             NSInteger worksNumber = [works count];
 			NSMutableArray *worksArray = [[NSMutableArray alloc] initWithCapacity:worksNumber];
 
+            NSArray *questions = picassoDictionnary[@"questions"];
+            NSInteger questionsNumber = [questions count];
+			NSMutableArray *questionsArray = [[NSMutableArray alloc] initWithCapacity:questionsNumber];
+            
             for(int i = 0; i < scenesNumber; i++) {
                 SceneModel *scene = [[SceneModel alloc] initWithData:[scenes objectAtIndex:i]];
                 [scenesArray addObject:scene];
@@ -54,8 +58,16 @@
                 [worksArray addObject:work];
             }
             
+            for(int i = 0; i < questionsNumber; i++) {
+                QuestionModel *question = [[QuestionModel alloc] initWithData:[questions objectAtIndex:i]];
+                if (![question.choice_1 isKindOfClass:[NSNull class]] && ![question.choice_2 isKindOfClass:[NSNull class]]) {
+                    [questionsArray addObject:question];
+                }
+            }
+            
             self.scenes = [NSArray arrayWithArray:scenesArray];
             self.works = [NSArray arrayWithArray:worksArray];
+            self.questions = [NSArray arrayWithArray:questionsArray];
         }
     }
     return self;
@@ -89,7 +101,6 @@
     return [self.scenes objectAtIndex:currentScene];
 }
 
-
 - (NSInteger)getScenesNumber {
     return [self.scenes count];
 }
@@ -115,6 +126,11 @@
 
 - (NSInteger)getWorksNumber {
     return [self.works count];
+}
+
+- (QuestionModel *)getRandomQuestion {
+    int index = arc4random() % ([self.questions count]);
+    return [self.questions objectAtIndex:index];
 }
 
 - (void)unlockWorkWithNumber:(NSInteger)number {
