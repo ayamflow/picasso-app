@@ -86,6 +86,11 @@
 		62E9FA35181FCBC20080A21D /* TrackerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA34181FCBC20080A21D /* TrackerModel.m */; };
 		62E9FA3A18201CD30080A21D /* SceneInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E9FA3918201CD30080A21D /* SceneInterstitial.m */; };
 		B93248E91856706C000BF92E /* menu.mov in Resources */ = {isa = PBXBuildFile; fileRef = B93248E81856706C000BF92E /* menu.mov */; };
+		B9551FFF1857C99300BE90C7 /* WorkFullViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9551FFE1857C99300BE90C7 /* WorkFullViewController.m */; };
+		B95520031857CA6E00BE90C7 /* A3ParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95520021857CA6E00BE90C7 /* A3ParallaxScrollView.m */; };
+		B95520081857D78A00BE90C7 /* grid-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520071857D78A00BE90C7 /* grid-bg@2x.png */; };
+		B955200A1857D78E00BE90C7 /* map-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B95520091857D78E00BE90C7 /* map-bg@2x.png */; };
+		B955200C1857E19900BE90C7 /* arrow-bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */; };
 		CE32CDDE182EC75600BBAE33 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */; };
 		CE32CDE4182EF42200BBAE33 /* menuSlider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE32CDE3182EF42200BBAE33 /* menuSlider@2x.png */; };
 		CE45E6A01849EB4200DCFF09 /* navBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE45E69E1849EB4200DCFF09 /* navBackButton@2x.png */; };
@@ -407,6 +412,13 @@
 		62E9FA3818201CD30080A21D /* SceneInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneInterstitial.h; path = Modules/SceneManager/SceneInterstitial.h; sourceTree = "<group>"; };
 		62E9FA3918201CD30080A21D /* SceneInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneInterstitial.m; path = Modules/SceneManager/SceneInterstitial.m; sourceTree = "<group>"; };
 		B93248E81856706C000BF92E /* menu.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = menu.mov; sourceTree = "<group>"; };
+		B9551FFD1857C99300BE90C7 /* WorkFullViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkFullViewController.h; path = Modules/Gallery/WorkFullViewController.h; sourceTree = "<group>"; };
+		B9551FFE1857C99300BE90C7 /* WorkFullViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkFullViewController.m; path = Modules/Gallery/WorkFullViewController.m; sourceTree = "<group>"; };
+		B95520011857CA6E00BE90C7 /* A3ParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = A3ParallaxScrollView.h; path = A3Parallax/A3ParallaxScrollView.h; sourceTree = "<group>"; };
+		B95520021857CA6E00BE90C7 /* A3ParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = A3ParallaxScrollView.m; path = A3Parallax/A3ParallaxScrollView.m; sourceTree = "<group>"; };
+		B95520071857D78A00BE90C7 /* grid-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grid-bg@2x.png"; path = "Data/UI/Gallery/Works/grid-bg@2x.png"; sourceTree = "<group>"; };
+		B95520091857D78E00BE90C7 /* map-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-bg@2x.png"; path = "Data/UI/Gallery/Works/map-bg@2x.png"; sourceTree = "<group>"; };
+		B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-bottom@2x.png"; path = "Data/UI/Gallery/Works/arrow-bottom@2x.png"; sourceTree = "<group>"; };
 		B98CFC2418204DE400BC6A09 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 4.jpg; path = Picasso/Data/4.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2518204DE400BC6A09 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 5.jpg; path = Picasso/Data/5.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2618204DE400BC6A09 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 6.jpg; path = Picasso/Data/6.jpg; sourceTree = SOURCE_ROOT; };
@@ -415,7 +427,7 @@
 		B98CFC2918204DE400BC6A09 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 9.jpg; path = Picasso/Data/9.jpg; sourceTree = SOURCE_ROOT; };
 		B98CFC2A18204DE400BC6A09 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 10.jpg; path = Picasso/Data/10.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5300181FBC7400DFCC39 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 0.jpg; path = Picasso/Data/0.jpg; sourceTree = SOURCE_ROOT; };
-		B9FF5306181FE76400DFCC39 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Picasso/Data/1.jpg; sourceTree = SOURCE_ROOT; };
+		B9FF5306181FE76400DFCC39 /* 1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "1@2x.jpg"; path = "Picasso/Data/1@2x.jpg"; sourceTree = SOURCE_ROOT; };
 		B9FF5307181FE76400DFCC39 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 2.jpg; path = Picasso/Data/2.jpg; sourceTree = SOURCE_ROOT; };
 		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscapeDelegate.h; path = Modules/SceneManager/SceneChooserLandscapeDelegate.h; sourceTree = "<group>"; };
@@ -696,6 +708,7 @@
 		4F34E958183CC79100661A68 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				B95520001857CA0F00BE90C7 /* A3Parallax */,
 				6248E17C1844F8CD001BEF6C /* iCarousel */,
 			);
 			path = Libs;
@@ -768,6 +781,7 @@
 		622504811855C5E7006D358B /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				B95520061857D78100BE90C7 /* Works */,
 				6225047B1855C5E3006D358B /* arrow-left-nav@2x.png */,
 				6225047C1855C5E3006D358B /* arrow-right-nav@2x.png */,
 				6225047D1855C5E3006D358B /* arrow-top-icon.png */,
@@ -927,6 +941,7 @@
 		624E6B2D181E6FAC00E7FE58 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B9551FFC1857C93C00BE90C7 /* WorkFullView */,
 				CE45E6AA184A1FAC00DCFF09 /* Intro */,
 				CE86045A18283BB00019657F /* Home */,
 				620423C518434AE500648ABA /* SceneChooser */,
@@ -1004,7 +1019,7 @@
 				B98CFC2818204DE400BC6A09 /* 8.jpg */,
 				B98CFC2918204DE400BC6A09 /* 9.jpg */,
 				B98CFC2A18204DE400BC6A09 /* 10.jpg */,
-				B9FF5306181FE76400DFCC39 /* 1.jpg */,
+				B9FF5306181FE76400DFCC39 /* 1@2x.jpg */,
 				B9FF5307181FE76400DFCC39 /* 2.jpg */,
 				B9FF5308181FE76400DFCC39 /* 3.jpg */,
 				B9FF5300181FBC7400DFCC39 /* 0.jpg */,
@@ -1070,6 +1085,34 @@
 				62DCA8E918439F7000CF593F /* scene-1@2x.png */,
 			);
 			path = Previews;
+			sourceTree = "<group>";
+		};
+		B9551FFC1857C93C00BE90C7 /* WorkFullView */ = {
+			isa = PBXGroup;
+			children = (
+				B9551FFD1857C99300BE90C7 /* WorkFullViewController.h */,
+				B9551FFE1857C99300BE90C7 /* WorkFullViewController.m */,
+			);
+			name = WorkFullView;
+			sourceTree = "<group>";
+		};
+		B95520001857CA0F00BE90C7 /* A3Parallax */ = {
+			isa = PBXGroup;
+			children = (
+				B95520011857CA6E00BE90C7 /* A3ParallaxScrollView.h */,
+				B95520021857CA6E00BE90C7 /* A3ParallaxScrollView.m */,
+			);
+			name = A3Parallax;
+			sourceTree = "<group>";
+		};
+		B95520061857D78100BE90C7 /* Works */ = {
+			isa = PBXGroup;
+			children = (
+				B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */,
+				B95520071857D78A00BE90C7 /* grid-bg@2x.png */,
+				B95520091857D78E00BE90C7 /* map-bg@2x.png */,
+			);
+			name = Works;
 			sourceTree = "<group>";
 		};
 		B9FF5302181FBD3A00DFCC39 /* WorkView */ = {
@@ -1595,6 +1638,7 @@
 				CE76B1311854925A000166C3 /* x8y12@2x.png in Resources */,
 				CE76B13F1854925A000166C3 /* x9y13@2x.png in Resources */,
 				CE76B0FC1854925A000166C3 /* x4y11@2x.png in Resources */,
+				B955200A1857D78E00BE90C7 /* map-bg@2x.png in Resources */,
 				CE76B1471854925A000166C3 /* x10y8@2x.png in Resources */,
 				CE98B419184524A8004760D3 /* scene-3@2x.png in Resources */,
 				624E6AFF181E5FD300E7FE58 /* InfoPlist.strings in Resources */,
@@ -1606,6 +1650,7 @@
 				5F63057C1855D54A002E8547 /* min-5@2x.jpg in Resources */,
 				CE76B1451854925A000166C3 /* x10y6@2x.png in Resources */,
 				CE76B1171854925A000166C3 /* x6y12@2x.png in Resources */,
+				B95520081857D78A00BE90C7 /* grid-bg@2x.png in Resources */,
 				CE76B1071854925A000166C3 /* x5y9@2x.png in Resources */,
 				CE76B12A1854925A000166C3 /* x8y5@2x.png in Resources */,
 				CE76B1181854925A000166C3 /* x6y13@2x.png in Resources */,
@@ -1613,6 +1658,7 @@
 				CE76B0D11854925A000166C3 /* x1y7@2x.png in Resources */,
 				CE76B0EC1854925A000166C3 /* x3y8@2x.png in Resources */,
 				CE76B1321854925A000166C3 /* x8y13@2x.png in Resources */,
+				B955200C1857E19900BE90C7 /* arrow-bottom@2x.png in Resources */,
 				62B31CD21844E1D20053CC75 /* Brandon_reg.otf in Resources */,
 				CE76B0F21854925A000166C3 /* x4y1@2x.png in Resources */,
 				5F6305791855D54A002E8547 /* min-2@2x.jpg in Resources */,
@@ -1703,6 +1749,7 @@
 				CE91160A184B6AC900420043 /* Path5View.m in Sources */,
 				624E6B60181EA2B700E7FE58 /* SceneModel.m in Sources */,
 				CE91160D184B6B5800420043 /* Path6View.m in Sources */,
+				B9551FFF1857C99300BE90C7 /* WorkFullViewController.m in Sources */,
 				CE9115F7184B5FED00420043 /* MapPathView.m in Sources */,
 				4F836D35183BD4EA00CA63CD /* Events.m in Sources */,
 				4F836D25183BD3EB00CA63CD /* UIViewControllerPicasso.m in Sources */,
@@ -1720,6 +1767,7 @@
 				CE45E6AE184A371800DCFF09 /* SceneMenu.m in Sources */,
 				CEE3B20F184414B4000324DD /* UIImage+ImageEffects.m in Sources */,
 				CE45E6B6184A5C9800DCFF09 /* SceneChooserLandscape.m in Sources */,
+				B95520031857CA6E00BE90C7 /* A3ParallaxScrollView.m in Sources */,
 				624E6B41181E8C1200E7FE58 /* MotionVideoPlayer.m in Sources */,
 				CE911613184B9AB400420043 /* DashedPathViewLandscape.m in Sources */,
 				CE911607184B6A6800420043 /* Path4View.m in Sources */,
