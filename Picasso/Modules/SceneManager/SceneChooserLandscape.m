@@ -16,7 +16,6 @@
 #import "ScenePreviewView.h"
 #import "SceneModel.h"
 #import "iCarousel.h"
-#import "DashedPathViewLandscape.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -28,8 +27,6 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
-
-@property (strong, nonatomic) DashedPathViewLandscape *dashedPath;
 
 @property (strong, nonatomic) UIImageView *leftArrow;
 @property (strong, nonatomic) UIImageView *rightArrow;
@@ -55,9 +52,6 @@
 
 	self.view.backgroundColor = [UIColor clearColor];
 
-    [self initPath];
-//    [self initBackground];
-
     [self initPreviews];
     [self initCarousel];
 
@@ -65,13 +59,6 @@
 
     [self initDate];
 }
-
-/*- (void)initBackground {
-    UIView *background = [[UIView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
-    background.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
-    [self.view addSubview:background];
-    [self.view sendSubviewToBack:background];
-}*/
 
 - (void)initArrows {
     self.leftArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow.png"]];
@@ -122,13 +109,6 @@
     separator.center = self.dateLabel.center;
 }
 
-- (void)initPath {
-    self.dashedPath = [[DashedPathViewLandscape alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width * 7 * 0.9, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
-    [self.view addSubview:self.dashedPath];
-    self.dashedPath.backgroundColor = [UIColor clearColor];
-    [self.view sendSubviewToBack:self.dashedPath];
-}
-
 - (void)transitionIn {
     [self.carousel moveTo:CGPointMake(self.carousel.frame.size.width, 0)];
     self.carousel.alpha = 0;
@@ -162,9 +142,7 @@
     [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [view moveTo:CGPointMake(- view.frame.size.width, view.frame.origin.y)];
         view.alpha = 0;
-        self.dashedPath.alpha = 0;
     } completion:^(BOOL finished) {
-        [self.dashedPath removeFromSuperview];
         [view removeFromSuperview];
         [self.delegate navigateToSceneWithNumber:index];
     }];
@@ -181,6 +159,7 @@
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
     self.dateLabel.text = [sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
     [self.delegate updateNavigationTitleWithString:[sceneModel.title uppercaseString]];
+    [self.mapDelegate translateMapToIndex:carousel.currentItemIndex];
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
@@ -223,8 +202,6 @@
     return transform;
 }
 
-- (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {
-    [self.dashedPath moveTo:CGPointMake( - offset * self.dashedPath.frame.size.width * 0.1, self.dashedPath.frame.origin.y)];
-}
+- (void)carouselScrollHasChanged:(iCarousel *)caroussel withOffset:(CGFloat)offset {}
 
 @end

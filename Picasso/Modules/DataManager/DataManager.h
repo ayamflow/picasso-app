@@ -10,11 +10,13 @@
 #import "SceneModel.h"
 #import "WorkModel.h"
 #import "GameModel.h"
+#import "QuestionModel.h"
 
 @interface DataManager : NSObject
 
 @property (strong, nonatomic) NSArray *scenes;
 @property (strong, nonatomic) NSArray *works;
+@property (strong, nonatomic) NSArray *questions;
 
 + (id)sharedInstance;
 
@@ -24,8 +26,11 @@
 - (NSMutableArray *)getWorksWithScene:(NSInteger)sceneNumber;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
 - (WorkModel *)getWorkWithNumber:(NSInteger)number;
+- (QuestionModel *)getRandomQuestion;
 - (void)unlockSceneTo:(NSInteger)number;
 - (void)unlockSceneWithNumber:(NSInteger)number;
+- (void)unlockWorkWithNumber:(NSInteger)number;
+- (void)unlockWorkTo:(NSInteger)number;
 - (NSInteger)getScenesNumber;
 - (NSInteger)getWorksNumber;
 

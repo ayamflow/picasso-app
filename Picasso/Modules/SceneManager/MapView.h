@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MapTranslationDelegate.h"
 
-@interface MapView : UIView <UIScrollViewDelegate>
+@interface MapView : UIView <UIScrollViewDelegate, MapTranslationDelegate>
 
 @property (strong, nonatomic) NSArray *scenes;
 
 - (void)showDetails;
+- (void)clearPaths;
+- (void)clearAnimatedPath;
+- (void)scrollToIndex:(NSInteger)index;
 
 @end

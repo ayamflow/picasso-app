@@ -12,6 +12,8 @@
 #import "UIViewControllerPicasso.h"
 #import "UIViewPicasso.h"
 #import "SceneChooser.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 20
@@ -47,7 +49,10 @@
     
     [self initLabels];
     [self initButtons];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self transitionIn];
 }
 
@@ -67,6 +72,7 @@
         [button addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+        [button setEasingFunction:QuadraticEaseOut forKeyPath:@"frame"];
     }
 
     // This one is the reference
@@ -94,42 +100,49 @@
 
 - (void)prepareTransitionOut:(id)sender {
     [self stopVideo];
+    NSArray *buttonsOrder;
     switch([sender tag]) {
         case 0:
             self.nextViewName = @"SceneChooser";
+            buttonsOrder = @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton];
             break;
         case 1:
             self.nextViewName = @"GalleryViewController";
+            buttonsOrder = @[self.galleryButton, self.exploreButton, self.museumButton, self.creditsButton];
             break;
         case 2:
             self.nextViewName = @"Museum";
+            buttonsOrder = @[self.museumButton, self.creditsButton, self.galleryButton, self.exploreButton];
             break;
         case 3:
             self.nextViewName = @"Credits";
+            buttonsOrder = @[self.creditsButton, self.museumButton, self.galleryButton, self.exploreButton];
             break;
     }
-    [self transitionOut];
+    [self transitionOutWithOrder:buttonsOrder];
 }
 
-- (void)transitionOut {
+- (void)transitionOutWithOrder:(NSArray *)order {
     CGFloat delay = 0;
     CGFloat duration = 0.8;
-    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+    int i = 0;
+    for(UIButton *button in order) {
         [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [button moveTo:CGPointMake(-button.frame.size.width, button.frame.origin.y)];
+            [button moveTo:CGPointMake(-button.frame.size.width * 1.2, button.frame.origin.y)];
             button.alpha = 0;
         } completion:^(BOOL finished) {
-
-            if(delay > 0.10) {
+            if(i == 3) {
                 [self transitionOutComplete];
             }
         }];
+        i++;
         delay += 0.05;
     }
 }
 
 - (void)transitionOutComplete {
     UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.nextViewName];
+//    NSLog(@"vc: %@, %@", self.navigationController,  nextViewController);
     [self.navigationController pushViewController:nextViewController animated:NO];
 }
 

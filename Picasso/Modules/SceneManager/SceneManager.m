@@ -47,7 +47,8 @@
     self.scenesNumber = [dataManager getScenesNumber];
     
     // Auto launch
-    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];
+    [self showSceneWithNumber:[[dataManager getGameModel] currentScene]];   
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserEvent] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateBackToHome) name:[MPPEvents BackToHomeEvent] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipInterstitial) name:[MPPEvents SkipInterstitialEvent] object:nil];
@@ -76,15 +77,15 @@
     }
     
     // create a new scene into *currentScene
-    [self createSceneWithNumber:number andPosition:CGPointMake(0, 0)];
+    [self createSceneWithNumber:number];
 }
 
-- (void)createSceneWithNumber:(NSInteger)number andPosition:(CGPoint)position {
+- (void)createSceneWithNumber:(NSInteger)number {
     DataManager *dataManager = [DataManager sharedInstance];
     SceneModel *sceneModel = [dataManager getSceneWithNumber:number];
 
     self.oldScene = self.currentScene;
-    self.currentScene = [[Scene alloc] initWithModel:sceneModel andPosition:position];
+    self.currentScene = [[Scene alloc] initWithModel:sceneModel];
     self.currentScene.view.frame = self.view.frame;
     self.currentScene.delegate = self;
     [self addChildViewController:self.currentScene];
@@ -109,20 +110,19 @@
 
 - (void)removeInterstitial {
     [self.interstitial.view removeFromSuperview];
+    self.interstitial = nil;
 }
 
 - (void)skipInterstitial {
     [[[DataManager sharedInstance] getGameModel] setSceneCurrentTime:0.0];
-    [self createSceneWithNumber:[self getNextSceneNumber] andPosition:CGPointMake(0, self.currentScene.view.frame.size.height)];
-    [UIView animateWithDuration:0.4f animations:^{
+    [self createSceneWithNumber:[self getNextSceneNumber]];
+    [self.currentScene.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height)];
+    [UIView animateWithDuration:0.4 animations:^{
         // Move old scene & interstitial out of the screen
-        CGPoint oldScenePosition = CGPointMake(0, -self.oldScene.view.frame.size.height);
-        CGRect oldSceneFrame = self.oldScene.view.frame;
-        oldSceneFrame.origin = oldScenePosition;
-        self.oldScene.view.frame = oldSceneFrame;
-        self.interstitial.view.frame = oldSceneFrame;
+        [self.oldScene.view moveTo:CGPointMake(0, -[OrientationUtils nativeLandscapeDeviceSize].size.height)];
+        [self.interstitial.view moveTo:CGPointMake(0, -[OrientationUtils nativeLandscapeDeviceSize].size.height)];
         // Move new scene into the screen
-        self.currentScene.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
+        [self.currentScene.view moveTo:CGPointMake(0, 0)];
     } completion:^(BOOL finished) {
         [self removeLastSeenScene];
         [self removeInterstitial];

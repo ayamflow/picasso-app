@@ -44,8 +44,7 @@
 }
 
 - (void)toHome {
-    Home *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
-    [self.navigationController pushViewController:homeView animated:NO];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)navigateBackToHome {
@@ -66,8 +65,7 @@
         view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
         view.alpha = 0;
     } completion:^(BOOL finished) {
-        Home *homeView = [viewController.storyboard instantiateViewControllerWithIdentifier:@"Home"];
-        [viewController.navigationController pushViewController:homeView animated:NO];
+        [viewController.navigationController popToRootViewControllerAnimated:NO];
     }];
 }
 

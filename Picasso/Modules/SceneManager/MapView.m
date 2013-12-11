@@ -7,6 +7,7 @@
 //
 
 #import "MapView.h"
+#import "UIViewPicasso.h"
 #import "Events.h"
 #import "MapPathStatus.h"
 #import "DataManager.h"
@@ -24,6 +25,10 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *cityLabels;
+@property (strong, nonatomic) NSArray *paths;
+@property (strong, nonatomic) UIView *infoView;
+@property (strong, nonatomic) CAGradientLayer *infoMask;
+@property (strong, nonatomic) MapPathView *animatedPath;
 
 @end
 
@@ -34,16 +39,29 @@
         self.backgroundColor = [UIColor clearColor];
         [self initTiledMap];
         [self initLabels];
-//        [self initPath];
+        [self initPath];
         [self initPoints];
+        
+        [self addGradientMaskToMap];
+        
+     /*   CGFloat delay = 0;
+        int i = 0;
+        for(MapPathView *path in self.paths) {
+            [self performSelector:@selector(animatePath:) withObject:path afterDelay:delay];
+            delay += 0.75;
+            i++;
+        }*/
     }
     return self;
 }
 
+- (void)animatePath:(MapPathView *)path {
+    [path animatePath];
+}
+
 - (void)initTiledMap {
     TiledMapView *tiledMap = [[TiledMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 2)];
-    tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1.png" ofType:nil] stringByReplacingOccurrencesOfString:@"x1y1.png" withString:@""];
-    NSLog(@"pathtest: %@", [[NSBundle mainBundle] pathForResource:@"" ofType:nil]);
+    tiledMap.directoryPath = [[[NSBundle mainBundle] pathForResource:@"x1y1@2x" ofType:@".png"] stringByReplacingOccurrencesOfString:@"x1y1@2x.png" withString:@""];
 
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
     [self addSubview:self.scrollView];
@@ -53,8 +71,22 @@
     self.scrollView.delegate = self;
 }
 
+- (void)addGradientMaskToMap {
+    self.infoMask = [CAGradientLayer layer];
+    self.infoMask.frame = self.bounds;
+    self.infoMask.colors = @[(id)[[UIColor clearColor] CGColor], (id)[[UIColor whiteColor] CGColor], (id)[[UIColor whiteColor] CGColor], (id)[[UIColor clearColor] CGColor]];
+    self.infoMask.locations = @[[NSNumber numberWithFloat:0.1], [NSNumber numberWithFloat:0.4], [NSNumber numberWithFloat:0.7], [NSNumber numberWithFloat:0.9]];
+    self.infoMask.startPoint = CGPointMake(0.5, 0.0);
+    self.infoMask.endPoint = CGPointMake(0.5, 1.0);
+    
+    [self.infoView.layer setMask:self.infoMask];
+}
+
 
 - (void)initLabels {
+    self.infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+    [self.scrollView addSubview:self.infoView];
+    
     NSMutableArray *labels = [NSMutableArray arrayWithCapacity:7];
     NSArray *cities = [NSArray arrayWithObjects:@"Malaga", @"La Corogne", @"Barcelone", @"Paris", @"Dinard", @"Boisloup", @"Moujin", nil];
     CGPoint positions[] = {CGPointMake(175, 552), CGPointMake(167, 360), CGPointMake(312, 440), CGPointMake(391, 165), CGPointMake(297, 154), CGPointMake(396, 329), CGPointMake(423, 377)};
@@ -67,31 +99,34 @@
         label.text = [[cities objectAtIndex:i] uppercaseString];
         label.textAlignment = NSTextAlignmentCenter;
         [labels addObject:label];
-        [self.scrollView addSubview:label];
+        [self.infoView addSubview:label];
     }
 
     self.cityLabels = [NSArray arrayWithArray:labels];
-
 }
 
 - (void)initPath {
     DataManager *dataManager = [DataManager sharedInstance];
     NSInteger currentSceneIndex = [[dataManager getGameModel] currentScene];
 
-//    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
-    for(int i = 0; i < 1; i++) {
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[dataManager getScenesNumber]];
+    
+    for(int i = 0; i < [dataManager getScenesNumber] - 1; i++) {
         Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", i + 1]);
-        MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:self.frame];
-        // i < current -> notstarted
-
+        MapPathView *path = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+            // i < current -> notstarted
         if(i > currentSceneIndex) path.status = [MapPathStatus PathNotStartedStatus];
-        // i > current -> completed
+            // i > current -> completed
         else if(i < currentSceneIndex) path.status = [MapPathStatus PathCompletedStatus];
-        // i == current -> started
+            // i == current -> started
         else path.status = [MapPathStatus PathStartedStatus];
 
-        [self addSubview:path];
+        [paths addObject:path];
+        path.tag = i;
+        [self.infoView addSubview:path];
     }
+    
+    self.paths = [NSArray arrayWithArray:paths];
 }
 
 - (void)initPoints {
@@ -124,19 +159,22 @@
         point.tag = i;
         [point addTarget:self action:@selector(sceneTouched:) forControlEvents:UIControlEventTouchUpInside];
         [scenes addObject:point];
-        [self.scrollView addSubview:point];
+        [self.infoView addSubview:point];
     }
     self.scenes = [NSArray arrayWithArray:scenes];
 }
 
 - (void)sceneTouched:(id)sender {
     UILabel *scene = (UILabel *)sender;
-    NSLog(@"scene: %li", scene.tag);
     [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:YES];
+    
+    CATransform3D zoom = CATransform3DScale(CATransform3DIdentity, 1.3, 1.3, 1.0);
+    CATransform3D skew = CATransform3DRotate(zoom, 0.4, 0.0, 1.0, 0);
     [UIView animateWithDuration:0.6 animations:^{
-        // Hide path
-        // Hide button
-        // Hide labels
+        self.scrollView.layer.transform = skew;
+        for(MapPathView *path in self.paths) {
+            path.alpha = 0;
+        }
         for(int i = 0; i < [self.scenes count]; i++) {
             [[self.scenes objectAtIndex:i] setAlpha:0];
             [[self.cityLabels objectAtIndex:i] setAlpha:0];
@@ -148,56 +186,72 @@
 
 - (void)showDetails {
     [UIView animateWithDuration:0.6 animations:^{
-        // Show path
-        // Show button
-        // Show labels
+        self.scrollView.layer.transform = CATransform3DIdentity;
+        for(MapPathView *path in self.paths) {
+            path.alpha = 1;
+        }
         for(int i = 0; i < [self.scenes count]; i++) {
             [[self.scenes objectAtIndex:i] setAlpha:1];
             [[self.cityLabels objectAtIndex:i] setAlpha:1];
         }
+    } completion:^(BOOL finished) {
+        if(self.animatedPath != nil) {
+         [self.animatedPath removeFromSuperview];
+            self.animatedPath = nil;
+        }
     }];
 }
 
-// UIScrollView protocol
+- (void)clearPaths {
+    for(MapPathView *path in self.paths) {
+        [path.layer removeAllAnimations];
+    }
+}
+
+- (void)clearAnimatedPath {
+    if(self.animatedPath != nil) {
+        [self.animatedPath.layer removeAllAnimations];
+        [self.animatedPath removeFromSuperview];
+        self.animatedPath = nil;
+    }
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self toggleLabelsVisibility];
-
-    UILabel *label = [self.cityLabels objectAtIndex:0];
-    NSLog(@"%f/%f", label.frame.origin.y - scrollView.contentOffset.y, self.frame.size.height - kTopOffset);
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    self.infoMask.position = CGPointMake(self.infoMask.position.x, self.scrollView.contentOffset.y + self.infoMask.bounds.size.height / 2);
+    [CATransaction commit];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if(!decelerate) [self toggleLabelsVisibility];
+- (void)scrollToIndex:(NSInteger)index {
+    UIButton *scene = [self.scenes objectAtIndex:index];
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
+    } completion:nil];
 }
 
-- (void)toggleLabelsVisibility {
-    // Show/hide cityLabels
-    for(int i = 0; i < [self.cityLabels count]; i++) {
-        UILabel *label = [self.cityLabels objectAtIndex:i];
-        [self updateLabel:label visibilityWithOffset:self.scrollView.contentOffset.y];
+// Map Translate Protocol
 
-        UILabel *scene = [self.scenes objectAtIndex:i];
-        [self updateLabel:scene visibilityWithOffset:self.scrollView.contentOffset.y];
+- (void)translateMapToIndex:(NSInteger)index {
+    UIButton *scene = [self.scenes objectAtIndex:index];
+    [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
+    } completion:nil];
+    
+    [self clearAnimatedPath];
+    
+    if(index > 0) {
+        Class PathClass = NSClassFromString([NSString stringWithFormat:@"Path%iView", index--]);
+        self.animatedPath = (MapPathView *)[[PathClass alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+        self.animatedPath.animated = YES;
+        [self.scrollView addSubview:self.animatedPath];
+        [self.animatedPath animatePath];
     }
-
-}
-
-- (void)updateLabel:(UILabel *)label visibilityWithOffset:(CGFloat)offset {
-    if(label.enabled && (label.frame.origin.y - offset <= kTopOffset || label.frame.origin.y - offset > self.frame.size.height - kTopOffset )) {
-        label.enabled = NO;
-//        [UIView animateWithDuration:0.3 animations:^{
-//            label.alpha = 0;
-//        } completion:^(BOOL finished) {
-            label.hidden = YES;
-//        }];
-    }
-    else if(!label.enabled && label.frame.origin.y - offset > kTopOffset && label.frame.origin.y - offset <= self.frame.size.height - kTopOffset) {
-        label.hidden = NO;
-//        [UIView animateWithDuration:0.3 animations:^{
-            label.enabled = YES;
-//            label.alpha = 1;
-//        }];
+    else {
+        self.animatedPath = (MapPathView *)[[Path1View alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, self.scrollView.contentSize.height)];
+        self.animatedPath.onlyPoints = YES;
+        self.animatedPath.animated = NO;
+        [self.scrollView addSubview:self.animatedPath];
     }
 }
 
