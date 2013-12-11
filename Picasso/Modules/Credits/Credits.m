@@ -12,7 +12,9 @@
 #import "UIViewPicasso.h"
 #import "UIViewControllerPicasso.h"
 #import "UIView+EasingFunctions.h"
+#import "MotionVideoPlayer.h"
 #import "easing.h"
+#import "MotionVideoPlayer.h"
 
 #define kNameViewTag 10
 
@@ -33,14 +35,17 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-    
+
     [self initNavigationBar];
     [self initTexts];
     [self initNames];
+    
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[[MotionVideoPlayer sharedInstance] player] pause];
     [self transitionIn];
 }
 

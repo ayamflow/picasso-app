@@ -20,6 +20,7 @@
 #import "NavigationBarView.h"
 #import "DashedPathView.h"
 #import "StatsFooterView.h"
+#import "Events.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -65,11 +66,21 @@
     [self initTitle];
     [self initDate];
 
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
     [self.view bringSubviewToFront:self.navigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    if([[[MotionVideoPlayer sharedInstance] view] alpha] < 1) {
+        [[[MotionVideoPlayer sharedInstance] player] seekToTime:CMTimeMakeWithSeconds(25, 1.0)];
+        [self playVideo];
+        [[MotionVideoPlayer sharedInstance] fadeIn];
+    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseVideo) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
+    [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:27];
     [self transitionIn];
 }
 
@@ -174,6 +185,10 @@
 }
 
 - (void)transitionOutToHome {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
+    [[MotionVideoPlayer sharedInstance] fadeOut];
+
     CGFloat duration = 0.6;
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.navigationBar moveTo:CGPointMake(0, - 20)];
@@ -194,6 +209,10 @@
 }
 
 - (void)transitionOutWithView:(UIView *)view andIndex:(NSInteger)index {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
+    [self playVideo];
+
     CGFloat duration = 0.6;
 
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{

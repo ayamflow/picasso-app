@@ -9,11 +9,13 @@
 #import "Home.h"
 #import "MotionVideoPlayer.h"
 #import "OrientationUtils.h"
+#import "DataManager.h"
 #import "UIViewControllerPicasso.h"
 #import "UIViewPicasso.h"
 #import "SceneChooser.h"
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
+#import "Events.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 20
@@ -23,6 +25,7 @@
 @interface Home ()
 
 @property (strong, nonatomic) NSString *nextViewName;
+@property (assign, nonatomic) BOOL fadeVideo;
 
 @end
 
@@ -36,31 +39,49 @@
     return YES;
 }
 
-- (void)stopVideo {
-	[[[MotionVideoPlayer sharedInstance] player] setRate:0.0];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
     
     [self updateRotation];
-    
-    [self initLabels];
+
     [self initButtons];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self transitionIn];
+
+    [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
+
+    for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
+        [button moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 + button.frame.size.width, button.frame.origin.y)];
+        button.alpha = 0;
+    }
+
+    if([[[DataManager sharedInstance] getGameModel] introCompleted]) {
+        [[MotionVideoPlayer sharedInstance] showMenuVideo];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loopVideoMenu) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
+        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:23];
+        [self transitionIn];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(introCompleted) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
+        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:19];
+    }
+
+    [[MotionVideoPlayer sharedInstance] fadeIn];
 }
 
-- (void)initLabels {
-    self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12.0];
-    self.titleLabel.text = [@"sur les traces\ndu maître picasso" uppercaseString];
-    self.travelLabel.text = [self.travelLabel.text uppercaseString];
-    self.museumLabel.text = [self.museumLabel.text uppercaseString];
+- (void)loopVideoMenu {
+    [[[MotionVideoPlayer sharedInstance] player] seekToTime:CMTimeMakeWithSeconds(20, 1.0)];
+}
+
+- (void)introCompleted {
+    [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
+    [[[DataManager sharedInstance] getGameModel] setIntroCompleted:YES];
+    [self transitionIn];
 }
 
 - (void)initButtons {
@@ -84,12 +105,12 @@
 
 
 - (void)transitionIn {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loopVideoMenu) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
+    [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:23.4];
     CGFloat delay = 0;
     CGFloat duration = 0.8;
     for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
-        [button moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 + button.frame.size.width, button.frame.origin.y)];
-        button.alpha = 0;
-
         [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [button moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width / 2 - button.frame.size.width / 2, button.frame.origin.y)];
             button.alpha = 1;
@@ -99,12 +120,15 @@
 }
 
 - (void)prepareTransitionOut:(id)sender {
-    [self stopVideo];
+//    [self stopVideo];
+    [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
     NSArray *buttonsOrder;
+    self.fadeVideo = YES;
     switch([sender tag]) {
         case 0:
             self.nextViewName = @"SceneChooser";
             buttonsOrder = @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton];
+            self.fadeVideo = NO;
             break;
         case 1:
             self.nextViewName = @"GalleryViewController";
@@ -132,7 +156,7 @@
             button.alpha = 0;
         } completion:^(BOOL finished) {
             if(i == 3) {
-                [self transitionOutComplete];
+                [self videoTransitionOut];
             }
         }];
         i++;
@@ -140,9 +164,25 @@
     }
 }
 
+- (void)videoTransitionOut {
+    if(self.fadeVideo) {
+        [UIView animateWithDuration:0.6 animations:^{
+            [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
+        } completion:^(BOOL finished) {
+            [self transitionOutComplete];
+        }];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transitionOutComplete) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
+        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:25];
+    }
+}
+
 - (void)transitionOutComplete {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
     UIViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.nextViewName];
-//    NSLog(@"vc: %@, %@", self.navigationController,  nextViewController);
     [self.navigationController pushViewController:nextViewController animated:NO];
 }
 

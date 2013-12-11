@@ -76,6 +76,10 @@
 
     // Play the scene's video
     NSString *filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
+    if(filePath == nil) { // Back to first scene if no video for the next scene
+        self.model = [[DataManager sharedInstance] getSceneWithNumber:0];
+        filePath = [[NSBundle mainBundle] pathForResource:self.model.sceneId ofType:self.model.videoType];
+    }
     NSURL *url = [NSURL fileURLWithPath:filePath];
     [self.playerView loadURL:url];
 
@@ -91,9 +95,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self transitionIn];
-
-//    NSLog(@"[Scene #%li] Started", (long)self.model.number);
-    [self resume]; // seekToTime + enableMotion
+    [self resume];
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel {
@@ -315,7 +317,8 @@
            !currentTracker.enabled) {
             currentTracker.enabled = YES;
             currentTracker.hidden = NO;
-            [[DataManager sharedInstance] unlockWorkWithNumber:[[self.model.trackers objectAtIndex:i] workId]];
+            NSInteger workId = ((TrackerModel *)[self.model.trackers objectAtIndex:i]).workId;
+            [[DataManager sharedInstance] unlockWorkWithNumber: workId];
             self.drawView.hidden = NO;
             self.trackerInertiaX = 0;
             self.trackerInertiaY = 0;

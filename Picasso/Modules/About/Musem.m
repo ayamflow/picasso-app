@@ -12,6 +12,7 @@
 #import "UIViewControllerPicasso.h"
 #import "OrientationUtils.h"
 #import "HoursPanel.h"
+#import "MotionVideoPlayer.h"
 #import "InfosPanel.h"
 #import "NavigationBarView.h"
 #import "UIView+EasingFunctions.h"
@@ -49,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self initNavigationBar];
     [self initTableView];
     [self initTableHeader];
@@ -57,11 +58,12 @@
     [self initTexts];
 
     self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
     [super viewWillAppear:animated];
+    [[[MotionVideoPlayer sharedInstance] player] pause];
     [self transitionIn];
 }
 

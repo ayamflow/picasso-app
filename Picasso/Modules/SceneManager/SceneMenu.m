@@ -74,6 +74,9 @@
 }
 
 - (void)dispatchBackToHome {
+    NSLog(@"dispatchback");
+    [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
+    [self pauseVideo];
     [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents BackToHomeEvent] object:nil];
 }
 

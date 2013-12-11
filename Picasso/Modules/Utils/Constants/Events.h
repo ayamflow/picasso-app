@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface MPPEvents : NSObject
++ (NSString *)PlayerObservedTimeEvent;
 
 + (NSString *)ResetSliderEvent;
 + (NSString *)SliderHasMovedEvent;

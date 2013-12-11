@@ -53,16 +53,13 @@
 - (void)initBackgroundVideo {
 	self.player = [MotionVideoPlayer sharedInstance];
 
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mov"];
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    [self.player loadURL:url];
-    self.player.player.rate = 2.0;
+    self.player.player.rate = 1.0;
     self.player.player.volume = 0;
     
     self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
     
-//    [self.window.rootViewController.view addSubview:self.player.view];
-//    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+    [self.window.rootViewController.view addSubview:self.player.view];
+    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
 }
 
 - (void)initMenuButton {

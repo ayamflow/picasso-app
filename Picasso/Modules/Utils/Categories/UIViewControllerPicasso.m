@@ -9,6 +9,7 @@
 #import "UIViewControllerPicasso.h"
 #import "SceneChooser.h"
 #import "Home.h"
+#import "MotionVideoPlayer.h"
 
 @implementation UIViewController (Picasso)
 
@@ -61,6 +62,7 @@
     }
     
     view.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    [[MotionVideoPlayer sharedInstance] fadeOut];
     [UIView animateWithDuration:0.4 animations:^{
         view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
         view.alpha = 0;
@@ -77,6 +79,14 @@
 - (void)buttonTouchUp:(id)sender {
     UIButton *button = (UIButton *)sender;
     button.alpha = 1;
+}
+
+- (void)pauseVideo {
+    [[[MotionVideoPlayer sharedInstance] player] pause];
+}
+
+- (void)playVideo {
+    [[[MotionVideoPlayer sharedInstance] player] play];
 }
 
 @end

@@ -10,6 +10,10 @@
 
 @implementation MPPEvents
 
++ (NSString *)PlayerObservedTimeEvent {
+    return @"timeUp";
+}
+
 + (NSString *)ResetSliderEvent {
     return @"resetSlider";
 }

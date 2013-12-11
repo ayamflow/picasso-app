@@ -74,7 +74,7 @@
     CGContextSetRGBFillColor(contextRef, 0, 0, 0, 1.0);
     CGFloat circleSize = 8;
     CGContextFillEllipseInRect(contextRef, CGRectMake(150, 325, circleSize, circleSize));
-    CGContextFillEllipseInRect(contextRef, CGRectMake(310, 420, circleSize, circleSize));
+    CGContextFillEllipseInRect(contextRef, CGRectMake(310, 418, circleSize, circleSize));
 }
 
 - (void)animatePath {

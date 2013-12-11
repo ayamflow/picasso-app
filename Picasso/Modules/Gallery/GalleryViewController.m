@@ -18,6 +18,7 @@
 #import "NavigationBarView.h"
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
+#import "MotionVideoPlayer.h"
 
 @interface GalleryViewController ()
 
@@ -38,15 +39,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    self.view.backgroundColor = [UIColor clearColor];
+
     [self initTexts];
     [self initNavigationBar];
     [self initGallery];
+
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
+    [[[MotionVideoPlayer sharedInstance] player] play];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
+    [[[MotionVideoPlayer sharedInstance] player] pause];
+
     CGFloat duration = 0.4;
     CGFloat delay = 0;
     

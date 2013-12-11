@@ -8,6 +8,7 @@
 // MotionVideoPlayer is a wrapper for an AVPlayer with its playback rate controlled by the CMMotionManager pitch.
 
 #import "MotionVideoPlayer.h"
+#import "Events.h"
 #import "OrientationUtils.h"
 #import "DataManager.h"
 #import "UIImage+ImageEffects.h"
@@ -19,14 +20,14 @@
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (assign, nonatomic) BOOL motionEnabled;
 @property (assign, nonatomic) BOOL playbackCompleted;
-
 @property (assign, nonatomic) double lastPitch;
+
+@property (assign, nonatomic) NSInteger observedTime;
+@property (strong, nonatomic) id updateListener;
 
 @end
 
 @implementation MotionVideoPlayer
-
-static BOOL initialized;
 
 + (id)sharedInstance {
     static MotionVideoPlayer *sharedInstance = nil;
@@ -52,16 +53,6 @@ static BOOL initialized;
     if(self = [super init]) {
         self.playbackCompleted = NO;
         self.motionEnabled = NO;
-        [self initMotionManager];
-    }
-    return self;
-}
-
-- (id)initWithURL:(NSURL *)URL {
-    if(self = [super init]) {
-        self.playbackCompleted = NO;
-        self.motionEnabled = NO;
-
         [self initPlayer];
         [self initMotionManager];
     }
@@ -69,35 +60,40 @@ static BOOL initialized;
 }
 
 - (void)initPlayer {
-    // Automatically starts with the current scene (previously set on the according button touch)
-//    SceneModel *currentScene = [[DataManager sharedInstance] getCurrentSceneModel];
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:currentScene.sceneId ofType:currentScene.videoType];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:filePath];
     
     self.player = [AVPlayer playerWithURL:url];
-    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-    
-    // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    layer.frame = [OrientationUtils nativeDeviceSize];
     [self.view.layer addSublayer:layer];
-    
+
     self.frameRate = [self getPlayerFrameRate];
 }
 
-- (void)initPlayerWithURL:(NSURL *)URL {
-    self.player = [AVPlayer playerWithURL:URL];
-    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-    
-    // Make sure the player takes the whole screen in landscape mode
-    CGRect screenSize = [OrientationUtils nativeLandscapeDeviceSize];
-    layer.frame = CGRectMake(0, 0, screenSize.size.width, screenSize.size.height);
-    [self.view.layer addSublayer:layer];
+- (void)showMenuVideo {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp4"];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    [self loadURL:url];
+//    [self.player seekToTime:CMTimeMakeWithSeconds(20, 1.0)];
+    [self.player seekToTime:CMTimeMakeWithSeconds(20, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+}
 
-    self.frameRate = [self getPlayerFrameRate];
+- (void)rotatePlayerToLandscape {
+    AVPlayerLayer *layer = [self.view.layer.sublayers objectAtIndex:0];
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    self.view.frame = layer.frame = [OrientationUtils nativeLandscapeDeviceSize];
+    [CATransaction commit];
+}
+
+- (void)rotatePlayerToPortrait {
+    AVPlayerLayer *layer = [self.view.layer.sublayers objectAtIndex:0];
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    self.view.frame = layer.frame = [OrientationUtils nativeDeviceSize];
+    [CATransaction commit];
 }
 
 - (void)initMotionManager {
@@ -105,19 +101,51 @@ static BOOL initialized;
 }
 
 - (void)loadURL:(NSURL *)url {
-	if(!initialized) {
-		[self initPlayerWithURL:url];
-        initialized = YES;
-    }
-    else {
-        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
-        [self.player replaceCurrentItemWithPlayerItem:item];
-        self.frameRate = [self getPlayerFrameRate];
+    AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:url];
+    [self.player replaceCurrentItemWithPlayerItem:item];
+    self.frameRate = [self getPlayerFrameRate];
+
+    // DEBUG
+    self.player.rate = 1.0;
+}
+
+#pragma Transitions methods
+- (void)fadeIn {
+    [UIView animateWithDuration:0.6 animations:^{
+        self.view.alpha = 1;
+    }];
+}
+
+- (void)fadeOut {
+    [UIView animateWithDuration:0.6 animations:^{
+        self.view.alpha = 0;
+    }];
+}
+
+#pragma Time related methods
+- (void)startToListenForUpdatesWithTime:(NSTimeInterval)time {
+    self.observedTime = time;
+    self.updateListener = [self listenForPlayerUpdates];
+}
+
+- (void)stopListeningForUpdates {
+    [self.player removeTimeObserver:self.updateListener];
+}
+
+- (id)listenForPlayerUpdates {
+    __weak typeof(self) weakSelf = self;
+    return [self.player addPeriodicTimeObserverForInterval:CMTimeMake(33, 1000) queue:NULL usingBlock:^(CMTime time) {
+        [weakSelf listenForVideoUpdate];
+    }];
+}
+
+- (void)listenForVideoUpdate {
+    if(CMTimeGetSeconds(self.player.currentTime) >= self.observedTime) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:[MPPEvents PlayerObservedTimeEvent] object:nil];
     }
 }
 
-// Motion methods
-
+#pragma  Motion related methods
 - (void)enableMotion {
     if(self.motionEnabled) return;
     if (self.motionManager.deviceMotionAvailable ) {

@@ -22,7 +22,14 @@
 - (void)enableMotion;
 - (void)disableMotion;
 - (void)loadURL:(NSURL *)url;
+- (void)showMenuVideo;
 - (UIImage *)getScreenshot;
 - (UIImage *)getBlurredScreenshot;
+- (void)startToListenForUpdatesWithTime:(NSTimeInterval)time;
+- (void)stopListeningForUpdates;
+- (void)fadeIn;
+- (void)fadeOut;
+- (void)rotatePlayerToLandscape;
+- (void)rotatePlayerToPortrait;
 
 @end

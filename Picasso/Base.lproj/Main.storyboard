@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2Uu-Jz-OKz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2Uu-Jz-OKz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Scene Chooser-->
@@ -36,21 +36,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS6-rt-DQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2417" y="-557"/>
-        </scene>
-        <!--Intro-->
-        <scene sceneID="uzT-Wn-vSY">
-            <objects>
-                <viewController id="RRh-zj-Qda" customClass="Intro" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IVw-9X-K1E">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="GYy-9u-lXp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5UR-ec-vRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="529" y="-8"/>
         </scene>
         <!--Musem-->
         <scene sceneID="6Ri-A0-tsU">
@@ -175,12 +160,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="slh-Y1-crv" kind="relationship" relationship="rootViewController" id="SZu-Tt-Ma1"/>
+                        <segue destination="slh-Y1-crv" kind="relationship" relationship="rootViewController" id="H6U-vT-yYL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqE-M1-TQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-82" y="-8"/>
+            <point key="canvasLocation" x="480" y="-8"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="uGs-Gl-U9n">

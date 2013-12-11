@@ -42,7 +42,8 @@
     self.view.frame = [OrientationUtils nativeLandscapeDeviceSize];
     self.view.backgroundColor = [UIColor clearColor];
     [self updateRotation];
-    
+    [[MotionVideoPlayer sharedInstance] rotatePlayerToLandscape];
+
     DataManager *dataManager = [DataManager sharedInstance];
     self.scenesNumber = [dataManager getScenesNumber];
     
@@ -85,6 +86,7 @@
     SceneModel *sceneModel = [dataManager getSceneWithNumber:number];
 
     self.oldScene = self.currentScene;
+    [[dataManager getGameModel] setCurrentScene:number];
     self.currentScene = [[Scene alloc] initWithModel:sceneModel];
     self.currentScene.view.frame = self.view.frame;
     self.currentScene.delegate = self;

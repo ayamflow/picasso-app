@@ -21,4 +21,7 @@
 - (void)buttonTouchDown:(id)sender;
 - (void)buttonTouchUp:(id)sender;
 
+- (void)pauseVideo;
+- (void)playVideo;
+
 @end

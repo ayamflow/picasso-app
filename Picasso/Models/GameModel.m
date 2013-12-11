@@ -25,6 +25,7 @@
 - (id)init {
     if(self = [super init]) {
 //        [self deletePList];
+        self.introCompleted = YES;
         [self load];
         [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
         if(self.lastUnlockedWork > -1) {
