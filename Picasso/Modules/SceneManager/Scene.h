@@ -20,5 +20,6 @@
 
 - (id)initWithModel:(SceneModel *)sceneModel;
 - (void)stop;
+- (void)resume;
 
 @end

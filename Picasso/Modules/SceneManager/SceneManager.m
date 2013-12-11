@@ -126,6 +126,7 @@
     } completion:^(BOOL finished) {
         [self removeLastSeenScene];
         [self removeInterstitial];
+        [self.currentScene resume];
     }];
 }
 

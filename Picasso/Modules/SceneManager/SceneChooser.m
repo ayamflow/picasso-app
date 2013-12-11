@@ -230,7 +230,7 @@
 
 - (void)toSceneWithNumber:(NSInteger)number {
     self.view.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.4 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{
         self.view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI_2);
         self.view.alpha = 0;
     } completion:^(BOOL finished) {

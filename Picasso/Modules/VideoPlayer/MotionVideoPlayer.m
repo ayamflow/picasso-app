@@ -33,7 +33,6 @@ static BOOL initialized;
     @synchronized(self) {
         if (sharedInstance == nil)
             sharedInstance = [[self alloc] init];
-//            [sharedInstance updateViewControllerRotation];
 
     }
     return sharedInstance;
@@ -142,8 +141,13 @@ static BOOL initialized;
 
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
     double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
-//    double playerRate = [self getNormalizedPlayerRateWithAttitude: motion.attitude];
-    self.player.rate = playerRate;
+
+    if(playerRate < 0 && CMTimeGetSeconds(self.player.currentItem.currentTime) <= 0) {
+        self.player.rate = 0;
+    }
+    else {
+        self.player.rate = playerRate;
+    }
     
     [self.delegate motionDidChange];
 }
@@ -151,7 +155,6 @@ static BOOL initialized;
 // This method mirrors the device motion to the player rate, normalized to [-2, 2]
 - (double)getNormalizedPlayerRateWithPitch:(double)pitch {
     double playerRate = fmin(0.5, fmax(-0.5, pitch)) * 4;
-    // Stabilizes playback around 0
 
     self.pitch = playerRate + (playerRate - self.lastPitch) * 0.1;
     self.lastPitch = self.pitch;

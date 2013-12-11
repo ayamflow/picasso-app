@@ -29,7 +29,7 @@
 #define kSliderHeight 80
 #define kSliderVisibleHeight 10
 
-#define kTrackerGap 45
+#define kTrackerGap 30
 
 @interface Scene ()
 
@@ -335,12 +335,30 @@
             CGFloat x = [[currentPosition objectAtIndex:1] floatValue];
             CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
             
-            self.drawView.startPoint = CGPointMake(x, y);
+            if(self.drawView.startPoint.x != 0 && self.drawView.startPoint.y != 0) {
+                CGFloat startX = self.drawView.startPoint.x + (x - self.drawView.startPoint.x) * 0.1;
+                self.drawView.startPoint = CGPointMake(startX, y);
+            }
+            else {
+                self.drawView.startPoint = CGPointMake(x, y);
+            }
 
-            CGFloat trackerX = self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch);
-
-//            self.drawView.endPoint = CGPointMake(trackerX * 0.97 + currentTracker.bounds.size.width * cosf(self.trackerInertiaX) * 0.01, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
-            self.drawView.endPoint = CGPointMake(trackerX + (trackerX - self.drawView.endPoint.x) * 0.1, self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01);
+            CGFloat trackerX;
+            CGFloat trackerY = self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01;
+            
+            if(self.drawView.endPoint.x != 0 && self.drawView.endPoint.y != 0) {
+                trackerX = self.drawView.endPoint.x + (self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch) - self.drawView.endPoint.x) * 0.97;
+            }
+            else {
+                trackerX = self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch);;
+            }
+            
+            if(fabs(self.drawView.endPoint.x - trackerX) > 5) {
+                self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x + (trackerX - self.drawView.endPoint.x) * 0.07, trackerY);
+            }
+            else {
+                self.drawView.endPoint = CGPointMake(trackerX, trackerY);
+            }
 
             currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
