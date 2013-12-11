@@ -120,8 +120,8 @@
 }
 
 - (void)workTouchedWithIndex:(NSInteger)index {
-    SceneModel *currentScene = [[DataManager sharedInstance] getSceneWithNumber:index];
-    if(!currentScene.unlocked) return;
+    WorkModel *currentWork = [[DataManager sharedInstance] getWorkWithNumber:index];
+    if(!currentWork.unlocked) return;
     
     WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
     workViewController.workId = index;
