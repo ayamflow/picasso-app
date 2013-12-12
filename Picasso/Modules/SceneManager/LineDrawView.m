@@ -21,7 +21,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
+    UIColor* strokeColor = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 0.8];
     UIBezierPath* context = [UIBezierPath bezierPath];
     
     [context moveToPoint: self.startPoint];

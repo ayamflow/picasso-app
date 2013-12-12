@@ -24,7 +24,7 @@
 }
 - (id)init {
     if(self = [super init]) {
-//        [self deletePList];
+        [self deletePList];
 //        self.introCompleted = YES; // Uncomment to skip the intro
         [self load];
         [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];

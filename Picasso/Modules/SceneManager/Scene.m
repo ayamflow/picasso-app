@@ -92,13 +92,12 @@
     [self initTimeline];
 
     [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
+    [[[MotionVideoPlayer sharedInstance] player] pause];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[MotionVideoPlayer sharedInstance] fadeIn];
     [self transitionIn];
-    [self resume];
 }
 
 - (id)initWithModel:(SceneModel *)sceneModel {
@@ -226,6 +225,7 @@
          	self.sceneTitle.alpha = 0;
             self.dateImageView.alpha = 0;
             self.dateTitle.alpha = 0;
+            [self resume];
         } completion:^(BOOL finished) {
             [self.sceneTitle removeFromSuperview];
             [self.dateImageView removeFromSuperview];
@@ -282,10 +282,10 @@
 
 - (void)trackerTouched:(id)sender {
 //    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
-    /*    [self stop];
-     WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
-     workView.workId = [sender tag];
-     [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];*/
+    [self stop];
+    WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
+    workView.workId = [sender tag];
+    [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];
 }
 
 - (void)motionDidChange {
@@ -297,10 +297,10 @@
     self.completion = CMTimeGetSeconds(self.player.currentTime) / CMTimeGetSeconds(self.player.currentItem.asset.duration);
     if(!self.hasEnded) {
         [self.timeline updateWithCompletion:self.completion];
-	    if(self.completion > kPlaybackFadePercent) {
+//	    if(self.completion > kPlaybackFadePercent) {
     	    // fade to white proportionaly
-    	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 10; // -10% opacity * factor
-        }
+//    	    self.view.alpha = 1.0 - (self.completion - kPlaybackFadePercent) * 10; // -10% opacity * factor
+//        }
         if(self.completion > 1.0) {
             self.hasEnded = YES;
             [self playerItemDidReachEnd];
@@ -325,30 +325,45 @@
             self.drawView.hidden = NO;
             self.trackerInertiaX = 0;
             self.trackerInertiaY = 0;
+            
+            currentTracker.alpha = 0;
+            self.drawView.alpha = 0;
         }
         else if(currentTracker.enabled && (currentFrame < [[self.trackerStarts objectAtIndex:i] integerValue] || currentFrame > [[self.trackerEnds objectAtIndex:i] integerValue])) {
+            self.drawView.endPoint = CGPointMake([OrientationUtils nativeLandscapeDeviceSize].size.width, self.drawView.endPoint.y);
             currentTracker.enabled = NO;
             currentTracker.hidden = YES;
             self.drawView.hidden = YES;
+            self.drawView.startPoint = CGPointMake(0, 0);
         }
 
         if(currentTracker.enabled) {
             self.trackerInertiaX += 0.03;
             self.trackerInertiaY += 0.07;
             NSArray *currentTrackerPositions = [[self.model.trackers objectAtIndex:i] positions];
-            NSArray *currentPosition = [currentTrackerPositions objectAtIndex:currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue]];
+            NSInteger trackerFrame =  currentFrame - [[self.trackerStarts objectAtIndex: i] integerValue];
+            NSInteger trackerFramesNumber = [currentTrackerPositions count];
+            NSArray *currentPosition = [currentTrackerPositions objectAtIndex:trackerFrame];
             
-            CGFloat x = [[currentPosition objectAtIndex:1] floatValue];
-            CGFloat y = [[currentPosition objectAtIndex:2] floatValue];
+            // Smooth appearance of the tracker
+            if(trackerFrame <= 15) {
+                CGFloat trackerAlpha = 1.0 - (15.0 - trackerFrame) / 15.0;
+                self.drawView.alpha = trackerAlpha;
+                currentTracker.alpha = trackerAlpha;
+            }
+            else if(trackerFrame >= trackerFramesNumber - 15) {
+                CGFloat trackerAlpha = (trackerFramesNumber - trackerFrame) / 15.0;
+                self.drawView.alpha = trackerAlpha;
+                currentTracker.alpha = trackerAlpha;
+            }
             
-            if(self.drawView.startPoint.x != 0 && self.drawView.startPoint.y != 0) {
-                CGFloat startX = self.drawView.startPoint.x + (x - self.drawView.startPoint.x) * 0.1;
-                self.drawView.startPoint = CGPointMake(startX, y);
-            }
-            else {
-                self.drawView.startPoint = CGPointMake(x, y);
-            }
+            // Computing the line Position
+            CGFloat x = [[currentPosition objectAtIndex:1] floatValue] / [OrientationUtils screenScale];
+            CGFloat y = [[currentPosition objectAtIndex:2] floatValue] / [OrientationUtils screenScale];
 
+            self.drawView.startPoint = CGPointMake(x, y);
+
+            // Computing the tracker position
             CGFloat trackerX;
             CGFloat trackerY = self.drawView.endPoint.y + currentTracker.bounds.size.height * sinf(self.trackerInertiaY) * 0.01;
             
@@ -356,16 +371,11 @@
                 trackerX = self.drawView.endPoint.x + (self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch) - self.drawView.endPoint.x) * 0.97;
             }
             else {
-                trackerX = self.drawView.startPoint.x + (kTrackerGap * self.playerView.pitch);;
+                trackerX = self.drawView.startPoint.x + (kTrackerGap - self.playerView.pitch);
             }
-            
-            if(fabs(self.drawView.endPoint.x - trackerX) > 5) {
-                self.drawView.endPoint = CGPointMake(self.drawView.endPoint.x + (trackerX - self.drawView.endPoint.x) * 0.07, trackerY);
-            }
-            else {
-                self.drawView.endPoint = CGPointMake(trackerX, trackerY);
-            }
+            self.drawView.endPoint = CGPointMake(trackerX, trackerY);
 
+            // Updating the line & the tracker
             currentTracker.center = self.drawView.endPoint;
             [self.drawView setNeedsDisplay];
         }
@@ -375,7 +385,11 @@
 - (void)playerItemDidReachEnd{
 //    NSLog(@"[Scene #%li] Ended", (long)self.model.number);
     [self stop];
-    [self.delegate showInterstitial];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.delegate showInterstitial];
+    }];
 }
 
 - (void)stop {
@@ -393,6 +407,7 @@
     self.playerView.delegate = self;
     [self.playerView enableMotion];
     self.player = self.playerView.player;
+    [self.playerView fadeIn];
     [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
 }
 
