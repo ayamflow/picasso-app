@@ -12,6 +12,8 @@
 
 @interface DataManager ()
 
+@property (assign, nonatomic) BOOL initialized;
+
 @end
 
 @implementation DataManager
@@ -26,7 +28,11 @@
 }
 
 - (id)init {
+    if(self.initialized) {
+        return self;
+    }
     if(self = [super init]) {
+        self.initialized = YES;
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
         NSURL *url = [NSURL fileURLWithPath:filePath];
         NSData *picassoData = [[NSData alloc] initWithContentsOfURL:url];

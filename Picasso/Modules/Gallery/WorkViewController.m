@@ -15,6 +15,7 @@
 #import "NavigationBarView.h"
 #import "DataManager.h"
 #import "SceneManager.h"
+#import "TextUtils.h"
 
 @interface WorkViewController ()
 
@@ -66,7 +67,7 @@
     _deviceSize = [OrientationUtils deviceSize];
     self.navigationController.navigationBarHidden = YES;
 
-    _datamanager = [[DataManager sharedInstance] init];
+    _datamanager = [DataManager sharedInstance];
     _work = [_datamanager getWorkWithNumber:self.workId];
     
     _navBarMiniWorkView.layer.borderColor = [UIColor blackColor].CGColor;
@@ -96,7 +97,10 @@
     descriptionWorkFrame.origin.y = _scrollViewSize;
     _descriptionWorkView.frame = descriptionWorkFrame;
     _descriptionWorkView.userInteractionEnabled = NO;
-    _descriptionWorkView.text = _work.description;
+    _descriptionWorkView.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:13];
+    _descriptionWorkView.attributedText = [TextUtils getKernedString:_work.description];
+    _descriptionWorkView.layoutManager.delegate = self;
+    _descriptionWorkView.textAlignment = NSTextAlignmentJustified;
     [self updateTextViewHeight:_descriptionWorkView];
     
     _scrollViewSize += _descriptionWorkView.frame.size.height;
@@ -113,11 +117,14 @@
     creditWorkViewFrame.origin.y = _scrollViewSize;
     _creditWorkView.frame = creditWorkViewFrame;
     
-    _titleMiniWorkLabel.text = [_work.title uppercaseString];
-    _dateMiniWorkLabel.text = _work.year;
+    _titleMiniWorkLabel.attributedText = [TextUtils getKernedString:[_work.title uppercaseString]];
+    _titleMiniWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:10];
+    _dateMiniWorkLabel.attributedText = [TextUtils getKernedString:_work.year];
+    _dateMiniWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:10];
     
-    _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numberWorkLabel.text = [NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1];
+    _titleWorkLabel.attributedText = [TextUtils getKernedString:[_work.title  uppercaseString]];
+    _titleWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:14];
+    _numberWorkLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1]];
     
     _scrollViewSize += 100;
     
@@ -138,10 +145,6 @@
         [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
-    
-    self.navigationBar.backgroundColor = [UIColor yellowColor];
-    self.navigationBar.backButton.backgroundColor = [UIColor greenColor];
-    self.navigationBar.exploreButton.backgroundColor = [UIColor blueColor];
 }
 
 - (void)backToGallery {
@@ -199,4 +202,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (CGFloat)layoutManager:(NSLayoutManager *)layoutManager lineSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(CGRect)rect {
+    return 5;
+}
 @end

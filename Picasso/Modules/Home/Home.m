@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) NSString *nextViewName;
 @property (assign, nonatomic) BOOL fadeVideo;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -72,9 +73,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(introCompleted) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
         [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:19];
         
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipIntro:)];
-        tapRecognizer.delegate = self;
-        [self.view addGestureRecognizer:tapRecognizer];
+        self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipIntro:)];
+        self.tapRecognizer.delegate = self;
+        [self.view addGestureRecognizer:self.tapRecognizer];
     }
 }
 
@@ -98,6 +99,7 @@
 }
 
 - (void)introCompleted {
+    if([self.view.gestureRecognizers count] > 0) [self.view removeGestureRecognizer:self.tapRecognizer];
     [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
     [[[DataManager sharedInstance] getGameModel] setIntroCompleted:YES];
     [self transitionIn];

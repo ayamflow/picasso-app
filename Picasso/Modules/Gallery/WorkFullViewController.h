@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NavigationBarView.h"
 
-@interface WorkFullViewController : UIViewController <UIScrollViewDelegate, UITextViewDelegate> {
+@interface WorkFullViewController : UIViewController <UIScrollViewDelegate, UITextViewDelegate, NSLayoutManagerDelegate> {
 
 }
 

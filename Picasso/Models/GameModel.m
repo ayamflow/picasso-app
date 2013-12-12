@@ -38,6 +38,7 @@
 }
 
 - (void)sceneUnlocked:(NSNotification *)notification {
+    NSLog(@"[GameModel] SceneUnlocked");
     NSInteger newUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
     if(newUnlockedScene > self.lastUnlockedScene) {
         self.lastUnlockedScene = newUnlockedScene;
@@ -45,6 +46,7 @@
 }
 
 - (void)workUnlocked:(NSNotification *)notification {
+    NSLog(@"[GameModel] WorkUnlocked");
     NSInteger newUnlockedWork = [[notification.userInfo objectForKey:@"number"] integerValue];
     if(newUnlockedWork > self.lastUnlockedWork) {
         self.lastUnlockedWork = newUnlockedWork;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WorkViewController : UIViewController  <UIGestureRecognizerDelegate, UIScrollViewDelegate> {
+@interface WorkViewController : UIViewController  <UIGestureRecognizerDelegate, UIScrollViewDelegate, NSLayoutManagerDelegate> {
     CGRect prevFrame;
 }
 
