@@ -200,11 +200,7 @@
     
     self.transitionsNumber++;
     [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height + self.timeline.view.frame.size.height)];
-    [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionCurveEaseOut animations:^{
-	    [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
-    } completion:^(BOOL finished) {
-        [self transitionInComplete];
-    }];
+    [self transitionInComplete];
     
 }
 
@@ -226,6 +222,7 @@
             self.dateImageView.alpha = 0;
             self.dateTitle.alpha = 0;
             [self resume];
+            [self.timeline.view moveTo:CGPointMake(0, [OrientationUtils nativeLandscapeDeviceSize].size.height - self.timeline.view.frame.size.height)];
         } completion:^(BOOL finished) {
             [self.sceneTitle removeFromSuperview];
             [self.dateImageView removeFromSuperview];
