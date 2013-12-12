@@ -28,6 +28,14 @@
 
 @implementation WorkViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
@@ -46,6 +54,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+        WorkFullViewController *workFullViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
+        workFullViewController.workId = self.workId;
+        workFullViewController.showExploreButton = self.showExploreButton;
+        [self.navigationController pushViewController:workFullViewController animated:YES];
+    }
     
     _deviceSize = [OrientationUtils deviceSize];
     self.navigationController.navigationBarHidden = YES;

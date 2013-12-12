@@ -10,6 +10,7 @@
 #import "WorkModel.h"
 #import "QuestionModel.h"
 #import "WorkFullViewController.h"
+#import "WorkViewController.h"
 #import "OrientationUtils.h"
 #import "A3ParallaxScrollView.h"
 #import "Colors.h"
@@ -51,6 +52,14 @@ CGRect deviceSize;
     [super viewDidLoad];
 	
     deviceSize = [OrientationUtils deviceSize];
+    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
+        workViewController.workId = self.workId;
+        workViewController.showExploreButton = self.showExploreButton;
+        [self.navigationController pushViewController:workViewController animated:YES];
+    }
     
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:self.navigationBar.frame andTitle:@"Galerie" andShowExploreButton:self.showExploreButton];
     
