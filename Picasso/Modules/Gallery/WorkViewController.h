@@ -22,6 +22,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionWorkView;
 @property (weak, nonatomic) IBOutlet UIView *textWorkView;
 @property (weak, nonatomic) IBOutlet UIView *creditWorkView;
+@property (weak, nonatomic) IBOutlet UILabel *titleMiniWorkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateMiniWorkLabel;
+@property (weak, nonatomic) IBOutlet UIView *navBarMiniWorkView;
+@property (weak, nonatomic) IBOutlet UIView *headerWorkView;
 
 @property (nonatomic, readwrite, assign) int workId;
 

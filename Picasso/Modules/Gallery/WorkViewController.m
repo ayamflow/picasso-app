@@ -17,9 +17,9 @@
 @interface WorkViewController ()
 
 @property (nonatomic, assign) CGRect deviceSize;
-@property (nonatomic, assign) bool isFullWorkView;
 @property (nonatomic, strong) DataManager *datamanager;
 @property (nonatomic, strong) WorkModel *work;
+@property (nonatomic, assign) int scrollViewSize;
 
 @end
 
@@ -49,36 +49,64 @@
     _datamanager = [[DataManager sharedInstance] init];
     _work = [_datamanager getWorkWithNumber:self.workId];
     
+    _navBarMiniWorkView.layer.borderColor = [UIColor blackColor].CGColor;
+    _navBarMiniWorkView.layer.borderWidth = 2.0f;
+    
     NSString *imageName = [NSString stringWithFormat: @"%d.jpg", self.workId];
-    _workImage.image = [UIImage imageNamed:imageName];
+    _workImage.image = [self imageWithImage:[UIImage imageNamed:imageName] scaledToWidth:self.deviceSize.size.width];
     [_workImage setClipsToBounds:YES];
     _workImage.contentMode = UIViewContentModeTop;
     _workImage.userInteractionEnabled = YES;
     _workImage.layer.zPosition = 1;
+    CGRect workImageFrame = _workImage.frame;
+    workImageFrame.size.height = _workImage.image.size.height;
+    _workImage.frame = workImageFrame;
     
-    CGSize contentSize = self.contentWorkView.frame.size;
+    _scrollViewSize = _workImage.frame.size.height;
+    _scrollViewSize += 100;
     
-    _contentWorkView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _contentWorkView.contentSize = contentSize;
+    CGRect headerWorkViewFrame = _headerWorkView.frame;
+    headerWorkViewFrame.origin.y = _scrollViewSize;
+    _headerWorkView.frame = headerWorkViewFrame;
     
+    _scrollViewSize += _headerWorkView.frame.size.height;
+    _scrollViewSize += 25;
+    
+    CGRect descriptionWorkFrame = _descriptionWorkView.frame;
+    descriptionWorkFrame.origin.y = _scrollViewSize;
+    _descriptionWorkView.frame = descriptionWorkFrame;
     _descriptionWorkView.userInteractionEnabled = NO;
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numberWorkLabel.text = [NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1];
     _descriptionWorkView.text = _work.description;
     [self updateTextViewHeight:_descriptionWorkView];
     
-    _textWorkView.frame = CGRectMake(20, _descriptionWorkView.frame.origin.y + _descriptionWorkView.frame.size.height + 40, _textWorkView.frame.size.width, _textWorkView.frame.size.height);
-    _creditWorkView.frame = CGRectMake(20, _textWorkView.frame.origin.y + _textWorkView.frame.size.height + 30, _creditWorkView.frame.size.width, _creditWorkView.frame.size.height);
+    _scrollViewSize += _descriptionWorkView.frame.size.height;
+    _scrollViewSize += 25;
     
-    [self updateScrollViewHeight:_contentWorkView];
+    CGRect textWorkViewFrame = _textWorkView.frame;
+    textWorkViewFrame.origin.y = _scrollViewSize;
+    _textWorkView.frame = textWorkViewFrame;
     
-    _workImage.frame = _contentWorkView.frame;
-    [_contentWorkView setContentSize:_workImage.frame.size];
+    _scrollViewSize += _textWorkView.frame.size.height;
+    _scrollViewSize += 25;
+    
+    CGRect creditWorkViewFrame = _creditWorkView.frame;
+    creditWorkViewFrame.origin.y = _scrollViewSize;
+    _creditWorkView.frame = creditWorkViewFrame;
+    
+    _titleMiniWorkLabel.text = [_work.title uppercaseString];
+    _dateMiniWorkLabel.text = _work.year;
+    
+    _titleWorkLabel.text = [_work.title  uppercaseString];
+    _numberWorkLabel.text = [NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1];
+    
+    _scrollViewSize += 100;
+    
+    _contentWorkView.delegate = self;
+    [_contentWorkView setContentSize:(CGSizeMake(self.deviceSize.size.width, _scrollViewSize))];
+}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    //CGPoint contentOffset = _contentWorkView.contentOffset;
 }
 
 - (void)updateTextViewHeight:(UITextView *)textView
@@ -98,6 +126,21 @@
         scrollViewHeight += view.frame.size.height;
     }
     [scrollView setContentSize:(CGSizeMake(320, scrollViewHeight))];
+}
+
+- (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToWidth:(float) i_width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning
