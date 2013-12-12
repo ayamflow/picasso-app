@@ -16,6 +16,7 @@
 #import "GalleryViewController.h"
 #import "SceneManager.h"
 #import "UIViewPicasso.h"
+#import "TextUtils.h"
 
 @interface WorkFullViewController ()
 
@@ -46,6 +47,14 @@ CGRect deviceSize;
     return self;
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,17 +74,26 @@ CGRect deviceSize;
     CGSize contentSize = self.parallaxScrollView.frame.size;
     
     // Update text
-    _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork] + 1), [[DataManager sharedInstance] getWorksNumber]] uppercaseString];
-    _textTitleLabel.text = _work.title;
-    _textHLabel.text = [NSString stringWithFormat:@"H: %@", _work.h];
-    _textLLabel.text = [NSString stringWithFormat:@"L: %@", _work.l];
-    _textTechniqueLabel.text = _work.technical;
+    _titleWorkLabel.attributedText = [TextUtils getKernedString:[_work.title  uppercaseString]];
+    _titleWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:24];
+    _numbersWorkLabel.attributedText = [TextUtils getKernedString:[[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork] + 1), [[DataManager sharedInstance] getWorksNumber]] uppercaseString]];
+    [_numbersWorkLabel sizeToFit];
+    _textTitleLabel.attributedText = [TextUtils getKernedString:_work.title];
+    [_textTitleLabel sizeToFit];
+    _textTitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Heavy" size:10];
+    _textHLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"H: %@", _work.h]];
+    _textHLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
+    _textLLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"L: %@", _work.l]];
+    _textLLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
+    _textTechniqueLabel.attributedText = [TextUtils getKernedString:_work.technical];
+    _textTechniqueLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
+    [_textTechniqueLabel sizeToFit];
     
-    _questionLabel.text = _question.question;
-    _choice1Label.text = _question.choice_1;
-    _choice2label.text = _question.choice_2;
-    _answerTextView.text = _question.explanation;
+    _questionLabel.attributedText = [TextUtils getKernedString:[_question.question uppercaseString]];
+    _choice1Label.attributedText = [TextUtils getKernedString:_question.choice_1];
+    _choice2label.attributedText = [TextUtils getKernedString:_question.choice_2];
+    _answerTextView.attributedText = [TextUtils getKernedString:_question.explanation];
+    _questionLabel.font = _choice1Label.font = _choice2label.font = _answerTextView.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:17];
     _answerTextView.alpha = 0.0f;
     
     // Add gesture recognizer for choices
@@ -131,7 +149,10 @@ CGRect deviceSize;
     _descriptionWorkView.layer.masksToBounds = NO;
     _descriptionWorkView.layer.shadowRadius = 5;
     _descriptionWorkView.layer.shadowOpacity = 0.1;
-    _descriptionWorkView.text = _work.description;
+    _descriptionWorkView.attributedText = [TextUtils getKernedString:_work.description];
+    _descriptionWorkView.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:13];
+    _descriptionWorkView.layoutManager.delegate = self;
+    _descriptionWorkView.textAlignment = NSTextAlignmentJustified;
     [self updateTextViewHeight:_descriptionWorkView];
     [self.parallaxScrollView addSubview:_descriptionWorkView withAcceleration:CGPointMake(0.0f, 0.42f)];
     
@@ -235,10 +256,7 @@ CGRect deviceSize;
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (CGFloat)layoutManager:(NSLayoutManager *)layoutManager lineSpacingAfterGlyphAtIndex:(NSUInteger)glyphIndex withProposedLineFragmentRect:(CGRect)rect {
+    return 5;
 }
-
 @end

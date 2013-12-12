@@ -41,8 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self updateRotation];
     self.view.backgroundColor = [UIColor clearColor];
-    self.sceneDate.backgroundColor = [UIColor clearColor];
 
     [self initBackground];
     [self initTexts];
