@@ -63,7 +63,7 @@
     if([[[DataManager sharedInstance] getGameModel] introCompleted]) {
         [[MotionVideoPlayer sharedInstance] showMenuVideo];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loopVideoMenu) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
-        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:23];
+        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:22.4];
         [self transitionIn];
     }
     else {
@@ -107,7 +107,7 @@
 - (void)transitionIn {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loopVideoMenu) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
-    [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:23.4];
+    [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:22.4];
     CGFloat delay = 0;
     CGFloat duration = 0.8;
     for(UIButton *button in @[self.exploreButton, self.galleryButton, self.museumButton, self.creditsButton]) {
@@ -173,6 +173,7 @@
         }];
     }
     else {
+        [[[MotionVideoPlayer sharedInstance] player] seekToTime:CMTimeMakeWithSeconds(23.8, 1.0)];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transitionOutComplete) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
         [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:25];
