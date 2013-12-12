@@ -56,14 +56,6 @@
 {
     [super viewDidLoad];
     
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        WorkFullViewController *workFullViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
-        workFullViewController.workId = self.workId;
-        workFullViewController.showExploreButton = self.showExploreButton;
-        [self.navigationController pushViewController:workFullViewController animated:YES];
-    }
-    
     _deviceSize = [OrientationUtils deviceSize];
     self.navigationController.navigationBarHidden = YES;
 

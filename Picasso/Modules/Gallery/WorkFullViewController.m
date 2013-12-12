@@ -56,19 +56,22 @@ CGRect deviceSize;
     return YES;
 }
 
-- (void)viewDidLoad
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [super viewDidLoad];
-	
-    deviceSize = [OrientationUtils deviceSize];
-    
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
         WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
         workViewController.workId = self.workId;
         workViewController.showExploreButton = self.showExploreButton;
         [self.navigationController pushViewController:workViewController animated:YES];
     }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+    deviceSize = [OrientationUtils deviceSize];
     
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:self.navigationBar.frame andTitle:@"Galerie" andShowExploreButton:self.showExploreButton];
     
