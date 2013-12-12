@@ -17,6 +17,7 @@
 @property (strong, nonatomic) SceneModel *model;
 @property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;
+@property (assign, nonatomic) BOOL shouldResume;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
 - (void)stop;

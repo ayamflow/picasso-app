@@ -765,5 +765,48 @@
               "technical": "Huiles sur toile",
               "description": "Cet autoportrait est la poursuite du cycle sur Casagemas comme le souligne Pierre Daix : « Cet autoportrait, toujours conservé par Picasso le montre tel qu’il s’est vu après le retour sur soi du Cycle de la mort de Casagemas en apprenant que Manyac, qui l’avait jusque-là soutenu financièrement lui coupait les vivres. Celui-ci désapprouvait le tournant que prenait la peinture de Picasso vers ce que l’on appelle à présent la « période bleue » et dont les thèmes, le malheur et la détresse, éloignaient les acheteurs. C’est en quelque sorte un autoportrait au futur dans la misère qui ne manquerait pas de le guetter, au milieu de l’hiver si inclément de Paris. Mais s’il n’a évidemment jamais porté cette moustache et cette barbe blonde qu’il peint avec des finesses de miniaturiste pour aggraver l’aspect hâve, creusé par la faim, de son visage, nous savons aujourd’hui à quel point il s’est alors « donné » cette tête-là. »  (Pierre Daix, Le nouveau dictionnaire Picasso, p. 68). Marie-Laure Bernadac revient sur l’importance de l’autoportrait dans l’œuvre picassien : « S’inscrivant dans la lignée de l’œuvre de ses illustres prédécesseurs (Rembrandt, Van Gogh) Picasso marque pour ce thème une prédilection, puisque l’on retrouvera tout au long de sa longue existence, des images distinctes de lui-même, révélatrices de chaque étape de sa vie et de son œuvre. Peint lors du second séjour à Paris, en hiver 1901, cet autoportrait qui marque le début de la période bleue est le dernier d’une série, avant le départ pour Barcelone en janvier 1902. » (Marie-Laure Bernadac, Musée Picasso Paris, Les chefs d’œuvre, p. 20)."
               }
-              ]
+              ],
+
+      "questions": [
+              {
+              "id":77,
+              "question":"Le tableau vendu aux enchères au prix le plus élevé à ce jour est-il un Picasso ?",
+              "choice_1":"Oui",
+              "choice_2":"Non",
+              "choice_correct":"Non",
+              "explanation":"Non, plus maintenant ! Le tableau le plus cher au monde est Le Cri, tableau du peintre norvégien Edvard Munch (1863-1944)."
+              },
+              {
+              "id":76,
+              "question":"Quel livre Picasso a-t-il, entre autres, illustré ?",
+              "choice_1":"Les métamorphoses",
+              "choice_2":"Guerre et Paix",
+              "choice_correct":"Les métamorphoses",
+              "explanation":"Picasso a illustré les Métamorphoses d’Ovide en 1930, mais entre 1905 et 1973 il a participé à la création de plus de 150 titres !"
+              },
+              {
+              "id":75,
+              "question":"Picasso appréciait il la corrida ?",
+              "choice_1":"Oui",
+              "choice_2":"Non",
+              "choice_correct":"Oui",
+              "explanation":"Oui, il appréciait la corrida, tradition espagnole qu’il découvrit dans son enfance."
+              },
+              {
+              "id":70,
+              "question":"Est-ce que Picasso a acheté une montagne Sainte-victoire  de Cézanne ?",
+              "choice_1":"Oui",
+              "choice_2":"Non",
+              "choice_correct":"Non",
+              "explanation":"Non il n’a pas acheté de tableau de Cézanne représentant la montagne mais Picasso confia à Kahnweiler qu’il avait acheté la montagne mais la vraie puisque il avait acquis le château de Vauvenargues situé sur cette montagne tant représentée par Cézanne."
+              },
+              {
+              "id":69,
+              "question":"Environ combien d’œuvres Picasso a-t-il produites ?",
+              "choice_1":"Plus de 20 000",
+              "choice_2":"Plus de 50 000",
+              "choice_correct":"Plus de 50 000",
+              "explanation":"Picasso a produit un nombre considérable d’œuvres, près, voire plus de 50 000 œuvres. Picasso était très productif : il travaillait tous les jours divers matériaux (découpages, dessins, céramique, sculptures, peintures) et ce, pendant 80 ans d’activité."
+              }
+      ]
 }

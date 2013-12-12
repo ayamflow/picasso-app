@@ -14,5 +14,6 @@
 @interface SceneManager : UIViewController <SceneManagerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) Scene *currentScene;
+@property (assign, nonatomic) BOOL shouldResume;
 
 @end

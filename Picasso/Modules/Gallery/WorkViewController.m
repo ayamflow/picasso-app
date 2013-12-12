@@ -12,19 +12,21 @@
 #import "OrientationUtils.h"
 #import "Colors.h"
 #import "WorkModel.h"
+#import "NavigationBarView.h"
 #import "DataManager.h"
+#import "SceneManager.h"
 
 @interface WorkViewController ()
 
+@property (nonatomic, assign) CGRect deviceSize;
+@property (nonatomic, strong) DataManager *datamanager;
+@property (nonatomic, strong) WorkModel *work;
+@property (nonatomic, assign) int scrollViewSize;
+@property (strong, nonatomic) NavigationBarView *navigationBar;
 
 @end
 
 @implementation WorkViewController
-
-CGRect deviceSize;
-UIImageView *workImage;
-CGRect fullWorkImageFrame;
-bool isFullWorkView;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
@@ -32,6 +34,7 @@ bool isFullWorkView;
     {
         WorkFullViewController *workFullViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
         workFullViewController.workId = self.workId;
+        workFullViewController.showExploreButton = self.showExploreButton;
         [self.navigationController pushViewController:workFullViewController animated:YES];
     }
 }
@@ -40,92 +43,138 @@ bool isFullWorkView;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)fullWorkView:(UISwipeGestureRecognizer*)sender {
-    if(!isFullWorkView) {
-        [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-            [workImage setFrame:fullWorkImageFrame];
-        }completion:^(BOOL finished){
-            isFullWorkView = YES;
-        }];
-        [UIView animateWithDuration:0.9 delay:0 options:0 animations:^{
-            [self.workNavigation setFrame:CGRectMake(20, 502, 280, 66)];
-        }completion:NO];
-        return;
-    }
-}
-
-- (void)partWorkView:(UISwipeGestureRecognizer*)sender {
-    if(isFullWorkView) {
-        [UIView animateWithDuration:0.3 delay:0 options:0 animations:^{
-            [workImage setFrame:CGRectMake(20, 55, 280, 180)];
-        }completion:^(BOOL finished){
-            [UIView animateWithDuration:0.2 delay:0 options:0 animations:^{
-                [workImage setFrame:CGRectMake(0, 55, deviceSize.size.width, 180)];
-            }completion:^(BOOL finished){
-                isFullWorkView = NO;
-            }];
-        }];
-        [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
-            [self.workNavigation setFrame:CGRectMake(20, 55, 280, 66)];
-        }completion:NO];
-        return;
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    deviceSize = [OrientationUtils deviceSize];
+    _deviceSize = [OrientationUtils deviceSize];
     self.navigationController.navigationBarHidden = YES;
-    
-    _navigationBar.layer.borderColor = [UIColor blackColor].CGColor;
-    _navigationBar.layer.borderWidth = 2.0f;
-    
-    NSString *imageUrl = [NSString stringWithFormat: @"%d.jpg", self.workId];
-    workImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageUrl]];
-    
-    workImage.contentMode = UIViewContentModeTop;
-    workImage.userInteractionEnabled = YES;
-    workImage.layer.zPosition = 1;
 
-    fullWorkImageFrame = CGRectMake(20, 120, 280, 380);
-    [workImage setFrame:fullWorkImageFrame];
-    [workImage setClipsToBounds:YES];
-    [self.view addSubview:workImage];
+    _datamanager = [[DataManager sharedInstance] init];
+    _work = [_datamanager getWorkWithNumber:self.workId];
     
-    isFullWorkView = YES;
+    _navBarMiniWorkView.layer.borderColor = [UIColor blackColor].CGColor;
+    _navBarMiniWorkView.layer.borderWidth = 2.0f;
     
-    self.workNavigation.userInteractionEnabled = YES;
+    NSString *imageName = [NSString stringWithFormat: @"%d.jpg", self.workId];
+    _workImage.image = [self imageWithImage:[UIImage imageNamed:imageName] scaledToWidth:self.deviceSize.size.width];
+    [_workImage setClipsToBounds:YES];
+    _workImage.contentMode = UIViewContentModeTop;
+    _workImage.userInteractionEnabled = YES;
+    _workImage.layer.zPosition = 1;
+    CGRect workImageFrame = _workImage.frame;
+    workImageFrame.size.height = _workImage.image.size.height;
+    _workImage.frame = workImageFrame;
     
-    UISwipeGestureRecognizer *swipeDownWorkImage = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(fullWorkView:)];
-    [swipeDownWorkImage setDirection:UISwipeGestureRecognizerDirectionDown];
-    [workImage addGestureRecognizer:swipeDownWorkImage];
+    _scrollViewSize = _workImage.frame.size.height;
+    _scrollViewSize += 100;
     
-    UISwipeGestureRecognizer *swipeDownWorkImageButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(fullWorkView:)];
-    [swipeDownWorkImageButton setDirection:UISwipeGestureRecognizerDirectionDown];
-    [self.workNavigation addGestureRecognizer:swipeDownWorkImageButton];
+    CGRect headerWorkViewFrame = _headerWorkView.frame;
+    headerWorkViewFrame.origin.y = _scrollViewSize;
+    _headerWorkView.frame = headerWorkViewFrame;
     
-    UISwipeGestureRecognizer *swipeUpWorkImage = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(partWorkView:)];
-    [swipeUpWorkImage setDirection:UISwipeGestureRecognizerDirectionUp];
-    [workImage addGestureRecognizer:swipeUpWorkImage];
+    _scrollViewSize += _headerWorkView.frame.size.height;
+    _scrollViewSize += 25;
     
-    UISwipeGestureRecognizer *swipeUpWorkImageButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(partWorkView:)];
-    [swipeUpWorkImageButton setDirection:UISwipeGestureRecognizerDirectionUp];
-    [self.workNavigation addGestureRecognizer:swipeUpWorkImageButton];
+    CGRect descriptionWorkFrame = _descriptionWorkView.frame;
+    descriptionWorkFrame.origin.y = _scrollViewSize;
+    _descriptionWorkView.frame = descriptionWorkFrame;
+    _descriptionWorkView.userInteractionEnabled = NO;
+    _descriptionWorkView.text = _work.description;
+    [self updateTextViewHeight:_descriptionWorkView];
     
-    UITapGestureRecognizer *tapGallery = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToGallery:)];
-    _comeBackGallery.userInteractionEnabled = YES;
-    [self.comeBackGallery addGestureRecognizer:tapGallery];
+    _scrollViewSize += _descriptionWorkView.frame.size.height;
+    _scrollViewSize += 25;
     
-    [self.workContent loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"workContent" ofType:@"html"]isDirectory:NO]]];
+    CGRect textWorkViewFrame = _textWorkView.frame;
+    textWorkViewFrame.origin.y = _scrollViewSize;
+    _textWorkView.frame = textWorkViewFrame;
+    
+    _scrollViewSize += _textWorkView.frame.size.height;
+    _scrollViewSize += 25;
+    
+    CGRect creditWorkViewFrame = _creditWorkView.frame;
+    creditWorkViewFrame.origin.y = _scrollViewSize;
+    _creditWorkView.frame = creditWorkViewFrame;
+    
+    _titleMiniWorkLabel.text = [_work.title uppercaseString];
+    _dateMiniWorkLabel.text = _work.year;
+    
+    _titleWorkLabel.text = [_work.title  uppercaseString];
+    _numberWorkLabel.text = [NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1];
+    
+    _scrollViewSize += 100;
+    
+    _contentWorkView.delegate = self;
+    [_contentWorkView setContentSize:(CGSizeMake(self.deviceSize.size.width, _scrollViewSize))];
+    
+    [self initNavigationBar];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)initNavigationBar {
+    self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 20, [OrientationUtils nativeDeviceSize].size.width, 20) andTitle:@"Galerie" andShowExploreButton:self.showExploreButton];
+    [self.view addSubview:self.navigationBar];
+    
+    [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
+    [self.navigationBar.backButton addTarget:self action:@selector(backToGallery) forControlEvents:UIControlEventTouchUpInside];
+    
+    if(self.showExploreButton) {
+        [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.view bringSubviewToFront:self.navigationBar];
+    
+    self.navigationBar.backgroundColor = [UIColor yellowColor];
+    self.navigationBar.backButton.backgroundColor = [UIColor greenColor];
+    self.navigationBar.exploreButton.backgroundColor = [UIColor blueColor];
+}
+
+- (void)backToGallery {
+    GalleryViewController *galleryView = [self.storyboard instantiateViewControllerWithIdentifier:@"GalleryViewController"];
+    [self.navigationController pushViewController:galleryView animated:NO];
+}
+
+- (void)backToScene {
+    SceneManager *sceneManager = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneManager"];
+    sceneManager.shouldResume = YES;
+    [self.navigationController pushViewController:sceneManager animated:NO];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    //CGPoint contentOffset = _contentWorkView.contentOffset;
+}
+
+- (void)updateTextViewHeight:(UITextView *)textView
 {
-    WorkModel *workModel = [[[DataManager sharedInstance] getWorkWithNumber:self.workId] init];
-    NSString *script = [NSString stringWithFormat:@"fillData('%@','%@','%@','%@','%@')", workModel.title, workModel.h, workModel.l, workModel.technical, workModel.description];
-    [self.workContent stringByEvaluatingJavaScriptFromString:script];
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textView.frame = newFrame;
+}
+
+- (void)updateScrollViewHeight:(UIScrollView *)scrollView
+{
+    CGFloat scrollViewHeight = 0.0f;
+    for (UIView* view in scrollView.subviews)
+    {
+        scrollViewHeight += view.frame.size.height;
+    }
+    [scrollView setContentSize:(CGSizeMake(320, scrollViewHeight))];
+}
+
+- (UIImage*)imageWithImage:(UIImage*) sourceImage scaledToWidth:(float) i_width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning

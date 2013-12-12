@@ -283,9 +283,11 @@
 - (void)trackerTouched:(id)sender {
 //    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
     [self stop];
+    [self.playerView fadeOut];
     WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
     workView.workId = [sender tag];
-    [self.parentViewController.navigationController presentViewController:workView animated:NO completion:nil];
+    workView.showExploreButton = YES;
+    [self.parentViewController.navigationController pushViewController:workView animated:NO];
 }
 
 - (void)motionDidChange {
@@ -408,7 +410,9 @@
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.playerView fadeIn];
-//    [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
+    if(self.shouldResume) {
+        [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
+    }
 }
 
 @end
