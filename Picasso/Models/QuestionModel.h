@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSString *question;
 @property (strong, nonatomic) NSString *choice_1;
 @property (strong, nonatomic) NSString *choice_2;
+@property (strong, nonatomic) NSString *choice_correct;
+@property (strong, nonatomic) NSString *explanation;
 
 - (id)initWithData:(NSDictionary *)data;
 

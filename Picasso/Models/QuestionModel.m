@@ -15,6 +15,8 @@
     self.question = data[@"question"];
     self.choice_1 = data[@"choice_1"];
     self.choice_2 = data[@"choice_2"];
+    self.choice_correct = data[@"choice_correct"];
+    self.explanation = data[@"explanation"];
     
     return [super init];
 }
