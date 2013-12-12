@@ -31,5 +31,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *answerView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionWorkView;
+@property (weak, nonatomic) IBOutlet UIView *questionBgView;
+@property (weak, nonatomic) IBOutlet UITextView *answerTextView;
 
 @end

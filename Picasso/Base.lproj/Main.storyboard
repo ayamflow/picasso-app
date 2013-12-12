@@ -227,7 +227,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="IZZ-19-X1P" userLabel="headerView">
-                                <rect key="frame" x="168" y="107" width="233" height="106"/>
+                                <rect key="frame" x="168" y="107" width="233" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 / 20 OEUVRES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zVh-u2-4bX">
@@ -246,6 +246,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-bottom.png" id="xCZ-vA-m2V">
+                                        <rect key="frame" x="111" y="124" width="11" height="6"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" id="HYZ-ah-tH4" userLabel="textView">
@@ -281,9 +285,22 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="2xT-rh-QaX" userLabel="questionView">
-                                <rect key="frame" x="20" y="-103" width="528" height="320"/>
+                                <rect key="frame" x="20" y="0.0" width="528" height="500"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="4JQ-DC-IaJ" userLabel="backgroundQuestion">
+                                        <rect key="frame" x="0.0" y="0.0" width="528" height="322"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="AGR-Kb-tNk" userLabel="answer">
+                                        <rect key="frame" x="0.0" y="600" width="528" height="110"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ds-mP-buH">
                                         <rect key="frame" x="90" y="33" width="349" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -296,7 +313,7 @@ T0lMRVMgPw
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="mWG-uw-J2s">
-                                        <rect key="frame" x="59" y="169" width="210" height="115"/>
+                                        <rect key="frame" x="59" y="450" width="210" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 ans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AMG-yn-CG7">
@@ -310,7 +327,7 @@ T0lMRVMgPw
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="h0L-Db-5DY">
-                                        <rect key="frame" x="260" y="169" width="210" height="115"/>
+                                        <rect key="frame" x="260" y="450" width="210" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 ans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kps-g6-Uej">
@@ -324,18 +341,9 @@ T0lMRVMgPw
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0dH-f3-97c">
-                                <rect key="frame" x="20" y="-400" width="528" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <view contentMode="scaleToFill" id="Uj0-nx-TuI">
-                                <rect key="frame" x="0.0" y="240" width="568" height="80"/>
+                            <view contentMode="scaleToFill" id="Uj0-nx-TuI" userLabel="footerView">
+                                <rect key="frame" x="0.0" y="600" width="568" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crédit photographique : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8zQ-9D-CEK">
@@ -369,8 +377,8 @@ T0lMRVMgPw
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" selectable="NO" id="FGa-BA-9wA">
-                                <rect key="frame" x="20" y="158" width="528" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" selectable="NO" id="FGa-BA-9wA" userLabel="descriptionView">
+                                <rect key="frame" x="20" y="600" width="528" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -383,7 +391,7 @@ T0lMRVMgPw
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="answerView" destination="0dH-f3-97c" id="PQH-rY-CQO"/>
+                        <outlet property="answerTextView" destination="AGR-Kb-tNk" id="Pxd-af-NIg"/>
                         <outlet property="choice1Label" destination="AMG-yn-CG7" id="zXj-dz-ilD"/>
                         <outlet property="choice1View" destination="mWG-uw-J2s" id="mwf-fd-80r"/>
                         <outlet property="choice2View" destination="h0L-Db-5DY" id="VDB-C2-ivj"/>
@@ -392,6 +400,7 @@ T0lMRVMgPw
                         <outlet property="footerView" destination="Uj0-nx-TuI" id="MDg-ks-tRf"/>
                         <outlet property="headerView" destination="IZZ-19-X1P" id="wwC-qZ-Zkk"/>
                         <outlet property="numbersWorkLabel" destination="zVh-u2-4bX" id="3eQ-Tc-ioR"/>
+                        <outlet property="questionBgView" destination="4JQ-DC-IaJ" id="2go-SX-M57"/>
                         <outlet property="questionLabel" destination="8ds-mP-buH" id="Jmf-tQ-0M1"/>
                         <outlet property="questionView" destination="2xT-rh-QaX" id="ekn-YV-cgg"/>
                         <outlet property="textHLabel" destination="XRR-fC-Lt6" id="wNu-ae-VO6"/>
@@ -622,6 +631,7 @@ T0lMRVMgPw
         </scene>
     </scenes>
     <resources>
+        <image name="arrow-bottom.png" width="11" height="6"/>
         <image name="arrow-left-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-top-icon.png" width="37" height="20"/>
