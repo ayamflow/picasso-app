@@ -14,3 +14,8 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+// AHEasing 64bits support
+#if __LP64__
+#define AH_EASING_USE_DBL_PRECIS
+#endif

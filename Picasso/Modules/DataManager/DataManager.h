@@ -10,19 +10,28 @@
 #import "SceneModel.h"
 #import "WorkModel.h"
 #import "GameModel.h"
+#import "QuestionModel.h"
 
 @interface DataManager : NSObject
+
+@property (strong, nonatomic) NSArray *scenes;
+@property (strong, nonatomic) NSArray *works;
+@property (strong, nonatomic) NSArray *questions;
 
 + (id)sharedInstance;
 
 - (GameModel *)getGameModel;
-- (SceneModel *)getSceneWithId:(NSString *)sceneId;
-- (SceneModel *)getSceneWithNumber:(int)number;
+- (SceneModel *)getSceneWithNumber:(NSInteger)number;
 -(SceneModel *)getCurrentSceneModel;
+- (NSMutableArray *)getWorksWithScene:(NSInteger)sceneNumber;
 - (WorkModel *)getWorkWithId:(NSString *)workId;
-- (WorkModel *)getWorkWithNumber:(int)number;
-- (void)unlockSceneWithNumber:(int)number;
-- (int)getScenesNumber;
-- (int)getWorksNumber;
+- (WorkModel *)getWorkWithNumber:(NSInteger)number;
+- (QuestionModel *)getRandomQuestion;
+- (void)unlockSceneTo:(NSInteger)number;
+- (void)unlockSceneWithNumber:(NSInteger)number;
+- (void)unlockWorkWithNumber:(NSInteger)number;
+- (void)unlockWorkTo:(NSInteger)number;
+- (NSInteger)getScenesNumber;
+- (NSInteger)getWorksNumber;
 
 @end

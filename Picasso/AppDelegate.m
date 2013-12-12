@@ -7,16 +7,65 @@
 //
 
 #import "AppDelegate.h"
+#import "DataManager.h"
 #import "GalleryViewController.h"
+#import "Colors.h"
+#import "MotionVideoPlayer.h"
+#import "OrientationUtils.h"
+
+@interface AppDelegate ()
+
+@property (strong, nonatomic) MotionVideoPlayer *player;
+
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+
+    [self initModels];
+//    [self showFonts];
+    [self initBackgroundVideo];
+    
     return YES;
 }
-							
+
+// CUSTOM METHODS FOR PICASSO
+
+- (void)initModels {
+    [[DataManager sharedInstance] getGameModel]; // Implicitly load the game
+}
+
+- (void)showFonts {
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"--%@--", family);
+
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+}
+
+- (void)initBackgroundVideo {
+	self.player = [MotionVideoPlayer sharedInstance];
+
+    self.player.player.rate = 1.0;
+    self.player.player.volume = 0;
+    
+    self.window.rootViewController.view.backgroundColor = [UIColor backgroundColor];
+    
+    [self.window.rootViewController.view addSubview:self.player.view];
+    [self.window.rootViewController.view sendSubviewToBack:self.player.view];
+}
+
+- (void)initMenuButton {
+
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -27,6 +76,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[[DataManager sharedInstance] getGameModel] save]; // Save game progress
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

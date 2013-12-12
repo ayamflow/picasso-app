@@ -1,5 +1,5 @@
-Picasso/Data/Scenes
-*.mp4
 .DS_Store
-Picasso.xcodeproj/project.pbxproj
-Picasso.xcodeproj/project.xcworkspace/xcuserdata/julian.xcuserdatad/UserInterfaceState.xcuserstate
+*.pbxuser
+*.xcworkspace
+xcuserdata
+*.xcodeproj/ !*.xcodeproj/project.pbxproj

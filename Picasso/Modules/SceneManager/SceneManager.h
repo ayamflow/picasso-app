@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SceneModel.h"
+#import "Scene.h"
 #import "SceneManagerDelegate.h"
-#import "SlidingButtonDelegate.h"
 
-@interface SceneManager : UIViewController <SceneManagerDelegate, SlidingButtonDelegate>
+@interface SceneManager : UIViewController <SceneManagerDelegate, UIGestureRecognizerDelegate>
+
+@property (strong, nonatomic) Scene *currentScene;
+@property (assign, nonatomic) BOOL shouldResume;
 
 @end

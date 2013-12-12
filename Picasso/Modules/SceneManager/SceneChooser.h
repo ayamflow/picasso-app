@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iCarousel.h"
 
-@interface SceneChooser : UIViewController
+@interface SceneChooser : UIViewController <iCarouselDataSource, iCarouselDelegate>
+@property (strong, nonatomic) iCarousel *carousel;
 
 @end

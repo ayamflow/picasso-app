@@ -10,16 +10,17 @@
 #import "MotionVideoPlayer.h"
 #import "SceneModel.h"
 #import "SceneManagerDelegate.h"
+#import "MotionVideoPlayerDelegate.h"
 
-@interface Scene : UIViewController
+@interface Scene : UIViewController <UIGestureRecognizerDelegate, MotionVideoPlayerDelegate>
 
-@property (strong, nonatomic) MotionVideoPlayer *playerView;
 @property (strong, nonatomic) SceneModel *model;
 @property (strong, nonatomic) NSArray *trackersImage;
 @property (weak, nonatomic) id<SceneManagerDelegate> delegate;
+@property (assign, nonatomic) BOOL shouldResume;
 
 - (id)initWithModel:(SceneModel *)sceneModel;
-- (id)initWithModel:(SceneModel *)sceneModel andPosition:(CGPoint)position;
 - (void)stop;
+- (void)resume;
 
 @end
