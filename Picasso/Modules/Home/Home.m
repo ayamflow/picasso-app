@@ -120,7 +120,6 @@
 }
 
 - (void)prepareTransitionOut:(id)sender {
-//    [self stopVideo];
     [[MotionVideoPlayer sharedInstance] stopListeningForUpdates];
     NSArray *buttonsOrder;
     self.fadeVideo = YES;
@@ -176,7 +175,7 @@
         [[[MotionVideoPlayer sharedInstance] player] seekToTime:CMTimeMakeWithSeconds(23.8, 1.0)];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transitionOutComplete) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
-        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:25];
+        [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:24];
     }
 }
 

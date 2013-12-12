@@ -56,9 +56,23 @@
     [self initTableHeader];
 //    [self initData];
     [self initTexts];
+    [self initBackground];
 
     self.view.backgroundColor = [UIColor clearColor]; // Maybe an image ?
-    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
+}
+
+- (void)initBackground {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"simpleBackground" ofType:@".png"];
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+    [self.tableView addSubview:background];
+    [background moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height / 2 - background.bounds.size.height / 4)];
+    [self.tableView sendSubviewToBack:background];
+    
+    NSString *bottomPath = [[NSBundle mainBundle] pathForResource:@"bottomBackground" ofType:@".png"];
+    UIImageView *bottomBackground = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:bottomPath]];
+    [self.tableView addSubview:bottomBackground];
+    [bottomBackground moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height + bottomBackground.bounds.size.height)];
+    [self.tableView sendSubviewToBack:bottomBackground];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -164,6 +178,8 @@
         cell.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.clipsToBounds = YES;
+        cell.backgroundColor = [UIColor clearColor];
+        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
     }
     return cell;
 }
@@ -187,6 +203,7 @@
     Class SubView = NSClassFromString(subviewName);
     UIView *view = ((UIViewController *)[[SubView alloc] initWithNibName:subviewName bundle:nil]).view;
     view.tag = kCellDetailTag;
+    view.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:view];
     [view moveTo:CGPointMake(0, cell.frame.size.height)];
     [self.cellHeights setObject:[NSNumber numberWithFloat:view.frame.size.height] atIndexedSubscript:indexPath.row];
@@ -273,8 +290,6 @@
     NSArray *cells = [self.tableView visibleCells];
     for(NSInteger i = [cells count] - 1; i >= 0; i--) {
         UITableViewCell *cell = [cells objectAtIndex:i];
-        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
-        [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
         [UIView animateWithDuration:0.4 delay:([cells count] - i - 1) * 0.1 options:0 animations:^{
             cell.alpha = 0;
             cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
@@ -309,8 +324,6 @@
     cell.alpha = 0;
     cell.layer.anchorPoint = CGPointMake(0.5, 0);
     cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0);
-    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"transform"];
-    [cell setEasingFunction:QuadraticEaseInOut forKeyPath:@"alpha"];
     [UIView animateWithDuration:0.25 delay:indexPath.row * 0.08 options:0 animations:^{
         cell.alpha = 1.0;
         cell.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);

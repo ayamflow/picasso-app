@@ -42,12 +42,18 @@
 
     self.view.backgroundColor = [UIColor clearColor];
 
+    [self initBackground];
     [self initTexts];
     [self initNavigationBar];
     [self initGallery];
+}
 
-    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
-    [[[MotionVideoPlayer sharedInstance] player] play];
+- (void)initBackground {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"simpleBackground" ofType:@".png"];
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+    [self.view addSubview:background];
+    [background moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height  - background.bounds.size.height)];
+    [self.view sendSubviewToBack:background];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,6 +105,7 @@
     [self updateTitleAndDateWithIndex:self.currentSceneNumber];
     
     self.scrollViewScenes.delegate = self;
+    self.scrollViewScenes.backgroundColor = [UIColor clearColor];
     
     NSInteger scenesNumber = [[DataManager sharedInstance] getScenesNumber];
     

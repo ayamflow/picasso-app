@@ -21,6 +21,8 @@
 #import "DashedPathView.h"
 #import "StatsFooterView.h"
 #import "Events.h"
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -158,29 +160,38 @@
 }
 
 - (void)transitionIn {
-    self.navigationBar.alpha = 0;
+    CGFloat duration = 0.8;
+    CGFloat delay = 0;
+    
+    for(UIView *view in @[self.carousel, self.titleLabel, self.dateLabel, self.navigationBar, self.bottomInfos]) {
+        view.alpha = 0;
+/*        [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        [view setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+        [UIView animateWithDuration:duration delay:delay options:0 animations:^{
+            view.alpha = 1;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
+        } completion:nil];
+        delay += 0.07;*/
+    }
+    
     [self.navigationBar moveTo:CGPointMake(0, - 20)];
-
-    [self.carousel moveTo:CGPointMake(0, - 20)];
-    self.carousel.alpha = 0;
-
-    self.bottomInfos.alpha = 0;
+    [self.carousel moveTo:CGPointMake([OrientationUtils nativeDeviceSize].size.width * 2 / 3, 0)];
+    [self.titleLabel moveTo:CGPointMake(self.titleLabel.frame.origin.x + [OrientationUtils nativeDeviceSize].size.width * 2 / 3, self.titleLabel.frame.origin.y)];
+    [self.dateLabel moveTo:CGPointMake(self.dateLabel.frame.origin.x + [OrientationUtils nativeDeviceSize].size.width * 2 / 3, self.dateLabel.frame.origin.y)];
     [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height)];
 
-    CGFloat duration = 0.6;
+    for(UIView *view in @[self.carousel, self.titleLabel, self.dateLabel]) {
+        [UIView animateWithDuration:duration delay:delay options:0 animations:^{
+            [view moveTo:CGPointMake(view.frame.origin.x - [OrientationUtils nativeDeviceSize].size.width * 2 / 3, view.frame.origin.y)];
+            view.alpha = 1;
+        } completion:nil];
+        delay += 0.07;
+    }
     [UIView animateWithDuration:duration delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.navigationBar moveTo:CGPointMake(0, 0)];
         self.navigationBar.alpha = 1;
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.carousel moveTo:CGPointMake(0, 0)];
-        self.carousel.alpha = 1;
-    } completion:nil];
-
-    [UIView animateWithDuration:duration delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.bounds.size.height)];
         self.bottomInfos.alpha = 1;
-        [self.bottomInfos moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height - self.bottomInfos.frame.size.height)];
     } completion:nil];
 }
 

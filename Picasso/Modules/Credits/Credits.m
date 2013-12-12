@@ -39,8 +39,7 @@
     [self initNavigationBar];
     [self initTexts];
     [self initNames];
-    
-    [[MotionVideoPlayer sharedInstance] rotatePlayerToPortrait];
+    [self initBackground];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,7 +53,6 @@
     CGFloat delay = 0;
     
     UIView *names = [self.scrollView viewWithTag:kNameViewTag];
-    
     
     for(UIView *view in @[self.gobelinsLabel, self.navigationBar, self.scrollView]) {
         view.alpha = 0;
@@ -81,6 +79,20 @@
         
         delay += 0.05;
     }
+}
+
+- (void)initBackground {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"simpleBackground" ofType:@".png"];
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+    [self.scrollView addSubview:background];
+    [background moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height / 2 - background.bounds.size.height / 4)];
+    [self.scrollView sendSubviewToBack:background];
+    
+    NSString *bottomPath = [[NSBundle mainBundle] pathForResource:@"bottomBackground" ofType:@".png"];
+    UIImageView *bottomBackground = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:bottomPath]];
+    [self.scrollView addSubview:bottomBackground];
+    [bottomBackground moveTo:CGPointMake(0, self.scrollView.contentSize.height - bottomBackground.bounds.size.height)];
+    [self.scrollView sendSubviewToBack:bottomBackground];
 }
 
 - (void)initNavigationBar {
