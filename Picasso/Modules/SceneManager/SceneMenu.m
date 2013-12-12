@@ -18,6 +18,7 @@
 #import "SceneChooserLandscape.h"
 #import "SceneManager.h"
 #import "MapView.h"
+#import "TextUtils.h"
 #import "StatsFooterView.h"
 
 @interface SceneMenu ()
@@ -147,7 +148,7 @@
         self.sceneChooser.view.alpha = 0;
     } completion:^(BOOL finished) {
         [self.sceneChooser.view performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-        self.navigationBar.titleLabel.text = [@"Explorer" uppercaseString]; //[self.sceneModel.title uppercaseString];
+        self.navigationBar.titleLabel.attributedText = [TextUtils getKernedString:[@"Explorer" uppercaseString]];
         self.sceneChooser.delegate = nil;
         self.sceneChooser.mapDelegate = nil;
         self.sceneChooser = nil;
@@ -177,7 +178,7 @@
 }
 
 - (void)updateNavigationTitleWithString:(NSString *)title {
-    self.navigationBar.titleLabel.text = [title uppercaseString];
+    self.navigationBar.titleLabel.attributedText = [TextUtils getKernedString:[title uppercaseString]];
 }
 
 @end

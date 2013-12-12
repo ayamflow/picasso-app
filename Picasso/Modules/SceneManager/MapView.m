@@ -18,6 +18,7 @@
 #import "Path4View.h"
 #import "Path5View.h"
 #import "Path6View.h"
+#import "TextUtils.h"
 
 #define kTopOffset 60
 
@@ -96,7 +97,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(positions[i].x - labelSize.width / 2, positions[i].y - labelSize.height / 2, labelSize.width, labelSize.height)];
         label.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12];
         label.textColor = [UIColor blackColor];
-        label.text = [[cities objectAtIndex:i] uppercaseString];
+        label.attributedText = [TextUtils getKernedString:[[cities objectAtIndex:i] uppercaseString]];
         label.textAlignment = NSTextAlignmentCenter;
         [labels addObject:label];
         [self.infoView addSubview:label];

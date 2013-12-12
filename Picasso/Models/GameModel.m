@@ -78,12 +78,12 @@
 
 - (void)deletePList {
     NSString *savePlist = [self getSavePlistPath];
-    NSLog(@"delete plist");
+    NSLog(@"[GameMdel] Delete plist");
     
     NSError *error;
     if(![[NSFileManager defaultManager] removeItemAtPath:savePlist error:&error])
     {
-        NSLog(@"plist deleted with error");
+        NSLog(@"[GmeModel] No plist to delete");
     }
 }
 

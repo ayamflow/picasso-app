@@ -14,6 +14,7 @@
 #import "UIViewPicasso.h"
 #import "SceneModel.h"
 #import "MotionVideoPlayer.h"
+#import "TextUtils.h"
 
 #define MARGIN 15
 
@@ -96,7 +97,7 @@
 
 - (void)initTitle {
     self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - 100.0, 50.0, 200.0, 40.0)];
-    self.sceneTitle.text = [self.sceneModel.title uppercaseString];
+    self.sceneTitle.attributedText = [TextUtils getKernedString:[self.sceneModel.title uppercaseString]];
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
     self.sceneTitle.textColor = [UIColor blackColor];
     self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];
@@ -109,7 +110,7 @@
 
 - (void)initDate {
     self.dateTitle = [[UILabel alloc] initWithFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - 50.0, 90.0, 100.0, 45.0)];
-    self.dateTitle.text = [self.sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"    "];
+    self.dateTitle.attributedText = [TextUtils getKernedString:[self.sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"    "]];
     self.dateTitle.textColor = [UIColor blackColor];
     [self.dateTitle setTextAlignment:NSTextAlignmentCenter];
     self.dateTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12.0];
@@ -127,7 +128,7 @@
     CGFloat leftPosition = (screenSize.size.width - textWidth) / 2;
 
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(leftPosition, self.dateTitle.layer.position.y + 25.0, textWidth, screenSize.size.height / 2) textContainer:nil];
-    [self.textView setText:self.sceneModel.description];
+    [self.textView setAttributedText:[TextUtils getKernedString:self.sceneModel.description]];
     self.textView.scrollEnabled = YES;
     [self.textView setTextAlignment:NSTextAlignmentCenter];
     [self.textView setEditable:NO];
@@ -159,7 +160,7 @@
     NSInteger nextSceneNumber = self.sceneModel.number >= [[DataManager sharedInstance] getScenesNumber] - 1 ? 0 : self.sceneModel.number + 1;
     if(nextSceneNumber > 0) {
         UILabel *nextSceneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
-        nextSceneLabel.text = [NSString stringWithFormat:@"%li", nextSceneNumber];
+        nextSceneLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"%li", nextSceneNumber]];
         nextSceneLabel.textAlignment = NSTextAlignmentCenter;
         nextSceneLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Bold" size:15];
         nextSceneLabel.textColor = [UIColor whiteColor];

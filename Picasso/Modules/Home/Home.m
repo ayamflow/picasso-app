@@ -16,6 +16,7 @@
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
 #import "Events.h"
+#import "TextUtils.h"
 
 #define kLogoPositionVariant -40
 #define kButtonsPositionVariant 20
@@ -94,6 +95,7 @@
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
         [button addTarget:self action:@selector(buttonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
         [button setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
+        [button setAttributedTitle:[TextUtils getKernedString:button.titleLabel.text] forState:UIControlStateNormal];
     }
 
     // This one is the reference
@@ -159,7 +161,7 @@
             }
         }];
         i++;
-        delay += 0.05;
+        delay += 0.08;
     }
 }
 

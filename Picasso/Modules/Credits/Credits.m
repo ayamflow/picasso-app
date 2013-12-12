@@ -14,6 +14,7 @@
 #import "UIView+EasingFunctions.h"
 #import "MotionVideoPlayer.h"
 #import "easing.h"
+#import "TextUtils.h"
 #import "MotionVideoPlayer.h"
 
 #define kNameViewTag 10
@@ -40,6 +41,7 @@
     [self initTexts];
     [self initNames];
     [self initBackground];
+    [self updateLetterSpacing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,7 +109,7 @@
     self.gobelinsLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
     self.gobelinsLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.gobelinsLabel.layer.borderWidth = 2;
-    self.gobelinsLabel.text = [@"Les Gobelins" uppercaseString];
+    self.gobelinsLabel.attributedText = [TextUtils getKernedString:[@"Les Gobelins" uppercaseString]];
 }
 
 - (void)initNames {
@@ -159,6 +161,16 @@
         
         delay += 0.1;
         transitionDone++;
+    }
+}
+
+- (void)updateLetterSpacing {
+    UIView *names = [self.scrollView viewWithTag:kNameViewTag];
+    
+    for(UIView *view in names.subviews) {
+        if([view isKindOfClass:[UILabel class]]) {
+            ((UILabel *)view).attributedText = [TextUtils getKernedString:((UILabel *)view).text];
+        }
     }
 }
 

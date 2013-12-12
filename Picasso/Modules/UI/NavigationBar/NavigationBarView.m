@@ -10,6 +10,7 @@
 #import "UIViewPicasso.h"
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
+#import "TextUtils.h"
 
 #define kMenuMargin 20
 
@@ -29,6 +30,8 @@
         [self initBackButton];
         [self initTitle];
         if(self.hasExploreButton) [self initExploreButton];
+        
+        [self sendSubviewToBack:self.titleLabel];
     }
     return self;
 }
@@ -49,8 +52,8 @@
 }
 
 - (void)initTitle {
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 2 * kMenuMargin, self.frame.size.height * 0.1, self.frame.size.width * 0.7, self.frame.size.height * 0.8)];
-    self.titleLabel.text = [self.title uppercaseString];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kMenuMargin, self.frame.size.height * 0.1, self.frame.size.width - 2 * kMenuMargin, self.frame.size.height * 0.8)];
+    self.titleLabel.attributedText = [TextUtils getKernedString:[self.title uppercaseString]];
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:18];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:self.titleLabel];

@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "UIViewControllerPicasso.h"
+#import "TextUtils.h"
 #import "UIViewPicasso.h"
 #import "Colors.h"
 #import "OrientationUtils.h"
@@ -136,6 +137,7 @@
 - (void)initTitle {
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width * 0.9, 40)];
     self.titleLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].title uppercaseString];
+    self.titleLabel.attributedText = [TextUtils getKernedString:[[[DataManager sharedInstance] getSceneWithNumber:0].title uppercaseString]];
     self.titleLabel.textColor = [UIColor blackColor];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
     self.titleLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15];
@@ -147,7 +149,7 @@
 
 - (void)initDate {
     self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeDeviceSize].size.width, 30)];
-    self.dateLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    self.dateLabel.attributedText = [TextUtils getKernedString:[[[DataManager sharedInstance] getSceneWithNumber:0].date stringByReplacingOccurrencesOfString:@"-" withString:@"   "]];
     self.dateLabel.textColor = [UIColor blackColor];
     [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
@@ -280,8 +282,8 @@
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
-    self.titleLabel.text = [sceneModel.title uppercaseString];
-    self.dateLabel.text = [sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    self.titleLabel.attributedText = [TextUtils getKernedString:[sceneModel.title uppercaseString]];
+    self.dateLabel.attributedText = [TextUtils getKernedString:[sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "]];
 }
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel {

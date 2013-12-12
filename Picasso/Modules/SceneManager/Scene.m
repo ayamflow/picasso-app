@@ -23,6 +23,7 @@
 #import "SceneMenu.h"
 #import "SceneManagerDelegate.h"
 #import "NavigationBarView.h"
+#import "TextUtils.h"
 
 #define kPlaybackFadePercent 0.90
 
@@ -164,7 +165,9 @@
 - (void)initTitle:(NSString *)title {
     float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.sceneTitle.frame.size.height / 2 - 50;
     self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 40.0)];
-    self.sceneTitle.text = [title uppercaseString];
+    self.sceneTitle.attributedText = [TextUtils getKernedString:[title uppercaseString]];
+    [self.sceneTitle sizeToFit];
+    self.sceneTitle.frame = CGRectMake(0, 0, self.sceneTitle.bounds.size.width, 40);
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
     self.sceneTitle.textColor = [UIColor textColor];
     self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];
@@ -179,7 +182,7 @@
 - (void)initDate:(NSString *)date {
     float topPosition = [OrientationUtils nativeLandscapeDeviceSize].size.height / 2 - self.sceneTitle.frame.size.height / 2;
     self.dateTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 45.0)];
-    self.dateTitle.text = date;
+    self.dateTitle.attributedText = [TextUtils getKernedString:date];
     self.dateTitle.textColor = [UIColor textColor];
     [self.dateTitle setTextAlignment:NSTextAlignmentCenter];
     self.dateTitle.font = [UIFont fontWithName:@"Avenir" size:12.0];

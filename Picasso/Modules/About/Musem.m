@@ -18,6 +18,7 @@
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
 #import <MapKit/MapKit.h>
+#import "TextUtils.h"
 
 #define kCellLabelTag 1
 #define kCellDetailTag 2
@@ -65,6 +66,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"simpleBackground" ofType:@".png"];
     UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
     [self.tableView addSubview:background];
+    background.tag = 10;
     [background moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height / 2 - background.bounds.size.height / 4)];
     [self.tableView sendSubviewToBack:background];
     
@@ -108,7 +110,7 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height, [OrientationUtils nativeDeviceSize].size.width, hotelImage.frame.size.height)];
     [header addSubview:hotelImage];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 3/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];
-    titleLabel.text = [@"L'hôtel salé" uppercaseString];
+    titleLabel.attributedText = [TextUtils getKernedString:[@"L'hôtel salé" uppercaseString]];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Black" size:20];
     titleLabel.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -117,13 +119,15 @@
     [header addSubview:titleLabel];
     
     UILabel *subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(hotelImage.frame.size.width * 0.05, hotelImage.frame.size.height * 4/5, hotelImage.frame.size.width * 0.9, hotelImage.frame.size.height / 5)];
-    subtitleLabel.text = [@"c'est ouvert !" uppercaseString];
+    subtitleLabel.attributedText = [TextUtils getKernedString:[@"c'est ouvert !" uppercaseString]];
     subtitleLabel.textColor = [UIColor whiteColor];
     subtitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:16];
     [subtitleLabel setTextAlignment:NSTextAlignmentCenter];
     [header addSubview:subtitleLabel];
 
+    header.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = header;
+    self.tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)initData {
@@ -163,8 +167,8 @@
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self.identifiers objectAtIndex:indexPath.row]];
         UILabel *label = [[UILabel alloc] initWithFrame:cell.frame];
-        label.text = [self.labels objectAtIndex:indexPath.row];
-        label.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:15];
+        label.attributedText = [TextUtils getKernedString:[self.labels objectAtIndex:indexPath.row]];
+        label.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
         [label setTextAlignment:NSTextAlignmentCenter];
         [cell.contentView addSubview:label];
         
@@ -274,10 +278,18 @@
 - (void)transitionIn {
     self.navigationBar.alpha = 0;
     self.tableView.tableHeaderView.alpha = 0;
-    [UIView animateWithDuration:0.4 animations:^{
-        self.navigationBar.alpha = 1;
-        self.tableView.tableHeaderView.alpha = 1;
-    }];
+    
+    UIView *background = [self.view viewWithTag:10];
+    
+    for(UIView *view in @[background, self.tableView.tableHeaderView, self.navigationBar]) {
+        view.alpha = 0;
+        [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            view.alpha = 1;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
+        }];
+    }
     [self performSelector:@selector(showTableCells) withObject:self afterDelay:0.2];
 }
 
@@ -296,19 +308,23 @@
         } completion:nil];
     }
 
-    [UIView animateWithDuration:0.4 delay:0.4 options:0 animations:^{
-        self.navigationBar.alpha = 0;
-        self.tableView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self cleanArrays];
-        if(self.leavingToExplore) {
-            [self toSceneChooser];
-        }
-        else {
-            [self toHome];
-        }
-    }];
+    UIView *background = [self.view viewWithTag:10];
+    
+    for(UIView *view in @[background, self.tableView.tableHeaderView, self.navigationBar]) {
+        [UIView animateWithDuration:0.4 animations:^{
+            view.alpha = 0;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        } completion:^(BOOL finished) {
+            [self cleanArrays];
+            if(self.leavingToExplore) {
+                [self toSceneChooser];
+            }
+            else {
+                [self toHome];
+            }
 
+        }];
+    }
 }
 
 - (void)cleanArrays {

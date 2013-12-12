@@ -10,6 +10,7 @@
 #import "OrientationUtils.h"
 #import "UIViewPicasso.h"
 #import "Colors.h"
+#import "TextUtils.h"
 
 #define kLineHeight 15
 
@@ -57,7 +58,15 @@
 }
 
 - (void)callMuseum {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://0142712521"]];
+    @try {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://0142712521"]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Calling is not supported by this device");
+    }
+    @finally {
+        NSLog(@"Calling is not supported by this device");
+    }
 }
 
 @end

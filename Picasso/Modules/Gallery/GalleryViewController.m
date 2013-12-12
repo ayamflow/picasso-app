@@ -18,6 +18,7 @@
 #import "NavigationBarView.h"
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
+#import "TextUtils.h"
 #import "MotionVideoPlayer.h"
 
 @interface GalleryViewController ()
@@ -51,6 +52,7 @@
 - (void)initBackground {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"simpleBackground" ofType:@".png"];
     UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+    background.tag = 10;
     [self.view addSubview:background];
     [background moveTo:CGPointMake(0, [OrientationUtils nativeDeviceSize].size.height  - background.bounds.size.height)];
     [self.view sendSubviewToBack:background];
@@ -58,19 +60,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
     [[[MotionVideoPlayer sharedInstance] player] pause];
+    [self transitionIn];
+}
 
+- (void)transitionIn {
     CGFloat duration = 0.4;
     CGFloat delay = 0;
+
+    UIView *background = [self.view viewWithTag:10];
     
-    for(UIView *view in @[self.scrollViewScenes, self.sceneDate, self.leftArrow, self.rightArrow, self.dateSeparator, self.navigationBar]) {
+    for(UIView *view in @[background, self.scrollViewScenes, self.sceneDate, self.leftArrow, self.rightArrow, self.dateSeparator, self.navigationBar]) {
         [view setEasingFunction:QuadraticEaseInOut forKeyPath:@"frame"];
         view.alpha = 0;
         [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
     }
     
-    for(UIView *view in @[self.scrollViewScenes, self.sceneDate, self.navigationBar]) {
+    for(UIView *view in @[background, self.scrollViewScenes, self.sceneDate, self.navigationBar]) {
         [UIView animateWithDuration:duration delay:delay options:0 animations:^{
             [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
             view.alpha = 1;
@@ -131,7 +137,7 @@
 
 - (void)updateTitleAndDateWithIndex:(NSInteger)index {
     SceneModel *currentScene = [[DataManager sharedInstance] getSceneWithNumber:index];
-    self.sceneDate.text = [currentScene.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    self.sceneDate.attributedText = [TextUtils getKernedString:[currentScene.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "]];
 }
 
 - (void)workTouchedWithIndex:(NSInteger)index {
@@ -149,6 +155,8 @@
     NSInteger numberOfView = 3;
     NSInteger transitionDone = 0;
     
+    UIView *background = [self.view viewWithTag:10];
+    
     for(UIView *view in @[self.navigationBar, self.sceneDate, self.scrollViewScenes]) {
         [UIView animateWithDuration:duration delay:delay options:0 animations:^{
             [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
@@ -162,7 +170,7 @@
         delay += 0.15;
     }
     
-    for(UIView *view in @[self.leftArrow, self.rightArrow, self.dateSeparator]) {
+    for(UIView *view in @[self.leftArrow, self.rightArrow, self.dateSeparator, background]) {
         [UIView animateWithDuration:duration delay:0.3 options:0 animations:^{
             [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
             view.alpha = 0;

@@ -250,6 +250,7 @@
 		62BF90971859CE5E002C8E73 /* simpleBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62BF90951859CE5E002C8E73 /* simpleBackground@2x.png */; };
 		62BF909A1859CE91002C8E73 /* bottomBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 62BF90981859CE91002C8E73 /* bottomBackground.png */; };
 		62BF909B1859CE91002C8E73 /* bottomBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62BF90991859CE91002C8E73 /* bottomBackground@2x.png */; };
+		62BF90A31859EA4A002C8E73 /* TextUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BF90A21859EA4A002C8E73 /* TextUtils.m */; };
 		62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CDE0A918435CEA006276C7 /* lockedButton@2x.png */; };
 		62DCA8EA18439F7000CF593F /* scene-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DCA8E918439F7000CF593F /* scene-1@2x.png */; };
 		62DCA8ED1843A3B700CF593F /* SceneTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DCA8EC1843A3B700CF593F /* SceneTimeline.m */; };
@@ -605,6 +606,8 @@
 		62BF90951859CE5E002C8E73 /* simpleBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simpleBackground@2x.png"; path = "Data/UI/simpleBackground@2x.png"; sourceTree = "<group>"; };
 		62BF90981859CE91002C8E73 /* bottomBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottomBackground.png; path = Data/UI/bottomBackground.png; sourceTree = "<group>"; };
 		62BF90991859CE91002C8E73 /* bottomBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottomBackground@2x.png"; path = "Data/UI/bottomBackground@2x.png"; sourceTree = "<group>"; };
+		62BF90A11859EA4A002C8E73 /* TextUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextUtils.h; path = Modules/Utils/TextUtils.h; sourceTree = "<group>"; };
+		62BF90A21859EA4A002C8E73 /* TextUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextUtils.m; path = Modules/Utils/TextUtils.m; sourceTree = "<group>"; };
 		62CDE0A918435CEA006276C7 /* lockedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockedButton@2x.png"; sourceTree = "<group>"; };
 		62DCA8E918439F7000CF593F /* scene-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scene-1@2x.png"; sourceTree = "<group>"; };
 		62DCA8EB1843A3B700CF593F /* SceneTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneTimeline.h; path = Modules/SceneManager/SceneTimeline.h; sourceTree = "<group>"; };
@@ -932,6 +935,8 @@
 				4F836D22183BD3D800CA63CD /* Categories */,
 				624B978D182120580087C576 /* OrientationUtils.h */,
 				624B978E182120580087C576 /* OrientationUtils.m */,
+				62BF90A11859EA4A002C8E73 /* TextUtils.h */,
+				62BF90A21859EA4A002C8E73 /* TextUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1917,6 +1922,7 @@
 				6248E17F1844F8CD001BEF6C /* iCarousel.m in Sources */,
 				629AC66B1858961000BAE2BA /* UIView+EasingFunctions.m in Sources */,
 				624E6B47181E94B100E7FE58 /* Scene.m in Sources */,
+				62BF90A31859EA4A002C8E73 /* TextUtils.m in Sources */,
 				62367AFD18463A6A0090B819 /* HoursPanel.m in Sources */,
 				CE9115FD184B61CB00420043 /* MapView.m in Sources */,
 				624E6B59181E9EEE00E7FE58 /* DataManager.m in Sources */,

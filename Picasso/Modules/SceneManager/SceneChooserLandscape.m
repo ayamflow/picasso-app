@@ -16,6 +16,7 @@
 #import "ScenePreviewView.h"
 #import "SceneModel.h"
 #import "iCarousel.h"
+#import "TextUtils.h"
 
 #define kDirectionNone 0
 #define kDirectionLeft 1
@@ -97,7 +98,7 @@
 
 - (void)initDate {
     self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [OrientationUtils nativeLandscapeDeviceSize].size.width, 30)];
-    self.dateLabel.text = [[[DataManager sharedInstance] getSceneWithNumber:0].date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    self.dateLabel.attributedText = [TextUtils getKernedString:[[[DataManager sharedInstance] getSceneWithNumber:0].date stringByReplacingOccurrencesOfString:@"-" withString:@"   "]];
     self.dateLabel.textColor = [UIColor blackColor];
     [self.dateLabel setTextAlignment:NSTextAlignmentCenter];
     self.dateLabel.font = [UIFont fontWithName:@"AvenirLTStd-Roman" size:13];
@@ -157,7 +158,7 @@
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
     SceneModel *sceneModel = [[DataManager sharedInstance] getSceneWithNumber: self.carousel.currentItemIndex];
-    self.dateLabel.text = [sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "];
+    self.dateLabel.attributedText = [TextUtils getKernedString:[sceneModel.date stringByReplacingOccurrencesOfString:@"-" withString:@"   "]];
     [self.delegate updateNavigationTitleWithString:[sceneModel.title uppercaseString]];
     [self.mapDelegate translateMapToIndex:carousel.currentItemIndex];
 }

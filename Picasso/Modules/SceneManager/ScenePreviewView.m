@@ -12,6 +12,7 @@
 #import "Colors.h"
 #import "UIViewPicasso.h"
 #import "DataManager.h"
+#import "TextUtils.h"
 #import "SceneManager.h"
 
 @interface ScenePreviewView ()
@@ -79,7 +80,7 @@
 - (void)initChapterLabel {
     NSString *labelText = [[NSString stringWithFormat:@"chapitre %li", self.model.number + 1] uppercaseString];
     UILabel *exploreLabel = [[UILabel alloc] initWithFrame:self.background.frame];
-    exploreLabel.text = labelText;
+    exploreLabel.attributedText = [TextUtils getKernedString:labelText];
     exploreLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:12];
     exploreLabel.textColor = [UIColor whiteColor];
     [exploreLabel setTextAlignment:NSTextAlignmentCenter];
