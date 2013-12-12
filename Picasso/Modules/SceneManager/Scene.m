@@ -405,7 +405,7 @@
     [self.playerView enableMotion];
     self.player = self.playerView.player;
     [self.playerView fadeIn];
-    [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
+//    [self.player seekToTime:CMTimeMakeWithSeconds([[[DataManager sharedInstance] getGameModel] sceneCurrentTime], self.player.currentItem.asset.duration.timescale)];
 }
 
 @end

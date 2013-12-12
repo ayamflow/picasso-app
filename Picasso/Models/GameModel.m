@@ -24,7 +24,7 @@
 }
 - (id)init {
     if(self = [super init]) {
-//        [self deletePList];
+        [self deletePList];
         self.introCompleted = YES; // Uncomment to skip the intro
         [self load];
         [[DataManager sharedInstance] unlockSceneTo:self.lastUnlockedScene];
@@ -38,11 +38,17 @@
 }
 
 - (void)sceneUnlocked:(NSNotification *)notification {
-    self.lastUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
+    NSInteger newUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
+    if(newUnlockedScene > self.lastUnlockedScene) {
+        self.lastUnlockedScene = newUnlockedScene;
+    }
 }
 
 - (void)workUnlocked:(NSNotification *)notification {
-    self.lastUnlockedWork = [[notification.userInfo objectForKey:@"number"] integerValue];
+    NSInteger newUnlockedWork = [[notification.userInfo objectForKey:@"number"] integerValue];
+    if(newUnlockedWork > self.lastUnlockedWork) {
+        self.lastUnlockedWork = newUnlockedWork;
+    }
 }
 
 - (void)save {
