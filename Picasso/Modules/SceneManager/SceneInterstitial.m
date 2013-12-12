@@ -96,8 +96,10 @@
 }
 
 - (void)initTitle {
-    self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - 100.0, 50.0, 200.0, 40.0)];
+    self.sceneTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 40.0)];
     self.sceneTitle.attributedText = [TextUtils getKernedString:[self.sceneModel.title uppercaseString]];
+    [self.sceneTitle sizeToFit];
+    self.sceneTitle.frame = CGRectMake([OrientationUtils nativeLandscapeDeviceSize].size.width / 2 - self.sceneTitle.bounds.size.width / 2, 50.0, self.sceneTitle.frame.size.width, 40);
     [self.sceneTitle setTextAlignment:NSTextAlignmentCenter];
     self.sceneTitle.textColor = [UIColor blackColor];
     self.sceneTitle.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:15.0];

@@ -61,6 +61,7 @@
         button.alpha = 0;
     }
 
+    [[MotionVideoPlayer sharedInstance] fadeIn];
     if([[[DataManager sharedInstance] getGameModel] introCompleted]) {
         [[MotionVideoPlayer sharedInstance] showMenuVideo];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loopVideoMenu) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
@@ -70,9 +71,26 @@
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(introCompleted) name:[MPPEvents PlayerObservedTimeEvent] object:nil];
         [[MotionVideoPlayer sharedInstance] startToListenForUpdatesWithTime:19];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(skipIntro:)];
+        tapRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapRecognizer];
     }
+}
 
-    [[MotionVideoPlayer sharedInstance] fadeIn];
+- (void)skipIntro:(UITapGestureRecognizer *)recognizer {
+    [self.view removeGestureRecognizer:recognizer];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [[[MotionVideoPlayer sharedInstance] view] setAlpha:0];
+        [self loopVideoMenu];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [[[MotionVideoPlayer sharedInstance] view] setAlpha:1];
+        } completion:^(BOOL finished) {
+            [self introCompleted];
+        }];
+    }];
 }
 
 - (void)loopVideoMenu {

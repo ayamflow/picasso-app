@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Home : UIViewController
+@interface Home : UIViewController <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *exploreButton;
 @property (weak, nonatomic) IBOutlet UIButton *galleryButton;

@@ -42,7 +42,7 @@
     
     chapterLabel.text = [[NSString stringWithFormat:@"%d / %d chapitres", [[[DataManager sharedInstance] getGameModel] lastUnlockedScene] + 1, [[DataManager sharedInstance] getScenesNumber]] uppercaseString];
     
-    worksLabel.text = [[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork]), [[DataManager sharedInstance] getWorksNumber]] uppercaseString];
+    worksLabel.text = [[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork] + 1), [[DataManager sharedInstance] getWorksNumber]] uppercaseString];
     
     [chapterLabel sizeToFit];
     [self addSubview:chapterLabel];

@@ -92,7 +92,7 @@
     NSArray *cities = [NSArray arrayWithObjects:@"Malaga", @"La Corogne", @"Barcelone", @"Paris", @"Dinard", @"Boisloup", @"Moujin", nil];
     CGPoint positions[] = {CGPointMake(175, 552), CGPointMake(167, 360), CGPointMake(312, 440), CGPointMake(391, 165), CGPointMake(297, 154), CGPointMake(396, 329), CGPointMake(423, 377)};
 
-    CGSize labelSize = CGSizeMake(80, 15);
+    CGSize labelSize = CGSizeMake(160, 15);
     for(int i = 0; i < [cities count]; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(positions[i].x - labelSize.width / 2, positions[i].y - labelSize.height / 2, labelSize.width, labelSize.height)];
         label.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:12];

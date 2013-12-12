@@ -657,7 +657,7 @@
     "works": [
               {
               "id": "0",
-              "title": "La fillette aux pieds nus",
+              "title" : "La jeune fille aux pieds nus",
               "sceneNumber": "0",
               "year": "1900",
               "h": "20 m",
@@ -678,7 +678,7 @@
               {
               "id": "2",
               "title": "Autoportrait",
-              "sceneNumber": "0",
+              "sceneNumber": "1",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -688,7 +688,7 @@
               {
               "id": "3",
               "title": "Autoportrait, automne 1906",
-              "sceneNumber": "1",
+              "sceneNumber": "2",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -697,7 +697,7 @@
               },
               {
               "id": "4",
-              "title": "La fillette aux pieds nus",
+              "title" : "Nature morte chaise cannée",
               "sceneNumber": "1",
               "year": "1900",
               "h": "20 m",
@@ -708,7 +708,7 @@
               {
               "id": "5",
               "title": "La mort de Casagemas",
-              "sceneNumber": "1",
+              "sceneNumber": "2",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -718,7 +718,7 @@
               {
               "id": "6",
               "title": "Autoportrait",
-              "sceneNumber": "1",
+              "sceneNumber": "2",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -728,7 +728,7 @@
               {
               "id": "7",
               "title": "Autoportrait, automne 1906",
-              "sceneNumber": "2",
+              "sceneNumber": "3",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -738,7 +738,7 @@
               {
               "id": "8",
               "title": "La fillette aux pieds nus",
-              "sceneNumber": "2",
+              "sceneNumber": "3",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",
@@ -758,7 +758,7 @@
               {
               "id": "10",
               "title": "Autoportrait",
-              "sceneNumber": "3",
+              "sceneNumber": "4",
               "year": "1900",
               "h": "20 m",
               "l": "30 m",

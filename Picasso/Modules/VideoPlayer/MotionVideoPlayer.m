@@ -157,7 +157,8 @@
 	        self.motionEnabled = YES;
     }
     else {
-        NSLog(@"[MotionVideoPlayer] Motion data not available :'(");
+        NSLog(@"[MotionVideoPlayer] Motion data not available :'(. Playing the video at rate of 1.0.");
+        self.player.rate = 1.0;
     }
 }
 
