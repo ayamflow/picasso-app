@@ -16,6 +16,6 @@
 - (void)showDetails;
 - (void)clearPaths;
 - (void)clearAnimatedPath;
-- (void)scrollToIndex:(NSInteger)index;
+- (void)scrollToIndex:(NSInteger)index andAnimated:(BOOL)animated;
 
 @end

@@ -45,8 +45,6 @@
     [self initMap];
     [self initNavigationBar];
     [self initBottomInfos];
-    
-    [self.map scrollToIndex:self.sceneModel.number];
 }
 
 - (void)initBackground {
@@ -87,6 +85,7 @@
 
 - (void)initMap {
     self.map = [[MapView alloc] initWithFrame:[OrientationUtils nativeLandscapeDeviceSize]];
+    [self.map scrollToIndex:self.sceneModel.number andAnimated:NO];
     [self.view addSubview:self.map];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSceneChooser) name:[MPPEvents ShowSceneChooserLandscapeEvent] object:nil];

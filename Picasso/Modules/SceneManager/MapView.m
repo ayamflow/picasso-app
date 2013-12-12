@@ -223,11 +223,16 @@
     [CATransaction commit];
 }
 
-- (void)scrollToIndex:(NSInteger)index {
+- (void)scrollToIndex:(NSInteger)index andAnimated:(BOOL)animated {
     UIButton *scene = [self.scenes objectAtIndex:index];
-    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    if(animated) {
+        [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
+        } completion:nil];
+    }
+    else {
         [self.scrollView scrollRectToVisible:CGRectMake(0, scene.frame.origin.y - self.frame.size.height / 2, self.frame.size.width, self.frame.size.height) animated:NO];
-    } completion:nil];
+    }
 }
 
 // Map Translate Protocol
