@@ -50,7 +50,7 @@
     _deviceSize = [OrientationUtils deviceSize];
     self.navigationController.navigationBarHidden = YES;
 
-    _datamanager = [[DataManager sharedInstance] init];
+    _datamanager = [DataManager sharedInstance];
     _work = [_datamanager getWorkWithNumber:self.workId];
     
     _navBarMiniWorkView.layer.borderColor = [UIColor blackColor].CGColor;
@@ -122,10 +122,6 @@
         [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
-    
-    self.navigationBar.backgroundColor = [UIColor yellowColor];
-    self.navigationBar.backButton.backgroundColor = [UIColor greenColor];
-    self.navigationBar.exploreButton.backgroundColor = [UIColor blueColor];
 }
 
 - (void)backToGallery {

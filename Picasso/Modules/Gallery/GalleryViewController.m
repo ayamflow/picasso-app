@@ -42,6 +42,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
+    self.sceneDate.backgroundColor = [UIColor clearColor];
 
     [self initBackground];
     [self initTexts];
@@ -146,7 +147,7 @@
     
     WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
     workViewController.workId = index;
-    [self.navigationController pushViewController:workViewController animated:YES];
+    [self.navigationController pushViewController:workViewController animated:NO];
 }
 
 - (void)transitionOutToHome {

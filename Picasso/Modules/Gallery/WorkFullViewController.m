@@ -54,7 +54,7 @@ CGRect deviceSize;
     
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:self.navigationBar.frame andTitle:@"Galerie" andShowExploreButton:self.showExploreButton];
     
-    _datamanager = [[DataManager sharedInstance] init];
+    _datamanager = [DataManager sharedInstance];
     _work = [_datamanager getWorkWithNumber:self.workId];
     _question = [_datamanager getRandomQuestion];
 
@@ -66,7 +66,7 @@ CGRect deviceSize;
     
     // Update text
     _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%li / %ld oeuvres", (long)_work.workId + 1, [_datamanager getWorksNumber] + 1] uppercaseString];
+    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork] + 1), [[DataManager sharedInstance] getWorksNumber]] uppercaseString];
     _textTitleLabel.text = _work.title;
     _textHLabel.text = [NSString stringWithFormat:@"H: %@", _work.h];
     _textLLabel.text = [NSString stringWithFormat:@"L: %@", _work.l];
@@ -164,9 +164,6 @@ CGRect deviceSize;
     if(self.showExploreButton) {
         [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
     }
-    self.navigationBar.backgroundColor = [UIColor yellowColor];
-    self.navigationBar.backButton.backgroundColor = [UIColor greenColor];
-    self.navigationBar.exploreButton.backgroundColor = [UIColor blueColor];
     [self.view bringSubviewToFront:self.navigationBar];
 }
 

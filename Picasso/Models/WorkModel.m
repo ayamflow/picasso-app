@@ -21,13 +21,13 @@
     self.h = data[@"h"];
     self.l = data[@"l"];
     self.technical = data[@"technical"];
-    self.unlocked = NO;
+    _unlocked = NO;
     
     return [super init];
 }
 
 - (void)unlockWork {
-    self.unlocked = YES;
+    _unlocked = YES;
     [[DataManager sharedInstance] unlockWorkWithNumber:self.workId];
 }
 
