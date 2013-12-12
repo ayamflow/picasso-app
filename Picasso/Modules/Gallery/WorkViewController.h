@@ -13,9 +13,15 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIView *navigationBar;
-@property (weak, nonatomic) IBOutlet UIWebView *workContent;
 @property (weak, nonatomic) IBOutlet UIView *workNavigation;
 @property (weak, nonatomic) IBOutlet UIImageView *comeBackGallery;
+@property (weak, nonatomic) IBOutlet UIImageView *workImage;
+@property (weak, nonatomic) IBOutlet UILabel *titleWorkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberWorkLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *contentWorkView;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionWorkView;
+@property (weak, nonatomic) IBOutlet UIView *textWorkView;
+@property (weak, nonatomic) IBOutlet UIView *creditWorkView;
 
 @property (nonatomic, readwrite, assign) int workId;
 

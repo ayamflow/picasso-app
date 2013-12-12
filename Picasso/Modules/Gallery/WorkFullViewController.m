@@ -54,7 +54,6 @@ CGRect deviceSize;
     [self.view addSubview:self.parallaxScrollView];
     
     CGSize contentSize = self.parallaxScrollView.frame.size;
-    contentSize.height *= 10.0f;
     
     _parallaxScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _parallaxScrollView.contentSize = contentSize;
@@ -133,7 +132,7 @@ CGRect deviceSize;
 -(void)viewDidAppear:(BOOL)animated
 {
     _titleWorkLabel.text = [_work.title  uppercaseString];
-    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%li / %ld oeuvres", (long)_work.workId + 1, [_datamanager getWorksNumber] + 1] uppercaseString];
+    _numbersWorkLabel.text = [[NSString stringWithFormat:@"%li / %d oeuvres", (long)_work.workId + 1, [_datamanager getWorksNumber] + 1] uppercaseString];
     _textTitleLabel.text = _work.title;
     _textHLabel.text = [NSString stringWithFormat:@"H: %@", _work.h];
     _textLLabel.text = [NSString stringWithFormat:@"L: %@", _work.l];
@@ -143,6 +142,18 @@ CGRect deviceSize;
     _questionLabel.text = _question.question;
     _choice1Label.text = _question.choice_1;
     _choice2label.text = _question.choice_2;
+    
+    [self updateScrollViewHeight:_parallaxScrollView];
+}
+
+- (void)updateScrollViewHeight:(UIScrollView *)scrollView
+{
+    CGFloat scrollViewHeight = 0.0f;
+    for (UIView* view in scrollView.subviews)
+    {
+        scrollViewHeight += view.frame.size.height;
+    }
+    [scrollView setContentSize:(CGSizeMake(320, scrollViewHeight))];
 }
 
 - (void)didReceiveMemoryWarning
