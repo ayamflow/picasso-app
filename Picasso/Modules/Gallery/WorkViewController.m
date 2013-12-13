@@ -85,7 +85,7 @@
     _headerWorkView.frame = headerWorkViewFrame;
     
     _scrollViewSize += _headerWorkView.frame.size.height;
-    _scrollViewSize += 25;
+    _scrollViewSize += 15;
     
     CGRect descriptionWorkFrame = _descriptionWorkView.frame;
     descriptionWorkFrame.origin.y = _scrollViewSize;
@@ -121,6 +121,7 @@
     _numberWorkLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1]];
     
     _textTitleLabel.attributedText = [TextUtils getKernedString:_work.place];
+    _textTitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Bold" size:0.5];
     _hWorkLabel.attributedText = [TextUtils getKernedString:_work.h];
     _lWorkLabel.attributedText = [TextUtils getKernedString:_work.l];
     _materialWorkLabel.attributedText = [TextUtils getKernedString:_work.technical];
