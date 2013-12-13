@@ -627,10 +627,6 @@ TEVTID8
     <resources>
         <image name="arrow-bottom.png" width="23" height="13"/>
         <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-left-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
-        <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
         <image name="dateSeparator.png" width="10" height="3"/>
         <image name="logoGobelins.png" width="120" height="192"/>
@@ -639,7 +635,6 @@ TEVTID8
         <image name="menuGaleryButton.png" width="188" height="43"/>
         <image name="menuMuseumButton.png" width="188" height="43"/>
         <image name="scenesNumber.png" width="20" height="20"/>
-        <image name="worksNumber.png" width="21" height="21"/>
         <image name="worksNumber.png" width="21" height="21"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
