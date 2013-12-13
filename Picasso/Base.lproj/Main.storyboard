@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2Uu-Jz-OKz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2Uu-Jz-OKz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -315,8 +315,8 @@
                                         <rect key="frame" x="90" y="33" width="349" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text" base64-UTF8="YES">
-w4AgUVVFTCDDgkdFIFBJQ0FTU08gA0EtVOKAmUlMIFLDiUFMSVNBU8OJIANTRVMgUFJFTUnDiFJFUyBU
-T0lMRVMgPw
+w4AgUVVFTCDDgkdFIFBJQ0FTU08gA0EtVOKAmUlMIFLDiUFMSVPDiSADU0VTIFBSRU1Jw4hSRVMgVE9J
+TEVTID8
 </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -415,6 +415,7 @@ T0lMRVMgPw
                         <outlet property="questionView" destination="sPH-2Z-bGc" id="FiU-NB-gWL"/>
                         <outlet property="textHLabel" destination="Co1-wI-VCi" id="uMg-a1-nLI"/>
                         <outlet property="textLLabel" destination="5qP-rL-e8h" id="9K0-yA-Tte"/>
+                        <outlet property="textPlaceLabel" destination="q8V-MK-uwR" id="nXR-SO-Mjf"/>
                         <outlet property="textTechniqueLabel" destination="NPB-Nv-FhD" id="jvk-wG-Kfi"/>
                         <outlet property="textTitleLabel" destination="q8V-MK-uwR" id="BgU-hN-SLI"/>
                         <outlet property="textWorkView" destination="x3Y-LL-I1Z" id="HIO-yD-fLe"/>
@@ -567,7 +568,7 @@ T0lMRVMgPw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pablo PICASSO, début 1895, La Corogne." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T5p-Sm-qDV">
-                                                <rect key="frame" x="0.0" y="0.0" width="113" height="54"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="170" height="54"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -586,7 +587,7 @@ T0lMRVMgPw
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Huile sur toile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="82C-jE-AT7">
-                                                <rect key="frame" x="0.0" y="94" width="89" height="21"/>
+                                                <rect key="frame" x="0.0" y="94" width="140" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="highlightedColor"/>
@@ -604,9 +605,13 @@ T0lMRVMgPw
                         <outlet property="creditWorkView" destination="LgA-pF-XlF" id="ZHY-2M-Jgj"/>
                         <outlet property="dateMiniWorkLabel" destination="03J-oc-etF" id="Hz4-TH-gEj"/>
                         <outlet property="descriptionWorkView" destination="cPl-uQ-eZN" id="J56-Fw-zKE"/>
+                        <outlet property="hWorkLabel" destination="lCa-GZ-8tX" id="B8X-VB-Izx"/>
                         <outlet property="headerWorkView" destination="Qe8-1G-YNc" id="Bzz-51-lhK"/>
+                        <outlet property="lWorkLabel" destination="PIq-bH-ZRM" id="1pW-Ot-kk6"/>
+                        <outlet property="materialWorkLabel" destination="82C-jE-AT7" id="DKm-Ex-nvJ"/>
                         <outlet property="navBarMiniWorkView" destination="Amt-cJ-Nni" id="4jY-T5-lOI"/>
                         <outlet property="numberWorkLabel" destination="rr0-f9-Mz4" id="xco-sK-tPt"/>
+                        <outlet property="textTitleLabel" destination="T5p-Sm-qDV" id="vjw-XS-KYc"/>
                         <outlet property="textWorkView" destination="utm-fE-Ph6" id="86o-mE-AzZ"/>
                         <outlet property="titleMiniWorkLabel" destination="uEh-Ul-kcN" id="M7M-xf-JbW"/>
                         <outlet property="titleWorkLabel" destination="PVb-7x-XAZ" id="Aa9-O1-WYj"/>

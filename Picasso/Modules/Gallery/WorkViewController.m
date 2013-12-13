@@ -118,6 +118,11 @@
     _titleWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:14];
     _numberWorkLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1]];
     
+    _textTitleLabel.attributedText = [TextUtils getKernedString:_work.place];
+    _hWorkLabel.attributedText = [TextUtils getKernedString:_work.h];
+    _lWorkLabel.attributedText = [TextUtils getKernedString:_work.l];
+    _materialWorkLabel.attributedText = [TextUtils getKernedString:_work.technical];
+    
     _scrollViewSize += 100;
     
     _contentWorkView.delegate = self;

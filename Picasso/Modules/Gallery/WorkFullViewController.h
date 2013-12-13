@@ -35,5 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIView *questionBgView;
 @property (weak, nonatomic) IBOutlet UITextView *answerTextView;
 @property (assign, nonatomic) BOOL showExploreButton;
+@property (weak, nonatomic) IBOutlet UILabel *textPlaceLabel;
 
 @end
