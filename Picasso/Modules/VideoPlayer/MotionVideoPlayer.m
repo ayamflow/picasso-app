@@ -157,8 +157,7 @@
 	        self.motionEnabled = YES;
     }
     else {
-        NSLog(@"[MotionVideoPlayer] Motion data not available :'(. Playing the video at rate of 1.0.");
-        self.player.rate = 1.0;
+        NSLog(@"[MotionVideoPlayer] Motion data not available :'(.");
     }
 }
 
@@ -171,7 +170,7 @@
 - (void)updatePlayerWithMotion:(CMDeviceMotion *)motion {
     double playerRate = [self getNormalizedPlayerRateWithPitch: motion.attitude.pitch];
 
-    if(playerRate < 0 && CMTimeGetSeconds(self.player.currentItem.currentTime) <= 0) {
+    if(playerRate < 0 && CMTimeGetSeconds(self.player.currentItem.currentTime) <= 1) {
         self.player.rate = 0;
     }
     else {

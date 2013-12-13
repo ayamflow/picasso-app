@@ -156,7 +156,7 @@ CGRect deviceSize;
     _descriptionWorkView.layer.masksToBounds = NO;
     _descriptionWorkView.layer.shadowRadius = 5;
     _descriptionWorkView.layer.shadowOpacity = 0.1;
-    _descriptionWorkView.attributedText = [TextUtils getKernedString:_work.description];
+    _descriptionWorkView.text = _work.description;
     _descriptionWorkView.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:13];
     _descriptionWorkView.layoutManager.delegate = self;
     _descriptionWorkView.textAlignment = NSTextAlignmentJustified;
@@ -203,7 +203,7 @@ CGRect deviceSize;
         
         [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
             view.alpha = 1;
-            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
         } completion:nil];
         delay += 0.07;
     }
@@ -231,8 +231,14 @@ CGRect deviceSize;
 - (void)transitionOutToGallery {
     NSArray *subviews = [NSArray arrayWithArray:[[self.parallaxScrollView.subviews reverseObjectEnumerator] allObjects]];
     
-    CGFloat delay = 0;
+    CGFloat delay = 0.14;
     NSInteger transitionDone = 0;
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        self.navigationBar.alpha = 0;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+    }];
+    
     for(UIView *view in subviews) {
         [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
             view.alpha = 0;
@@ -250,8 +256,13 @@ CGRect deviceSize;
 - (void)transitionOutToScene {
     NSArray *subviews = [NSArray arrayWithArray:[[self.parallaxScrollView.subviews reverseObjectEnumerator] allObjects]];
     
-    CGFloat delay = 0;
+    CGFloat delay = 0.14;
     NSInteger transitionDone = 0;
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        self.navigationBar.alpha = 0;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+    }];
     for(UIView *view in subviews) {
         [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
             view.alpha = 0;

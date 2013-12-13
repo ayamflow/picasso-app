@@ -95,7 +95,7 @@
     _descriptionWorkView.frame = descriptionWorkFrame;
     _descriptionWorkView.userInteractionEnabled = NO;
     _descriptionWorkView.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:13];
-    _descriptionWorkView.attributedText = [TextUtils getKernedString:_work.description];
+    _descriptionWorkView.text = _work.description;
     _descriptionWorkView.layoutManager.delegate = self;
     _descriptionWorkView.textAlignment = NSTextAlignmentJustified;
     [self updateTextViewHeight:_descriptionWorkView];
@@ -194,8 +194,13 @@
 - (void)transitionOutToGallery {
     NSArray *subviews = [NSArray arrayWithArray:[[self.contentWorkView.subviews reverseObjectEnumerator] allObjects]];
     
-    CGFloat delay = 0;
+    CGFloat delay = 0.14;
     NSInteger transitionDone = 0;
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        self.navigationBar.alpha = 0;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+    }];
     for(UIView *view in subviews) {
         [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
             view.alpha = 0;
@@ -213,8 +218,13 @@
 - (void)transitionOutToScene {
     NSArray *subviews = [NSArray arrayWithArray:[[self.contentWorkView.subviews reverseObjectEnumerator] allObjects]];
     
-    CGFloat delay = 0;
+    CGFloat delay = 0.14;
     NSInteger transitionDone = 0;
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        self.navigationBar.alpha = 0;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+    }];
     for(UIView *view in subviews) {
         [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
             view.alpha = 0;
