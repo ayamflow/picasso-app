@@ -99,6 +99,7 @@
         width = image.size.width;
         height = image.size.height;
 //    }
+
     return CGSizeMake(width , height);
 }
 

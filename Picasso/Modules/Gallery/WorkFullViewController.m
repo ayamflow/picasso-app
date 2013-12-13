@@ -84,7 +84,7 @@ CGRect deviceSize;
     _numbersWorkLabel.attributedText = [TextUtils getKernedString:[[NSString stringWithFormat:@"%d / %d œuvres", MAX(0, [[[DataManager sharedInstance] getGameModel] lastUnlockedWork] + 1), [[DataManager sharedInstance] getWorksNumber]] uppercaseString]];
     [_numbersWorkLabel sizeToFit];
     _textTitleLabel.attributedText = [TextUtils getKernedString:_work.title];
-    [_textTitleLabel sizeToFit];
+    //[_textTitleLabel sizeToFit];
     _textTitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Heavy" size:10];
     _textHLabel.attributedText = [TextUtils getKernedString:_work.h];
     _textHLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
@@ -92,7 +92,7 @@ CGRect deviceSize;
     _textLLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
     _textTechniqueLabel.attributedText = [TextUtils getKernedString:_work.technical];
     _textTechniqueLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
-    [_textTechniqueLabel sizeToFit];
+    //[_textTechniqueLabel sizeToFit];
     _textPlaceLabel.attributedText = [TextUtils getKernedString:_work.place];
     _textPlaceLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
     
@@ -102,12 +102,6 @@ CGRect deviceSize;
     _answerTextView.attributedText = [TextUtils getKernedString:_question.explanation];
     _questionLabel.font = _choice1Label.font = _choice2label.font = _answerTextView.font = [UIFont fontWithName:@"BrandonGrotesque-Regular" size:17];
     _answerTextView.alpha = 0.0f;
-    
-    // Add gesture recognizer for choices
-    _touchChoice1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getQuestionAnswer:)];
-    _touchChoice2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getQuestionAnswer:)];
-    [_choice1View addGestureRecognizer:_touchChoice1];
-    [_choice2View addGestureRecognizer:_touchChoice2];
     
     _parallaxScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _parallaxScrollView.contentSize = contentSize;
@@ -140,7 +134,7 @@ CGRect deviceSize;
     [self.parallaxScrollView addSubview:_imageWorkView withAcceleration:CGPointMake(0.0f, 0.4f)];
     
     // Text work view
-    _textWorkView.frame = CGRectMake(_imageWorkView.frame.origin.x + _imageWorkView.frame.size.width, _imageWorkView.frame.origin.y + ( _imageWorkView.frame.size.height/2 - (170/2) ), 150, 170);
+    _textWorkView.frame = CGRectMake(_imageWorkView.frame.origin.x + _imageWorkView.frame.size.width, _imageWorkView.frame.origin.y + ( _imageWorkView.frame.size.height/2 - (170/2) ), 200, 150);
     _textWorkView.backgroundColor = [UIColor whiteColor];
     _textWorkView.layer.masksToBounds = NO;
     _textWorkView.layer.shadowOffset = CGSizeMake(5, 5);
@@ -150,36 +144,45 @@ CGRect deviceSize;
     _parallaxY = _textWorkView.frame.origin.y + _textWorkView.frame.size.height;
     
     // Description work view
-    _descriptionWorkView.frame = CGRectMake(100, _imageWorkView.frame.origin.y + _imageWorkView.frame.size.height, 420, 0);
-    _descriptionWorkView.contentInset = UIEdgeInsetsMake(40.0,0.0,30.0,0.0);
-    _descriptionWorkView.backgroundColor = [UIColor whiteColor];
-    _descriptionWorkView.layer.masksToBounds = NO;
-    _descriptionWorkView.layer.shadowRadius = 5;
-    _descriptionWorkView.layer.shadowOpacity = 0.1;
-    _descriptionWorkView.text = _work.description;
+
+    _viewDescription.frame = CGRectMake(100, _imageWorkView.frame.origin.y + _imageWorkView.frame.size.height, 460, 0);
+    _descriptionWorkView.frame = CGRectMake(30, _descriptionWorkView.frame.origin.y, 400, 0);
+    _viewDescription.backgroundColor = [UIColor whiteColor];
+    _viewDescription.layer.masksToBounds = NO;
+    _viewDescription.layer.shadowRadius = 5;
+    _viewDescription.layer.shadowOpacity = 0.1;
+    _descriptionWorkView.attributedText = [TextUtils getKernedString:_work.description];
     _descriptionWorkView.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:13];
     _descriptionWorkView.layoutManager.delegate = self;
     _descriptionWorkView.textAlignment = NSTextAlignmentJustified;
+    
     [self updateTextViewHeight:_descriptionWorkView];
-    [self.parallaxScrollView addSubview:_descriptionWorkView withAcceleration:CGPointMake(0.0f, 0.42f)];
+    _viewDescription.frame = CGRectMake(80, _imageWorkView.frame.origin.y + _imageWorkView.frame.size.height, 460, _descriptionWorkView.frame.size.height + 30);
+    [self.parallaxScrollView addSubview:_viewDescription withAcceleration:CGPointMake(0.0f, 0.42f)];
     
     // Question view
-    _questionView.frame = CGRectMake(20, _descriptionWorkView.frame.origin.y + _descriptionWorkView.frame.size.height + 300, _questionView.frame.size.width, _questionView.frame.size.height);
+    _questionView.frame = CGRectMake(20, _viewDescription.frame.origin.y + _viewDescription.frame.size.height + 350, _questionView.frame.size.width, _questionView.frame.size.height);
     [self.parallaxScrollView addSubview:_questionView withAcceleration:CGPointMake(0.0f, 0.50f)];
     
-    //_answerView.frame = CGRectMake(_answerView.frame.origin.x, _parallaxY + 25, _answerView.frame.size.width, _answerView.frame.size.height);
-    //[self.parallaxScrollView addSubview:_answerView withAcceleration:CGPointMake(0.0f, 0.25f)];
-    
-    /*
-    _footerView.frame = CGRectMake(_footerView.frame.origin.x, _parallaxScrollView.contentSize.height - 80, _footerView.frame.size.width, _footerView.frame.size.height);
-    //[self.parallaxScrollView addSubview:_footerView];
-    */
+    _answerTextView.frame = CGRectMake(_answerTextView.frame.origin.x, _questionBgView.frame.origin.y + _questionBgView.frame.size.height + 150, _answerTextView.frame.size.width, _answerTextView.frame.size.height);
+    [self.parallaxScrollView addSubview:_answerTextView withAcceleration:CGPointMake(0.0f, 0.25f)];
+     [self.parallaxScrollView bringSubviewToFront:self.answerTextView];
     
     _isQuestionDiscover = NO;
     
-    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 5000))];
+
+    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 6000))];
     
     [self initNavigationBar];
+
+    // Add gesture recognizer for choices
+/*    _touchChoice1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getQuestionAnswer:)];
+    _touchChoice2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getQuestionAnswer:)];
+    _touchChoice1.delegate = self;
+    _touchChoice2.delegate = self;
+    
+    [_choice1View addGestureRecognizer:_touchChoice1];
+    [_choice2View addGestureRecognizer:_touchChoice2];*/
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -298,18 +301,11 @@ CGRect deviceSize;
     textView.frame = newFrame;
 }
 
+/*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint contentOffset = _parallaxScrollView.contentOffset;
-    if(contentOffset.y >= _questionView.frame.origin.y && contentOffset.y <= _questionView.frame.origin.y + _questionView.frame.size.height) {
-        [UIView transitionWithView:_choice1View duration:0.75 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            [_choice1View moveTo:CGPointMake(_choice1View.frame.origin.x, 160)];
-        } completion:nil];
-        [UIView transitionWithView:_choice2View duration:0.80 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            [_choice2View moveTo:CGPointMake(_choice2View.frame.origin.x, 160)];
-        } completion:nil];
-    }
-
-    if(contentOffset.y > _questionView.frame.origin.y + (_questionBgView.frame.size.height/2) ) {
+    UIView *answer = [self.parallaxScrollView viewWithTag:20];
+    if(contentOffset.y > _questionBgView.frame.origin.y + _questionBgView.frame.size.height) {
         if(!_isQuestionDiscover) {
             if([_question.choice_1 isEqualToString:_question.choice_correct]) {
                 [UIView transitionWithView:_choice1View duration:0.50 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -326,10 +322,53 @@ CGRect deviceSize;
             } completion:nil];
         }
     }
+    if(contentOffset.y > _questionBgView.frame.origin.y) {
+        [UIView transitionWithView:_choice1View duration:0.75 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [_choice1View moveTo:CGPointMake(_choice1View.frame.origin.x, 160)];
+            [answer moveTo:CGPointMake(_choice1View.frame.origin.x, 160)];
+        } completion:nil];
+        [UIView transitionWithView:_choice2View duration:0.80 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [_choice2View moveTo:CGPointMake(_choice2View.frame.origin.x, 160)];
+        } completion:nil];
+    }
 }
+*/
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint contentOffset = _parallaxScrollView.contentOffset;
+    /*
+    if(contentOffset.y >= _questionView.frame.origin.y && contentOffset.y <= _questionView.frame.origin.y + _questionView.frame.size.height - 500) {
+        [UIView transitionWithView:_choice1View duration:0.75 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [_choice1View moveTo:CGPointMake(_choice1View.frame.origin.x, 160)];
+        } completion:nil];
+        [UIView transitionWithView:_choice2View duration:0.80 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [_choice2View moveTo:CGPointMake(_choice2View.frame.origin.x, 160)];
+        } completion:nil];
+    }
+    */
+    
+    if(contentOffset.y > _questionView.frame.origin.y + (_questionBgView.frame.size.height/2) - 200 && contentOffset.y <= _questionView.frame.origin.y + _questionBgView.frame.size.height) {
+        if(!_isQuestionDiscover) {
+            if([_question.choice_1 isEqualToString:_question.choice_correct]) {
+                [UIView transitionWithView:_choice1View duration:0.90 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    [_choice2View setAlpha:0.0f];
+                } completion:nil];
+            } else {
+                [UIView transitionWithView:_choice2View duration:0.90 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    [_choice1View setAlpha:0.0f];
+                } completion:nil];
+            }
+            [UIView transitionWithView:_answerTextView duration:0.50 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                [_answerTextView setAlpha:1.0f];
+            } completion:nil];
+        }
+    }
+}
+ 
 - (void)getQuestionAnswer:(UITapGestureRecognizer*)sender {
+    NSLog(@"touch");
     if(!_isQuestionDiscover) {
+        NSLog(@"is question is discover");
         if([_question.choice_1 isEqualToString:_question.choice_correct]) {
             [UIView transitionWithView:_choice1View duration:0.50 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 [_choice2View setAlpha:0.0f];
