@@ -91,14 +91,14 @@
     CGFloat width;
     CGFloat height;
     
-    if(image.size.width > self.bounds.size.width / 2 - kImageMargin) {
-        width = self.bounds.size.width / 2 - kImageMargin;
-        height = width / image.size.height * image.size.width;
-    }
-    else {
+//    if(image.size.width > self.bounds.size.width / 2 - kImageMargin) {
+//        width = self.bounds.size.width / 2 - kImageMargin;
+//        height = width / image.size.height * image.size.width;
+//    }
+//    else {
         width = image.size.width;
         height = image.size.height;
-    }
+//    }
     return CGSizeMake(width , height);
 }
 
