@@ -176,7 +176,7 @@ CGRect deviceSize;
     
     _isQuestionDiscover = NO;
     
-    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 6000))];
+    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 4800))];
     
     [self initNavigationBar];
 
