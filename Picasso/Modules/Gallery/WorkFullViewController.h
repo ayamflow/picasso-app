@@ -36,5 +36,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *answerTextView;
 @property (assign, nonatomic) BOOL showExploreButton;
 @property (weak, nonatomic) IBOutlet UILabel *textPlaceLabel;
+@property (assign, nonatomic) BOOL didRotate;
 
 @end

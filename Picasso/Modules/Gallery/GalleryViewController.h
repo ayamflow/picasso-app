@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *leftArrow;
 @property (weak, nonatomic) IBOutlet UIImageView *rightArrow;
 @property (weak, nonatomic) IBOutlet UIImageView *dateSeparator;
+@property (assign, nonatomic) BOOL shouldUpdateRotation;
 
 @end

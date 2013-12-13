@@ -13,7 +13,7 @@
 #import "DataManager.h"
 #import "TrackerModel.h"
 #import "OrientationUtils.h"
-#import "WorkViewController.h"
+#import "WorkFullViewController.h"
 #import "SceneManager.h"
 #import "Colors.h"
 #import "Events.h"
@@ -284,10 +284,15 @@
 //    NSLog(@"[Scene #%li] Touched tracker with workId %li", self.model.number, [sender tag]);
     [self stop];
     [self.playerView fadeOut];
-    WorkViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkViewController"];
+    WorkFullViewController *workView = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
     workView.workId = [sender tag];
     workView.showExploreButton = YES;
-    [self.parentViewController.navigationController pushViewController:workView animated:NO];
+    [UIView animateWithDuration:0.6 animations:^{
+        [self.view moveTo:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 20)];
+        self.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.parentViewController.navigationController pushViewController:workView animated:NO];
+    }];
 }
 
 - (void)motionDidChange {

@@ -38,7 +38,6 @@
 }
 
 - (void)sceneUnlocked:(NSNotification *)notification {
-    NSLog(@"[GameModel] SceneUnlocked");
     NSInteger newUnlockedScene = [[notification.userInfo objectForKey:@"number"] integerValue];
     if(newUnlockedScene > self.lastUnlockedScene) {
         self.lastUnlockedScene = newUnlockedScene;
@@ -46,7 +45,6 @@
 }
 
 - (void)workUnlocked:(NSNotification *)notification {
-    NSLog(@"[GameModel] WorkUnlocked");
     NSInteger newUnlockedWork = [[notification.userInfo objectForKey:@"number"] integerValue];
     if(newUnlockedWork > self.lastUnlockedWork) {
         self.lastUnlockedWork = newUnlockedWork;
@@ -70,8 +68,8 @@
     self.currentScene = [[savedData objectAtIndex:0] integerValue];
     self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue];
     self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue];
-    self.lastUnlockedWork = [[savedData objectAtIndex:3] integerValue];
-    //self.lastUnlockedWork = 2;
+//    self.lastUnlockedWork = [[savedData objectAtIndex:3] integerValue];
+    self.lastUnlockedWork = 5;
 }
 
 - (NSString *)getSavePlistPath {

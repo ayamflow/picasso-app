@@ -48,22 +48,15 @@ CGRect deviceSize;
     return self;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
     {
-        WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
+        WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
         workViewController.workId = self.workId;
         workViewController.showExploreButton = self.showExploreButton;
-        [self.navigationController pushViewController:workViewController animated:YES];
+        workViewController.didRotate = YES;
+        [self.navigationController pushViewController:workViewController animated:NO];
     }
 }
 
@@ -184,9 +177,42 @@ CGRect deviceSize;
     
     _isQuestionDiscover = NO;
     
-    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 3500))];
+    [self.parallaxScrollView setContentSize:(CGSizeMake(320, 5000))];
     
     [self initNavigationBar];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if(!self.didRotate) {
+        [self transitionIn];
+    }
+}
+
+- (void)transitionIn {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.parallaxScrollView.subviews reverseObjectEnumerator] allObjects]];
+
+    CGFloat delay = 0;
+    
+    self.navigationBar.alpha = 0;
+    [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y + 20)];
+
+    for(UIView *view in subviews) {
+        view.alpha = 0;
+        [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 1;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
+        } completion:nil];
+        delay += 0.07;
+    }
+    
+    [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+        self.navigationBar.alpha = 1;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+    } completion:nil];
+
 }
 
 - (void)initNavigationBar {
@@ -194,16 +220,55 @@ CGRect deviceSize;
     [self.view addSubview:self.navigationBar];
     
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
-    [self.navigationBar.backButton addTarget:self action:@selector(backToGallery) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(transitionOutToGallery) forControlEvents:UIControlEventTouchUpInside];
     
     if(self.showExploreButton) {
-        [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
+        [self.navigationBar.exploreButton addTarget:self action:@selector(transitionOutToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
 }
 
+- (void)transitionOutToGallery {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.parallaxScrollView.subviews reverseObjectEnumerator] allObjects]];
+    
+    CGFloat delay = 0;
+    NSInteger transitionDone = 0;
+    for(UIView *view in subviews) {
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 0;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        } completion:^(BOOL finished) {
+            if(transitionDone >= [subviews count] - 1) {
+                [self backToGallery];
+            }
+        }];
+        transitionDone++;
+        delay += 0.07;
+    }
+}
+
+- (void)transitionOutToScene {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.parallaxScrollView.subviews reverseObjectEnumerator] allObjects]];
+    
+    CGFloat delay = 0;
+    NSInteger transitionDone = 0;
+    for(UIView *view in subviews) {
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 0;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        } completion:^(BOOL finished) {
+            if(transitionDone >= [subviews count] - 1) {
+                [self backToScene];
+            }
+        }];
+        transitionDone++;
+        delay += 0.07;
+    }
+}
+
 - (void)backToGallery {
     GalleryViewController *galleryView = [self.storyboard instantiateViewControllerWithIdentifier:@"GalleryViewController"];
+    galleryView.shouldUpdateRotation = YES;
     [self.navigationController pushViewController:galleryView animated:NO];
 }
 

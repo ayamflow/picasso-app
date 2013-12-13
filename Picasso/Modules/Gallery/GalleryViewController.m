@@ -41,7 +41,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self updateRotation];
+    if(self.shouldUpdateRotation) {
+        [self updateRotation];
+    }
+    
     self.view.backgroundColor = [UIColor clearColor];
 
     [self initBackground];
@@ -145,9 +148,7 @@
     WorkModel *currentWork = [[DataManager sharedInstance] getWorkWithNumber:index];
     if(!currentWork.unlocked) return;
     
-    WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
-    workViewController.workId = index;
-    [self.navigationController pushViewController:workViewController animated:NO];
+    [self transitionOutToWork:index];
 }
 
 - (void)transitionOutToHome {
@@ -165,6 +166,37 @@
         } completion:^(BOOL finished) {
             if(transitionDone == numberOfView - 1) {
                 [self toHome];
+            }
+        }];
+        transitionDone++;
+        delay += 0.15;
+    }
+    
+    for(UIView *view in @[self.leftArrow, self.rightArrow, self.dateSeparator, background]) {
+        [UIView animateWithDuration:duration delay:0.3 options:0 animations:^{
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+            view.alpha = 0;
+        } completion:nil];
+    }
+}
+
+- (void)transitionOutToWork:(NSInteger)workId {
+    CGFloat duration = 0.4;
+    CGFloat delay = 0;
+    NSInteger numberOfView = 3;
+    NSInteger transitionDone = 0;
+    
+    UIView *background = [self.view viewWithTag:10];
+    
+    for(UIView *view in @[self.navigationBar, self.sceneDate, self.scrollViewScenes]) {
+        [UIView animateWithDuration:duration delay:delay options:0 animations:^{
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+            view.alpha = 0;
+        } completion:^(BOOL finished) {
+            if(transitionDone == numberOfView - 1) {
+                WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkViewController"];
+                workViewController.workId = workId;
+                [self.navigationController pushViewController:workViewController animated:NO];
             }
         }];
         transitionDone++;

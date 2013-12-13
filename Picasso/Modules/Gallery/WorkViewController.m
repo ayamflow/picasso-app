@@ -15,6 +15,7 @@
 #import "NavigationBarView.h"
 #import "StatsFooterView.h"
 #import "DataManager.h"
+#import "UIViewPicasso.h"
 #import "SceneManager.h"
 #import "TextUtils.h"
 
@@ -43,10 +44,12 @@
 {
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
+    NSLog(@"will rotate from portrait");
         WorkFullViewController *workFullViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
         workFullViewController.workId = self.workId;
+        workFullViewController.didRotate = YES;
         workFullViewController.showExploreButton = self.showExploreButton;
-        [self.navigationController pushViewController:workFullViewController animated:YES];
+        [self.navigationController pushViewController:workFullViewController animated:NO];
     }
 }
 
@@ -135,15 +138,49 @@
     [self initStatsFooter];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if(!self.didRotate) {
+        [self transitionIn];
+    }
+}
+
+- (void)transitionIn {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.contentWorkView.subviews reverseObjectEnumerator] allObjects]];
+    
+    CGFloat delay = 0.14;
+    
+    self.navigationBar.alpha = 0;
+    [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y + 20)];
+
+    [UIView animateWithDuration:0.6 animations:^{
+        self.navigationBar.alpha = 1;
+        [self.navigationBar moveTo:CGPointMake(self.navigationBar.frame.origin.x, self.navigationBar.frame.origin.y - 20)];
+        self.statsFooterView.alpha = 1;
+        [self.statsFooterView moveTo:CGPointMake(self.statsFooterView.frame.origin.x, self.statsFooterView.frame.origin.y - 20)];
+    }];
+    
+    for(UIView *view in subviews) {
+        view.alpha = 0;
+        [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 1;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y + 20)];
+        } completion:nil];
+        delay += 0.07;
+    }
+}
+
 - (void)initNavigationBar {
     self.navigationBar = [[NavigationBarView alloc] initWithFrame:CGRectMake(0, 20, [OrientationUtils nativeDeviceSize].size.width, 20) andTitle:@"Galerie" andShowExploreButton:self.showExploreButton];
     [self.view addSubview:self.navigationBar];
     
     [self.navigationBar.backButton setImage:[UIImage imageNamed:@"navBackButton.png"] forState:UIControlStateNormal];
-    [self.navigationBar.backButton addTarget:self action:@selector(backToGallery) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationBar.backButton addTarget:self action:@selector(transitionOutToGallery) forControlEvents:UIControlEventTouchUpInside];
     
     if(self.showExploreButton) {
-        [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
+        [self.navigationBar.exploreButton addTarget:self action:@selector(transitionOutToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
 }
@@ -152,6 +189,44 @@
     self.statsFooterView = [[StatsFooterView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeDeviceSize].size.height - 20, [OrientationUtils nativeDeviceSize].size.width, 20)];
     [self.view addSubview:self.statsFooterView];
     [self.view bringSubviewToFront:self.statsFooterView];
+}
+
+- (void)transitionOutToGallery {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.contentWorkView.subviews reverseObjectEnumerator] allObjects]];
+    
+    CGFloat delay = 0;
+    NSInteger transitionDone = 0;
+    for(UIView *view in subviews) {
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 0;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        } completion:^(BOOL finished) {
+            if(transitionDone >= [subviews count] - 1) {
+                [self backToGallery];
+            }
+        }];
+        transitionDone++;
+        delay += 0.07;
+    }
+}
+
+- (void)transitionOutToScene {
+    NSArray *subviews = [NSArray arrayWithArray:[[self.contentWorkView.subviews reverseObjectEnumerator] allObjects]];
+    
+    CGFloat delay = 0;
+    NSInteger transitionDone = 0;
+    for(UIView *view in subviews) {
+        [UIView animateWithDuration:0.6 delay:delay options:0 animations:^{
+            view.alpha = 0;
+            [view moveTo:CGPointMake(view.frame.origin.x, view.frame.origin.y - 20)];
+        } completion:^(BOOL finished) {
+            if(transitionDone >= [subviews count] - 1) {
+                [self backToScene];
+            }
+        }];
+        transitionDone++;
+        delay += 0.07;
+    }
 }
 
 - (void)backToGallery {

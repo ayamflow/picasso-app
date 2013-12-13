@@ -33,5 +33,6 @@
 @property (nonatomic, readwrite, assign) int workId;
 
 @property (assign, nonatomic) BOOL showExploreButton;
+@property (assign, nonatomic) BOOL didRotate;
 
 @end
