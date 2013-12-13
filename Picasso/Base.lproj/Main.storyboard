@@ -436,7 +436,7 @@ TEVTID8
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="jIA-7z-Zw4">
-                                <rect key="frame" x="20" y="502" width="280" height="66"/>
+                                <rect key="frame" x="20" y="582" width="280" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scenesNumber.png" id="kro-M5-TTy">
@@ -460,17 +460,6 @@ TEVTID8
                                         <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" id="1fo-VL-659">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="66"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-top-icon.png" id="iNF-5n-3Za">
-                                                <rect key="frame" x="131" y="20" width="18" height="10"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -616,7 +605,6 @@ TEVTID8
                         <outlet property="titleMiniWorkLabel" destination="uEh-Ul-kcN" id="M7M-xf-JbW"/>
                         <outlet property="titleWorkLabel" destination="PVb-7x-XAZ" id="Aa9-O1-WYj"/>
                         <outlet property="workImage" destination="kKL-WK-Shc" id="Kaa-7T-Osi"/>
-                        <outlet property="workNavigation" destination="1fo-VL-659" id="Sj3-Iw-INT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOJ-fW-5x3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,7 +616,6 @@ TEVTID8
         <image name="arrow-bottom.png" width="23" height="13"/>
         <image name="arrow-left-nav.png" width="6" height="11"/>
         <image name="arrow-right-nav.png" width="6" height="11"/>
-        <image name="arrow-top-icon.png" width="37" height="20"/>
         <image name="dateSeparator.png" width="10" height="3"/>
         <image name="logoGobelins.png" width="120" height="192"/>
         <image name="menuCreditsButton.png" width="188" height="43"/>

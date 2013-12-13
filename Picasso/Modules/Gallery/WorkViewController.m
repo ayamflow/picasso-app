@@ -13,6 +13,7 @@
 #import "Colors.h"
 #import "WorkModel.h"
 #import "NavigationBarView.h"
+#import "StatsFooterView.h"
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "TextUtils.h"
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) WorkModel *work;
 @property (nonatomic, assign) int scrollViewSize;
 @property (strong, nonatomic) NavigationBarView *navigationBar;
+@property (strong, nonatomic) StatsFooterView *statsFooterView;
 
 @end
 
@@ -129,6 +131,7 @@
     [_contentWorkView setContentSize:(CGSizeMake(self.deviceSize.size.width, _scrollViewSize))];
     
     [self initNavigationBar];
+    [self initStatsFooter];
 }
 
 - (void)initNavigationBar {
@@ -142,6 +145,12 @@
         [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
+}
+
+- (void)initStatsFooter {
+    self.statsFooterView = [[StatsFooterView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeDeviceSize].size.height - 20, [OrientationUtils nativeDeviceSize].size.width, 20)];
+    [self.view addSubview:self.statsFooterView];
+    [self.view bringSubviewToFront:self.statsFooterView];
 }
 
 - (void)backToGallery {
