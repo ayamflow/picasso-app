@@ -10,6 +10,7 @@
 #import "WorkModel.h"
 #import "QuestionModel.h"
 #import "WorkFullViewController.h"
+#import "WorkViewController.h"
 #import "OrientationUtils.h"
 #import "A3ParallaxScrollView.h"
 #import "Colors.h"
@@ -55,6 +56,17 @@ CGRect deviceSize;
     return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
+        WorkViewController *workViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkFullViewController"];
+        workViewController.workId = self.workId;
+        workViewController.showExploreButton = self.showExploreButton;
+        [self.navigationController pushViewController:workViewController animated:YES];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -81,13 +93,15 @@ CGRect deviceSize;
     _textTitleLabel.attributedText = [TextUtils getKernedString:_work.title];
     [_textTitleLabel sizeToFit];
     _textTitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Heavy" size:10];
-    _textHLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"H: %@", _work.h]];
+    _textHLabel.attributedText = [TextUtils getKernedString:_work.h];
     _textHLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
-    _textLLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"L: %@", _work.l]];
+    _textLLabel.attributedText = [TextUtils getKernedString:_work.l];
     _textLLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
     _textTechniqueLabel.attributedText = [TextUtils getKernedString:_work.technical];
     _textTechniqueLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
     [_textTechniqueLabel sizeToFit];
+    _textPlaceLabel.attributedText = [TextUtils getKernedString:_work.place];
+    _textPlaceLabel.font = [UIFont fontWithName:@"AvenirLTStd-Light" size:10];
     
     _questionLabel.attributedText = [TextUtils getKernedString:[_question.question uppercaseString]];
     _choice1Label.attributedText = [TextUtils getKernedString:_question.choice_1];

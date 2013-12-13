@@ -71,6 +71,7 @@
     self.lastUnlockedScene = [[savedData objectAtIndex:1] integerValue];
     self.sceneCurrentTime = [[savedData objectAtIndex:2] floatValue];
     self.lastUnlockedWork = [[savedData objectAtIndex:3] integerValue];
+    //self.lastUnlockedWork = 2;
 }
 
 - (NSString *)getSavePlistPath {

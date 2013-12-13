@@ -13,6 +13,7 @@
 #import "Colors.h"
 #import "WorkModel.h"
 #import "NavigationBarView.h"
+#import "StatsFooterView.h"
 #import "DataManager.h"
 #import "SceneManager.h"
 #import "TextUtils.h"
@@ -24,10 +25,19 @@
 @property (nonatomic, strong) WorkModel *work;
 @property (nonatomic, assign) int scrollViewSize;
 @property (strong, nonatomic) NavigationBarView *navigationBar;
+@property (strong, nonatomic) StatsFooterView *statsFooterView;
 
 @end
 
 @implementation WorkViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
@@ -75,7 +85,7 @@
     _headerWorkView.frame = headerWorkViewFrame;
     
     _scrollViewSize += _headerWorkView.frame.size.height;
-    _scrollViewSize += 25;
+    _scrollViewSize += 15;
     
     CGRect descriptionWorkFrame = _descriptionWorkView.frame;
     descriptionWorkFrame.origin.y = _scrollViewSize;
@@ -110,12 +120,19 @@
     _titleWorkLabel.font = [UIFont fontWithName:@"BrandonGrotesque-Medium" size:14];
     _numberWorkLabel.attributedText = [TextUtils getKernedString:[NSString stringWithFormat:@"n°00%ld", (long)_work.workId + 1]];
     
+    _textTitleLabel.attributedText = [TextUtils getKernedString:_work.place];
+    _textTitleLabel.font = [UIFont fontWithName:@"AvenirLTStd-Bold" size:0.5];
+    _hWorkLabel.attributedText = [TextUtils getKernedString:_work.h];
+    _lWorkLabel.attributedText = [TextUtils getKernedString:_work.l];
+    _materialWorkLabel.attributedText = [TextUtils getKernedString:_work.technical];
+    
     _scrollViewSize += 100;
     
     _contentWorkView.delegate = self;
     [_contentWorkView setContentSize:(CGSizeMake(self.deviceSize.size.width, _scrollViewSize))];
     
     [self initNavigationBar];
+    [self initStatsFooter];
 }
 
 - (void)initNavigationBar {
@@ -129,6 +146,12 @@
         [self.navigationBar.exploreButton addTarget:self action:@selector(backToScene) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.view bringSubviewToFront:self.navigationBar];
+}
+
+- (void)initStatsFooter {
+    self.statsFooterView = [[StatsFooterView alloc] initWithFrame:CGRectMake(0, [OrientationUtils nativeDeviceSize].size.height - 20, [OrientationUtils nativeDeviceSize].size.width, 20)];
+    [self.view addSubview:self.statsFooterView];
+    [self.view bringSubviewToFront:self.statsFooterView];
 }
 
 - (void)backToGallery {
