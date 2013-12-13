@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NavigationBarView.h"
 
-@interface WorkFullViewController : UIViewController <UIScrollViewDelegate, UITextViewDelegate, NSLayoutManagerDelegate> {
-
-}
+@interface WorkFullViewController : UIViewController <UIScrollViewDelegate, UITextViewDelegate, NSLayoutManagerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, readwrite, assign) int workId;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -36,5 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *answerTextView;
 @property (assign, nonatomic) BOOL showExploreButton;
 @property (weak, nonatomic) IBOutlet UILabel *textPlaceLabel;
+@property (weak, nonatomic) IBOutlet UIView *viewDescription;
+
 
 @end

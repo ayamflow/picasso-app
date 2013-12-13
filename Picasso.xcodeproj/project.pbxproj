@@ -14,7 +14,6 @@
 		4F836D35183BD4EA00CA63CD /* Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F836D33183BD4EA00CA63CD /* Events.m */; };
 		4FB559D5184DFC9C0000D076 /* LineDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB559D4184DFC9C0000D076 /* LineDrawView.m */; };
 		5F6305771855D54A002E8547 /* min-0@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056C1855D54A002E8547 /* min-0@2x.jpg */; };
-		5F6305781855D54A002E8547 /* min-1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056D1855D54A002E8547 /* min-1@2x.jpg */; };
 		5F6305791855D54A002E8547 /* min-2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056E1855D54A002E8547 /* min-2@2x.jpg */; };
 		5F63057A1855D54A002E8547 /* min-3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F63056F1855D54A002E8547 /* min-3@2x.jpg */; };
 		5F63057B1855D54A002E8547 /* min-4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305701855D54A002E8547 /* min-4@2x.jpg */; };
@@ -25,6 +24,8 @@
 		5F6305801855D54A002E8547 /* min-9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305751855D54A002E8547 /* min-9@2x.jpg */; };
 		5F6305811855D54A002E8547 /* min-10@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F6305761855D54A002E8547 /* min-10@2x.jpg */; };
 		5F630584185614EA002E8547 /* WorksCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F630583185614EA002E8547 /* WorksCollectionView.m */; };
+		5FF59286185B16DA00CFE400 /* min-1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5FF59285185B16DA00CFE400 /* min-1@2x.jpg */; };
+		5FF59288185B193500CFE400 /* 1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5FF59287185B193500CFE400 /* 1@2x.jpg */; };
 		5FFF2AC61858BE0900D21FCD /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF2AC51858BE0900D21FCD /* QuestionModel.m */; };
 		620409211833A64000105A03 /* menuSliderUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 620409201833A64000105A03 /* menuSliderUp@2x.png */; };
 		620423C818434B5D00648ABA /* ScenePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 620423C718434B5D00648ABA /* ScenePreviewView.m */; };
@@ -332,7 +333,6 @@
 		4FB559D4184DFC9C0000D076 /* LineDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineDrawView.m; path = Modules/SceneManager/LineDrawView.m; sourceTree = "<group>"; };
 		5F52051318577FB00054E0EE /* WorkCollectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkCollectionDelegate.h; path = Modules/Gallery/WorkCollectionDelegate.h; sourceTree = "<group>"; };
 		5F63056C1855D54A002E8547 /* min-0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-0@2x.jpg"; sourceTree = "<group>"; };
-		5F63056D1855D54A002E8547 /* min-1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-1@2x.jpg"; sourceTree = "<group>"; };
 		5F63056E1855D54A002E8547 /* min-2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-2@2x.jpg"; sourceTree = "<group>"; };
 		5F63056F1855D54A002E8547 /* min-3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-3@2x.jpg"; sourceTree = "<group>"; };
 		5F6305701855D54A002E8547 /* min-4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-4@2x.jpg"; sourceTree = "<group>"; };
@@ -344,6 +344,8 @@
 		5F6305761855D54A002E8547 /* min-10@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-10@2x.jpg"; sourceTree = "<group>"; };
 		5F630582185614EA002E8547 /* WorksCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorksCollectionView.h; path = Modules/Gallery/WorksCollectionView.h; sourceTree = "<group>"; };
 		5F630583185614EA002E8547 /* WorksCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorksCollectionView.m; path = Modules/Gallery/WorksCollectionView.m; sourceTree = "<group>"; };
+		5FF59285185B16DA00CFE400 /* min-1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "min-1@2x.jpg"; sourceTree = "<group>"; };
+		5FF59287185B193500CFE400 /* 1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1@2x.jpg"; sourceTree = "<group>"; };
 		5FFF2AC41858BE0900D21FCD /* QuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuestionModel.h; path = Models/QuestionModel.h; sourceTree = "<group>"; };
 		5FFF2AC51858BE0900D21FCD /* QuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuestionModel.m; path = Models/QuestionModel.m; sourceTree = "<group>"; };
 		620409201833A64000105A03 /* menuSliderUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuSliderUp@2x.png"; sourceTree = "<group>"; };
@@ -637,17 +639,6 @@
 		B95520091857D78E00BE90C7 /* map-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-bg@2x.png"; path = "Data/UI/Gallery/Works/map-bg@2x.png"; sourceTree = "<group>"; };
 		B955200B1857E19900BE90C7 /* arrow-bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-bottom@2x.png"; path = "Data/UI/Gallery/Works/arrow-bottom@2x.png"; sourceTree = "<group>"; };
 		B9850CB11859188E00F56C4C /* scene-1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "scene-1.mov"; sourceTree = "<group>"; };
-		B98CFC2418204DE400BC6A09 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 4.jpg; path = Picasso/Data/4.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2518204DE400BC6A09 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 5.jpg; path = Picasso/Data/5.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2618204DE400BC6A09 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 6.jpg; path = Picasso/Data/6.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2718204DE400BC6A09 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 7.jpg; path = Picasso/Data/7.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2818204DE400BC6A09 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 8.jpg; path = Picasso/Data/8.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2918204DE400BC6A09 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 9.jpg; path = Picasso/Data/9.jpg; sourceTree = SOURCE_ROOT; };
-		B98CFC2A18204DE400BC6A09 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 10.jpg; path = Picasso/Data/10.jpg; sourceTree = SOURCE_ROOT; };
-		B9FF5300181FBC7400DFCC39 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 0.jpg; path = Picasso/Data/0.jpg; sourceTree = SOURCE_ROOT; };
-		B9FF5306181FE76400DFCC39 /* 1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "1@2x.jpg"; path = "Picasso/Data/1@2x.jpg"; sourceTree = SOURCE_ROOT; };
-		B9FF5307181FE76400DFCC39 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 2.jpg; path = Picasso/Data/2.jpg; sourceTree = SOURCE_ROOT; };
-		B9FF5308181FE76400DFCC39 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = Picasso/Data/3.jpg; sourceTree = SOURCE_ROOT; };
 		CE181CE4184AA5EC0040EC9C /* SceneChooserLandscapeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneChooserLandscapeDelegate.h; path = Modules/SceneManager/SceneChooserLandscapeDelegate.h; sourceTree = "<group>"; };
 		CE1A02A71858F11A00C66F9A /* menu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu.mp4; sourceTree = "<group>"; };
 		CE32CDDD182EC75600BBAE33 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = Data/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
@@ -1093,9 +1084,9 @@
 			isa = PBXGroup;
 			children = (
 				5F63056C1855D54A002E8547 /* min-0@2x.jpg */,
-				5F63056D1855D54A002E8547 /* min-1@2x.jpg */,
 				5F63056E1855D54A002E8547 /* min-2@2x.jpg */,
 				5F63056F1855D54A002E8547 /* min-3@2x.jpg */,
+				5FF59285185B16DA00CFE400 /* min-1@2x.jpg */,
 				5F6305701855D54A002E8547 /* min-4@2x.jpg */,
 				5F6305711855D54A002E8547 /* min-5@2x.jpg */,
 				5F6305721855D54A002E8547 /* min-6@2x.jpg */,
@@ -1103,17 +1094,7 @@
 				5F6305741855D54A002E8547 /* min-8@2x.jpg */,
 				5F6305751855D54A002E8547 /* min-9@2x.jpg */,
 				5F6305761855D54A002E8547 /* min-10@2x.jpg */,
-				B98CFC2418204DE400BC6A09 /* 4.jpg */,
-				B98CFC2518204DE400BC6A09 /* 5.jpg */,
-				B98CFC2618204DE400BC6A09 /* 6.jpg */,
-				B98CFC2718204DE400BC6A09 /* 7.jpg */,
-				B98CFC2818204DE400BC6A09 /* 8.jpg */,
-				B98CFC2918204DE400BC6A09 /* 9.jpg */,
-				B98CFC2A18204DE400BC6A09 /* 10.jpg */,
-				B9FF5306181FE76400DFCC39 /* 1@2x.jpg */,
-				B9FF5307181FE76400DFCC39 /* 2.jpg */,
-				B9FF5308181FE76400DFCC39 /* 3.jpg */,
-				B9FF5300181FBC7400DFCC39 /* 0.jpg */,
+				5FF59287185B193500CFE400 /* 1@2x.jpg */,
 			);
 			name = Works;
 			path = Data/Works;
@@ -1667,7 +1648,6 @@
 				622505321855CCB3006D358B /* x2y8@2x.png in Resources */,
 				622505661855CCB3006D358B /* x6y8@2x.png in Resources */,
 				CEC93C0018537B0400E1AF9B /* menuHamburger@2x.png in Resources */,
-				5F6305781855D54A002E8547 /* min-1@2x.jpg in Resources */,
 				CEC93BFE18537B0400E1AF9B /* menuPause@2x.png in Resources */,
 				6225057D1855CCB3006D358B /* x8y5@2x.png in Resources */,
 				622505641855CCB3006D358B /* x6y6@2x.png in Resources */,
@@ -1729,6 +1709,7 @@
 				5F6305801855D54A002E8547 /* min-9@2x.jpg in Resources */,
 				6225056D1855CCB3006D358B /* x7y2@2x.png in Resources */,
 				6225055A1855CCB3006D358B /* x5y9@2x.png in Resources */,
+				5FF59286185B16DA00CFE400 /* min-1@2x.jpg in Resources */,
 				6225052A1855CCB3006D358B /* x1y13@2x.png in Resources */,
 				622505391855CCB3006D358B /* x3y2@2x.png in Resources */,
 				622505881855CCB4006D358B /* x9y3@2x.png in Resources */,
@@ -1820,6 +1801,7 @@
 				62AF044F18473A1A00A83599 /* InfosPanel.xib in Resources */,
 				6225057F1855CCB3006D358B /* x8y7@2x.png in Resources */,
 				62CDE0AA18435CEA006276C7 /* lockedButton@2x.png in Resources */,
+				5FF59288185B193500CFE400 /* 1@2x.jpg in Resources */,
 				CE45E6A31849F35100DCFF09 /* leftArrow@2x.png in Resources */,
 				622505B11855CCB4006D358B /* x12y5@2x.png in Resources */,
 				6225055F1855CCB3006D358B /* x6y1@2x.png in Resources */,
